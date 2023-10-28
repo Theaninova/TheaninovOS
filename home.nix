@@ -2,6 +2,8 @@
 let
   packages = import ./packages.nix { inherit pkgs; };
 in {
+  imports = [ ./desktops/hyprland/hyprland.nix ];
+
   home = {
     inherit homeDirectory packages stateVersion username;
 
@@ -21,4 +23,6 @@ in {
 
   programs = import ./programs.nix { inherit pkgs; };
   services = import ./services.nix;
+
+  home.file.".p10k.zsh".source = ./programs/.p10k.zsh;
 }

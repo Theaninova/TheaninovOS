@@ -7,10 +7,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland";
+    # hyprland.url = "github:hyprwm/Hyprland";
+    # split-monitor-workspaces = {
+    #   url = "github:Duckonaut/split-monitor-workspaces";
+    #   inputs.hyprland.follows = "hyprland";
+    # };
   };
 
-  outputs = {nixpkgs, home-manager, hyprland, ...}:
+  outputs = {nixpkgs, home-manager, ...}:
     let
       username = "theaninova";
       system = "x86_64-linux";
@@ -28,11 +32,11 @@
         inherit homeDirectory pkgs stateVersion system username;
       });
     in {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
+      homeConfigurations.theaninova = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
         modules = [
-          hyprland.homeManagerModules.default
+          # hyprland.homeManagerModules.default
           home
         ];
       };

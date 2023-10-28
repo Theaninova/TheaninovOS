@@ -2,8 +2,9 @@
 
 Rebuild the configuration
 ```sh
-reload-home-manager-config
+home-manager switch --flake ~/.config/home-manager
 ```
+**Make sure new files are added to git**
 
 ## Initial Setup on a new machine
 
