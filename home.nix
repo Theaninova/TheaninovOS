@@ -6,7 +6,7 @@ in {
     inherit homeDirectory packages stateVersion username;
 
     shellAliases = {
-      reload-home-manager-config = "home-manager switch --flake ${builtins.toString ./.}";
+      reload-home-manager-config = "home-manager switch --flake ${homeDirectory}/.config/home-manager";
     };
   };
 
