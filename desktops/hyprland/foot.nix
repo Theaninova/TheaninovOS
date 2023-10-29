@@ -14,7 +14,7 @@
       beam-thickness = 1.5;
     };
     colors = {
-      alpha=1;
+      alpha=0.8;
       background = "191c1e";
       foreground = "e1e2e5";
       regular0 = "191c1e";

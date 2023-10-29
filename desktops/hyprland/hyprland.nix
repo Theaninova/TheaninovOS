@@ -11,10 +11,12 @@
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_NO_HARDWARE_CURSORS,1"
         "NIXOS_OZONE_WL,1"
+        # Fixes black screen on Jellyfin
+        # https://github.com/jellyfin/jellyfin-media-player/issues/165#issuecomment-1569842393
+        "QT_QPA_PLATFORM,xcb"
       ];
       exec-once = [
-        "dunst"
-        "waybar"
+        "ags"
         "swww init"
         "swww img ~/Pictures/Wallpapers/wallpaper.jpg --transition-type center"
       ];
@@ -29,17 +31,20 @@
         layout = "dwindle";
       };
       dwindle.preserve_split = true;
+      dwindle.pseudotile = true;
       input = {
         accel_profile = "flat";
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
       bindr = [
-        "SUPER,SUPER_L,exec,pkill wofi || wofi --show=drun"
+        "SUPER,SUPER_L,exec,pkill fuzzel || fuzzel"
+        "SUPER,space,exec,(pkill fuzzel && hyprctl workspace previous) || (hyprctl workspace empty && fuzzel)"
       ];
       monitor = import ./monitors.nix;
       windowrule = [
-        "pseudo,^(Alacritty)$"
+        "pseudo,^(discord)$"
+        "monitor DP-3,^(discord)$"
       ];
       layerrule = import ./layerrules.nix;
       decoration = import ./decoration.nix;
@@ -53,9 +58,10 @@
     configDir = ./ags;
   };
   programs.fuzzel = import ./fuzzel.nix;
-  programs.alacritty.enable = true;
+  # programs.alacritty.enable = true;
+  programs.fish.enable = true;
   programs.foot = import ./foot.nix;
-  programs.waybar = import ./waybar.nix;
+  # programs.waybar = import ./waybar.nix;
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
@@ -63,7 +69,7 @@
     xwaylandvideobridge
     hyprpicker
     wl-clipboard
-    wttrbar
+    # wttrbar
     swww
     # ags
     glib
