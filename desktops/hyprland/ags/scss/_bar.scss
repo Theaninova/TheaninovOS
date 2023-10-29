@@ -149,7 +149,7 @@ $notchOnPrimary: $onPrimary;
     border-top: 0.068rem solid;
     border-bottom: 0.068rem solid;
     border-color: transparent;
-    color: $white;
+    color: $t_background;
 }
 
 .bar-ws-active-box {
@@ -159,11 +159,13 @@ $notchOnPrimary: $onPrimary;
 }
 
 .bar-ws-active {
-    min-width: #{1.772 - (0.2 * 2)}rem;
-    margin-top: 0.2rem;
-    font-size: #{1.091 - 0.2}rem;
+    min-height: 1.636rem;
+    min-width: 1.772rem;
+    font-size: 1.091rem;
+    border: 0.4rem solid $black;
     @include mainfont;
 
+    background-clip: content-box;
     background-color: $notchPrimary;
     color: $notchOnPrimary;
     border-radius: 999px;

@@ -1,18 +1,18 @@
 // Transparent version
-$transparentize_amount: 0.3;
-$transparentize_surface_amount_less: 0.6;
-$transparentize_surface_amount_less_less: 0.35;
-$transparentize_surface_amount: 0.7;
-$transparentize_surface_amount_more: 0.8;
+$transparentize_amount: 0.2;
+$transparentize_surface_amount_less: 0.3;
+$transparentize_surface_amount_less_less: 0.15;
+$transparentize_surface_amount: 0.5;
+$transparentize_surface_amount_more: 0.6;
 $transparentize_surface_amount_subtract_surface: $transparentize_surface_amount - $transparentize_amount;
 
 @if $darkmode ==true {
     // Less transparency
     $transparentize_amount: 0.15;
-    $transparentize_surface_amount_less: 0.5;
-    $transparentize_surface_amount_less_less: 0.3;
-    $transparentize_surface_amount: 0.6;
-    $transparentize_surface_amount_more: 0.7;
+    $transparentize_surface_amount_less: 0.2;
+    $transparentize_surface_amount_less_less: 0.1;
+    $transparentize_surface_amount: 0.3;
+    $transparentize_surface_amount_more: 0.5;
     $transparentize_surface_amount_subtract_surface: $transparentize_surface_amount - $transparentize_amount;
 }
 

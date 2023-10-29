@@ -14,7 +14,7 @@ const activeWorkspaceIndicator = Widget.Box({
     [Hyprland.active.workspace, (box) => {
       const ws = Hyprland.active.workspace.id;
       box.setStyle(`
-                        margin-left: -${1.772 * (NUM_OF_WORKSPACES - ws + 1) + WORKSPACE_SIDE_PAD / 2 - 0.2}rem;
+                        margin-left: -${1.772 * (NUM_OF_WORKSPACES - ws + 1) + WORKSPACE_SIDE_PAD / 2 + 0.4}rem;
                     `);
       lastWorkspace = ws;
     }],
