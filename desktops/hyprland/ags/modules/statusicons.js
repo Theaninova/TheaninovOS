@@ -74,7 +74,7 @@ export const NetworkIndicator = () => Widget.Stack({
         ['wired', NetworkWiredIndicator()],
     ],
     connections: [[Network, stack => {
-        const primary = Network.primary || 'wifi';
+        const primary = Network.primary || 'wired';
         stack.shown = primary;
     }]],
 });

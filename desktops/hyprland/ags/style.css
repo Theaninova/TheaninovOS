@@ -10,11 +10,11 @@
   min-width: 3rem; }
 
 .txt-title {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 2.045rem; }
 
 .txt-title-small {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.364rem; }
 
 .techfont {
@@ -100,7 +100,7 @@
   font-weight: bold; }
 
 .titlefont {
-  font-family: 'Gabarito', 'Lexend', sans-serif; }
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif; }
 
 .mainfont {
   font-family: 'AR One Sans', 'Inter', 'Roboto', 'Noto Sans', sans-serif; }
@@ -410,7 +410,7 @@ tooltip {
   border: 1px solid #3f484a; }
 
 .bar-bg {
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   min-height: 2.727rem; }
 
 .bar-sidespace {
@@ -420,12 +420,11 @@ tooltip {
   padding: 0.2rem; }
 
 .bar-group {
-  background-color: rgba(251, 253, 253, 0.3); }
+  background-color: rgba(251, 253, 253, 0.4); }
 
 .bar-group-center {
   border-bottom-left-radius: 1.364rem;
   border-bottom-right-radius: 1.364rem;
-  padding: 0.2rem;
   background-color: black; }
 
 .corner-bar-group {
@@ -484,24 +483,21 @@ tooltip {
   border-top-right-radius: 1.364rem;
   border-bottom-right-radius: 1.364rem; }
 
-.bar-ws-width {
-  min-width: 18.614rem; }
-
 .bar-separator {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   min-width: 0.341rem;
   min-height: 0.341rem;
-  background-color: rgba(228, 231, 231, 0.3);
+  background-color: rgba(228, 231, 231, 0.4);
   margin: 0rem 0.341rem; }
 
 .bar-clock {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.2727rem;
   color: #191c1d; }
 
 .bar-date {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 1rem;
   color: #191c1d; }
 
@@ -516,17 +512,18 @@ tooltip {
   color: white; }
 
 .bar-ws-active-box {
+  min-height: 1.636rem;
+  min-width: 1.772rem;
   transition: 300ms cubic-bezier(0.05, 0.7, 0.1, 1); }
 
 .bar-ws-active {
-  min-height: 1.5rem;
-  min-width: 1.5rem;
-  font-size: 1.091rem;
+  min-width: 1.372rem;
+  margin-top: 0.2rem;
+  font-size: 0.891rem;
   font-family: 'AR One Sans', 'Inter', 'Roboto', 'Noto Sans', sans-serif;
-  background-color: #8ef1ff;
-  color: #001f24;
-  border-radius: 999px;
-  margin: 0.068rem; }
+  background-color: #006874;
+  color: #ffffff;
+  border-radius: 999px; }
 
 .bar-ws-active-middledecor {
   min-width: 0.682rem;
@@ -536,41 +533,41 @@ tooltip {
   margin: 0rem 0.409rem; }
 
 .bar-ws-occupied {
-  background-color: #051f23;
-  color: #cde7ec;
+  background-color: #cde7ec;
+  color: #051f23;
   min-width: 1.772rem;
-  border-top: 0.068rem solid #cde7ec;
-  border-bottom: 0.068rem solid #cde7ec; }
+  border-top: 0.068rem solid #051f23;
+  border-bottom: 0.068rem solid #051f23; }
 
 .bar-ws-occupied-left {
-  background-color: #051f23;
-  color: #cde7ec;
+  background-color: #cde7ec;
+  color: #051f23;
   min-width: 1.704rem;
   border-top-left-radius: 999px;
   border-bottom-left-radius: 999px;
-  border-left: 0.068rem solid #cde7ec;
-  border-top: 0.068rem solid #cde7ec;
-  border-bottom: 0.068rem solid #cde7ec;
+  border-left: 0.068rem solid #051f23;
+  border-top: 0.068rem solid #051f23;
+  border-bottom: 0.068rem solid #051f23;
   border-right: 0px solid transparent; }
 
 .bar-ws-occupied-right {
-  background-color: #051f23;
-  color: #cde7ec;
+  background-color: #cde7ec;
+  color: #051f23;
   min-width: 1.704rem;
   border-top-right-radius: 999px;
   border-bottom-right-radius: 999px;
-  border-right: 0.068rem solid #cde7ec;
-  border-top: 0.068rem solid #cde7ec;
-  border-bottom: 0.068rem solid #cde7ec;
+  border-right: 0.068rem solid #051f23;
+  border-top: 0.068rem solid #051f23;
+  border-bottom: 0.068rem solid #051f23;
   border-left: 0px solid transparent; }
 
 .bar-ws-occupied-left-right {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
-  background-color: #051f23;
-  color: #cde7ec;
+  background-color: #cde7ec;
+  color: #051f23;
   min-width: 1.636rem;
-  border: 0.068rem solid #cde7ec; }
+  border: 0.068rem solid #051f23; }
 
 .bar-ws-empty {
   color: #191c1d;
@@ -580,8 +577,8 @@ tooltip {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   padding: 0rem 0.341rem;
-  background-color: rgba(205, 231, 236, 0.7);
-  color: rgba(5, 31, 35, 0.7); }
+  background-color: rgba(205, 231, 236, 0.85);
+  color: rgba(5, 31, 35, 0.85); }
 
 .bar-sidemodule {
   min-width: 26rem; }
@@ -591,16 +588,16 @@ tooltip {
   color: #ffdad4; }
 
 .bar-batt-full {
-  background-color: #d1e8d5;
-  color: #0c1f13; }
+  background-color: #374b3e;
+  color: #d1e9d6; }
 
 .bar-batt-prog-low {
   background-color: #ba1b1b;
   color: #ffdad4; }
 
 .bar-batt-prog-full {
-  background-color: #d1e8d5;
-  color: #0c1f13; }
+  background-color: #374b3e;
+  color: #d1e9d6; }
 
 .bar-music-playstate {
   min-height: 1.770rem;
@@ -696,13 +693,13 @@ tooltip {
     min-width: 0.680rem;
     margin: 0rem 0.137rem;
     border-radius: 10rem;
-    background-color: rgba(5, 31, 35, 0.7); }
+    background-color: rgba(5, 31, 35, 0.85); }
 
 .bar-prog-batt-low progress {
   background-color: #ffdad4; }
 
 .bar-prog-batt-full progress {
-  background-color: #0c1f13; }
+  background-color: #d1e9d6; }
 
 .bar-batt-chargestate {
   border-radius: 10rem;
@@ -712,13 +709,13 @@ tooltip {
   border-radius: 10rem;
   min-width: 0.681rem;
   min-height: 0.681rem;
-  background-color: rgba(5, 31, 35, 0.7); }
+  background-color: rgba(5, 31, 35, 0.85); }
 
 .bar-batt-chargestate-low {
   background-color: #ffdad4; }
 
 .bar-batt-chargestate-full {
-  background-color: #0c1f13; }
+  background-color: #d1e9d6; }
 
 .bar-batt-percentage {
   font-size: 1rem;
@@ -726,7 +723,7 @@ tooltip {
   font-weight: 500; }
 
 .corner {
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem; }
 
@@ -774,14 +771,14 @@ tooltip {
 .cheatsheet-bg {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   margin-bottom: 0.682rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   padding: 1.364rem; }
 
 .cheatsheet-key {
@@ -817,20 +814,20 @@ tooltip {
   background-color: #acb5b7; }
 
 .cheatsheet-category-title {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.705rem; }
 
 .sidebar-right {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   padding: 1.023rem; }
 
 .sideright-show {
@@ -844,13 +841,13 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   padding: 1.023rem; }
 
 .sideleft-show {
@@ -864,12 +861,12 @@ tooltip {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   padding: 0.341rem;
-  background-color: rgba(251, 253, 253, 0.3); }
+  background-color: rgba(251, 253, 253, 0.4); }
 
 .sidebar-group-nopad {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
-  background-color: rgba(251, 253, 253, 0.3); }
+  background-color: rgba(251, 253, 253, 0.4); }
 
 .sidebar-group-invisible {
   padding: 0.341rem; }
@@ -886,33 +883,33 @@ tooltip {
   min-height: 2.727rem; }
 
 .sidebar-iconbutton:hover {
-  background-color: rgba(165, 191, 196, 0.7); }
+  background-color: rgba(165, 191, 196, 0.85); }
 
 .sidebar-iconbutton:active {
-  background-color: rgba(125, 151, 156, 0.7); }
+  background-color: rgba(125, 151, 156, 0.85); }
 
 .sidebar-button {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   padding: 0rem 0.818rem;
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .sidebar-button-nopad {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .sidebar-button:hover {
-  background-color: rgba(165, 191, 196, 0.7); }
+  background-color: rgba(165, 191, 196, 0.85); }
 
 .sidebar-button:active {
-  background-color: rgba(125, 151, 156, 0.7); }
+  background-color: rgba(125, 151, 156, 0.85); }
 
 .sidebar-button-nopad:hover {
-  background-color: rgba(165, 191, 196, 0.7); }
+  background-color: rgba(165, 191, 196, 0.85); }
 
 .sidebar-button-nopad:active {
-  background-color: rgba(125, 151, 156, 0.7); }
+  background-color: rgba(125, 151, 156, 0.85); }
 
 .sidebar-button-left {
   border-top-left-radius: 0.818rem;
@@ -954,7 +951,7 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1); }
 
 .sidebar-navrail-btn:hover > box > label:first-child {
-  background-color: rgba(159, 168, 170, 0.37); }
+  background-color: rgba(171, 180, 182, 0.46); }
 
 .sidebar-navrail-btn:active > box > label:first-child {
   background-color: #b4bdbf; }
@@ -1013,10 +1010,10 @@ tooltip {
   -gtk-outline-radius: 9999px;
   min-width: 0.273rem;
   min-height: 2.045rem;
-  background-color: rgba(63, 72, 74, 0.3); }
+  background-color: rgba(63, 72, 74, 0.4); }
 
 .sidebar-scrollbar slider:hover {
-  background-color: rgba(63, 72, 74, 0.44); }
+  background-color: rgba(63, 72, 74, 0.52); }
 
 .sidebar-scrollbar slider:active {
   background-color: #8d9698; }
@@ -1059,11 +1056,11 @@ tooltip {
   border-radius: 9999px;
   -gtk-outline-radius: 9999px;
   padding: 0rem 0.682rem;
-  background-color: rgba(219, 228, 230, 0.3);
+  background-color: rgba(219, 228, 230, 0.4);
   color: #3f484a; }
 
 .sidebar-calendar-monthyear-btn:hover {
-  background-color: rgba(183, 192, 194, 0.335);
+  background-color: rgba(192, 201, 203, 0.43);
   color: #475052; }
 
 .sidebar-calendar-monthyear-btn:active {
@@ -1075,11 +1072,11 @@ tooltip {
   -gtk-outline-radius: 9999px;
   min-width: 2.045rem;
   min-height: 2.045rem;
-  background-color: rgba(219, 228, 230, 0.3);
+  background-color: rgba(219, 228, 230, 0.4);
   color: #3f484a; }
 
 .sidebar-calendar-monthshift-btn:hover {
-  background-color: rgba(183, 192, 194, 0.335);
+  background-color: rgba(192, 201, 203, 0.43);
   color: #475052; }
 
 .sidebar-calendar-monthshift-btn:active {
@@ -1094,7 +1091,7 @@ tooltip {
   color: #191c1d; }
 
 .sidebar-todo-selector-tab:hover {
-  background-color: rgba(159, 168, 170, 0.37); }
+  background-color: rgba(171, 180, 182, 0.46); }
 
 .sidebar-todo-selector-tab:active {
   background-color: #b4bdbf; }
@@ -1118,30 +1115,30 @@ tooltip {
   min-height: 1.705rem; }
 
 .sidebar-todo-item-action:hover {
-  background-color: rgba(240, 242, 242, 0.3); }
+  background-color: rgba(240, 242, 242, 0.4); }
 
 .sidebar-todo-item-action:active {
-  background-color: rgba(217, 219, 219, 0.3); }
+  background-color: rgba(217, 219, 219, 0.4); }
 
 .sidebar-clipboard-item {
   border-radius: 0.818rem;
   min-height: 2.045rem;
   padding: 0.341rem;
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .sidebar-clipboard-item:hover {
-  background-color: rgba(185, 211, 216, 0.7); }
+  background-color: rgba(185, 211, 216, 0.85); }
 
 .sidebar-clipboard-item:active {
-  background-color: rgba(165, 191, 196, 0.7); }
+  background-color: rgba(165, 191, 196, 0.85); }
 
 .osd-bg {
   min-width: 8.864rem;
   min-height: 3.409rem; }
 
 .osd-value {
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   border-radius: 1.023rem;
   padding: 0.625rem 1.023rem;
   padding-top: 0.313rem;
@@ -1178,7 +1175,7 @@ tooltip {
   margin-top: 0.341rem; }
 
 .osd-value-txt {
-  font-family: 'Gabarito', 'Lexend', sans-serif;
+  font-family: 'Noto Sans', 'Gabarito', 'Lexend', sans-serif;
   font-size: 1.688rem;
   font-weight: 500;
   color: #191c1d; }
@@ -1190,17 +1187,17 @@ tooltip {
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   min-width: 13.636rem;
   min-height: 3.409rem;
   padding: 0rem 1.364rem;
   padding-right: 2.864rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   color: #191c1d;
   caret-color: transparent; }
   .overview-search-box selection {
@@ -1228,15 +1225,15 @@ tooltip {
 .overview-search-results {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   min-width: 28.773rem;
   padding: 0.682rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   color: #191c1d; }
 
 .overview-search-results-icon {
@@ -1269,41 +1266,41 @@ tooltip {
 .overview-tasks {
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
   padding: 0.341rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   color: #191c1d; }
 
 .overview-tasks-workspace {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   margin: 0.341rem;
-  background-color: rgba(232, 234, 234, 0.207); }
+  background-color: rgba(232, 234, 234, 0.307); }
 
 .overview-tasks-window {
   border-radius: 1.159rem;
   -gtk-outline-radius: 1.159rem;
   transition: 200ms cubic-bezier(0.05, 0.7, 0.1, 1);
-  background-color: rgba(205, 231, 236, 0.4);
+  background-color: rgba(205, 231, 236, 0.5);
   color: #051f23;
   border: 0.068rem solid rgba(5, 31, 35, 0.07); }
 
 .overview-tasks-window:hover {
-  background-color: rgba(169, 209, 215, 0.43); }
+  background-color: rgba(177, 214, 220, 0.525); }
 
 .overview-tasks-window:focus {
-  background-color: rgba(169, 209, 215, 0.43); }
+  background-color: rgba(177, 214, 220, 0.525); }
 
 .overview-tasks-window:active {
-  background-color: rgba(142, 192, 199, 0.46); }
+  background-color: rgba(154, 199, 206, 0.55); }
 
 .overview-tasks-window-selected {
-  background-color: rgba(142, 192, 199, 0.46); }
+  background-color: rgba(154, 199, 206, 0.55); }
 
 .overview-tasks-window-dragging {
   opacity: 0.2; }
@@ -1312,13 +1309,13 @@ tooltip {
   transition: 170ms cubic-bezier(0.05, 0.7, 0.1, 1);
   border-radius: 1.705rem;
   -gtk-outline-radius: 1.705rem;
-  border-top: 1px solid rgba(138, 141, 141, 0.28);
-  border-left: 1px solid rgba(138, 141, 141, 0.28);
-  border-right: 1px solid rgba(178, 181, 181, 0.24);
-  border-bottom: 1px solid rgba(178, 181, 181, 0.24);
+  border-top: 1px solid rgba(164, 166, 166, 0.37);
+  border-left: 1px solid rgba(164, 166, 166, 0.37);
+  border-right: 1px solid rgba(199, 201, 202, 0.335);
+  border-bottom: 1px solid rgba(199, 201, 202, 0.335);
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.45);
   margin: 7px;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   padding: 1.023rem; }
 
 .osk-show {
@@ -1331,21 +1328,21 @@ tooltip {
 
 .osk-key {
   border-radius: 0.682rem;
-  background-color: rgba(219, 228, 230, 0.3);
+  background-color: rgba(219, 228, 230, 0.4);
   color: #3f484a;
   padding: 0.188rem;
   font-weight: 500;
   font-size: 1.091rem; }
 
 .osk-key:hover {
-  background-color: rgba(203, 212, 214, 0.3); }
+  background-color: rgba(203, 212, 214, 0.4); }
 
 .osk-key:active {
-  background-color: rgba(172, 181, 183, 0.3);
+  background-color: rgba(172, 181, 183, 0.4);
   font-size: 1.091rem; }
 
 .osk-key-active {
-  background-color: rgba(172, 181, 183, 0.3); }
+  background-color: rgba(172, 181, 183, 0.4); }
 
 .osk-key-normal {
   min-width: 2.5rem;
@@ -1373,22 +1370,22 @@ tooltip {
 
 .osk-control-button {
   border-radius: 0.682rem;
-  background-color: rgba(219, 228, 230, 0.3);
+  background-color: rgba(219, 228, 230, 0.4);
   color: #3f484a;
   font-weight: 500;
   font-size: 1.091rem;
   padding: 0.682rem; }
 
 .osk-control-button:hover {
-  background-color: rgba(203, 212, 214, 0.3); }
+  background-color: rgba(203, 212, 214, 0.4); }
 
 .osk-control-button:active {
-  background-color: rgba(172, 181, 183, 0.3);
+  background-color: rgba(172, 181, 183, 0.4);
   font-size: 1.091rem; }
 
 .session-bg {
   margin-top: -2.727rem;
-  background-color: rgba(251, 253, 253, 0.44); }
+  background-color: rgba(251, 253, 253, 0.51); }
 
 .session-button {
   border-radius: 1.705rem;
@@ -1423,7 +1420,7 @@ tooltip {
 .notif-low {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
-  background-color: rgba(219, 228, 230, 0.65);
+  background-color: rgba(219, 228, 230, 0.7);
   color: #3f484a;
   padding: 0.818rem;
   padding-right: 1.363rem; }
@@ -1431,7 +1428,7 @@ tooltip {
 .notif-normal {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
-  background-color: rgba(219, 228, 230, 0.65);
+  background-color: rgba(219, 228, 230, 0.7);
   color: #3f484a;
   padding: 0.818rem;
   padding-right: 1.363rem; }
@@ -1448,7 +1445,7 @@ tooltip {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
   min-width: 30.682rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   color: #3f484a;
   padding: 0.818rem;
   padding-right: 1.363rem; }
@@ -1457,7 +1454,7 @@ tooltip {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
   min-width: 30.682rem;
-  background-color: rgba(251, 253, 253, 0.7);
+  background-color: rgba(251, 253, 253, 0.85);
   color: #3f484a;
   padding: 0.818rem;
   padding-right: 1.363rem; }
@@ -1487,19 +1484,19 @@ tooltip {
   min-height: 3.409rem; }
 
 .notif-icon-material {
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .notif-icon-material-low {
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .notif-icon-material-normal {
-  background-color: rgba(205, 231, 236, 0.7);
+  background-color: rgba(205, 231, 236, 0.85);
   color: #051f23; }
 
 .notif-icon-material-critical {
-  background-color: rgba(255, 218, 212, 0.7);
+  background-color: rgba(255, 218, 212, 0.85);
   color: #410001; }
 
 .notif-close-btn {
@@ -1527,7 +1524,7 @@ tooltip {
 .osd-notif {
   border-radius: 0.818rem;
   -gtk-outline-radius: 0.818rem;
-  background-color: rgba(251, 253, 253, 0.6);
+  background-color: rgba(251, 253, 253, 0.55);
   min-width: 30.682rem; }
 
 .growingRadial {

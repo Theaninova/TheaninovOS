@@ -65,7 +65,11 @@
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
+  fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    # fonts
+    noto-fonts
+    # essentials
     xwaylandvideobridge
     hyprpicker
     wl-clipboard

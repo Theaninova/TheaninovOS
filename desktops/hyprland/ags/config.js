@@ -36,10 +36,12 @@ export default {
     },
     windows: [
         Bar(),
-        CornerTopleft(),
-        CornerTopright(),
-        CornerBottomleft(),
-        CornerBottomright(),
+        ...Array.from({length: 3}, (_, i) => [
+            CornerTopleft(i),
+            CornerTopright(i),
+            CornerBottomleft(i),
+            CornerBottomright(i),
+        ]),
         Overview(),
         Indicator(),
         Cheatsheet(),
