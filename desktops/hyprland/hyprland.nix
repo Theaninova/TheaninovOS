@@ -10,6 +10,7 @@
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_NO_HARDWARE_CURSORS,1"
+        "NIXOS_OZONE_WL,1"
       ];
       exec-once = [
         "dunst"
@@ -22,6 +23,9 @@
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
+      bindr = [
+        "SUPER,SUPER_L,exec,pkill wofi || wofi --show=drun"
+      ];
       monitor = import ./monitors.nix;
       windowrule = [
         "pseudo,^(alacritty)$"
@@ -34,6 +38,7 @@
   programs.alacritty.enable = true;
   programs.waybar = import ./waybar.nix;
   programs.wofi = import ./wofi.nix;
+  programs.swaylock = import ./swaylock.nix;
 
   home.packages = with pkgs; [
     xwaylandvideobridge
@@ -45,8 +50,16 @@
   gtk = {
     enable = true;
     theme = {
-      name = "Adwaita";
+      name = "adw-gtk3";
       package = pkgs.adw-gtk3;
+    };
+    cursorTheme = {
+      name = "capitaine-cursors";
+      package = pkgs.capitaine-cursors;
+    };
+    iconTheme = {
+      name = "Tela";
+      package = pkgs.tela-icon-theme;
     };
   };
 

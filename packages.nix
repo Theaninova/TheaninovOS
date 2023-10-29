@@ -20,7 +20,7 @@
   (import ./packages/threema-desktop.nix { inherit pkgs; })
   (discord.override {
     withOpenASAR = true;
-    withVencord = true;
+    withVencord = false;
   })
   slack
   
