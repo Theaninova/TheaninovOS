@@ -18,7 +18,7 @@
       exec-once = [
         "ags"
         "swww init"
-        "swww img ~/Pictures/Wallpapers/wallpaper.jpg --transition-type center"
+        "swww img ~/Pictures/Wallpapers/wallpaper.jpg"
       ];
       general = {
         gaps_in = 4;
@@ -38,7 +38,7 @@
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
       bindr = [
-        "SUPER,SUPER_L,exec,pkill fuzzel || fuzzel"
+        "SUPER,SUPER_L,exec,ags -t overview"
         "SUPER,space,exec,(pkill fuzzel && hyprctl workspace previous) || (hyprctl workspace empty && fuzzel)"
       ];
       monitor = import ./monitors.nix;
@@ -51,7 +51,7 @@
     };
   };
 
-  services.dunst = import ./dunst.nix;
+  # services.dunst = import ./dunst.nix;
   
   programs.ags = {
     enable = true;
@@ -72,7 +72,16 @@
     # essentials
     xwaylandvideobridge
     hyprpicker
+    grim
+    slurp
     wl-clipboard
+    /* TODO: (flameshot.overrideAttrs(prev: {
+      nativeBuildInputs = prev.nativeBuildInputs ++ [ git grim ];
+      cmakeFlags = [
+        "-DUSE_WAYLAND_CLIPBOARD=1"
+        "-DUSE_WAYLAND_GRIM=true"
+      ];
+    }))*/
     # wttrbar
     swww
     # ags
@@ -80,6 +89,8 @@
     brightnessctl
     ydotool
     sassc
+    # gnome packages
+    gnome.nautilus
   ];
 
   gtk = {

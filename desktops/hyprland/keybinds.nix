@@ -2,6 +2,7 @@
   "SUPER,Q,killactive"
   "SUPER,T,exec,foot"
   "SUPER_SHIFT,C,exec,hyprpicker"
+  "SUPER_SHIFT,S,exec,slurp | grim -g - - | wl-copy"
   "SUPER,P,pseudo,"
 
   "SUPER_SHIFT,up,movewindow,u"
