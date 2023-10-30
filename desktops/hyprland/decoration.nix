@@ -2,7 +2,7 @@
   rounding = 20;
   blur = {
     enabled = true;
-    xray = true;
+    xray = false;
     special = false;
 
     size = 6;

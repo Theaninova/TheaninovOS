@@ -14,6 +14,9 @@
         # Fixes black screen on Jellyfin
         # https://github.com/jellyfin/jellyfin-media-player/issues/165#issuecomment-1569842393
         "QT_QPA_PLATFORM,xcb"
+        # Fixes dialogs randomly closing again in IntelliJ
+        # https://github.com/hyprwm/Hyprland/issues/1947
+        "_JAVA_AWT_WM_NOREPARENTING=1"
       ];
       exec-once = [
         "ags"
@@ -42,9 +45,30 @@
         "SUPER,space,exec,(pkill fuzzel && hyprctl workspace previous) || (hyprctl workspace empty && fuzzel)"
       ];
       monitor = import ./monitors.nix;
+      workspace = [
+        "1,monitor:DP-1"
+        "2,monitor:DP-1"
+        "3,monitor:DP-1"
+        "4,monitor:DP-3"
+        "5,monitor:DP-3"
+        "6,monitor:DP-3"
+        "7,monitor:HDMI-A-1"
+        "8,monitor:HDMI-A-1"
+        "9,monitor:HDMI-A-1"
+      ];
       windowrule = [
         "pseudo,^(discord)$"
+        "pseudo,^(org.gnome.Calculator)$"
+        "pseudo,^(Slack)$"
         "monitor DP-3,^(discord)$"
+      ];
+      windowrulev2 = [
+        # IntelliJ focus fixes
+        "windowdance,class:^(jetbrains-.*)$"
+        "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
+        "noanim,class:^(jetbrains-.*)$,title:^(win.*)$"
+        "noinitialfocus,class:^(jetbrains-.*)$,title:^(win.*)$"
+        "rounding 0,class:^(jetbrains-.*)$,title:^(win.*)$"
       ];
       layerrule = import ./layerrules.nix;
       decoration = import ./decoration.nix;
@@ -90,13 +114,27 @@
     ydotool
     sassc
     # gnome packages
+    evince
+    gnome.gnome-keyring
     gnome.nautilus
+    gnome.gnome-calendar
+    gnome.gnome-characters
+    gnome.gnome-contacts
+    gnome.gnome-clocks
+    gnome.gnome-calculator
+    gnome.simple-scan
+    gnome.geary
+    gnome.ghex
+    gnome.gnome-weather
+    gnome.gnome-keyring
+    gnome.gnome-disk-utility
   ];
 
+  dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   gtk = {
     enable = true;
     theme = {
-      name = "adw-gtk3";
+      name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
     cursorTheme = {
@@ -107,6 +145,10 @@
       name = "Tela";
       package = pkgs.tela-icon-theme;
     };
+  };
+  qt = {
+    enable = true;
+    platformTheme = "gtk";
   };
 
   home.file.profile = {
