@@ -10,6 +10,11 @@ in {
     shellAliases = {
       reload-home-manager-config = "home-manager switch --flake ${homeDirectory}/.config/home-manager";
     };
+
+    keyboard = {
+      layout = "us";
+      variant = "altgr-intl";
+    };
   };
 
   nixpkgs = {

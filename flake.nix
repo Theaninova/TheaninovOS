@@ -6,9 +6,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ags = {
+      url = "github:Aylur/ags";
+    };
   };
 
-  outputs = {nixpkgs, home-manager, ...}:
+  outputs = {nixpkgs, home-manager, ags, ...}:
     let
       username = "theaninova";
       system = "x86_64-linux";
@@ -30,6 +34,7 @@
         inherit pkgs;
 
         modules = [
+          ags.homeManagerModules.default
           home
         ];
       };

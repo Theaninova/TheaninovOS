@@ -14,7 +14,7 @@
         # Fixes black screen on Jellyfin
         # https://github.com/jellyfin/jellyfin-media-player/issues/165#issuecomment-1569842393
         "QT_QPA_PLATFORM,xcb"
-        # Fixes dialogs randomly closing again in IntelliJ
+        # Potentially (?) fixes dialogs randomly closing again in IntelliJ
         # https://github.com/hyprwm/Hyprland/issues/1947
         "_JAVA_AWT_WM_NOREPARENTING=1"
       ];
@@ -22,6 +22,9 @@
         "ags"
         "swww init"
         "swww img ~/Pictures/Wallpapers/wallpaper.jpg"
+        "gnome-keyring-daemon --start --components=secrets"
+        "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+
       ];
       general = {
         gaps_in = 4;
@@ -37,6 +40,9 @@
       dwindle.pseudotile = true;
       input = {
         accel_profile = "flat";
+        kb_layout = "us";
+        kb_variant = "altgr-intl";
+        numlock_by_default = true;
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
@@ -66,6 +72,7 @@
         # IntelliJ focus fixes
         "windowdance,class:^(jetbrains-.*)$"
         "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
+        "center,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
         "noanim,class:^(jetbrains-.*)$,title:^(win.*)$"
         "noinitialfocus,class:^(jetbrains-.*)$,title:^(win.*)$"
         "rounding 0,class:^(jetbrains-.*)$,title:^(win.*)$"
@@ -75,8 +82,6 @@
     };
   };
 
-  # services.dunst = import ./dunst.nix;
-  
   programs.ags = {
     enable = true;
     configDir = ./ags;
@@ -85,7 +90,6 @@
   # programs.alacritty.enable = true;
   programs.fish.enable = true;
   programs.foot = import ./foot.nix;
-  # programs.waybar = import ./waybar.nix;
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
@@ -99,6 +103,7 @@
     grim
     slurp
     wl-clipboard
+    polkit_gnome
     /* TODO: (flameshot.overrideAttrs(prev: {
       nativeBuildInputs = prev.nativeBuildInputs ++ [ git grim ];
       cmakeFlags = [
@@ -106,7 +111,6 @@
         "-DUSE_WAYLAND_GRIM=true"
       ];
     }))*/
-    # wttrbar
     swww
     # ags
     glib

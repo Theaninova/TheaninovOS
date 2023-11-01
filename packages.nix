@@ -15,6 +15,7 @@
   makemkv
   handbrake
   metadata-cleaner
+  bitwarden
 
   # chat apps
   (import ./packages/threema-desktop.nix { inherit pkgs; })
@@ -49,4 +50,7 @@
   bottles
   protontricks
   mangohud
+
+  # utils
+  neofetch
 ]
