@@ -16,7 +16,9 @@
         "QT_QPA_PLATFORM,xcb"
         # Potentially (?) fixes dialogs randomly closing again in IntelliJ
         # https://github.com/hyprwm/Hyprland/issues/1947
-        "_JAVA_AWT_WM_NOREPARENTING=1"
+        "_JAVA_AWT_WM_NOREPARENTING,1"
+        # Gnome file manager fix
+        "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
       ];
       exec-once = [
         "ags"
@@ -55,17 +57,18 @@
         "1,monitor:DP-1"
         "2,monitor:DP-1"
         "3,monitor:DP-1"
-        "4,monitor:DP-3"
-        "5,monitor:DP-3"
-        "6,monitor:DP-3"
-        "7,monitor:HDMI-A-1"
-        "8,monitor:HDMI-A-1"
-        "9,monitor:HDMI-A-1"
+        "4,monitor:HDMI-A-1"
+        "5,monitor:HDMI-A-1"
+        "6,monitor:HDMI-A-1"
+        "7,monitor:DP-3"
+        "8,monitor:DP-3"
+        "9,monitor:DP-3"
       ];
       windowrule = [
         "pseudo,^(discord)$"
         "pseudo,^(org.gnome.Calculator)$"
         "pseudo,^(Slack)$"
+        "pseudo,^(steam)$"
         "monitor DP-3,^(discord)$"
       ];
       windowrulev2 = [
@@ -93,6 +96,9 @@
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
+  services.udiskie.enable = true;
+  services.udiskie.tray = "never";
+
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     # fonts
@@ -119,6 +125,7 @@
     sassc
     # gnome packages
     evince
+    gnome.gvfs
     gnome.gnome-keyring
     gnome.nautilus
     gnome.gnome-calendar

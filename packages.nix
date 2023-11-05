@@ -2,6 +2,9 @@
   # nix
   cachix
   lorri
+
+  # fix for proton games not launching without any error message
+  libxcrypt
   
   # browsers
   firefox-wayland
