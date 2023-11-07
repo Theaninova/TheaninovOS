@@ -26,7 +26,6 @@
         "swww img ~/Pictures/Wallpapers/wallpaper.jpg"
         "gnome-keyring-daemon --start --components=secrets"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-
       ];
       general = {
         gaps_in = 4;
@@ -72,6 +71,11 @@
         "monitor DP-3,^(discord)$"
       ];
       windowrulev2 = [
+        # Games
+        ## AC2
+        "monitor DP-3,class:^(steam_app_805550)$"
+        "fullscreen,class:^(steam_app_805550)$"
+        "immediate,class:^(steam_app_805550)$"
         # IntelliJ focus fixes
         "windowdance,class:^(jetbrains-.*)$"
         "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
@@ -134,11 +138,15 @@
     gnome.gnome-clocks
     gnome.gnome-calculator
     gnome.simple-scan
+    gnome.gedit
+    gnome.eog
     gnome.geary
     gnome.ghex
     gnome.gnome-weather
     gnome.gnome-keyring
     gnome.gnome-disk-utility
+    # fixes
+    xorg.xrandr
   ];
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
