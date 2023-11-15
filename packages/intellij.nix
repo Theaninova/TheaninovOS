@@ -1,7 +1,7 @@
 { pkgs }: pkgs.jetbrains.idea-ultimate.overrideAttrs(prev: {
-  version = "2023.2.4";
+  version = "2023.2.5";
   src = builtins.fetchurl {
-    url = "https://download.jetbrains.com/idea/ideaIU-2023.2.4.tar.gz";
-    sha256 = "26fea1a8597e8124dcc24e8ed1dd6f5268e0cd1ba736bbe0e22df3f635ad280b";
+    url = "https://download.jetbrains.com/idea/ideaIU-2023.2.5.tar.gz";
+    sha256 = "1fcffaa924f60d2d74a2494ee3a69e904ae0e91b491ad373639fab61f2568624";
   };
 })

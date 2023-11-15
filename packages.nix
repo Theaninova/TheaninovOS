@@ -3,9 +3,9 @@
   cachix
   lorri
 
-  # fix for proton games not launching without any error message
-  libxcrypt
-  
+  # gaming
+  gamescope
+
   # browsers
   firefox-wayland
   chromium
@@ -19,6 +19,7 @@
   handbrake
   metadata-cleaner
   bitwarden
+  nextcloud-client
 
   # chat apps
   (import ./packages/threema-desktop.nix { inherit pkgs; })
@@ -31,6 +32,7 @@
   # office
   libreoffice
   apostrophe # markdown editor
+  AusweisApp2
   
   # creative
   gimp-with-plugins
