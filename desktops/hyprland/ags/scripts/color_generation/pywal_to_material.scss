@@ -27,31 +27,87 @@ $inverseSurface: invert($surface);
 $inverseOnSurface: invert($onSurface);
 $inversePrimary: invert($primary);
 
-.primary { color: $primary; }
-.onPrimary { color: $onPrimary; }
-.primaryContainer { color: $primaryContainer; }
-.onPrimaryContainer { color: $onPrimaryContainer; }
-.secondary { color: $secondary; }
-.onSecondary { color: $onSecondary; }
-.secondaryContainer { color: $secondaryContainer; }
-.onSecondaryContainer { color: $onSecondaryContainer; }
-.tertiary { color: $tertiary; }
-.onTertiary { color: $onTertiary; }
-.tertiaryContainer { color: $tertiaryContainer; }
-.onTertiaryContainer { color: $tertiaryContainer; }
-.error { color: $error; }
-.onError { color: $onError; }
-.errorContainer { color: $errorContainer; }
-.onErrorContainer { color: $onErrorContainer; }
-.colorbarbg { color: $colorbarbg; }
-.background { color: $background; }
-.onBackground { color: $onBackground; }
-.surface { color: $surface; }
-.onSurface { color: $onSurface; }
-.surfaceVariant { color: $surfaceVariant; }
-.onSurfaceVariant { color: $onSurfaceVariant; }
-.outline { color: $outline; }
-.shadow { color: $shadow; }
-.inverseSurface { color: $inverseSurface; }
-.inverseOnSurface { color: $inverseOnSurface; }
-.inversePrimary { color: $inversePrimary; }
+.primary {
+  color: $primary;
+}
+.onPrimary {
+  color: $onPrimary;
+}
+.primaryContainer {
+  color: $primaryContainer;
+}
+.onPrimaryContainer {
+  color: $onPrimaryContainer;
+}
+.secondary {
+  color: $secondary;
+}
+.onSecondary {
+  color: $onSecondary;
+}
+.secondaryContainer {
+  color: $secondaryContainer;
+}
+.onSecondaryContainer {
+  color: $onSecondaryContainer;
+}
+.tertiary {
+  color: $tertiary;
+}
+.onTertiary {
+  color: $onTertiary;
+}
+.tertiaryContainer {
+  color: $tertiaryContainer;
+}
+.onTertiaryContainer {
+  color: $tertiaryContainer;
+}
+.error {
+  color: $error;
+}
+.onError {
+  color: $onError;
+}
+.errorContainer {
+  color: $errorContainer;
+}
+.onErrorContainer {
+  color: $onErrorContainer;
+}
+.colorbarbg {
+  color: $colorbarbg;
+}
+.background {
+  color: $background;
+}
+.onBackground {
+  color: $onBackground;
+}
+.surface {
+  color: $surface;
+}
+.onSurface {
+  color: $onSurface;
+}
+.surfaceVariant {
+  color: $surfaceVariant;
+}
+.onSurfaceVariant {
+  color: $onSurfaceVariant;
+}
+.outline {
+  color: $outline;
+}
+.shadow {
+  color: $shadow;
+}
+.inverseSurface {
+  color: $inverseSurface;
+}
+.inverseOnSurface {
+  color: $inverseOnSurface;
+}
+.inversePrimary {
+  color: $inversePrimary;
+}

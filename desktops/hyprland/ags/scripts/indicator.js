@@ -1,40 +1,36 @@
-import { Service, Utils } from '../imports.js';
-const { exec, execAsync } = Utils;
+import {Service, Utils} from "../imports.js"
+const {exec, execAsync} = Utils
 
-const clamp = (num, min, max) => Math.min(Math.max(num, min), max);
+const clamp = (num, min, max) => Math.min(Math.max(num, min), max)
 
 class IndicatorService extends Service {
-    static {
-        Service.register(
-            this,
-            { 'popup': ['double'], },
-        );
-    }
+  static {
+    Service.register(this, {popup: ["double"]})
+  }
 
-    _delay = 1500;
-    _count = 0;
+  _delay = 1500
+  _count = 0
 
-    popup(value) {
-        this.emit('popup', value);
-        this._count++;
-        Utils.timeout(this._delay, () => {
-            this._count--;
+  popup(value) {
+    this.emit("popup", value)
+    this._count++
+    Utils.timeout(this._delay, () => {
+      this._count--
 
-            if (this._count === 0)
-                this.emit('popup', -1);
-        });
-    }
+      if (this._count === 0) this.emit("popup", -1)
+    })
+  }
 
-    connectWidget(widget, callback) {
-        connect(this, widget, callback, 'popup');
-    }
+  connectWidget(widget, callback) {
+    connect(this, widget, callback, "popup")
+  }
 }
 
 // the singleton instance
-const service = new IndicatorService();
+const service = new IndicatorService()
 
 // make it global for easy use with cli
-globalThis['indicator'] = service;
+globalThis["indicator"] = service
 
 // export to use in other modules
-export default service;
+export default service

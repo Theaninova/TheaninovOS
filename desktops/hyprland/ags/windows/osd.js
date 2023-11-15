@@ -1,12 +1,17 @@
-import { Widget } from '../imports.js';
-import Osd from "../modules/onscreendisplay.js";
+import {Widget} from "../imports.js"
+import Osd from "../modules/onscreendisplay.js"
 
-export default (monitor) => Widget.Window({
+/**
+ * @param monitor {number}
+ * @returns {import('resource:///com/github/Aylur/ags/widgets/window.js').default}
+ */
+export default monitor =>
+  Widget.Window({
     name: `indicator${monitor}`,
     monitor,
-    className: 'indicator',
-    layer: 'overlay',
+    className: "indicator",
+    layer: "overlay",
     visible: true,
-    anchor: ['top'],
+    anchor: ["top"],
     child: Osd(),
-});
+  })

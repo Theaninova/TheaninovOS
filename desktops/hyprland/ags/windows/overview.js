@@ -1,18 +1,17 @@
-import { Widget } from '../imports.js';
-import { SearchAndWindows } from "../modules/overview.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js"
+import SearchAndWindows from "../modules/overview.js"
 
-export default () => Widget.Window({
-    name: 'overview',
+export default () =>
+  Widget.Window({
+    name: "overview",
     exclusive: false,
     focusable: true,
     popup: true,
     visible: false,
-    anchor: ['top'],
-    layer: 'overlay',
+    anchor: ["top"],
+    layer: "overlay",
     child: Widget.Box({
-        vertical: true,
-        children: [
-            SearchAndWindows(),
-        ]
+      vertical: true,
+      children: [SearchAndWindows()],
     }),
-})
+  })

@@ -1,40 +1,22 @@
-import { Widget } from '../imports.js';
-import { RoundedCorner } from "../modules/lib/roundedcorner.js";
+import Widget from "resource:///com/github/Aylur/ags/widget.js"
+import RoundedCorner from "../modules/lib/roundedcorner.js"
 
-export const CornerTopleft = monitor => Widget.Window({
-    name: 'cornertl',
-    layer: 'top',
+/**
+ * @param vertical {'top' | 'bottom'}
+ * @param horizontal {'left' | 'right'}
+ * @param monitor {number}
+ * @returns {import('resource:///com/github/Aylur/ags/widgets/window.js').default}
+ */
+function Corner(vertical, horizontal, monitor) {
+  return Widget.Window({
+    name: `corner${vertical[0]}${horizontal[0]}`,
+    layer: "top",
     monitor,
-    anchor: ['top', 'left'],
+    anchor: [vertical, horizontal],
     exclusive: false,
     visible: true,
-    child: RoundedCorner('topleft', { className: monitor === 1 ? 'corner' : 'corner-black', }),
-});
-export const CornerTopright = monitor => Widget.Window({
-    name: 'cornertr',
-    layer: 'top',
-    monitor,
-    anchor: ['top', 'right'],
-    exclusive: false,
-    visible: true,
-    child: RoundedCorner('topright', { className: monitor === 1 ? 'corner' : 'corner-black', }),
-});
-export const CornerBottomleft = monitor => Widget.Window({
-    name: 'cornerbl',
-    layer: 'top',
-    monitor,
-    anchor: ['bottom', 'left'],
-    exclusive: false,
-    visible: true,
-    child: RoundedCorner('bottomleft', { className: 'corner-black', }),
-});
-export const CornerBottomright = monitor => Widget.Window({
-    name: 'cornerbr',
-    layer: 'top',
-    monitor,
-    anchor: ['bottom', 'right'],
-    exclusive: false,
-    visible: true,
-    child: RoundedCorner('bottomright', { className: 'corner-black', }),
-});
+    child: RoundedCorner(vertical, horizontal, {class_name: monitor === 1 ? "corner" : "corner-black"}),
+  })
+}
 
+export default Corner

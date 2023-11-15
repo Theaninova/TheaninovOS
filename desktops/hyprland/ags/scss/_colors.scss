@@ -7,13 +7,13 @@ $transparentize_surface_amount_more: 0.1;
 $transparentize_surface_amount_subtract_surface: $transparentize_surface_amount - $transparentize_amount;
 
 @if $darkmode ==true {
-    // Less transparency
-    $transparentize_amount: 0.6;
-    $transparentize_surface_amount_less: 0.2;
-    $transparentize_surface_amount_less_less: 0.1;
-    $transparentize_surface_amount: 0.7;
-    $transparentize_surface_amount_more: 0.1;
-    $transparentize_surface_amount_subtract_surface: $transparentize_surface_amount - $transparentize_amount;
+  // Less transparency
+  $transparentize_amount: 0.6;
+  $transparentize_surface_amount_less: 0.2;
+  $transparentize_surface_amount_less_less: 0.1;
+  $transparentize_surface_amount: 0.7;
+  $transparentize_surface_amount_more: 0.1;
+  $transparentize_surface_amount_subtract_surface: $transparentize_surface_amount - $transparentize_amount;
 }
 
 // Extended material
@@ -23,11 +23,11 @@ $successContainer: #d1e8d5;
 $onSuccessContainer: #0c1f13;
 
 @if $darkmode ==true {
-    // Dark variant
-    $success: #b5ccba;
-    $onSuccess: #213528;
-    $successContainer: #374b3e;
-    $onSuccessContainer: #d1e9d6;
+  // Dark variant
+  $success: #b5ccba;
+  $onSuccess: #213528;
+  $successContainer: #374b3e;
+  $onSuccessContainer: #d1e9d6;
 }
 
 // Transparent material

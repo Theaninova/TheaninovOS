@@ -1,28 +1,28 @@
 // Reset
 * {
-    all: unset;
+  all: unset;
 }
 
 // Colors
-@import './material'; // Material colors
-@import './colors'; // Global color definitions. Uses material colors as base.
-@import './lib'; // Global mixins and functions
-@import './common'; // Context menu n stuff
+@import "./material"; // Material colors
+@import "./colors"; // Global color definitions. Uses material colors as base.
+@import "./lib"; // Global mixins and functions
+@import "./common"; // Context menu n stuff
 
 // Components
-@import './bar';
-@import './cheatsheet';
-@import './sidebars';
-@import './osd';
-@import './overview';
-@import './osk';
-@import './session';
-@import './notifications';
+@import "./bar";
+@import "./cheatsheet";
+@import "./sidebars";
+@import "./osd";
+@import "./overview";
+@import "./osk";
+@import "./session";
+@import "./notifications";
 
 // Classes for interaction
 .growingRadial {
-    transition: 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
+  transition: 300ms cubic-bezier(0.2, 0, 0, 1);
 }
 .fadingRadial {
-    transition: 50ms cubic-bezier(0.2, 0.0, 0, 1.0);
+  transition: 50ms cubic-bezier(0.2, 0, 0, 1);
 }
