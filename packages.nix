@@ -36,7 +36,7 @@
   gimp-with-plugins
   inkscape-with-extensions
   audacity
-  friture
+  # friture TODO: broken
   blender
    
   # development
