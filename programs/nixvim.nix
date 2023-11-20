@@ -1,6 +1,7 @@
 { pkgs }:
 {
   enable = true;
+  defaultEditor = true;
   
   options = {
     number = true;
@@ -67,9 +68,6 @@
     };
 
     none-ls.enable = true;
-    lspsaga = {
-      enable = true;
-    };
     lsp-format.enable = true;
     lsp = {
       enable = true;
