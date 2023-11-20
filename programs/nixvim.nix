@@ -28,6 +28,8 @@
     minimap_width = 10;
     minimap_auto_start = 1;
     minimap_auto_start_win_enter = 1;
+
+    mapleader = "<Space>";
   };
 
   clipboard = {
@@ -60,7 +62,17 @@
     nvim-autopairs.enable = true;
     illuminate.enable = true;
     nvim-colorizer.enable = true;
+    nvim-tree.enable = true;
     undotree.enable = true;
+    telescope = {
+      enable = true;
+      keymaps = {
+        "<leader>ff" = "find_files";
+        "<leader>fg" = "live_grep";
+        "<leader>fb" = "buffers";
+        "<leader>fh" = "help_tags";
+      };
+    };
 
     treesitter = {
       enable = true;
