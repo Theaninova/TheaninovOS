@@ -10,9 +10,14 @@
     ags = {
       url = "github:Aylur/ags";
     };
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {nixpkgs, home-manager, ags, ...}:
+  outputs = {nixpkgs, home-manager, ags, nixvim, ...}:
     let
       username = "theaninova";
       system = "x86_64-linux";
@@ -36,6 +41,7 @@
         modules = [
           ags.homeManagerModules.default
           home
+	  nixvim.homeManagerModules.nixvim 
         ];
       };
     };
