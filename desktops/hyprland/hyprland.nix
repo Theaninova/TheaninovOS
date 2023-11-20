@@ -94,9 +94,7 @@
     configDir = ./ags;
   };
   programs.fuzzel = import ./fuzzel.nix;
-  # programs.alacritty.enable = true;
-  programs.fish.enable = true;
-  programs.foot = import ./foot.nix;
+  programs.alacritty = import ./alacritty.nix;
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
