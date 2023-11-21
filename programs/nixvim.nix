@@ -21,7 +21,7 @@
   };
 
   keymaps = [
-    { key = "<F9>"; mode = "n"; action = "<cmd>:UndotreeToggle<CR>"; }
+    { key = "<leader>u"; mode = "n"; action = "<cmd>:UndotreeToggle<CR>"; }
   ];
 
   globals = {
@@ -29,7 +29,7 @@
     minimap_auto_start = 1;
     minimap_auto_start_win_enter = 1;
 
-    mapleader = "<Space>";
+    mapleader = ";";
   };
 
   clipboard = {
@@ -37,9 +37,33 @@
     providers.wl-copy.enable = true;
   };
 
-  extraConfigVim = ''
+  extraConfigVim = /* vim */ ''
     hi Normal guibg=NONE ctermbg=NONE
   '';
+
+  extraConfigLua = /* lua */ ''
+    local Terminal  = require('toggleterm.terminal').Terminal
+    local lazygit = Terminal:new({
+      cmd = "lazygit",
+      dir = "git_dir",
+      direction = "float",
+      on_open = function(term)
+        vim.cmd("startinsert!")
+        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+      end,
+      on_close = function(term)
+        vim.cmd("startinsert!")
+      end,
+    })
+
+
+    function _lazygit_toggle()
+      lazygit:toggle()
+    end
+
+    vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+  '';
+
   colorschemes.gruvbox = {
     enable = true;
     trueColor = true;
@@ -52,7 +76,6 @@
 
   plugins = {
     lualine.enable = true;
-    gitblame.enable = true;
     fidget.enable = true;
     indent-blankline = {
       enable = true;
@@ -62,8 +85,13 @@
     nvim-autopairs.enable = true;
     illuminate.enable = true;
     nvim-colorizer.enable = true;
-    nvim-tree.enable = true;
     undotree.enable = true;
+    toggleterm = {
+      enable = true;
+      openMapping = "<c-t>";
+      direction = "horizontal";
+    };
+
     telescope = {
       enable = true;
       keymaps = {
@@ -109,9 +137,9 @@
     nvim-cmp = {
       enable = true;
       mapping = { 
-        "<F7>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
-        "<F5>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-        "<F6>" = "cmp.mapping.confirm({select = true})";
+        "<F7>" = /* lua */ "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+        "<F5>" = /* lua */ "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
+        "<F6>" = /* lua */ "cmp.mapping.confirm({select = true})";
       };
       sources = [
         { name = "buffer"; }

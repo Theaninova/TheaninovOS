@@ -27,7 +27,7 @@ in {
   };
 
   programs = import ./programs.nix { inherit pkgs; };
-  services = import ./services.nix;
+  services = import ./services.nix { inherit pkgs; };
 
   home.file.".p10k.zsh".source = ./programs/.p10k.zsh;
 }

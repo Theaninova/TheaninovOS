@@ -24,6 +24,8 @@
         "ags"
         "swww init"
         "swww img ~/Pictures/Wallpapers/wallpaper.jpg"
+        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
+        "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];

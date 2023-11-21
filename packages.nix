@@ -56,4 +56,5 @@
 
   # utils
   neofetch
+  pinentry-gnome
 ]
