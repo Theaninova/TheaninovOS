@@ -1,4 +1,7 @@
 { pkgs }:
+let
+  angular-ls = (import ../packages/node-packages { inherit pkgs; nodejs = pkgs.nodejs_18; })."@angular/language-server";
+in
 {
   enable = true;
   defaultEditor = true;
@@ -83,7 +86,6 @@
     };
     rainbow-delimiters.enable = true;
     nvim-autopairs.enable = true;
-    illuminate.enable = true;
     nvim-colorizer.enable = true;
     undotree.enable = true;
     toggleterm = {
@@ -105,6 +107,18 @@
     treesitter = {
       enable = true;
       indent = true;
+      /* TODO: grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars ++ [
+        (pkgs.tree-sitter.buildGrammar {
+          language = "angular";
+          version = "624ff10";
+          src = pkgs.fetchFromGitHub {
+            owner = "osenvosem";
+            repo = "tree-sitter-angular";
+            rev = "194a9404a0769e05a9cce77c4d69d92cd48d00fe";
+            sha256 = "sha256-bza1f5DDZcH65UJpO778AhjRUYICL4y5hqwB8lmAh0Q=";
+          };
+        })
+      ];*/
     };
 
     none-ls.enable = true;
@@ -115,6 +129,14 @@
         diagnostic = {
         };
       };
+      enabledServers = [
+        {
+          name = "angularls";
+          extraOptions = {
+            cmd = ["${angular-ls}" "--stdio" "--tsProbeLocations" "${pkgs.nodePackages.typescript-language-server}" "--ngProbeLocations" "${angular-ls}"];
+          };
+        }
+      ];
       servers = {
         html.enable = true;
         cssls.enable = true;
@@ -142,7 +164,6 @@
         "<F6>" = /* lua */ "cmp.mapping.confirm({select = true})";
       };
       sources = [
-        { name = "buffer"; }
         { name = "path"; }
         { name = "nvim_lsp"; }
         { name = "npm"; }
@@ -152,7 +173,17 @@
     nix.enable = true;
   };
 
+  extraPackages = [ angular-ls pkgs.nodePackages.typescript-language-server ];
   extraPlugins = with pkgs.vimPlugins; [
     minimap-vim
+    /*(pkgs.vimUtils.buildVimPlugin {
+      name = "nvim-treesitter-angular";
+      src = pkgs.fetchFromGitHub {
+        owner = "elgiano";
+        repo = "nvim-treesitter-angular";
+        rev = "53d55ba0473c3ac58e25ce3d016a0409481c645c";
+        sha256 = "sha256-+OIOTRVfJxCFDzWqFDZAtfQVSQMaJZEltXSKfgfbeVY=";
+      };
+    })*/
   ];
 }
