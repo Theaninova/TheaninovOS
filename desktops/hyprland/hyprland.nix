@@ -43,8 +43,7 @@
       dwindle.pseudotile = true;
       input = {
         accel_profile = "flat";
-        kb_layout = "us";
-        kb_variant = "altgr-intl";
+        kb_layout = "cc1-thea";
         numlock_by_default = true;
       };
       bind = import ./keybinds.nix;

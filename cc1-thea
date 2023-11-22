@@ -1,0 +1,39 @@
+xkb_symbols "cc1-thea"
+{
+  include "us(basic)"
+  include "level3(ralt_switch)"
+
+  key <AE11> {[minus, underscore, at]};
+  key <AE12> {[equal, question, ssharp]};
+  key <LatQ> {[q, Q, asterisk]};
+  key <LatW> {[w, W, 9]};
+  key <LatE> {[e, E, braceleft]};
+  key <LatR> {[r, R, 1]};
+  key <LatT> {[t, T, braceright]};
+  key <LatY> {[y, Y, bar]};
+  key <LatU> {[u, U, 5]};
+  key <LatI> {[i, I, exclam]};
+  key <LatO> {[o, O, 3]};
+  key <LatP> {[p, P, greater]};
+  key <LatA> {[a, A, 0]};
+  key <LatS> {[s, S, 4]};
+  key <LatD> {[d, D, parenright]};
+  key <LatF> {[f, F, 6]};
+  key <LatG> {[g, G, asciicircum]};
+  key <LatH> {[h, H, bracketright]};
+  key <LatJ> {[j, J, percent]};
+  key <LatK> {[k, K, 7]};
+  key <LatL> {[l, L, slash]};
+  key <AC10> {[semicolon, colon, dollar, EuroSign]};
+  key <AC11> {[apostrophe, quotedbl, ampersand]};
+  key <LatZ> {[z, Z, dead_diaeresis]};
+  key <LatX> {[x, X, plus]};
+  key <LatC> {[c, C, parenleft]};
+  key <LatV> {[v, V, less]};
+  key <LatB> {[b, B, 8]};
+  key <LatN> {[n, N, 2]};
+  key <LatM> {[m, M, bracketleft, mu]};
+  key <AB08> {[comma, numbersign, grave]};
+  key <AB09> {[period, asciitilde, backslash]};
+};
+  
