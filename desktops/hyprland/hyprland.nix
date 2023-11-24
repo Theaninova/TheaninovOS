@@ -63,10 +63,10 @@
         "7,monitor:DP-3"
         "8,monitor:DP-3"
         "9,monitor:DP-3"
+        "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
       windowrule = [
         "pseudo,^(discord)$"
-        "pseudo,^(org.gnome.Calculator)$"
         "pseudo,^(Slack)$"
         "pseudo,^(steam)$"
         "monitor DP-3,^(discord)$"
@@ -84,9 +84,64 @@
         "noanim,class:^(jetbrains-.*)$,title:^(win.*)$"
         "noinitialfocus,class:^(jetbrains-.*)$,title:^(win.*)$"
         "rounding 0,class:^(jetbrains-.*)$,title:^(win.*)$"
+        # pinentry
+        "dimaround,class:^(gcr-prompter)$"
+        "noborder,class:^(gcr-prompter)$"
+        "rounding 10,class:^(gcr-prompter)$"
+        "animation slide,class:^(gcr-prompter)$"
       ];
-      layerrule = import ./layerrules.nix;
-      decoration = import ./decoration.nix;
+      layerrule = [
+        "noanim, .*"
+        "xray 1, .*"
+
+        "noanim, noanim"
+        "blur, noanim"
+        "blur, gtk-layer-shell"
+        "ignorezero, gtk-layer-shell"
+        "blur, launcher"
+        "ignorealpha 0.3, launcher"
+        "blur, notifications"
+        "ignorealpha 0.3, notifications"
+        # ags
+        "blur, bar"
+        "ignorealpha 0.3, bar"
+        "blur, corner.*"
+        "ignorealpha 0.3, corner.*"
+        "blur, indicator.*"
+        "ignorealpha 0.3, indicator.*"
+        "blur, overview"
+        "ignorealpha 0.3, overview"
+        "xray 0, overview"
+        "blur, cheatsheet"
+        "ignorealpha 0.3, cheatsheet"
+        "blur, sideright"
+        "ignorealpha 0.3, sideright"
+        "blur, sideleft"
+        "ignorealpha 0.3, sideleft"
+        "blur, indicatorundefined"
+        "ignorealpha 0.3, indicatorundefined"
+        "blur, osk"
+        "ignorealpha 0.3, osk"
+        "blur, session"
+      ];
+      animation = [
+        "specialWorkspace,1,4,default,fade"
+      ];
+      decoration = {
+        rounding = 20;
+        blur = {
+          enabled = true;
+          xray = false;
+
+          size = 6;
+          passes = 4;
+        };
+
+        drop_shadow = true;
+        shadow_range = 15;
+        shadow_render_power = 6;
+        "col.shadow" = "rgba(00000044)";
+      };
     };
   };
 
@@ -174,10 +229,10 @@
     enable = true;
     target = ".zprofile"; # change to .profile if you're not using zsh
     text = ''
-      Hyprland && echo "goodbye" && exit 0 \
-        || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
-        && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
-        || echo "not on tty1, letting in"
+    Hyprland && echo "goodbye" && exit 0 \
+    || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
+    && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
+    || echo "not on tty1, letting in"
     '';
   };
 

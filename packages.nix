@@ -57,4 +57,7 @@
   # utils
   neofetch
   pinentry-gnome
+  ranger
+  lazydocker
+  libqalculate
 ]
