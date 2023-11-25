@@ -169,6 +169,7 @@
     slurp
     wl-clipboard
     polkit_gnome
+    xdg-desktop-portal-gtk
     /* TODO: (flameshot.overrideAttrs(prev: {
       nativeBuildInputs = prev.nativeBuildInputs ++ [ git grim ];
       cmakeFlags = [
@@ -211,10 +212,6 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
-    cursorTheme = {
-      name = "capitaine-cursors";
-      package = pkgs.capitaine-cursors;
-    };
     iconTheme = {
       name = "Tela";
       package = pkgs.tela-icon-theme;
@@ -225,20 +222,28 @@
     platformTheme = "gtk";
   };
 
-  home.file.profile = {
-    enable = true;
-    target = ".zprofile"; # change to .profile if you're not using zsh
-    text = ''
-    Hyprland && echo "goodbye" && exit 0 \
-    || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
-    && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
-    || echo "not on tty1, letting in"
-    '';
-  };
+  home = {
+    pointerCursor = {
+      gtk.enable = true;
+      package = pkgs.capitaine-cursors;
+      name = "capitaine-cursors";
+    };
 
-  home.file.".config/hypr/shaders" = {
-    source = ./hypr/shaders;
-    recursive = true;
+    file.profile = {
+      enable = true;
+      target = ".zprofile"; # change to .profile if you're not using zsh
+      text = /* sh */ ''
+      Hyprland && echo "goodbye" && exit 0 \
+      || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
+      && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
+      || echo "not on tty1, letting in"
+      '';
+    };
+
+    file.".config/hypr/shaders" = {
+      source = ./hypr/shaders;
+      recursive = true;
+    };
   };
 }
 

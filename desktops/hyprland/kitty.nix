@@ -3,45 +3,20 @@
   enable = true;
   shellIntegration.enableFishIntegration = true;
   font = {
-    package = pkgs.fira-code-nerdfont;
-    name = "FiraCode Nerdfont";
+    package = pkgs.fira-code;
+    name = "FiraCode";
     size = 12;
   };
+  extraConfig = ''
+  symbol_map U+23FB-U+23FE,U+2665,U+26A1,U+2B58,U+E000-U+E00A,U+E0A0-U+E0A3,U+E0B0-U+E0D4,U+E200-U+E2A9,U+E300-U+E3E3,U+E5FA-U+E6AA,U+E700-U+E7C5,U+EA60-U+EBEB,U+F000-U+F2E0,U+F300-U+F32F,U+F400-U+F4A9,U+F500-U+F8FF,U+F0001-U+F1AF0 Symbols Nerd Font Mono
+
+  include ./current-theme.conf
+  '';
   settings = {
     background_opacity = "0.8";
-    window_padding_width = 24;
+    window_padding_width = 10;
 
     cursor = "#928374";
     cursor_text_color = "background";
-
-    url_color              = "#83a598";
-    visual_bell_color      = "#8ec07c";
-    bell_border_color      = "#8ec07c";
-    active_border_color    = "#d3869b";
-    inactive_border_color  = "#665c54";
-    foreground             = "#ebdbb2";
-    background             = "#282828";
-    selection_foreground   = "#928374";
-    selection_background   = "#ebdbb2";
-    active_tab_foreground  = "#fbf1c7";
-    active_tab_background  = "#665c54";
-    inactive_tab_foreground= "#a89984";
-    inactive_tab_background= "#3c3836";
-    color0                 = "#665c54";
-    color8                 = "#7c6f64";
-    color1                 = "#cc241d";
-    color9                 = "#fb4934";
-    color2                 = "#98971a";
-    color10                = "#b8bb26";
-    color3                 = "#d79921";
-    color11                = "#fabd2f";
-    color4                 = "#458588";
-    color12                = "#83a598";
-    color5                 = "#b16286";
-    color13                = "#d3869b";
-    color6                 = "#689d6a";
-    color14                = "#8ec07c";
-    color7                 = "#a89984";
-    color15                = "#bdae93";
   };
 }
