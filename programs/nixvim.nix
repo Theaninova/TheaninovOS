@@ -147,7 +147,6 @@ in
         indent.char = "▏";
       };
       illuminate.enable = true;
-      rainbow-delimiters.enable = true;
       nvim-autopairs.enable = true;
       nvim-colorizer.enable = true;
       neo-tree = {
