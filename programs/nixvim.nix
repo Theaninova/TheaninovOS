@@ -159,6 +159,7 @@ in
       illuminate.enable = true;
       nvim-autopairs.enable = true;
       nvim-colorizer.enable = true;
+      copilot-vim.enable = true;
       neo-tree = {
         enable = true;
         filesystem.filteredItems.visible = true;

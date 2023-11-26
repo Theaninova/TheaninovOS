@@ -55,6 +55,7 @@
   mangohud
 
   # utils
+  gh
   neofetch
   pinentry-gnome
   ranger
