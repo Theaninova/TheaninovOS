@@ -6,8 +6,18 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "dlvandenberg";
       repo = "nvim-treesitter-angular";
-      rev = "1d1b468180c2b2d40bf87a834a28297456e24825";
-      hash = "sha256-z7jcJsrDdHE69VLO3V0nteZEvWxEN16vIOJDGJ01SJs=";
+      rev = "7549872eb34934c5bc4f4df2ca71196755adfb1c";
+      hash = "sha256-fayRXogWBeV9jDmjXs/u6ULlbCziKIL26pKKh9QJzf8=";
+    };
+  });
+  tree-sitter-angular = (pkgs.tree-sitter.buildGrammar {
+    language = "angular";
+    version = "624ff10";
+    src = pkgs.fetchFromGitHub {
+      owner = "dlvandenberg";
+      repo = "tree-sitter-angular";
+      rev = "e0d7582e1ebbcf6136cfcfb22a37e20f4562acba";
+      hash = "sha256-ADOlhAUidmRKCpDxmo70ZYHgtUIwxrfy0ucACfjkhlQ=";
     };
   });
   darkman = (pkgs.vimUtils.buildVimPlugin {
@@ -23,7 +33,7 @@ let
         sha256 = "sha256-ssEYdM460I1rufjgh63CEkLi4K+bEWbwku/6gQbytno=";
       };
       postInstall = ''
-        cp -r lua $out
+      cp -r lua $out
       '';
     };
   });
@@ -89,33 +99,33 @@ in
     };
 
     extraConfigVim = /* vim */ ''
-      hi Normal guibg=NONE ctermbg=NONE
+    hi Normal guibg=NONE ctermbg=NONE
     '';
 
     extraConfigLua = /* lua */ ''
-      require("darkman").setup()
-    
-      local Terminal  = require('toggleterm.terminal').Terminal
-      local lazygit = Terminal:new({
-        cmd = "lazygit",
-        dir = "git_dir",
-        direction = "float",
+    require("darkman").setup()
 
-        on_open = function(term)
-          vim.cmd("startinsert!")
-          vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-        end,
-        on_close = function(term)
-          vim.cmd("startinsert!")
-        end,
-      })
+    local Terminal  = require('toggleterm.terminal').Terminal
+    local lazygit = Terminal:new({
+      cmd = "lazygit",
+      dir = "git_dir",
+      direction = "float",
+
+      on_open = function(term)
+      vim.cmd("startinsert!")
+      vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
+      end,
+      on_close = function(term)
+      vim.cmd("startinsert!")
+      end,
+    })
 
 
-      function _lazygit_toggle()
-        lazygit:toggle()
-      end
+    function _lazygit_toggle()
+    lazygit:toggle()
+    end
 
-      vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
+    vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
     '';
 
     colorschemes.catppuccin = {
@@ -154,9 +164,9 @@ in
         filesystem.filteredItems.visible = true;
         eventHandlers = {
           file_opened = /* lua */ ''
-            function()
-              require('neo-tree').close_all()
-            end
+          function()
+          require('neo-tree').close_all()
+          end
           '';
         };
       };
@@ -182,18 +192,7 @@ in
       treesitter = {
         enable = true;
         indent = true;
-        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars ++ [
-          (pkgs.tree-sitter.buildGrammar {
-            language = "angular";
-            version = "624ff10";
-            src = pkgs.fetchFromGitHub {
-              owner = "dlvandenberg";
-              repo = "tree-sitter-angular";
-              rev = "e316388ca6dcc728a5c521b4d63acecdeedab942";
-              hash = "sha256-t/qLxBideSGP/x4dhDu8MvMnugIEhcBvYasUdUFisFI=";
-            };
-          })
-        ];
+        grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars ++ [tree-sitter-angular];
       };
 
       none-ls.enable = true;
@@ -235,10 +234,10 @@ in
         enable = true;
         mode = "symbol";
         cmp.after = /* lua */ ''
-          function(entry, vim_item, kind)
-            kind.kind = kind.kind .. " ";
-            return kind
-          end
+        function(entry, vim_item, kind)
+        kind.kind = kind.kind .. " ";
+        return kind
+        end
         '';
       };
       nvim-cmp = {
