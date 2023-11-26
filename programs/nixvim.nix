@@ -50,6 +50,8 @@ in
 
       termguicolors = true;
 
+      updatetime = 50;
+
       fillchars.eob = " ";
     };
 
@@ -57,6 +59,16 @@ in
       { key = "<leader>u"; mode = "n"; action = "<cmd>:UndotreeToggle<CR>"; }
       { key = "<leader>ft"; action = "<cmd>:Neotree toggle<CR>"; }
       { key = "<leader>s"; action = "<cmd>:SymbolsOutline<CR>"; }
+
+      { key = "J"; mode = "v"; action = ":m '>+1<CR>gv=gv"; }
+      { key = "K"; mode = "v"; action = ":m '<-2<CR>gv=gv"; }
+
+      { key = "<C-d>"; mode = "n"; action = "<C-d>zz"; }
+      { key = "<C-u>"; mode = "n"; action = "<C-d>zz"; }
+
+      { key = "<leader>p"; mode = "x"; action = "\"_dP"; }
+      { key = "<leader>p"; mode = "n"; action = "\"_dP"; }
+      { key = "<leader>p"; mode = "v"; action = "\"_dP"; }
     ];
 
     globals = {
@@ -81,10 +93,8 @@ in
     '';
 
     extraConfigLua = /* lua */ ''
-      require("scrollbar").setup()
       require("darkman").setup()
-      require("symbols-outline").setup()
-
+    
       local Terminal  = require('toggleterm.terminal').Terminal
       local lazygit = Terminal:new({
         cmd = "lazygit",
@@ -115,7 +125,6 @@ in
         dark = "frappe";
         light = "latte";
       };
-      integrations.indent_blankline.colored_indent_levels = true;
     };
 
     plugins = {
@@ -129,21 +138,6 @@ in
           lualine_z = [ { name = "location"; separator = { right = ""; left = ""; }; } ];
         };
       };
-      noice = {
-        enable = true;
-        lsp.override = {
-          "vim.lsp.util.convert_input_to_markdown_lines" = true;
-          "vim.lsp.util.stylize_markdown" = true;
-          "cmp.entry.get_documentation" = true;
-        };
-        presets = {
-          bottom_search = true; 
-          command_palette = true;
-          long_message_to_split = true;
-          inc_rename = false;
-          lsp_doc_border = false;
-        };
-      };
       auto-save = {
         enable = true;
         triggerEvents = [ "FocusLost" "CursorHold" "BufLeave" ];
@@ -154,7 +148,6 @@ in
       };
       illuminate.enable = true;
       rainbow-delimiters.enable = true;
-      notify.enable = true;
       nvim-autopairs.enable = true;
       nvim-colorizer.enable = true;
       neo-tree = {
@@ -273,8 +266,7 @@ in
     extraPackages = [ angular-ls pkgs.nodePackages.typescript-language-server ];
     extraPlugins = with pkgs.vimPlugins; [
       nvim-treesitter-angular
+      vim-startuptime
       darkman
-      nvim-scrollbar
-      symbols-outline-nvim
     ];
   }
