@@ -7,7 +7,10 @@
       size = 12;
     };
     window = {
-      padding = { x = 16; y = 16; };
+      padding = {
+        x = 16;
+        y = 16;
+      };
       opacity = 0.8;
     };
   };

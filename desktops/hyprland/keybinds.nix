@@ -3,7 +3,7 @@
   "SUPER,T,exec,kitty"
   "SUPER,C,togglespecialworkspace,calc"
   "SUPER_SHIFT,C,exec,hyprpicker"
-  ",PRINT,exec,slurp | grim -g - - | wl-copy"
+  "SUPER_SHIFT,V,exec,slurp | grim -g - - | wl-copy"
   "SUPER,P,pseudo,"
 
   "SUPER_SHIFT,up,movewindow,u"
@@ -11,8 +11,8 @@
   "SUPER_SHIFT,left,movewindow,l"
   "SUPER_SHIFT,right,movewindow,r"
 
-  "SUPER_SHIFT,S,movetoworkspace,special"
-  "SUPER,S,togglespecialworkspace,special"
+  "SUPER_SHIFT,S,movetoworkspace,special:terminal"
+  "SUPER,S,togglespecialworkspace,terminal"
 
   "SUPER,up,movefocus,u"
   "SUPER,down,movefocus,d"

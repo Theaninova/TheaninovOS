@@ -6,9 +6,9 @@
       position = "top";
       height = 48;
       output = "HDMI-A-1";
-      modules-left = [ "wlr/workspaces" ];
-      modules-center = [ "wlr/taskbar" ];
-      modules-right = [ "custom/weather" "clock" ];
+      modules-left = ["wlr/workspaces"];
+      modules-center = ["wlr/taskbar"];
+      modules-right = ["custom/weather" "clock"];
 
       "wlr/taskbar" = {
         all-outputs = true;

@@ -1,8 +1,13 @@
-{ homeDirectory, pkgs, stateVersion, system, username }:
-let
-  packages = import ./packages.nix { inherit pkgs; };
+{
+  homeDirectory,
+  pkgs,
+  stateVersion,
+  system,
+  username,
+}: let
+  packages = import ./packages.nix {inherit pkgs;};
 in {
-  imports = [ ./desktops/hyprland/hyprland.nix ];
+  imports = [./desktops/hyprland/hyprland.nix];
 
   home = {
     inherit homeDirectory packages stateVersion username;
@@ -26,6 +31,6 @@ in {
     };
   };
 
-  programs = import ./programs.nix { inherit pkgs; };
-  services = import ./services.nix { inherit pkgs homeDirectory; };
+  programs = import ./programs.nix {inherit pkgs;};
+  services = import ./services.nix {inherit pkgs homeDirectory;};
 }

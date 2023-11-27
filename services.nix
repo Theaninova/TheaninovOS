@@ -1,5 +1,7 @@
-{ pkgs, homeDirectory }:
 {
+  pkgs,
+  homeDirectory,
+}: {
   gpg-agent = {
     enable = true;
     enableSshSupport = true;
@@ -24,7 +26,7 @@
 
       vendorHash = "sha256-xEPmNnaDwFU4l2G4cMvtNeQ9KneF5g9ViQSFrDkrafY=";
 
-      nativeBuildInputs = [ pkgs.scdoc ];
+      nativeBuildInputs = [pkgs.scdoc];
 
       postPatch = ''
         substituteInPlace darkman.service \
@@ -45,13 +47,13 @@
         runHook preInstall
         make PREFIX=$out install
         runHook postInstall
-        '';
+      '';
 
       meta = with pkgs.lib; {
         description = "Framework for dark-mode and light-mode transitions on Linux desktop";
         homepage = "https://gitlab.com/WhyNotHugo/darkman";
         license = licenses.isc;
-        maintainers = [ maintainers.ajgrf ];
+        maintainers = [maintainers.ajgrf];
         platforms = platforms.linux;
         mainProgram = "darkman";
       };
@@ -61,25 +63,41 @@
       lng = 13.405;
     };
     darkModeScripts = {
-      gtk-theme = /* bash */ ''
-        ${pkgs.dconf}/bin/dconf write \
-          /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-      '';
-      kitty-theme = /* bash */ ''
-        ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
-      '';
+      gtk-theme =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.dconf}/bin/dconf write \
+            /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
+        '';
+      kitty-theme =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
+        '';
       wallpaper = ''
         ${pkgs.swww}/bin/swww img ${./Lakeside-2/Lakeside-2-1.jpg}
       '';
     };
     lightModeScripts = {
-      gtk-theme = /* bash */ ''
-        ${pkgs.dconf}/bin/dconf write \
-          /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-      '';
-      kitty-theme = /* bash */ ''
-        ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
-      '';
+      gtk-theme =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.dconf}/bin/dconf write \
+            /org/gnome/desktop/interface/color-scheme "'prefer-light'"
+        '';
+      kitty-theme =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
+        '';
       wallpaper = ''
         ${pkgs.swww}/bin/swww img ${./Lakeside-2/Lakeside-2-10.jpg}
       '';

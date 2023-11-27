@@ -1,5 +1,8 @@
-{ config, pkgs, ... }:
 {
+  config,
+  pkgs,
+  ...
+}: {
   wayland.windowManager.hyprland = {
     enable = true;
     enableNvidiaPatches = true;
@@ -151,7 +154,7 @@
   };
   programs.fuzzel = import ./fuzzel.nix;
   # programs.alacritty = import ./alacritty.nix;
-  programs.kitty = import ./kitty.nix { inherit pkgs; };
+  programs.kitty = import ./kitty.nix {inherit pkgs;};
   programs.wofi = import ./wofi.nix;
   programs.swaylock = import ./swaylock.nix;
 
@@ -170,13 +173,15 @@
     wl-clipboard
     polkit_gnome
     xdg-desktop-portal-gtk
-    /* TODO: (flameshot.overrideAttrs(prev: {
+    /*
+       TODO: (flameshot.overrideAttrs(prev: {
       nativeBuildInputs = prev.nativeBuildInputs ++ [ git grim ];
       cmakeFlags = [
         "-DUSE_WAYLAND_CLIPBOARD=1"
         "-DUSE_WAYLAND_GRIM=true"
       ];
-    }))*/
+    }))
+    */
     swww
     # ags
     glib
@@ -232,12 +237,16 @@
     file.profile = {
       enable = true;
       target = ".zprofile"; # change to .profile if you're not using zsh
-      text = /* sh */ ''
-      Hyprland && echo "goodbye" && exit 0 \
-      || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
-      && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
-      || echo "not on tty1, letting in"
-      '';
+      text =
+        /*
+        sh
+        */
+        ''
+          Hyprland && echo "goodbye" && exit 0 \
+          || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
+          && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
+          || echo "not on tty1, letting in"
+        '';
     };
 
     file.".config/hypr/shaders" = {
@@ -246,4 +255,3 @@
     };
   };
 }
-

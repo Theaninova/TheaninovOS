@@ -1,5 +1,9 @@
-{ lib, stdenv, fetchFromGitHub, pkgs }:
-
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkgs,
+}:
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff-tools";
   version = "0.1.0";
