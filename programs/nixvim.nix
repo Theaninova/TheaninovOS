@@ -5,23 +5,14 @@
       nodejs = pkgs.nodejs_18;
     })
     ."@angular/language-server";
-  nvim-treesitter-angular = pkgs.vimUtils.buildVimPlugin {
-    name = "nvim-treesitter-angular";
-    src = pkgs.fetchFromGitHub {
-      owner = "dlvandenberg";
-      repo = "nvim-treesitter-angular";
-      rev = "7549872eb34934c5bc4f4df2ca71196755adfb1c";
-      hash = "sha256-fayRXogWBeV9jDmjXs/u6ULlbCziKIL26pKKh9QJzf8=";
-    };
-  };
   tree-sitter-angular = pkgs.tree-sitter.buildGrammar {
     language = "angular";
     version = "624ff10";
     src = pkgs.fetchFromGitHub {
       owner = "dlvandenberg";
       repo = "tree-sitter-angular";
-      rev = "e0d7582e1ebbcf6136cfcfb22a37e20f4562acba";
-      hash = "sha256-ADOlhAUidmRKCpDxmo70ZYHgtUIwxrfy0ucACfjkhlQ=";
+      rev = "ddd64047c8ccc3dc2aff1082e4461ebc9210917d";
+      hash = "sha256-wAbkrJ0MmNhE3qb34DQiju/mFIb7YCTyBUgVmP+iWQs=";
     };
   };
   darkman = pkgs.vimUtils.buildVimPlugin {
@@ -367,7 +358,6 @@ in {
 
   extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server];
   extraPlugins = with pkgs.vimPlugins; [
-    nvim-treesitter-angular
     vim-startuptime
     darkman
   ];

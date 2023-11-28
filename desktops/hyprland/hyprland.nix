@@ -153,10 +153,8 @@
     configDir = ./ags;
   };
   programs.fuzzel = import ./fuzzel.nix;
-  # programs.alacritty = import ./alacritty.nix;
   programs.kitty = import ./kitty.nix {inherit pkgs;};
   programs.wofi = import ./wofi.nix;
-  programs.swaylock = import ./swaylock.nix;
 
   services.udiskie.enable = true;
   services.udiskie.tray = "never";
