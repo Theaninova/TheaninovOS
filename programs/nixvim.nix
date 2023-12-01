@@ -123,6 +123,9 @@ in {
     catppuccin_debug = true;
 
     mapleader = ";";
+
+    mergetool_layout = "mr";
+    mergetool_prefer_revision = "local";
   };
 
   clipboard = {
@@ -132,10 +135,28 @@ in {
 
   extraConfigVim = ''
     hi Normal guibg=NONE ctermbg=NONE
+    set noshowmode
   '';
 
   extraConfigLua = ''
     require("darkman").setup()
+    require("cmp-npm").setup({})
+    require("codewindow").setup({
+      auto_enable = true,
+      window_border = "none",
+      minimap_width = 10,
+    })
+
+    local signs = {
+      { name = "DiagnosticSignError", text = "" },
+      { name = "DiagnosticSignWarn", text = "" },
+      { name = "DiagnosticSignHint", text = "󰌵" },
+      { name = "DiagnosticSignInfo", text = "" },
+    }
+
+    for _, sign in ipairs(signs) do
+      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+    end
 
     local Terminal  = require('toggleterm.terminal').Terminal
     local lazygit = Terminal:new({
@@ -167,11 +188,85 @@ in {
       dark = "frappe";
       light = "latte";
     };
+    integrations.native_lsp.underlines = {
+      errors = ["undercurl"];
+      warnings = ["undercurl"];
+    };
+    customHighlights =
+      /*
+      lua
+      */
+      ''
+        function(colors)
+          return {
+            CmpItemKindCopilot = {fg = colors.teal},
+            CmpItemKindNpm = {fg = colors.maroon},
+
+            -- IntelliJ Theme
+            Constant = {fg = colors.mauve},
+            Character = {link = "Keyword"},
+            Number = {fg = colors.sapphire},
+            Boolean = {link = "Keyword"},
+            Identifier = {fg = colors.text},
+            Function = {fg = colors.blue},
+            Statement = {fg = colors.text},
+            Conditional = {link = "Keyword"},
+            Repeat = {link = "Keyword"},
+            Label = {link = "Keyword"},
+            Operator = {fg = colors.text},
+            Keyword = {fg = colors.peach},
+            Exception = {link = "Keyword"},
+            Include = {link = "Keyword"},
+            Structure = {fg = colors.yellow},
+            Type = {fg = colors.teal},
+
+            SpellBad = {sp = colors.green, style = {"underdotted"}},
+            SpellCap = {sp = colors.green, style = {"underdotted"}},
+            SpellLocal = {sp = colors.green, style = {"underdotted"}},
+            SpellRare = {sp = colors.green, style = {"underdotted"}},
+
+            ["@constructor"] = {link = "Keyword"},
+            ["@constructor.typescript"] = {link = "@constructor"},
+            ["@parameter"] = {link = "Identifier"},
+
+            ["@tag"] = {link = "Structure"},
+            ["@tag.delimiter"] = {link = "Structure"},
+            ["@tag.attribute"] = {fg = colors.mauve, style = {"italic"}}, -- Constant
+
+            ["@keyword.function"] = {link = "Keyword"},
+            ["@keyword.operator"] = {link = "Keyword"},
+            ["@keyword.return"] = {link = "Keyword"},
+            ["@keyword.export"] = {link = "Keyword"},
+
+            ["@punctuation.special"] = {link = "Operator"},
+            ["@conditional.ternary"] = {link = "Operator"},
+
+            ["@type.builtin"] = {link = "Keyword"},
+            ["@variable.builtin"] = {link = "Keyword"},
+            ["@lsp.typemod.class.defaultLibrary"] = {fg = colors.yellow, style = {"bold"}}, -- Structure
+            ["@lsp.typemod.variable.defaultLibrary"] = {fg = colors.mauve, style = {"bold"}}, -- Constant
+            ["@lsp.typemod.function.defaultLibrary"] = {fg = colors.blue, style = {"bold"}}, -- Function
+
+            ["@variable"] = {link = "Constant"},
+            ["@field"] = {link = "Constant"},
+            ["@property"] = {link = "Constant"},
+            ["@property.typescript"] = {link = "@property"},
+            ["@lsp.type.property"] = {link = "Constant"},
+            ["@lsp.type.interface"] = {link = "Structure"},
+            ["@lsp.type.namespace"] = {link = "Structure"},
+            ["@attribute.typescript"] = {link = "Structure"},
+
+            ["@lsp.mod.local"] = {fg = colors.text},
+            ["@lsp.mod.readonly"] = {style = {"italic"}},
+          }
+        end
+      '';
   };
 
   plugins = {
     lualine = {
       enable = true;
+      theme = "catppuccin";
       globalstatus = true;
       sectionSeparators = {
         left = "";
@@ -192,6 +287,16 @@ in {
             icon = "";
           }
         ];
+        lualine_x = [
+          {
+            name = "filetype";
+            extraConfig = {icon_only = true;};
+            padding = {
+              left = 1;
+              right = 2;
+            };
+          }
+        ];
         lualine_z = [
           {
             name = "location";
@@ -210,11 +315,11 @@ in {
     indent-blankline = {
       enable = true;
       indent.char = "▏";
+      scope.showStart = false;
     };
     illuminate.enable = true;
     nvim-autopairs.enable = true;
     nvim-colorizer.enable = true;
-    copilot-vim.enable = true;
     neo-tree = {
       enable = true;
       filesystem.filteredItems.visible = true;
@@ -258,35 +363,39 @@ in {
       enable = true;
       sources = {
         code_actions = {
-          eslint.enable = true;
+          eslint_d.enable = true;
           shellcheck.enable = true;
         };
         diagnostics = {
-          eslint.enable = true;
+          eslint_d.enable = true;
           shellcheck.enable = true;
         };
         formatting = {
           alejandra.enable = true;
-          prettier.enable = true;
+          prettier_d_slim.enable = true;
           rustfmt.enable = true;
           shfmt.enable = true;
           stylua.enable = true;
         };
       };
-      onAttach = ''
-        function(client, bufnr)
-          if client.supports_method("textDocument/formatting") then
-            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              group = augroup,
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format({async = false})
-              end,
-            })
+      onAttach =
+        /*
+        lua
+        */
+        ''
+          function(client, bufnr)
+            if client.supports_method("textDocument/formatting") then
+              vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                  vim.lsp.buf.format({async = false})
+                end,
+              })
+            end
           end
-        end
-      '';
+        '';
     };
     lsp = {
       enable = true;
@@ -330,10 +439,17 @@ in {
       mode = "symbol";
       cmp.after = ''
         function(entry, vim_item, kind)
-          kind.kind = kind.kind .. " ";
+          if entry.source.name == "npm" then
+            kind.kind = ""
+            kind.kind_hl_group = "CmpItemKindNpm"
+          end
+          kind.kind = kind.kind .. " "
           return kind
         end
       '';
+      symbolMap = {
+        Copilot = "";
+      };
     };
     nvim-cmp = {
       enable = true;
@@ -344,13 +460,27 @@ in {
         "<C-Enter>" = "cmp.mapping.complete()";
       };
       sources = [
+        {name = "copilot";}
         {name = "path";}
+        {
+          name = "npm";
+          keywordLength = 4;
+          priority = 10;
+        }
         {name = "nvim_lsp";}
-        {name = "npm";}
-        {name = "treesitter";}
+        {name = "nvim_lsp_signature_help";}
+        {name = "nvim_lsp_document_symbol";}
       ];
       formatting.fields = ["kind" "abbr" "menu"];
-      window.completion.border = "rounded";
+      window = {
+        completion.border = "rounded";
+        documentation.border = "rounded";
+      };
+      experimental.ghost_text = true;
+    };
+    copilot-lua = {
+      panel.enabled = false;
+      suggestion.enabled = false;
     };
 
     nix.enable = true;
@@ -359,6 +489,8 @@ in {
   extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server];
   extraPlugins = with pkgs.vimPlugins; [
     vim-startuptime
+    vim-mergetool
+    codewindow-nvim
     darkman
   ];
 }
