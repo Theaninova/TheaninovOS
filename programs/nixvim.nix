@@ -249,6 +249,8 @@ in {
 
             ["@variable"] = {link = "Constant"},
             ["@field"] = {link = "Constant"},
+            ["@label.json"] = {link = "Constant"},
+            ["@label.jsonc"] = {link = "Constant"},
             ["@property"] = {link = "Constant"},
             ["@property.typescript"] = {link = "@property"},
             ["@lsp.type.property"] = {link = "Constant"},
@@ -372,7 +374,12 @@ in {
         };
         formatting = {
           alejandra.enable = true;
-          prettier_d_slim.enable = true;
+          prettier = {
+            enable = true;
+            withArgs = ''
+              {extra_filetypes = {"svelte"}}
+            '';
+          };
           rustfmt.enable = true;
           shfmt.enable = true;
           stylua.enable = true;
@@ -419,13 +426,20 @@ in {
         html.enable = true;
         cssls.enable = true;
         svelte.enable = true;
-        tsserver.enable = true;
+        tsserver = {
+          enable = true;
+          onAttach.function = "client.server_capabilities.documentFormattingProvider = false";
+        };
 
         yamlls.enable = true;
         jsonls.enable = true;
         taplo.enable = true;
 
-        rust-analyzer.enable = true;
+        rust-analyzer = {
+          enable = true;
+          installCargo = false;
+          installRustc = false;
+        };
         pylsp.enable = true;
 
         nixd.enable = true;
