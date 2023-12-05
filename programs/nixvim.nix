@@ -141,11 +141,6 @@ in {
   extraConfigLua = ''
     require("darkman").setup()
     require("cmp-npm").setup({})
-    require("codewindow").setup({
-      auto_enable = true,
-      window_border = "none",
-      minimap_width = 10,
-    })
 
     local signs = {
       { name = "DiagnosticSignError", text = "" },
@@ -340,6 +335,7 @@ in {
       direction = "vertical";
       size = 60;
     };
+    luasnip.enable = true;
 
     telescope = {
       enable = true;
@@ -369,7 +365,12 @@ in {
           shellcheck.enable = true;
         };
         diagnostics = {
-          eslint_d.enable = true;
+          eslint_d = {
+            enable = true;
+            withArgs = ''
+              {only_local = "node_modules/.bin"}
+            '';
+          };
           shellcheck.enable = true;
         };
         formatting = {
@@ -385,6 +386,7 @@ in {
           stylua.enable = true;
         };
       };
+      sourcesItems = [{__raw = "require('null-ls').builtins.diagnostics.stylelint";}];
       onAttach =
         /*
         lua
@@ -450,17 +452,23 @@ in {
 
     lspkind = {
       enable = true;
-      mode = "symbol";
-      cmp.after = ''
-        function(entry, vim_item, kind)
-          if entry.source.name == "npm" then
-            kind.kind = ""
-            kind.kind_hl_group = "CmpItemKindNpm"
-          end
-          kind.kind = kind.kind .. " "
-          return kind
-        end
-      '';
+      mode = "symbol_text";
+      cmp = {
+        after =
+          /*
+          lua
+          */
+          ''
+            function(entry, vim_item, kind)
+              if entry.source.name == "npm" then
+                kind.kind = ""
+                kind.kind_hl_group = "CmpItemKindNpm"
+              end
+              kind.kind = kind.kind .. " "
+              return kind
+            end
+          '';
+      };
       symbolMap = {
         Copilot = "";
       };
@@ -476,6 +484,7 @@ in {
       sources = [
         {name = "copilot";}
         {name = "path";}
+        {name = "luasnip";}
         {
           name = "npm";
           keywordLength = 4;
@@ -485,7 +494,7 @@ in {
         {name = "nvim_lsp_signature_help";}
         {name = "nvim_lsp_document_symbol";}
       ];
-      formatting.fields = ["kind" "abbr" "menu"];
+      formatting.fields = ["abbr" "kind"];
       window = {
         completion.border = "rounded";
         documentation.border = "rounded";
@@ -500,11 +509,10 @@ in {
     nix.enable = true;
   };
 
-  extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server];
+  extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server pkgs.nodePackages.stylelint];
   extraPlugins = with pkgs.vimPlugins; [
     vim-startuptime
     vim-mergetool
-    codewindow-nvim
     darkman
   ];
 }

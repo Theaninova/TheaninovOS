@@ -36,6 +36,7 @@ with pkgs; [
   # creative
   gimp-with-plugins
   inkscape-with-extensions
+  scribus
   audacity
   # friture TODO: broken
   blender
@@ -57,6 +58,7 @@ with pkgs; [
 
   # utils
   gh
+  git-filter-repo
   neofetch
   pinentry-gnome
   ranger
