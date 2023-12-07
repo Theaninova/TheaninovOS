@@ -27,6 +27,7 @@ with pkgs; [
     withOpenASAR = true;
     withVencord = false;
   })
+  element-desktop
   slack
 
   # office
@@ -64,4 +65,5 @@ with pkgs; [
   ranger
   lazydocker
   libqalculate
+  ripgrep
 ]

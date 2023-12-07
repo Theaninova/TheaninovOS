@@ -9,8 +9,14 @@
   extraConfig = {
     pull.rebase = true;
     merge = {
-      tool = "nvimdiff";
+      tool = "nvim-mergetool";
       conflictstyle = "diff3";
+    };
+    mergetool.nvim-mergetool = {
+      cmd = ''
+        nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
+      '';
+      trustExitCode = true;
     };
     mergetool.prompt = false;
   };

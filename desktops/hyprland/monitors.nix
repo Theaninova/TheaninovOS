@@ -1,5 +1,5 @@
 [
-  "DP-1,1920x1080@240,0x0,1,vrr,1"
-  "DP-3,2560x1440@75,1920x0,1,vrr,1"
-  "HDMI-A-1,1920x1080@75,0x1080,1,transform,2"
+  "DP-1,highrr,0x0,1"
+  "DP-3,highrr,1920x0,1"
+  "HDMI-A-1,highrr,0x1080,1,transform,2"
 ]

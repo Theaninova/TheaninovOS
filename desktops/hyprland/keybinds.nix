@@ -19,9 +19,15 @@
   "SUPER,left,movefocus,l"
   "SUPER,right,movefocus,r"
 
-  "SUPER,Tab,workspace,m+1"
-  "SUPER,mouse_up,workspace,m+1"
-  "SUPER,mouse_down,workspace,m-1"
+  "SUPER,f,workspace,r-1"
+  "SUPER,h,workspace,r+1"
+  "SUPER_SHIFT,f,movetoworkspace,r-1"
+  "SUPER_SHIFT,h,movetoworkspace,r+1"
+  "SUPER,mouse_up,workspace,r+1"
+  "SUPER,mouse_down,workspace,r-1"
+
+  # just dump the window anywhere
+  "SUPER,x,movetoworkspacesilent,empty"
 
   "SUPER,1,workspace,1"
   "SUPER,2,workspace,2"

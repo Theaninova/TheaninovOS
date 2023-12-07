@@ -32,6 +32,16 @@
       '';
     };
   };
+  lualine-so-fancy = pkgs.vimUtils.buildVimPlugin {
+    name = "lualine-so-fancy";
+    version = "2128450";
+    src = pkgs.fetchFromGitHub {
+      owner = "meuter";
+      repo = "lualine-so-fancy.nvim";
+      rev = "21284504fed2776668fdea8743a528774de5d2e1";
+      hash = "sha256-JMz3Dv3poGoYQU+iq/jtgyHECZLx+6mLCvqUex/a0SY=";
+    };
+  };
 in {
   enable = true;
   defaultEditor = true;
@@ -50,9 +60,12 @@ in {
     undodir = {__raw = "os.getenv('HOME') .. '/.config/nvim/undodir'";};
     undofile = true;
 
-    scrolloff = 8;
+    scrolloff = 12;
 
     termguicolors = true;
+
+    hlsearch = false;
+    incsearch = true;
 
     updatetime = 50;
 
@@ -73,7 +86,6 @@ in {
       key = "<leader>s";
       action = "<cmd>:SymbolsOutline<CR>";
     }
-
     {
       key = "J";
       mode = "v";
@@ -93,9 +105,8 @@ in {
     {
       key = "<C-u>";
       mode = "n";
-      action = "<C-d>zz";
+      action = "<C-u>zz";
     }
-
     {
       key = "<leader>p";
       mode = "x";
@@ -110,6 +121,18 @@ in {
       key = "<leader>p";
       mode = "v";
       action = ''"_dP'';
+    }
+    {
+      key = "<leader>n";
+      mode = "n";
+      options.silent = true;
+      action = "vim.lsp.buf.hover";
+      lua = true;
+    }
+    {
+      key = "hh";
+      mode = "n";
+      action = '':Telescope harpoon marks<CR>'';
     }
   ];
 
@@ -152,6 +175,15 @@ in {
     for _, sign in ipairs(signs) do
       vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
     end
+
+    vim.diagnostic.config({
+      virtual_text = true,
+      signs = true,
+      underline = true,
+      update_in_insert = true,
+      severity_sort = false,
+    })
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
 
     local Terminal  = require('toggleterm.terminal').Terminal
     local lazygit = Terminal:new({
@@ -285,6 +317,7 @@ in {
           }
         ];
         lualine_x = [
+          {name = "fancy_lsp_servers";}
           {
             name = "filetype";
             extraConfig = {icon_only = true;};
@@ -329,6 +362,10 @@ in {
       };
     };
     undotree.enable = true;
+    notify = {
+      enable = true;
+      backgroundColour = "#000000";
+    };
     toggleterm = {
       enable = true;
       openMapping = "<leader>t";
@@ -336,6 +373,17 @@ in {
       size = 60;
     };
     luasnip.enable = true;
+    ts-autotag.enable = true;
+    leap.enable = true;
+    harpoon = {
+      enable = false;
+      enableTelescope = true;
+      keymaps = {
+        addFile = "hm";
+        navNext = "hn";
+        navPrev = "hp";
+      };
+    };
 
     telescope = {
       enable = true;
@@ -344,7 +392,14 @@ in {
         "<leader>fa" = "find_files";
         "<leader>fg" = "live_grep";
         "<leader>fb" = "buffers";
-        "<leader>fh" = "help_tags";
+
+        "<leader>sr" = "lsp_references";
+        "<leader>sd" = "lsp_definitions";
+        "<leader>si" = "lsp_implementations";
+        "<leader>ss" = "lsp_document_symbols";
+        "<leader>sw" = "lsp_workspace_symbols";
+        "<leader>st" = "lsp_type_definitions";
+        "<leader>sh" = "diagnostics";
       };
     };
 
@@ -399,7 +454,13 @@ in {
                 group = augroup,
                 buffer = bufnr,
                 callback = function()
-                  vim.lsp.buf.format({async = false})
+                  vim.lsp.buf.format({
+                    filter = function(client)
+                      return client.name == "null-ls"
+                    end,
+                    bufnr = bufnr,
+                    async = false,
+                  })
                 end,
               })
             end
@@ -428,10 +489,7 @@ in {
         html.enable = true;
         cssls.enable = true;
         svelte.enable = true;
-        tsserver = {
-          enable = true;
-          onAttach.function = "client.server_capabilities.documentFormattingProvider = false";
-        };
+        tsserver.enable = true;
 
         yamlls.enable = true;
         jsonls.enable = true;
@@ -495,6 +553,7 @@ in {
         {name = "nvim_lsp_document_symbol";}
       ];
       formatting.fields = ["abbr" "kind"];
+      snippet.expand = "luasnip";
       window = {
         completion.border = "rounded";
         documentation.border = "rounded";
@@ -513,6 +572,7 @@ in {
   extraPlugins = with pkgs.vimPlugins; [
     vim-startuptime
     vim-mergetool
+    lualine-so-fancy
     darkman
   ];
 }

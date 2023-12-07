@@ -24,9 +24,8 @@
         "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
       ];
       exec-once = [
-        "ags"
         "swww init"
-        "swww img ~/Pictures/Wallpapers/wallpaper.jpg"
+        "ags"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
