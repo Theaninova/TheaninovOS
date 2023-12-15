@@ -20,6 +20,15 @@ with pkgs; [
   handbrake
   metadata-cleaner
   bitwarden
+  # BluRay support
+  # Also downlaod the latest version of the decryption keys
+  # http://fvonline-db.bplaced.net/
+  # and put them into ~/.config/aacs/KEYDB.cfg
+  (libbluray.override {
+    withAACS = true;
+    withJava = true;
+    withBDplus = true;
+  })
 
   # chat apps
   (import ./packages/threema-desktop.nix {inherit pkgs;})

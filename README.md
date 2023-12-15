@@ -25,3 +25,7 @@ nix build '.#homeConfigurations.theaninova.activationPackage'
 ```
 
 After that reload the shell
+
+### BluRays
+
+Download the database from [here](http://fvonline-db.bplaced.net/) and place it in `~/.config/aacs/KEYDB.cfg`
