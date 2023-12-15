@@ -51,8 +51,7 @@
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
       bindr = [
-        "SUPER,SUPER_L,exec,ags -t overview"
-        "SUPER,space,exec,(pkill fuzzel && hyprctl workspace previous) || (hyprctl workspace empty && fuzzel)"
+        "SUPER,SUPER_L,exec,pkill anyrun || anyrun"
       ];
       monitor = import ./monitors.nix;
       workspace = [
@@ -93,9 +92,6 @@
         "animation slide,class:^(gcr-prompter)$"
       ];
       layerrule = [
-        "noanim, .*"
-        "xray 1, .*"
-
         "noanim, noanim"
         "blur, noanim"
         "blur, gtk-layer-shell"
@@ -104,6 +100,8 @@
         "ignorealpha 0.3, launcher"
         "blur, notifications"
         "ignorealpha 0.3, notifications"
+        "blur, anyrun"
+        "ignorealpha 0.3, anyrun"
         # ags
         "blur, bar"
         "ignorealpha 0.3, bar"
@@ -151,9 +149,69 @@
     enable = true;
     configDir = ./ags;
   };
-  programs.fuzzel = import ./fuzzel.nix;
   programs.kitty = import ./kitty.nix {inherit pkgs;};
-  programs.wofi = import ./wofi.nix;
+  programs.anyrun = {
+    enable = true;
+    config = {
+      plugins = with pkgs.anyrunPlugins; [
+        applications
+        symbols
+        rink
+        dictionary
+        shell
+      ];
+      y.fraction = 0.2;
+      showResultsImmediately = true;
+      closeOnClick = true;
+    };
+    extraCss =
+      /*
+      css
+      */
+      ''
+        * {
+          font-family: "Noto Sans NF";
+        }
+
+        window#window {
+          background: transparent;
+        }
+
+        entry#entry,
+        list#main {
+          background: rgba(48, 52, 70, 0.4);
+          box-shadow: 0 0 15px rgba(0, 0, 0, 0.29);
+        }
+
+        entry#entry,
+        list#main {
+          border-radius: 24px;
+        }
+
+        row#match {
+          border-radius: 8px;
+          padding: 0 4px;
+        }
+
+        row#plugin {
+          border-radius: 16px;
+          padding: 16px;
+        }
+
+        entry#entry {
+          padding: 8px 24px;
+          margin-bottom: 16px;
+        }
+
+        list#main {
+          padding: 8px;
+        }
+
+        list#plugin {
+          background: transparent;
+        }
+      '';
+  };
 
   services.udiskie.enable = true;
   services.udiskie.tray = "never";

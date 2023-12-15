@@ -14,7 +14,7 @@ with pkgs; [
 
   # media
   jellyfin-media-player
-  youtube-music
+  # youtube-music.override {electron = pkgs.electron_28;})
   vlc
   makemkv
   handbrake
@@ -27,7 +27,8 @@ with pkgs; [
     withOpenASAR = true;
     withVencord = false;
   })
-  element-desktop
+  (vesktop.override {electron = pkgs.electron_28;})
+  (element-desktop.override {electron = pkgs.electron_28;})
   slack
 
   # office
@@ -66,4 +67,6 @@ with pkgs; [
   lazydocker
   libqalculate
   ripgrep
+  jq
+  httpie
 ]

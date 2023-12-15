@@ -5,7 +5,8 @@
       nodejs = pkgs.nodejs_18;
     })
     ."@angular/language-server";
-  tree-sitter-angular = pkgs.tree-sitter.buildGrammar {
+  /*
+    *tree-sitter-angular = pkgs.tree-sitter.buildGrammar {
     language = "angular";
     version = "624ff10";
     src = pkgs.fetchFromGitHub {
@@ -15,6 +16,7 @@
       hash = "sha256-wAbkrJ0MmNhE3qb34DQiju/mFIb7YCTyBUgVmP+iWQs=";
     };
   };
+  */
   darkman = pkgs.vimUtils.buildVimPlugin {
     name = "darkman";
     src = pkgs.buildGoModule rec {
@@ -164,6 +166,7 @@ in {
   extraConfigLua = ''
     require("darkman").setup()
     require("cmp-npm").setup({})
+    require("rest-nvim").setup({})
 
     local signs = {
       { name = "DiagnosticSignError", text = "" },
@@ -406,9 +409,7 @@ in {
     treesitter = {
       enable = true;
       indent = true;
-      grammarPackages =
-        pkgs.vimPlugins.nvim-treesitter.allGrammars
-        ++ [tree-sitter-angular];
+      grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
       nixvimInjections = true;
     };
 
@@ -568,11 +569,13 @@ in {
     nix.enable = true;
   };
 
-  extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server pkgs.nodePackages.stylelint];
+  extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server pkgs.nodePackages.stylelint pkgs.jq pkgs.html-tidy];
   extraPlugins = with pkgs.vimPlugins; [
     vim-startuptime
     vim-mergetool
     lualine-so-fancy
     darkman
+    rest-nvim
+    plenary-nvim
   ];
 }

@@ -15,6 +15,11 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    anyrun = {
+      url = "github:Kirottu/anyrun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = {
@@ -22,6 +27,7 @@
     home-manager,
     ags,
     nixvim,
+    anyrun,
     ...
   }: let
     username = "theaninova";
@@ -31,6 +37,9 @@
     pkgs = import nixpkgs {
       inherit system;
       config.allowUnfree = true;
+      overlays = [
+        (final: prev: {anyrunPlugins = anyrun.packages.${prev.system};})
+      ];
     };
 
     homeDirPrefix =
@@ -48,8 +57,9 @@
 
       modules = [
         ags.homeManagerModules.default
-        home
         nixvim.homeManagerModules.nixvim
+        anyrun.homeManagerModules.default
+        home
       ];
     };
   };
