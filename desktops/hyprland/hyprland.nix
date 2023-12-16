@@ -126,6 +126,7 @@
       ];
       animation = [
         "specialWorkspace,1,4,default,fade"
+        "fade,1,1,default"
       ];
       decoration = {
         rounding = 20;
@@ -161,7 +162,6 @@
         shell
       ];
       y.fraction = 0.2;
-      showResultsImmediately = true;
       closeOnClick = true;
     };
     extraCss =
@@ -170,22 +170,29 @@
       */
       ''
         * {
-          font-family: "Noto Sans NF";
+          font-family: "NotoSans NF";
         }
 
         window#window {
           background: transparent;
         }
 
-        entry#entry,
-        list#main {
+        box#main {
           background: rgba(48, 52, 70, 0.4);
           box-shadow: 0 0 15px rgba(0, 0, 0, 0.29);
+          border-radius: 24px;
+        }
+
+        entry#entry {
+          border: none;
+          box-shadow: none;
+          padding: 8px 24px;
         }
 
         entry#entry,
         list#main {
           border-radius: 24px;
+          background: transparent;
         }
 
         row#match {
@@ -196,15 +203,6 @@
         row#plugin {
           border-radius: 16px;
           padding: 16px;
-        }
-
-        entry#entry {
-          padding: 8px 24px;
-          margin-bottom: 16px;
-        }
-
-        list#main {
-          padding: 8px;
         }
 
         list#plugin {
