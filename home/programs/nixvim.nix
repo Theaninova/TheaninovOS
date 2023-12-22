@@ -136,6 +136,13 @@ in {
       mode = "n";
       action = '':Telescope harpoon marks<CR>'';
     }
+    {
+      key = "<leader>sa";
+      mode = "n";
+      options.silent = true;
+      lua = true;
+      action = "require('actions-preview').code_actions";
+    }
   ];
 
   globals = {
@@ -167,6 +174,7 @@ in {
     require("darkman").setup()
     require("cmp-npm").setup({})
     require("rest-nvim").setup({})
+    require("actions-preview").setup({})
 
     local signs = {
       { name = "DiagnosticSignError", text = "" },
@@ -577,5 +585,6 @@ in {
     darkman
     rest-nvim
     plenary-nvim
+    actions-preview-nvim
   ];
 }

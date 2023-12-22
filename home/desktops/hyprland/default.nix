@@ -3,6 +3,10 @@
   pkgs,
   ...
 }: {
+  imports = [
+    ./darkman.nix
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     enableNvidiaPatches = true;
@@ -46,6 +50,7 @@
       input = {
         accel_profile = "flat";
         kb_layout = "cc1-thea";
+        # kb_options = "grp:alt_shift_toggle";
         numlock_by_default = true;
       };
       bind = import ./keybinds.nix;
