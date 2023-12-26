@@ -1,20 +1,16 @@
-{
+{pkgs}: {
   enable = true;
   settings = {
     mainBar = {
       layer = "top";
-      position = "top";
-      height = 48;
-      output = "HDMI-A-1";
-      modules-left = ["wlr/workspaces"];
-      modules-center = ["wlr/taskbar"];
-      modules-right = ["custom/weather" "clock"];
+      position = "left";
+      width = 16;
+      modules-left = ["hyprland/workspaces"];
+      modules-center = ["clock"];
+      modules-right = ["custom/weather"];
 
-      "wlr/taskbar" = {
-        all-outputs = true;
-        format = "{icon}";
-        icon-size = 32;
-        on-click = "activate";
+      "clock" = {
+        format = "<b>{%H}</b>\n{%M}";
       };
 
       "custom/weather" = {
@@ -25,12 +21,16 @@
         return-type = "json";
       };
 
-      "wlr/workspaces" = {
-        all-outputs = true;
-        format = "<sub>{icon}</sub>\n{windows}";
+      "hyprland/workspaces" = {
+        format = "{windows}";
         format-window-separator = "\n";
         window-rewrite = {
-          "(.*) — Mozilla Firefox" = "";
+          "title<.*youtube.*>" = "";
+          "class<firefox>" = "";
+          "title<nvim.*>" = "";
+          "class<kitty>" = "";
+          "class<VencordDesktop>" = "󰙯";
+          "class<org.gnome.Nautilus>" = "󰝰";
         };
       };
     };
