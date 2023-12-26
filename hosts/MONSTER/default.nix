@@ -151,6 +151,8 @@
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
   programs.hyprland.enable = true;
   programs.hyprland.enableNvidiaPatches = true;
+  programs.fish.enable = true;
+  users.defaultUserShell = pkgs.fish;
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = ["networkmanager" "wheel" "audio" "video" "dialout" "plugdev" "scanner" "lp" "input" "adbusers" "cdrom"];

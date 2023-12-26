@@ -16,5 +16,9 @@
       useTheme = "pararussel";
       enableFishIntegration = true;
     };
+    direnv = {
+      enable = true;
+      nix-direnv.enable = true;
+    };
   };
 }
