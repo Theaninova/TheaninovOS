@@ -1,6 +1,6 @@
 {
   pkgs,
-  homeDirectory,
+  config,
   ...
 }: {
   services.darkman = {
@@ -68,10 +68,10 @@
         bash
         */
         ''
-          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
+          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
         '';
       wallpaper = ''
-        ${pkgs.swww}/bin/swww img ${./Lakeside-2/Lakeside-2-1.jpg}
+        ${pkgs.swww}/bin/swww img ${./wallpapers/Lakeside-2/Lakeside-2-1.jpg}
       '';
     };
     lightModeScripts = {
@@ -88,10 +88,10 @@
         bash
         */
         ''
-          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
+          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
         '';
       wallpaper = ''
-        ${pkgs.swww}/bin/swww img ${./Lakeside-2/Lakeside-2-10.jpg}
+        ${pkgs.swww}/bin/swww img ${./wallpapers/Lakeside-2/Lakeside-2-10.jpg}
       '';
     };
   };

@@ -4,6 +4,7 @@
 {
   config,
   pkgs,
+  username,
   ...
 }: {
   imports = [
@@ -145,14 +146,13 @@
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  services.getty.autologinUser = "theaninova";
+  services.getty.autologinUser = "${username}";
   services.getty.extraArgs = ["--noclear" "--noissue" "--nonewline"];
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
   programs.hyprland.enable = true;
   programs.hyprland.enableNvidiaPatches = true;
-  users.users.theaninova = {
+  users.users.${username} = {
     isNormalUser = true;
-    description = "Thea Schöbl";
     extraGroups = ["networkmanager" "wheel" "audio" "video" "dialout" "plugdev" "scanner" "lp" "input" "adbusers" "cdrom"];
   };
 
@@ -193,9 +193,6 @@
     (nerdfonts.override {fonts = ["JetBrainsMono" "Noto" "NerdFontsSymbolsOnly"];})
   ];
 
-  programs.fish.enable = true;
-  users.users.theaninova.shell = pkgs.fish;
-
   networking = {
     firewall = {
       allowedTCPPorts = [8100 5037];
@@ -204,7 +201,8 @@
 
     networkmanager.enable = true;
     hosts = {
-      "192.168.0.184" = ["kookaborrow"];
+      "192.168.0.219" = ["kookaborrow"];
+      "192.168.0.1" = ["router"];
     };
   };
 

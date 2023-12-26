@@ -39,27 +39,10 @@
         ];
       });
 
-    mkHome = {
-      username,
-      desktop,
-      system,
-    }:
-      home-manager.lib.homeManagerConfiguration rec {
-        homeDirectory = "/home/${username}";
-        modules = [
-          ags.homeManagerModules.default
-          nixvim.homeManagerModules.nixvim
-          anyrun.homeManagerModules.default
-          ./home/packages
-          ./home/programs
-          ./home/services
-          ./home/desktops/${desktop}
-        ];
-        pkgs = legacyPackages.${system};
-      };
-
     mkHost = {
       hostname,
+      username,
+      desktop,
       system,
       stateVersion,
     }:
@@ -68,21 +51,26 @@
         modules = [
           ./modules/nixos/hid-fanatecff
           ./hosts/${hostname}
+          home-manager.nixosModules.home-manager
           {
+            _module.args = {inherit username;};
             networking.hostName = hostname;
             system.stateVersion = stateVersion;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = {inherit username desktop stateVersion inputs;};
+              users.${username} = import ./home;
+            };
           }
         ];
         specialArgs = inputs;
       };
   in {
-    homeConfigurations.theaninova = mkHome {
-      username = "theaninova";
-      desktop = "hyprland";
-    };
-
     nixosConfigurations.MONSTER = mkHost {
       hostname = "MONSTER";
+      username = "theaninova";
+      desktop = "hyprland";
       system = "x86_64-linux";
       stateVersion = "23.05";
     };
