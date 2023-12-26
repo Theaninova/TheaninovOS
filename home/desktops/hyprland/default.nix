@@ -29,6 +29,7 @@
       ];
       exec-once = [
         "swww init"
+        "swww img ~/.local/state/wallpaper.jpg"
         "ags"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"

@@ -3,7 +3,9 @@
   config,
   ...
 }: {
-  services.darkman = {
+  services.darkman = let
+    wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
+  in {
     enable = true;
     package = pkgs.buildGoModule rec {
       pname = "darkman";
@@ -70,9 +72,14 @@
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
         '';
-      wallpaper = ''
-        ${pkgs.swww}/bin/swww img ${./wallpapers/Lakeside-2/Lakeside-2-1.jpg}
-      '';
+      wallpaper =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.coreutils}/bin/ln -sf ${./wallpapers/Lakeside-2/Lakeside-2-1.jpg} ${wallpaperPath}
+          ${pkgs.swww}/bin/swww img ${wallpaperPath}
+        '';
     };
     lightModeScripts = {
       gtk-theme =
@@ -90,9 +97,14 @@
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
         '';
-      wallpaper = ''
-        ${pkgs.swww}/bin/swww img ${./wallpapers/Lakeside-2/Lakeside-2-10.jpg}
-      '';
+      wallpaper =
+        /*
+        bash
+        */
+        ''
+          ${pkgs.coreutils}/bin/ln -sf ${./wallpapers/Lakeside-2/Lakeside-2-10.jpg} ${wallpaperPath}
+          ${pkgs.swww}/bin/swww img ${wallpaperPath}
+        '';
     };
   };
 }
