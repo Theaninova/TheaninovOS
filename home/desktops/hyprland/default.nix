@@ -9,7 +9,6 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
-    enableNvidiaPatches = true;
     settings = {
       env = [
         "LIBVA_DRIVER_NAME,nvidia"
@@ -29,16 +28,16 @@
       ];
       exec-once = [
         "swww init"
-        "swww img ~/.local/state/wallpaper.jpg"
         "ags"
+        "waybar"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
       general = {
-        gaps_in = 4;
-        gaps_out = 5;
+        gaps_in = 16;
+        gaps_out = 16;
         border_size = 1;
 
         "col.active_border" = "rgba(0DB7D4FF)";
@@ -61,22 +60,13 @@
       ];
       monitor = import ./monitors.nix;
       workspace = [
-        "1,monitor:DP-1"
-        "2,monitor:DP-1"
-        "3,monitor:DP-1"
-        "4,monitor:HDMI-A-1"
-        "5,monitor:HDMI-A-1"
-        "6,monitor:HDMI-A-1"
-        "7,monitor:DP-3"
-        "8,monitor:DP-3"
-        "9,monitor:DP-3"
+        "100,monitor:DP-1,default:true"
+        "200,monitor:HDMI-A-1,default:true"
+        "300,monitor:DP-3:default:true"
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
       windowrule = [
-        "pseudo,^(discord)$"
-        "pseudo,^(Slack)$"
         "pseudo,^(steam)$"
-        "monitor DP-3,^(discord)$"
       ];
       windowrulev2 = [
         # Games
@@ -135,7 +125,7 @@
         "fade,1,1,default"
       ];
       decoration = {
-        rounding = 20;
+        rounding = 8;
         blur = {
           enabled = true;
           xray = false;
@@ -159,11 +149,20 @@
   programs.kitty = import ./kitty.nix {inherit pkgs;};
   programs.anyrun = import ./anyrun.nix {inherit pkgs;};
   programs.waybar = import ./waybar.nix {inherit pkgs;};
+  programs.foot.enable = true;
   services.udiskie.enable = true;
   services.udiskie.tray = "never";
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
+    (callPackage ../../../overlays/wezterm {
+      Cocoa = pkgs.Cocoa;
+      CoreGraphics = pkgs.CoreGraphics;
+      Foundation = pkgs.Foundation;
+      System = pkgs.System;
+      UserNotifications = pkgs.UserNotifications;
+    })
+    libsForQt5.konsole
     # fonts
     noto-fonts
     # essentials
@@ -228,6 +227,17 @@
     platformTheme = "gtk";
   };
 
+  programs.fish.loginShellInit =
+    /*
+    fish
+    */
+    ''
+      Hyprland && echo "goodbye" && exit 0 \
+      || echo "$status couldn't launch Hyprland" && tty | grep tty1 \
+      && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
+      || echo "not on tty1, letting in"
+    '';
+
   home = {
     pointerCursor = {
       gtk.enable = true;
@@ -235,23 +245,13 @@
       name = "capitaine-cursors";
     };
 
-    file.profile = {
-      enable = true;
-      target = ".zprofile"; # change to .profile if you're not using zsh
-      text =
-        /*
-        sh
-        */
-        ''
-          Hyprland && echo "goodbye" && exit 0 \
-          || echo "$? couldn't launch Hyprland" && tty | grep tty1 \
-          && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
-          || echo "not on tty1, letting in"
-        '';
-    };
-
     file.".config/hypr/shaders" = {
       source = ./hypr/shaders;
+      recursive = true;
+    };
+
+    file.".config/wezterm" = {
+      source = ./wezterm;
       recursive = true;
     };
   };

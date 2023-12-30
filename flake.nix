@@ -35,7 +35,9 @@
           experimental-features = "nix-command flakes";
         };
         overlays = [
-          (final: prev: {anyrunPlugins = anyrun.packages.${prev.system};})
+          (final: prev: {
+            anyrunPlugins = anyrun.packages.${prev.system};
+          })
         ];
       });
 

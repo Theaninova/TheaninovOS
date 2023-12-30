@@ -150,7 +150,6 @@
   services.getty.extraArgs = ["--noclear" "--noissue" "--nonewline"];
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
   programs.hyprland.enable = true;
-  programs.hyprland.enableNvidiaPatches = true;
   programs.fish.enable = true;
   users.defaultUserShell = pkgs.fish;
   users.users.${username} = {
@@ -188,12 +187,22 @@
     docker-compose
   ];
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk
-    noto-fonts-emoji
-    (nerdfonts.override {fonts = ["JetBrainsMono" "Noto" "NerdFontsSymbolsOnly"];})
-  ];
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
+      (nerdfonts.override {fonts = ["JetBrainsMono" "Noto" "NerdFontsSymbolsOnly"];})
+    ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = ["JetBrainsMono Nerd Font"];
+        sansSerif = ["Noto Sans Nerd Font"];
+      };
+
+      subpixel.rgba = "bgr";
+    };
+  };
 
   networking = {
     firewall = {
