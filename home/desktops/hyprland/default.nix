@@ -29,7 +29,6 @@
       exec-once = [
         "swww init"
         "ags"
-        "waybar"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
@@ -148,8 +147,6 @@
   };
   programs.kitty = import ./kitty.nix {inherit pkgs;};
   programs.anyrun = import ./anyrun.nix {inherit pkgs;};
-  programs.waybar = import ./waybar.nix {inherit pkgs;};
-  programs.foot.enable = true;
   services.udiskie.enable = true;
   services.udiskie.tray = "never";
 

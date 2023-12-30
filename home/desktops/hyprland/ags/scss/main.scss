@@ -1,28 +1,36 @@
-// Reset
-* {
-    all: unset;
-}
+@import "/tmp/ags/scss/options";
+@import "./variables";
 
-// Colors
-@import './material'; // Material colors
-@import './colors'; // Global color definitions. Uses material colors as base.
-@import './lib'; // Global mixins and functions
-@import './common'; // Context menu n stuff
+// common
+@import "./common/unset";
+@import "./common/widget";
+@import "./common/button";
+@import "./common/a11y-button";
+@import "./common/floating-widget";
+@import "./common/slider";
+@import "./common/scrollable";
+@import "./common/switch";
+@import "./common/hidden";
+@import "./common/text-border";
+@import "./common/tooltip";
+@import "./common/menu";
+@import "./common/spacing";
 
-// Components
-@import './bar';
-@import './cheatsheet';
-@import './sidebars';
-@import './osd';
-@import './overview';
-@import './osk';
-@import './session';
-@import './notifications';
+// widgets
+@import "./widgets/about";
+@import "./widgets/applauncher";
+@import "./widgets/bar";
+@import "./widgets/desktop";
+@import "./widgets/notifications";
+@import "./widgets/overview";
+@import "./widgets/osd";
+@import "./widgets/dashboard";
+@import "./widgets/dock";
+@import "./widgets/powermenu";
+@import "./widgets/lockscreen";
+@import "./widgets/media";
+@import "./widgets/quicksettings";
+@import "./widgets/settings";
 
-// Classes for interaction
-.growingRadial {
-    transition: 300ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
-.fadingRadial {
-    transition: 50ms cubic-bezier(0.2, 0.0, 0, 1.0);
-}
+// additional overrides
+@import "/tmp/ags/scss/additional";
