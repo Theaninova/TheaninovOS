@@ -87,7 +87,6 @@ const End = () =>
       SeparatorDot(Recorder, (r) => r.recording),
       SystemIndicators(),
       SeparatorDot(Battery, (b) => b.available),
-      BatteryBar(),
       SeparatorDot(),
       PowerMenu(),
     ],

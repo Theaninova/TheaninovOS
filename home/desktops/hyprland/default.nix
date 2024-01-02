@@ -28,7 +28,7 @@
       ];
       exec-once = [
         "swww init"
-        "ags"
+        "ags -b hypr"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
@@ -43,6 +43,7 @@
         "col.inactive_border" = "rgba(31313600)";
 
         layout = "dwindle";
+        resize_on_border = true;
       };
       dwindle.preserve_split = true;
       dwindle.pseudotile = true;
@@ -59,9 +60,6 @@
       ];
       monitor = import ./monitors.nix;
       workspace = [
-        "100,monitor:DP-1,default:true"
-        "200,monitor:HDMI-A-1,default:true"
-        "300,monitor:DP-3:default:true"
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
       windowrule = [
@@ -86,57 +84,43 @@
         "rounding 10,class:^(gcr-prompter)$"
         "animation slide,class:^(gcr-prompter)$"
       ];
+      misc = {
+        layers_hog_keyboard_focus = false;
+        disable_splash_rendering = true;
+        force_default_wallpaper = 0;
+      };
       layerrule = [
-        "noanim, noanim"
-        "blur, noanim"
-        "blur, gtk-layer-shell"
-        "ignorezero, gtk-layer-shell"
-        "blur, launcher"
-        "ignorealpha 0.3, launcher"
-        "blur, notifications"
-        "ignorealpha 0.3, notifications"
         "blur, anyrun"
         "ignorealpha 0.3, anyrun"
-        # ags
-        "blur, bar"
-        "ignorealpha 0.3, bar"
-        "blur, corner.*"
-        "ignorealpha 0.3, corner.*"
-        "blur, indicator.*"
-        "ignorealpha 0.3, indicator.*"
-        "blur, overview"
-        "ignorealpha 0.3, overview"
-        "xray 0, overview"
-        "blur, cheatsheet"
-        "ignorealpha 0.3, cheatsheet"
-        "blur, sideright"
-        "ignorealpha 0.3, sideright"
-        "blur, sideleft"
-        "ignorealpha 0.3, sideleft"
-        "blur, indicatorundefined"
-        "ignorealpha 0.3, indicatorundefined"
-        "blur, osk"
-        "ignorealpha 0.3, osk"
-        "blur, session"
-      ];
-      animation = [
-        "specialWorkspace,1,4,default,fade"
-        "fade,1,1,default"
       ];
       decoration = {
-        rounding = 8;
+        drop_shadow = "yes";
+        shadow_range = 8;
+        shadow_render_power = 2;
+        "col.shadow" = "rgba(00000044)";
+
+        dim_inactive = false;
+
         blur = {
           enabled = true;
-          xray = false;
-
-          size = 6;
-          passes = 4;
+          size = 8;
+          passes = 3;
+          noise = 0.01;
+          contrast = 0.9;
+          brightness = 0.8;
         };
+      };
 
-        drop_shadow = true;
-        shadow_range = 15;
-        shadow_render_power = 6;
-        "col.shadow" = "rgba(00000044)";
+      animations = {
+        enabled = "yes";
+        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+        animation = [
+          "windows, 1, 5, myBezier"
+          "windowsOut, 1, 7, default, popin 80%"
+          "border, 1, 10, default"
+          "fade, 1, 7, default"
+          "workspaces, 1, 6, default"
+        ];
       };
     };
   };
