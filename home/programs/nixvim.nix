@@ -143,6 +143,42 @@ in {
       lua = true;
       action = "require('actions-preview').code_actions";
     }
+    {
+      key = "<leader>xx";
+      mode = "n";
+      lua = true;
+      action = "require('trouble').toggle";
+    }
+    {
+      key = "<leader>xw";
+      mode = "n";
+      lua = true;
+      action = "function() require('trouble').toggle('workspace_diagnostics') end";
+    }
+    {
+      key = "<leader>xd";
+      mode = "n";
+      lua = true;
+      action = "function() require('trouble').toggle('document_diagnostics') end";
+    }
+    {
+      key = "<leader>xq";
+      mode = "n";
+      lua = true;
+      action = "function() require('trouble').toggle('quickfix') end";
+    }
+    {
+      key = "<leader>xl";
+      mode = "n";
+      lua = true;
+      action = "function() require('trouble').toggle('loclist') end";
+    }
+    {
+      key = "gR";
+      mode = "n";
+      lua = true;
+      action = "function() require('trouble').toggle('lsp_references') end";
+    }
   ];
 
   globals = {
@@ -412,6 +448,11 @@ in {
         "<leader>st" = "lsp_type_definitions";
         "<leader>sh" = "diagnostics";
       };
+    };
+
+    trouble = {
+      enable = true;
+      useDiagnosticSigns = true;
     };
 
     treesitter = {

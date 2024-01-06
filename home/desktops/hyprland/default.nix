@@ -180,7 +180,7 @@
     gnome.gnome-clocks
     gnome.gnome-calculator
     gnome.simple-scan
-    gnome.gedit
+    gedit
     gnome.eog
     gnome.geary
     gnome.ghex

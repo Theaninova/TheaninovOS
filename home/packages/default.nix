@@ -14,6 +14,9 @@
 
     # media
     jellyfin-media-player
+    youtube-dl
+    tartube
+    yt-dlp
     # youtube-music.override {electron = pkgs.electron_28;})
     vlc
     makemkv
@@ -54,9 +57,9 @@
 
     # development
     (import ./intellij.nix {inherit pkgs;})
-    jetbrains.rust-rover
     insomnia
     avalonia-ilspy
+    ghidra
 
     # gaming
     steam
