@@ -1,6 +1,7 @@
 {
   config,
   pkgs,
+  lib,
   ...
 }: {
   imports = [
@@ -27,8 +28,6 @@
         "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
       ];
       exec-once = [
-        "swww init"
-        "ags -b hypr"
         "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
         "gnome-keyring-daemon --start --components=secrets"
@@ -42,28 +41,32 @@
         "col.active_border" = "rgba(0DB7D4FF)";
         "col.inactive_border" = "rgba(31313600)";
 
-        layout = "dwindle";
+        layout = "master";
         resize_on_border = true;
       };
-      dwindle.preserve_split = true;
-      dwindle.pseudotile = true;
+      master = {
+        orientation = "center";
+        new_is_master = false;
+        always_center_master = true;
+        mfact = 0.4;
+      };
       input = {
         accel_profile = "flat";
         kb_layout = "cc1-thea";
-        # kb_options = "grp:alt_shift_toggle";
-        numlock_by_default = true;
+        mouse_refocus = false;
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
       bindr = [
         "SUPER,SUPER_L,exec,pkill anyrun || anyrun"
       ];
-      monitor = import ./monitors.nix;
+      monitor = [
+        "DP-1,highrr,0x0,1,bitdepth,10"
+        "DP-1,addreserved,200,0,0,0"
+        "DP-3,highrr,3840x400,1,bitdepth,10"
+      ];
       workspace = [
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
-      ];
-      windowrule = [
-        "pseudo,^(steam)$"
       ];
       windowrulev2 = [
         # Games
@@ -129,6 +132,32 @@
     enable = true;
     configDir = ./ags;
   };
+  xdg.configFile.ags.onChange = ''
+    ${pkgs.procps}/bin/pkill -u $USER -USR2 ags || true
+  '';
+  systemd.user.services.ags = {
+    Unit = {
+      Description = "ags";
+      PartOf = ["graphical-session.target" "tray.target"];
+    };
+    Service = {
+      ExecStart = "${pkgs.ags}/bin/ags";
+      ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
+      Restart = "on-failure";
+      KillMode = "mixed";
+      Environment = "PATH=/run/current-system/sw/bin/:${with pkgs;
+        lib.makeBinPath [
+          swww
+          sassc
+          glib
+          brightnessctl
+          ydotool
+        ]}";
+    };
+    Install = {
+      WantedBy = ["graphical-session.target"];
+    };
+  };
   programs.kitty = import ./kitty.nix {inherit pkgs;};
   programs.anyrun = import ./anyrun.nix {inherit pkgs;};
   services.udiskie.enable = true;
@@ -163,12 +192,7 @@
       ];
     }))
     */
-    swww
-    # ags
-    glib
-    brightnessctl
-    ydotool
-    sassc
+    # AGS
     # gnome packages
     evince
     gnome.gvfs

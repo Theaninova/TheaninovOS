@@ -4,7 +4,12 @@
   "SUPER,C,togglespecialworkspace,calc"
   "SUPER_SHIFT,C,exec,hyprpicker"
   "SUPER_SHIFT,V,exec,slurp | grim -g - - | wl-copy"
-  "SUPER,P,pseudo,"
+  "SUPER,P,togglefloating,"
+  "SUPER,P,pin,"
+  "SUPER,D,fullscreen,1"
+  "SUPER,D,movetoworkspace,empty"
+  "SUPER,V,fullscreen,0"
+  "SUPER,V,movetoworkspace,empty"
 
   "SUPER_SHIFT,up,movewindow,u"
   "SUPER_SHIFT,down,movewindow,d"

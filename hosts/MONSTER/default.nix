@@ -47,9 +47,6 @@
       "boot.shell_on_fail"
       "vt.global_cursor_default=0" # no cursor blinking
       "fbdev=1" # NVIDIA
-      "video=DP-1:1920x1080@240"
-      "video=DP-3:2560x1440@75"
-      "video=HDMI-A-1:1920x1080@75"
     ];
     consoleLogLevel = 0;
     initrd.verbose = false;
@@ -119,8 +116,7 @@
   # Configure keymap in X11
   console.useXkbConfig = true;
   services.xserver = {
-    layout = "us";
-    xkbVariant = "altgr-intl";
+    layout = "cc1-thea";
     extraLayouts.cc1-thea = {
       description = "A CC1 optimized layout";
       languages = ["eng" "ger"];
@@ -151,6 +147,9 @@
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
   programs.hyprland.enable = true;
   programs.fish.enable = true;
+  security.sudo.configFile = ''
+    Defaults env_reset,pwfeedback,insults,passprompt="󰟵  "
+  '';
   users.defaultUserShell = pkgs.fish;
   users.users.${username} = {
     isNormalUser = true;

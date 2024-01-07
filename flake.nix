@@ -15,6 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/hyprland";
+    kde2nix.url = "github:nix-community/kde2nix";
   };
 
   outputs = {
@@ -24,6 +25,7 @@
     nixvim,
     anyrun,
     hyprland,
+    kde2nix,
     ...
   } @ inputs: let
     inherit (nixpkgs.lib) genAttrs listToAttrs;
@@ -35,8 +37,6 @@
           allowUnfree = true;
           allowUnsupportedSystem = true;
           experimental-features = "nix-command flakes";
-        };
-        nix.settings = {
           substituters = ["https://hyprland.cachix.org"];
           trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
         };
@@ -45,6 +45,7 @@
             anyrunPlugins = anyrun.packages.${prev.system};
             hyprland = hyprland.packages.${prev.system}.hyprland;
             xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
+            ags = ags.packages.${prev.system}.default;
           })
         ];
       });
@@ -61,6 +62,7 @@
         modules = [
           ./modules/nixos/hid-fanatecff
           ./hosts/${hostname}
+          kde2nix.nixosModules.plasma6
           home-manager.nixosModules.home-manager
           {
             _module.args = {inherit username;};

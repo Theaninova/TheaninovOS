@@ -8,12 +8,16 @@ export default [
   Theme({
     name: "Kitty Dark",
     icon: "󰄛",
-    "desktop.wallpaper.img": WP + "kittybl.jpeg",
+    "desktop.screen_corners": false,
+    "bar.style": "floating",
+    "desktop.wallpaper.img": WP + "Lakeside-2-1.jpg",
   }),
   Theme({
     name: "Kitty Light",
     icon: "󰄛",
-    "desktop.wallpaper.img": WP + "kitty.jpeg",
+    "desktop.screen_corners": false,
+    "bar.style": "floating",
+    "desktop.wallpaper.img": WP + "Lakeside-2-10.jpg",
     ...lightColors,
     "theme.widget.bg": "$accent",
     "theme.widget.opacity": 64,

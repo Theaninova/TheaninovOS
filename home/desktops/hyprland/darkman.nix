@@ -57,14 +57,6 @@
       lng = 13.405;
     };
     darkModeScripts = {
-      gtk-theme =
-        /*
-        bash
-        */
-        ''
-          ${pkgs.dconf}/bin/dconf write \
-            /org/gnome/desktop/interface/color-scheme "'prefer-dark'"
-        '';
       kitty-theme =
         /*
         bash
@@ -72,38 +64,14 @@
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
         '';
-      wallpaper =
-        /*
-        bash
-        */
-        ''
-          ${pkgs.coreutils}/bin/ln -sf ${./wallpapers/Lakeside-2/Lakeside-2-1.jpg} ${wallpaperPath}
-          ${pkgs.swww}/bin/swww img ${wallpaperPath}
-        '';
     };
     lightModeScripts = {
-      gtk-theme =
-        /*
-        bash
-        */
-        ''
-          ${pkgs.dconf}/bin/dconf write \
-            /org/gnome/desktop/interface/color-scheme "'prefer-light'"
-        '';
       kitty-theme =
         /*
         bash
         */
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
-        '';
-      wallpaper =
-        /*
-        bash
-        */
-        ''
-          ${pkgs.coreutils}/bin/ln -sf ${./wallpapers/Lakeside-2/Lakeside-2-10.jpg} ${wallpaperPath}
-          ${pkgs.swww}/bin/swww img ${wallpaperPath}
         '';
     };
   };
