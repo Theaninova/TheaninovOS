@@ -148,7 +148,7 @@
   programs.hyprland.enable = true;
   programs.fish.enable = true;
   security.sudo.configFile = ''
-    Defaults env_reset,pwfeedback,insults,passprompt="󰟵  "
+    Defaults env_reset,pwfeedback,passprompt="󰟵  "
   '';
   users.defaultUserShell = pkgs.fish;
   users.users.${username} = {

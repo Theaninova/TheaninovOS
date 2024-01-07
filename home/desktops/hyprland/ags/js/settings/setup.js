@@ -16,6 +16,7 @@ export function init() {
   warnOnLowBattery();
   globals();
   tmux();
+  kitty();
   gsettigsColorScheme();
   gtkFontSettings();
   dependandOptions();
@@ -33,6 +34,18 @@ function dependandOptions() {
     if (value !== "normal")
       options.desktop.screen_corners.setValue(false, true);
   });
+}
+
+function kitty() {
+  if (!Utils.exec("which kitty")) return;
+  console.log("kitty");
+  options.theme.scheme.connect("changed", ({ value }) =>
+    Utils.execAsync(
+      `kitty +kitten themes --reload-in=all --config-file-name /home/theaninova/.config/kitty/current-colors.conf Catppuccin-${
+        value === "light" ? "Latte" : "Frappe"
+      }`,
+    ),
+  );
 }
 
 function tmux() {

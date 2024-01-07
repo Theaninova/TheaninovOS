@@ -152,6 +152,7 @@
           glib
           brightnessctl
           ydotool
+          kitty
         ]}";
     };
     Install = {

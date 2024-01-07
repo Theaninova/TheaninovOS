@@ -56,16 +56,17 @@ export default () =>
           children: [
             Row([Volume()], [SinkSelector(), AppMixer()]),
             Microhone(),
-            Brightness(),
+            /*Brightness()*/
+            ,
           ],
         }),
         Row(
-          [Homogeneous([NetworkToggle(), BluetoothToggle()]), DND()],
-          [WifiSelection(), BluetoothDevices()],
+          [Homogeneous([/*NetworkToggle(),*/ BluetoothToggle()]), DND()],
+          [/*WifiSelection()*/ BluetoothDevices()],
         ),
         Row(
-          [Homogeneous([ProfileToggle(), ThemeToggle()]), MicMute()],
-          [ProfileSelector(), ThemeSelector()],
+          [Homogeneous([/*ProfileToggle(),*/ ThemeToggle()]), MicMute()],
+          [/*ProfileSelector(),*/ ThemeSelector()],
         ),
         Media(),
       ],

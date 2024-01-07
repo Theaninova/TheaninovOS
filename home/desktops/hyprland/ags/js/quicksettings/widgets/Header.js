@@ -17,7 +17,7 @@ export default () =>
         vpack: "center",
         hexpand: true,
         children: [
-          Widget.Box({
+          /*Widget.Box({
             class_name: "battery horizontal",
             children: [
               Widget.Icon({ binds: [["icon", Battery, "icon-name"]] }),
@@ -29,7 +29,7 @@ export default () =>
           Widget.Label({
             class_name: "uptime",
             binds: [["label", uptime, "value", (v) => `up: ${v}`]],
-          }),
+          }),*/
           Widget.Button({
             on_clicked: openSettings,
             child: Widget.Icon(icons.ui.settings),

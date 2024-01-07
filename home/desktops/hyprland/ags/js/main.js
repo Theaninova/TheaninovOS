@@ -15,6 +15,7 @@ import { init } from "./settings/setup.js";
 import { forMonitors } from "./utils.js";
 import { initWallpaper } from "./settings/wallpaper.js";
 import options from "./options.js";
+import Dock from "./dock/Dock.js";
 
 initWallpaper();
 
@@ -27,6 +28,7 @@ const windows = () => [
   forMonitors(TopBar),
   Applauncher(),
   Dashboard(),
+  Dock(),
   Overview(),
   PowerMenu(),
   QuickSettings(),

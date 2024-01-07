@@ -21,15 +21,28 @@ export const WP = App.configDir + "/assets/";
 
 export const lightColors = {
   "theme.scheme": "light",
-  "color.red": "#e55f86",
-  "color.green": "#00D787",
-  "color.yellow": "#EBFF71",
-  "color.blue": "#51a4e7",
-  "color.magenta": "#9077e7",
-  "color.teal": "#51e6e6",
-  "color.orange": "#E79E64",
-  "theme.bg": "#fffffa",
-  "theme.fg": "#141414",
+  "color.red": "#d20f39",
+  "color.green": "#40a02b",
+  "color.yellow": "#df8e1d",
+  "color.blue": "#1e66f5",
+  "color.magenta": "#8839ef",
+  "color.teal": "#179299",
+  "color.orange": "#fe640b",
+  "theme.bg": "transparentize(#eff1f5, 0.3)",
+  "theme.fg": "#4c4f69",
+};
+
+export const darkColors = {
+  "theme.scheme": "dark",
+  "color.red": "#e78284",
+  "color.green": "#a6d189",
+  "color.yellow": "#e5c890",
+  "color.blue": "#8caaee",
+  "color.magenta": "#ca9ee6",
+  "color.teal": "#81c8be",
+  "color.orange": "#ef9f76",
+  "theme.bg": "transparentize(#303446, 0.3)",
+  "theme.fg": "#c6d0f5",
 };
 
 export const Theme = ({ name, icon = " ", ...options }) => ({

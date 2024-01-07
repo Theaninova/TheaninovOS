@@ -6,7 +6,7 @@
   services.darkman = let
     wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
   in {
-    enable = true;
+    enable = false;
     package = pkgs.buildGoModule rec {
       pname = "darkman";
       version = "1.5.4";

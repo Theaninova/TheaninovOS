@@ -19,8 +19,8 @@ export default (index) => {
     class_name: "workspace",
     vpack: "center",
     css: `
-            min-width: ${1920 * SCALE}px;
-            min-height: ${1080 * SCALE}px;
+            min-width: ${3840 * SCALE}px;
+            min-height: ${2160 * SCALE}px;
         `,
     connections: [
       [

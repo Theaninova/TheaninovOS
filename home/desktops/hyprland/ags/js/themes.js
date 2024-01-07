@@ -2,18 +2,19 @@
  * A Theme is a set of options that will be applied
  * ontop of the default values. see options.js for possible options
  */
-import { Theme, WP, lightColors } from "./settings/theme.js";
+import { Theme, WP, lightColors, darkColors } from "./settings/theme.js";
 
 export default [
   Theme({
-    name: "Kitty Dark",
+    name: "Latte",
     icon: "󰄛",
     "desktop.screen_corners": false,
     "bar.style": "floating",
     "desktop.wallpaper.img": WP + "Lakeside-2-1.jpg",
+    ...darkColors,
   }),
   Theme({
-    name: "Kitty Light",
+    name: "Frappe",
     icon: "󰄛",
     "desktop.screen_corners": false,
     "bar.style": "floating",
@@ -22,7 +23,7 @@ export default [
     "theme.widget.bg": "$accent",
     "theme.widget.opacity": 64,
   }),
-  Theme({
+  /*Theme({
     name: "Leaves",
     icon: "󰌪",
     "desktop.wallpaper.img": WP + "leaves.jpg",
@@ -66,5 +67,5 @@ export default [
     "theme.bg": "transparentize(#171717, 0.3)",
     "theme.widget.opacity": 95,
     "bar.flat_buttons": false,
-  }),
+  }),*/
 ];
