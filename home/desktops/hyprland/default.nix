@@ -34,13 +34,6 @@
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
       general = {
-        gaps_in = 16;
-        gaps_out = 16;
-        border_size = 1;
-
-        "col.active_border" = "rgba(0DB7D4FF)";
-        "col.inactive_border" = "rgba(31313600)";
-
         layout = "master";
         resize_on_border = true;
       };
@@ -62,13 +55,27 @@
       ];
       monitor = [
         "DP-1,highrr,0x0,1,bitdepth,10"
-        "DP-1,addreserved,200,0,0,0"
+        "DP-1,addreserved,250,0,0,0"
         "DP-3,highrr,3840x400,1,bitdepth,10"
       ];
       workspace = [
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
-      windowrulev2 = [
+      windowrulev2 = let
+        firefoxPip = "class:^(firefox)$,title:^(Picture-in-Picture)$";
+        firefoxPipInitial = "class:^(firefox)$,title:^(Firefox)$";
+      in [
+        "keepaspectratio,${firefoxPip}"
+        "nofocus,${firefoxPip}"
+        "noborder,${firefoxPip}"
+        "float,${firefoxPip}"
+        "float,${firefoxPipInitial}"
+        "pin,${firefoxPip}"
+        "pin,${firefoxPipInitial}"
+        "fakefullscreen,${firefoxPip}"
+        "fakefullscreen,${firefoxPipInitial}"
+        "move 22 72,${firefoxPip}"
+        "move 22 72,${firefoxPipInitial}"
         # Games
         ## AC2
         "monitor DP-3,class:^(steam_app_805550)$"
@@ -98,8 +105,7 @@
       ];
       decoration = {
         drop_shadow = "yes";
-        shadow_range = 8;
-        shadow_render_power = 2;
+        shadow_range = 16;
         "col.shadow" = "rgba(00000044)";
 
         dim_inactive = false;
@@ -128,6 +134,10 @@
     };
   };
 
+  services.kdeconnect = {
+    enable = true;
+    indicator = true;
+  };
   programs.ags = {
     enable = true;
     configDir = ./ags;
@@ -143,7 +153,7 @@
     Service = {
       ExecStart = "${pkgs.ags}/bin/ags";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-      Restart = "on-failure";
+      Restart = "always";
       KillMode = "mixed";
       Environment = "PATH=/run/current-system/sw/bin/:${with pkgs;
         lib.makeBinPath [
@@ -173,7 +183,6 @@
       System = pkgs.System;
       UserNotifications = pkgs.UserNotifications;
     })
-    libsForQt5.konsole
     # fonts
     noto-fonts
     # essentials

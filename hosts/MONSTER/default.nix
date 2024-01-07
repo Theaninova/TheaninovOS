@@ -90,7 +90,10 @@
   services.dbus.enable = true;
   xdg.portal = {
     enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-kde
+    ];
   };
 
   time.timeZone = "Europe/Berlin";
@@ -147,6 +150,7 @@
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
   programs.hyprland.enable = true;
   programs.fish.enable = true;
+  programs.kdeconnect.enable = true;
   security.sudo.configFile = ''
     Defaults env_reset,pwfeedback,passprompt="󰟵  "
   '';

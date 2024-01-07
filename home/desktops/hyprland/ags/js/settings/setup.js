@@ -11,7 +11,6 @@ import { showAbout } from "../about/about.js";
 import Gtk from "gi://Gtk";
 
 export function init() {
-  console.log("init settings");
   notificationBlacklist();
   warnOnLowBattery();
   globals();
@@ -21,7 +20,6 @@ export function init() {
   gtkFontSettings();
   dependandOptions();
 
-  console.log("init scss");
   reloadScss();
   hyprlandInit();
   setupHyprland();

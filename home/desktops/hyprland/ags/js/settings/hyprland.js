@@ -1,7 +1,7 @@
 import App from "resource:///com/github/Aylur/ags/app.js";
 import Hyprland from "resource:///com/github/Aylur/ags/service/hyprland.js";
 import options from "../options.js";
-import { readFile, writeFile } from "resource:///com/github/Aylur/ags/utils.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
 const noIgnorealpha = ["verification", "powermenu", "lockscreen"];
 
@@ -39,6 +39,15 @@ export function hyprlandInit() {
 }
 
 export async function setupHyprland() {
+  /*Hyprland.event("activewindowv2", async (addr) => {
+    const client = Hyprland.getClient(addr);
+    if (!client.pinned || !client.floating) return;
+    const x = client.at[0];
+    console.log(
+      await Utils.execAsync(`hyprctl dispatch moveactive exact ${x} 80`),
+    );
+  });*/
+
   const wm_gaps = Math.floor(
     options.hypr.wm_gaps_multiplier.value * options.spacing.value,
   );
