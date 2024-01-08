@@ -1,6 +1,9 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import icons from "../../icons.js";
 import Brightness from "../../services/brightness.js";
+import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
+
+const CanSupportBrightness = () => Utils.exec("which gbmonctl");
 
 const BrightnessSlider = () =>
   Widget.Slider({

@@ -56,8 +56,7 @@ export default () =>
           children: [
             Row([Volume()], [SinkSelector(), AppMixer()]),
             Microhone(),
-            /*Brightness()*/
-            ,
+            Brightness(),
           ],
         }),
         Row(

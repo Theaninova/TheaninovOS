@@ -42,13 +42,18 @@ class Brightness extends Service {
   }
 
   set screen(percent) {
-    if (!dependencies(["brightnessctl"])) return;
+    if (!dependencies(["gbmonctl"])) return;
 
     if (percent < 0) percent = 0;
 
     if (percent > 1) percent = 1;
 
-    Utils.execAsync(`brightnessctl s ${percent * 100}% -q`)
+    Utils.execAsync(
+      `gbmonctl --prop brightness -val ${Math.min(
+        Math.max(Math.floor(percent * 100), 0),
+        100,
+      )}`,
+    )
       .then(() => {
         this.#screen = percent;
         this.changed("screen");
