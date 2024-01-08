@@ -12,7 +12,8 @@ export default [
     "desktop.clock.enable": false,
     "bar.style": "separated",
     "bar.separators": false,
-    "desktop.wallpaper.img": WP + "Lakeside-2-1.jpg",
+    "desktop.wallpaper.img":
+      WP + "wallpapers/Lakeside/lakeside_2019_midnight.png",
     ...darkColors,
   }),
   Theme({
@@ -22,7 +23,8 @@ export default [
     "desktop.clock.enable": false,
     "bar.style": "separated",
     "bar.separators": false,
-    "desktop.wallpaper.img": WP + "Lakeside-2-10.jpg",
+    "desktop.wallpaper.img":
+      WP + "wallpapers/Lakeside/Lakeside_2019_Teal_NoDeer_UHD2.png",
     ...lightColors,
     "theme.widget.bg": "$accent",
     "theme.widget.opacity": 64,

@@ -1,23 +1,19 @@
 [
   "SUPER,Q,killactive"
   "SUPER,T,exec,kitty"
+  "SUPER,TAB,exec,ags -t overview"
   "SUPER,C,togglespecialworkspace,calc"
   "SUPER_SHIFT,C,exec,hyprpicker"
   "SUPER_SHIFT,V,exec,slurp | grim -g - - | wl-copy"
   "SUPER,P,togglefloating,"
   "SUPER,P,pin,"
   "SUPER,D,fullscreen,1"
-  "SUPER,D,movetoworkspace,empty"
   "SUPER,V,fullscreen,0"
-  "SUPER,V,movetoworkspace,empty"
 
   "SUPER_SHIFT,up,movewindow,u"
   "SUPER_SHIFT,down,movewindow,d"
   "SUPER_SHIFT,left,movewindow,l"
   "SUPER_SHIFT,right,movewindow,r"
-
-  "SUPER_SHIFT,S,movetoworkspace,special:terminal"
-  "SUPER,S,togglespecialworkspace,terminal"
 
   "SUPER,up,movefocus,u"
   "SUPER,down,movefocus,d"
@@ -30,9 +26,6 @@
   "SUPER_SHIFT,h,movetoworkspace,r+1"
   "SUPER,mouse_up,workspace,r+1"
   "SUPER,mouse_down,workspace,r-1"
-
-  # just dump the window anywhere
-  "SUPER,x,movetoworkspacesilent,empty"
 
   "SUPER,1,workspace,1"
   "SUPER,2,workspace,2"

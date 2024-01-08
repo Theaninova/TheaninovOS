@@ -75,6 +75,7 @@
   };
 
   hardware.hid-fanatecff.enable = true;
+  hardware.gbmonctl.enable = true;
 
   hardware.sane = {
     enable = true;

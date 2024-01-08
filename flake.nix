@@ -46,6 +46,7 @@
             hyprland = hyprland.packages.${prev.system}.hyprland;
             xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
             ags = ags.packages.${prev.system}.default;
+            gbmonctl = prev.callPackage ./overlays/gbmonctl {};
           })
         ];
       });
@@ -61,6 +62,7 @@
         pkgs = legacyPackages.${system};
         modules = [
           ./modules/nixos/hid-fanatecff
+          ./modules/nixos/gbmonctl
           ./hosts/${hostname}
           kde2nix.nixosModules.plasma6
           home-manager.nixosModules.home-manager
