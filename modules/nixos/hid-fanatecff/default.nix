@@ -15,8 +15,9 @@ in {
       default = false;
       description = lib.mkDoc ''
         Enables the Linux module drivers for Fanatec wheel bases.
-        Works with the CSL Elite, and has experimental support
-        for the ClubSport V2/V2.5, Podium DD1/DD2, CSR Elite and the CSL DD.
+        Works with the CSL Elite and CSL/ClubSport DD/DD Pro,
+        and has experimental support for the ClubSport V2/V2.5,
+        Podium DD1/DD2 and CSR Elite.
       '';
     };
   };
