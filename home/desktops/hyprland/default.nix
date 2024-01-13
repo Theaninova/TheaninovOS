@@ -56,7 +56,6 @@
       monitor = [
         "DP-1,highrr,0x0,1,bitdepth,10"
         "DP-1,addreserved,250,0,0,0"
-        "DP-3,highrr,3840x400,1,bitdepth,10"
       ];
       workspace = [
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
@@ -76,11 +75,6 @@
         "fakefullscreen,${firefoxPipInitial}"
         "move 22 72,${firefoxPip}"
         "move 22 72,${firefoxPipInitial}"
-        # Games
-        ## AC2
-        "monitor DP-3,class:^(steam_app_805550)$"
-        "fullscreen,class:^(steam_app_805550)$"
-        "immediate,class:^(steam_app_805550)$"
         # IntelliJ focus fixes
         "windowdance,class:^(jetbrains-.*)$"
         "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
@@ -94,6 +88,7 @@
         "rounding 10,class:^(gcr-prompter)$"
         "animation slide,class:^(gcr-prompter)$"
       ];
+      xwayland.force_zero_scaling = true;
       misc = {
         layers_hog_keyboard_focus = false;
         disable_splash_rendering = true;
@@ -119,7 +114,6 @@
           brightness = 0.8;
         };
       };
-
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
