@@ -18,6 +18,7 @@
     inputs.ags.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.anyrun.homeManagerModules.default
+    ./programs/neovide.nix
     ./packages
     ./programs
     ./services

@@ -188,12 +188,20 @@ in {
     minimap_close_buftypes = ["nofile"];
     minimap_block_filetypes = ["NvimTree"];
 
-    catppuccin_debug = true;
-
     mapleader = ";";
 
     mergetool_layout = "mr";
     mergetool_prefer_revision = "local";
+
+    guifont = "JetBrains_Mono:h12";
+
+    neovide_transparency = 0.8;
+    neovide_padding_top = 10;
+    neovide_padding_bottom = 10;
+    neovide_padding_left = 10;
+    neovide_padding_right = 10;
+    neovide_floating_blur_amount_x = 10;
+    neovide_floating_blur_amount_y = 10;
   };
 
   clipboard = {
@@ -202,7 +210,9 @@ in {
   };
 
   extraConfigVim = ''
-    hi Normal guibg=NONE ctermbg=NONE
+    if !exists("g:neovide")
+      hi Normal guibg=NONE ctermbg=NONE
+    endif
     set noshowmode
   '';
 
@@ -211,6 +221,17 @@ in {
     require("cmp-npm").setup({})
     require("rest-nvim").setup({})
     require("actions-preview").setup({})
+
+    if vim.g.neovide then
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          local flavour = require("catppuccin").options.background[vim.o.background]
+          local palette = require("catppuccin.palettes").get_palette(flavour)
+          vim.cmd("hi Normal guibg=" .. palette.base)
+        end,
+      })
+    end
 
     local signs = {
       { name = "DiagnosticSignError", text = "" },
@@ -257,6 +278,7 @@ in {
 
   colorschemes.catppuccin = {
     enable = true;
+    terminalColors = true;
     transparentBackground = true;
     background = {
       dark = "frappe";

@@ -1,0 +1,6 @@
+maximized = false
+
+[font]
+normal = ["JetBrains Mono"]
+size = 16
+edging = "subpixelantialias"
