@@ -1,6 +1,6 @@
 maximized = false
 
 [font]
-normal = ["JetBrains Mono"]
+normal = ["JetBrainsMono NF"]
 size = 16
 edging = "subpixelantialias"

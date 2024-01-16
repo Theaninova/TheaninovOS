@@ -196,6 +196,7 @@
       noto-fonts
       noto-fonts-cjk
       noto-fonts-emoji
+      fira-code
       (nerdfonts.override {fonts = ["JetBrainsMono" "Noto" "NerdFontsSymbolsOnly"];})
     ];
     fontconfig = {
