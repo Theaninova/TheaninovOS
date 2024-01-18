@@ -39,7 +39,7 @@
       };
       master = {
         orientation = "center";
-        new_is_master = false;
+        new_is_master = true;
         always_center_master = true;
         mfact = 0.4;
       };

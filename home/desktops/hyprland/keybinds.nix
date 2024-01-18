@@ -3,7 +3,7 @@
   "SUPER,T,exec,kitty"
   "SUPER,TAB,exec,ags -t overview"
   "SUPER,C,togglespecialworkspace,calc"
-  "SUPER_SHIFT,C,exec,hyprpicker"
+  "SUPER_SHIFT,C,exec,hyprpicker | wl-copy"
   "SUPER_SHIFT,V,exec,slurp | grim -g - - | wl-copy"
   "SUPER,P,togglefloating,"
   "SUPER,P,pin,"

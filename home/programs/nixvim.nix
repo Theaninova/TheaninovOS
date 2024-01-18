@@ -5,18 +5,6 @@
       nodejs = pkgs.nodejs_18;
     })
     ."@angular/language-server";
-  /*
-    *tree-sitter-angular = pkgs.tree-sitter.buildGrammar {
-    language = "angular";
-    version = "624ff10";
-    src = pkgs.fetchFromGitHub {
-      owner = "dlvandenberg";
-      repo = "tree-sitter-angular";
-      rev = "ddd64047c8ccc3dc2aff1082e4461ebc9210917d";
-      hash = "sha256-wAbkrJ0MmNhE3qb34DQiju/mFIb7YCTyBUgVmP+iWQs=";
-    };
-  };
-  */
   darkman = pkgs.vimUtils.buildVimPlugin {
     name = "darkman";
     src = pkgs.buildGoModule rec {
@@ -193,8 +181,6 @@ in {
     mergetool_layout = "mr";
     mergetool_prefer_revision = "local";
 
-    guifont = "JetBrains_Mono:h12";
-
     neovide_transparency = 0.8;
     neovide_padding_top = 10;
     neovide_padding_bottom = 10;
@@ -202,6 +188,8 @@ in {
     neovide_padding_right = 10;
     neovide_floating_blur_amount_x = 10;
     neovide_floating_blur_amount_y = 10;
+    neovide_floating_shadow = false;
+    neovide_cursor_vfx_mode = "pixiedust";
   };
 
   clipboard = {
@@ -229,6 +217,7 @@ in {
           local flavour = require("catppuccin").options.background[vim.o.background]
           local palette = require("catppuccin.palettes").get_palette(flavour)
           vim.cmd("hi Normal guibg=" .. palette.base)
+          vim.cmd("set pumblend=100")
         end,
       })
     end

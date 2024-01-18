@@ -18,7 +18,7 @@
     tartube
     yt-dlp
     # youtube-music.override {electron = pkgs.electron_28;})
-    vlc
+    mpv
     makemkv
     handbrake
     metadata-cleaner
