@@ -15,7 +15,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/hyprland";
-    kde2nix.url = "github:nix-community/kde2nix";
   };
 
   outputs = {
@@ -25,7 +24,6 @@
     nixvim,
     anyrun,
     hyprland,
-    kde2nix,
     ...
   } @ inputs: let
     inherit (nixpkgs.lib) genAttrs listToAttrs;
@@ -64,7 +62,6 @@
           ./modules/nixos/hid-fanatecff
           ./modules/nixos/gbmonctl
           ./hosts/${hostname}
-          kde2nix.nixosModules.plasma6
           home-manager.nixosModules.home-manager
           {
             _module.args = {inherit username;};

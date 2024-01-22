@@ -172,13 +172,6 @@
 
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
-    (callPackage ../../../overlays/wezterm {
-      Cocoa = pkgs.Cocoa;
-      CoreGraphics = pkgs.CoreGraphics;
-      Foundation = pkgs.Foundation;
-      System = pkgs.System;
-      UserNotifications = pkgs.UserNotifications;
-    })
     # fonts
     noto-fonts
     # essentials
@@ -258,11 +251,6 @@
 
     file.".config/hypr/shaders" = {
       source = ./hypr/shaders;
-      recursive = true;
-    };
-
-    file.".config/wezterm" = {
-      source = ./wezterm;
       recursive = true;
     };
   };
