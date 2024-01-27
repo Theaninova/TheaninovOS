@@ -239,7 +239,13 @@
       allowedUDPPorts = [50765];
     };
 
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      plugins = with pkgs; [
+        networkmanager-openconnect
+      ];
+    };
+
     hosts = {
       "192.168.0.219" = ["kookaborrow"];
       "192.168.0.1" = ["router"];

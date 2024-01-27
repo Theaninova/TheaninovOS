@@ -52,8 +52,11 @@
     inkscape-with-extensions
     scribus
     audacity
+    pinta
     # friture TODO: broken
-    blender
+    (blender.override {
+      cudaSupport = true;
+    })
 
     # development
     (import ./intellij.nix {inherit pkgs;})
