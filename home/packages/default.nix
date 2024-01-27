@@ -35,10 +35,6 @@
 
     # chat apps
     (import ./threema-desktop.nix {inherit pkgs;})
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = false;
-    })
     (vesktop.override {electron = pkgs.electron_28;})
     (element-desktop.override {electron = pkgs.electron_28;})
     slack
@@ -59,7 +55,6 @@
     })
 
     # development
-    (import ./intellij.nix {inherit pkgs;})
     insomnia
     avalonia-ilspy
     ghidra

@@ -18,7 +18,7 @@
 
   boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
-  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11];
+  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11_beta];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -28,7 +28,7 @@
     nvidiaSettings = false;
     # no idea if this actually does anything...
     nvidiaPersistenced = false;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   environment = {
