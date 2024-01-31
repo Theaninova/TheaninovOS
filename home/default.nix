@@ -5,13 +5,15 @@
   osConfig,
   inputs,
   ...
-}: {
+}: rec {
   home = {
     inherit username stateVersion;
     homeDirectory = "/home/${username}";
-    shellAliases = {
-      nix-reload-home = "home-manager switch --flake ${./..}";
-      nix-reload-system = "nixos-rebuild switch --flake ${./..}";
+  };
+  xdg.userDirs = {
+    enable = true;
+    extraConfig = {
+      XDG_PROJECTS_DIR = "${home.homeDirectory}/Projects";
     };
   };
   imports = [

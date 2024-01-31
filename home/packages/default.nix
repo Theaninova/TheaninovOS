@@ -1,4 +1,5 @@
 {pkgs, ...}: {
+  xdg.configFile."ranger/rc.conf".source = ./ranger.conf;
   home.packages = with pkgs; [
     # nix
     cachix

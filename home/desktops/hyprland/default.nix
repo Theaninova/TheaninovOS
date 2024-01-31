@@ -221,6 +221,8 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
+    gtk3.extraCss = builtins.readFile ./gtk.css;
+    gtk4.extraCss = builtins.readFile ./gtk.css;
     iconTheme = {
       name = "Tela";
       package = pkgs.tela-icon-theme;

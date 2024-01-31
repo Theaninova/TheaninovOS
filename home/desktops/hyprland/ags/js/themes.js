@@ -6,7 +6,7 @@ import { Theme, WP, lightColors, darkColors } from "./settings/theme.js";
 
 export default [
   Theme({
-    name: "Latte",
+    name: "Frappé",
     icon: "󰄛",
     "desktop.screen_corners": false,
     "desktop.clock.enable": false,
@@ -17,7 +17,7 @@ export default [
     ...darkColors,
   }),
   Theme({
-    name: "Frappe",
+    name: "Latte",
     icon: "󰄛",
     "desktop.screen_corners": false,
     "desktop.clock.enable": false,
