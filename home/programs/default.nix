@@ -5,6 +5,8 @@
     git = import ./git.nix;
     lazygit.enable = true;
     nixvim = import ./nixvim.nix {inherit pkgs;};
+    firefox = import ./firefox.nix {inherit pkgs;};
+    gpg.enable = true;
     btop = {
       enable = true;
       settings = {

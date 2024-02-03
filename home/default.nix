@@ -10,16 +10,11 @@
     inherit username stateVersion;
     homeDirectory = "/home/${username}";
   };
-  xdg.userDirs = {
-    enable = true;
-    extraConfig = {
-      XDG_PROJECTS_DIR = "${home.homeDirectory}/Projects";
-    };
-  };
   imports = [
     inputs.ags.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.anyrun.homeManagerModules.default
+    ./clean-home-dir.nix
     ./programs/neovide.nix
     ./packages
     ./programs

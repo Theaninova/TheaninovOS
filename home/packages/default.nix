@@ -9,7 +9,6 @@
     libxcrypt
 
     # browsers
-    firefox-wayland
     chromium
     brave
 
@@ -59,6 +58,11 @@
     insomnia
     avalonia-ilspy
     ghidra
+
+    # 3d printing
+    lpc21isp
+    dfu-util
+    cura
 
     # gaming
     steam

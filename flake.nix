@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -19,6 +20,7 @@
 
   outputs = {
     nixpkgs,
+    nur,
     home-manager,
     ags,
     nixvim,
@@ -39,12 +41,14 @@
           trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
         };
         overlays = [
+          nur.overlay
           (final: prev: {
             anyrunPlugins = anyrun.packages.${prev.system};
             hyprland = hyprland.packages.${prev.system}.hyprland;
             xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
             ags = ags.packages.${prev.system}.default;
             gbmonctl = prev.callPackage ./overlays/gbmonctl {};
+            lpc21isp = prev.callPackage ./overlays/lpc21isp {};
           })
         ];
       });

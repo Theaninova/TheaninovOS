@@ -17,6 +17,8 @@
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_NO_HARDWARE_CURSORS,1"
+        "__GL_GSYNC_ALLOWED,0"
+        "__GL_VRR_ALLOWED,0"
         "NIXOS_OZONE_WL,1"
         # Fixes black screen on Jellyfin
         # https://github.com/jellyfin/jellyfin-media-player/issues/165#issuecomment-1569842393
