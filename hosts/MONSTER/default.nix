@@ -119,7 +119,7 @@
 
   # Configure keymap in X11
   console.useXkbConfig = true;
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "cc1-thea";
     extraLayouts.cc1-thea = {
       description = "A CC1 optimized layout";
