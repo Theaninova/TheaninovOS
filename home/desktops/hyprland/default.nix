@@ -67,7 +67,6 @@
         firefoxPipInitial = "class:^(firefox)$,title:^(Firefox)$";
       in [
         "keepaspectratio,${firefoxPip}"
-        "nofocus,${firefoxPip}"
         "noborder,${firefoxPip}"
         "float,${firefoxPip}"
         "float,${firefoxPipInitial}"
