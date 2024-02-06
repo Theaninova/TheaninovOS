@@ -192,7 +192,6 @@
       ];
     }))
     */
-    # AGS
     # gnome packages
     evince
     gnome.gvfs
