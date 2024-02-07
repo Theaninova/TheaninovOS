@@ -21,7 +21,7 @@ showSearch.connect("changed", ({ value }) => {
 
 /** @param {import('./option.js').Opt<string>} opt */
 const EnumSetter = (opt) => {
-  const lbl = Widget.Label({ binds: [["label", opt]] });
+  const lbl = Widget.Label().bind("label", opt);
   const step = (dir = 1) => {
     const i = opt.enums.findIndex((i) => i === lbl.label);
     opt.setValue(
@@ -57,51 +57,42 @@ const Setter = (opt) => {
         setup(self) {
           self.set_range(0, 1000);
           self.set_increments(1, 5);
+          self.on("value-changed", () => opt.setValue(self.value, true));
+          self.hook(opt, () => (self.value = opt.value));
         },
-        connections: [
-          ["value-changed", (self) => opt.setValue(self.value, true)],
-          [opt, (self) => (self.value = opt.value)],
-        ],
       });
     case "float":
     case "object":
       return Widget.Entry({
         on_accept: (self) => opt.setValue(JSON.parse(self.text || ""), true),
-        connections: [[opt, (self) => (self.text = JSON.stringify(opt.value))]],
+        setup: (self) =>
+          self.hook(opt, () => (self.text = JSON.stringify(opt.value))),
       });
     case "string":
       return Widget.Entry({
         on_accept: (self) => opt.setValue(self.text, true),
-        connections: [[opt, (self) => (self.text = opt.value)]],
+        setup: (self) => self.hook(opt, () => (self.text = opt.value)),
       });
     case "enum":
       return EnumSetter(opt);
     case "boolean":
-      return Widget.Switch({
-        connections: [
-          ["notify::active", (self) => opt.setValue(self.active, true)],
-          [opt, (self) => (self.active = opt.value)],
-        ],
-      });
+      return Widget.Switch()
+        .on("notify::active", (self) => opt.setValue(self.active, true))
+        .hook(opt, (self) => (self.active = opt.value));
+
     case "img":
-      return Widget.FileChooserButton({
-        connections: [
-          [
-            "selection-changed",
-            (self) => {
-              opt.setValue(self.get_uri()?.replace("file://", ""), true);
-            },
-          ],
-        ],
+      return Widget.FileChooserButton().on("selection-changed", (self) => {
+        opt.setValue(self.get_uri()?.replace("file://", ""), true);
       });
+
     case "font":
       return Widget.FontButton({
         show_size: false,
         use_size: false,
-        connections: [
-          ["notify::font", ({ font }) => opt.setValue(font, true)],
-          [opt, (self) => (self.font = opt.value)],
-        ],
+        setup: (self) =>
+          self
+            .on("notify::font", ({ font }) => opt.setValue(font, true))
+            .hook(opt, () => (self.font = opt.value)),
       });
     default:
       return Widget.Label({
@@ -114,7 +105,7 @@ const Setter = (opt) => {
 const Row = (opt) =>
   Widget.Box({
     class_name: "row",
-    setup: (self) => (self.opt = opt),
+    attribute: opt,
     children: [
       Widget.Box({
         vertical: true,
@@ -161,19 +152,15 @@ const Page = (category) =>
     child: Widget.Box({
       class_name: "page-content vertical",
       vertical: true,
-      connections: [
-        [
-          search,
-          (self) => {
-            for (const child of self.children) {
-              child.visible =
-                child.opt.id.includes(search.value) ||
-                child.opt.title.includes(search.value) ||
-                child.opt.note.includes(search.value);
-            }
-          },
-        ],
-      ],
+      setup: (self) =>
+        self.hook(search, () => {
+          for (const child of self.children) {
+            child.visible =
+              child.attribute.id.includes(search.value) ||
+              child.attribute.title.includes(search.value) ||
+              child.attribute.note.includes(search.value);
+          }
+        }),
       children: optionsList
         .filter((opt) => opt.category.includes(category))
         .map(Row),
@@ -181,7 +168,7 @@ const Page = (category) =>
   });
 
 const sidebar = Widget.Revealer({
-  binds: [["reveal-child", search, "value", (v) => !v]],
+  reveal_child: search.bind().transform((v) => !v),
   transition: "slide_right",
   child: Widget.Box({
     hexpand: false,
@@ -213,14 +200,9 @@ const sidebar = Widget.Revealer({
               Widget.Button({
                 label: (icons.dialog[name] || "") + " " + name,
                 xalign: 0,
-                binds: [
-                  [
-                    "class-name",
-                    currentPage,
-                    "value",
-                    (v) => (v === name ? "active" : ""),
-                  ],
-                ],
+                class_name: currentPage
+                  .bind()
+                  .transform((v) => `${v === name ? "active" : ""}`),
                 on_clicked: () => currentPage.setValue(name),
               }),
             ),
@@ -254,21 +236,15 @@ const sidebar = Widget.Revealer({
 
 const searchEntry = Widget.Revealer({
   transition: "slide_down",
-  binds: [
-    ["reveal-child", showSearch],
-    ["transition-duration", options.transition],
-  ],
+  reveal_child: showSearch.bind(),
+  transition_duration: options.transition.bind("value"),
   child: Widget.Entry({
-    connections: [
-      [
-        showSearch,
-        (self) => {
-          if (!showSearch.value) self.text = "";
+    setup: (self) =>
+      self.hook(showSearch, () => {
+        if (!showSearch.value) self.text = "";
 
-          if (showSearch.value) self.grab_focus();
-        },
-      ],
-    ],
+        if (showSearch.value) self.grab_focus();
+      }),
     hexpand: true,
     class_name: "search",
     placeholder_text: "Search Options",
@@ -279,41 +255,36 @@ const searchEntry = Widget.Revealer({
 
 const categoriesStack = Widget.Stack({
   transition: "slide_left_right",
-  items: categories.map((name) => [name, Page(name)]),
-  binds: [
-    ["shown", currentPage],
-    ["visible", search, "value", (v) => !v],
-  ],
+  children: categories.reduce((obj, name) => {
+    obj[name] = Page(name);
+    return obj;
+  }, {}),
+  shown: currentPage.bind(),
+  visible: search.bind().transform((v) => !v),
 });
 
 const searchPage = Widget.Box({
-  binds: [["visible", search, "value", (v) => !!v]],
+  visible: search.bind().transform((v) => !!v),
   child: Page(""),
 });
 
 export default RegularWindow({
   name: "settings-dialog",
   title: "Settings",
-  setup: (win) => win.set_default_size(800, 500),
-  connections: [
-    [
-      "delete-event",
-      (win) => {
+  setup: (win) =>
+    win
+      .on("delete-event", () => {
         win.hide();
         return true;
-      },
-    ],
-    [
-      "key-press-event",
-      (self, event) => {
+      })
+      .on("key-press-event", (_, event) => {
         if (event.get_keyval()[1] === imports.gi.Gdk.KEY_Escape) {
-          self.text = "";
           showSearch.setValue(false);
           search.setValue("");
         }
-      },
-    ],
-  ],
+      })
+      .set_default_size(800, 500),
+
   child: Widget.Box({
     children: [
       sidebar,

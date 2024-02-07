@@ -7,7 +7,7 @@ const PasswordEntry = () =>
   Widget.Box({
     children: [
       Widget.Entry({
-        connections: [[Lockscreen, (entry) => (entry.text = ""), "lock"]],
+        setup: (self) => self.hook(Lockscreen, () => (self.text = ""), "lock"),
         visibility: false,
         placeholder_text: "Password",
         on_accept: ({ text }) => Lockscreen.auth(text || ""),
@@ -17,9 +17,12 @@ const PasswordEntry = () =>
       Widget.Spinner({
         active: true,
         vpack: "center",
-        connections: [
-          [Lockscreen, (w, auth) => (w.visible = auth), "authenticating"],
-        ],
+        setup: (self) =>
+          self.hook(
+            Lockscreen,
+            (_, auth) => (self.visible = auth),
+            "authenticating",
+          ),
       }),
     ],
   });
@@ -32,7 +35,8 @@ export default (monitor) => {
     monitor,
     layer: "overlay",
     visible: false,
-    connections: [[Lockscreen, (w, lock) => (w.visible = lock), "lock"]],
+    setup: (self) =>
+      self.hook(Lockscreen, (_, lock) => (self.visible = lock), "lock"),
     child: Widget.Box({
       css: "min-width: 3000px; min-height: 2000px;",
       class_name: "shader",

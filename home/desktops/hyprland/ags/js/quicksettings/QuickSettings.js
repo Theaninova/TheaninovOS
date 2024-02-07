@@ -33,19 +33,15 @@ const Homogeneous = (toggles) =>
 export default () =>
   PopupWindow({
     name: "quicksettings",
-    connections: [
-      [
-        options.bar.position,
-        (self) => {
-          self.anchor = ["right", options.bar.position.value];
-          if (options.bar.position.value === "top")
-            self.transition = "slide_down";
+    setup: (self) =>
+      self.hook(options.bar.position, () => {
+        self.anchor = ["right", options.bar.position.value];
+        if (options.bar.position.value === "top")
+          self.transition = "slide_down";
 
-          if (options.bar.position.value === "bottom")
-            self.transition = "slide_up";
-        },
-      ],
-    ],
+        if (options.bar.position.value === "bottom")
+          self.transition = "slide_up";
+      }),
     child: Widget.Box({
       vertical: true,
       children: [
@@ -60,12 +56,8 @@ export default () =>
           ],
         }),
         Row(
-          [Homogeneous([/*NetworkToggle(),*/ BluetoothToggle()]), DND()],
-          [/*WifiSelection()*/ BluetoothDevices()],
-        ),
-        Row(
-          [Homogeneous([/*ProfileToggle(),*/ ThemeToggle()]), MicMute()],
-          [/*ProfileSelector(),*/ ThemeSelector()],
+          [Homogeneous([ThemeToggle(), BluetoothToggle()]), MicMute()],
+          [ThemeSelector(), BluetoothDevices()],
         ),
         Media(),
       ],

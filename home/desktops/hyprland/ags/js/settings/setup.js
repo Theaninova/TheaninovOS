@@ -8,7 +8,7 @@ import { wallpaper } from "./wallpaper.js";
 import { hyprlandInit, setupHyprland } from "./hyprland.js";
 import { globals } from "./globals.js";
 import { showAbout } from "../about/about.js";
-import Gtk from "gi://Gtk";
+import Gtk from "gi://Gtk?version=3.0";
 
 export function init() {
   notificationBlacklist();

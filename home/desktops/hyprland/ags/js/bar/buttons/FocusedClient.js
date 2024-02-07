@@ -7,49 +7,38 @@ import { substitute } from "../../utils.js";
 
 export const ClientLabel = () =>
   Widget.Label({
-    binds: [
-      [
-        "label",
-        Hyprland.active.client,
-        "class",
-        (c) => {
-          const { titles } = options.substitutions;
-          return substitute(titles, c);
-        },
-      ],
-    ],
+    label: Hyprland.active.client.bind("class").transform((c) => {
+      const { titles } = options.substitutions;
+      return substitute(titles, c);
+    }),
   });
 
 export const ClientIcon = () =>
   Widget.Icon({
-    connections: [
-      [
-        Hyprland.active.client,
-        (self) => {
-          const { icons } = options.substitutions;
-          const { client } = Hyprland.active;
+    setup: (self) =>
+      self.hook(Hyprland.active.client, () => {
+        const { icons } = options.substitutions;
+        const { client } = Hyprland.active;
 
-          const classIcon = substitute(icons, client.class) + "-symbolic";
-          const titleIcon = substitute(icons, client.class) + "-symbolic";
+        const classIcon = substitute(icons, client.class) + "-symbolic";
+        const titleIcon = substitute(icons, client.class) + "-symbolic";
 
-          const hasTitleIcon = Utils.lookUpIcon(titleIcon);
-          const hasClassIcon = Utils.lookUpIcon(classIcon);
+        const hasTitleIcon = Utils.lookUpIcon(titleIcon);
+        const hasClassIcon = Utils.lookUpIcon(classIcon);
 
-          if (hasClassIcon) self.icon = classIcon;
+        if (hasClassIcon) self.icon = classIcon;
 
-          if (hasTitleIcon) self.icon = titleIcon;
+        if (hasTitleIcon) self.icon = titleIcon;
 
-          self.visible = !!(hasTitleIcon || hasClassIcon);
-        },
-      ],
-    ],
+        self.visible = !!(hasTitleIcon || hasClassIcon);
+      }),
   });
 
 export default () =>
   PanelButton({
     class_name: "focused-client",
     content: Widget.Box({
+      tooltip_text: Hyprland.active.bind("client").transform((c) => c.title),
       children: [ClientIcon(), ClientLabel()],
-      binds: [["tooltip-text", Hyprland.active, "client", (c) => c.title]],
     }),
   });

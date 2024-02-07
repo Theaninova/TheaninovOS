@@ -8,7 +8,7 @@
     "strict": true,
     "noImplicitAny": false,
     "baseUrl": ".",
-    "typeRoots": ["./types/ags.d.ts", "./node_modules/@girs"],
+    "typeRoots": ["./types"],
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
   }

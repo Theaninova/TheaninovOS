@@ -22,113 +22,95 @@ const AppButton = ({ icon, pinned = false, ...rest }) => {
     ),
   });
 
-  const button = Widget.Button({
+  return Widget.Button({
     ...rest,
+    attribute: indicators,
     child: Widget.Box({
       class_name: "box",
       child: Widget.Overlay({
         child: Widget.Icon({
           icon,
-          binds: [["size", options.desktop.dock.icon_size]],
+          size: options.desktop.dock.icon_size.bind("value"),
         }),
         pass_through: true,
         overlays: pinned ? [indicators] : [],
       }),
     }),
   });
-
-  return Object.assign(button, { indicators });
 };
 
 const Taskbar = () =>
   Widget.Box({
-    binds: [
-      [
-        "children",
-        Hyprland,
-        "clients",
-        (c) =>
-          c.map((client) => {
-            for (const appName of options.desktop.dock.pinned_apps.value) {
-              if (client.class.toLowerCase().includes(appName.toLowerCase()))
-                return null;
-            }
-            for (const app of Applications.list) {
-              if (
-                (client.title && app.match(client.title)) ||
-                (client.class && app.match(client.class))
-              ) {
-                return AppButton({
-                  icon: app.icon_name || "",
-                  tooltip_text: app.name,
-                  on_primary_click: () => focus(client),
-                  on_middle_click: () => launchApp(app),
-                });
-              }
-            }
-          }),
-      ],
-    ],
+    children: Hyprland.bind("clients").transform((c) =>
+      c.map((client) => {
+        for (const appName of options.desktop.dock.pinned_apps.value) {
+          if (client.class.toLowerCase().includes(appName.toLowerCase()))
+            return null;
+        }
+        for (const app of Applications.list) {
+          if (
+            (client.title && app.match(client.title)) ||
+            (client.class && app.match(client.class))
+          ) {
+            return AppButton({
+              icon: app.icon_name || "",
+              tooltip_text: app.name,
+              on_primary_click: () => focus(client),
+              on_middle_click: () => launchApp(app),
+            });
+          }
+        }
+      }),
+    ),
   });
 
 const PinnedApps = () =>
   Widget.Box({
     class_name: "pins",
     homogeneous: true,
-    binds: [
-      [
-        "children",
-        options.desktop.dock.pinned_apps,
-        "value",
-        (v) =>
-          v
-            .map((term) => ({ app: Applications.query(term)?.[0], term }))
-            .filter(({ app }) => app)
-            .map(({ app, term = true }) =>
-              AppButton({
-                pinned: true,
-                icon: app.icon_name || "",
-                on_primary_click: () => {
-                  for (const client of Hyprland.clients) {
-                    if (client.class.toLowerCase().includes(term))
-                      return focus(client);
-                  }
+    children: options.desktop.dock.pinned_apps.bind("value").transform((v) =>
+      v
+        .map((term) => ({ app: Applications.query(term)?.[0], term }))
+        .filter(({ app }) => app)
+        .map(({ app, term }) =>
+          AppButton({
+            pinned: true,
+            icon: app.icon_name || "",
+            on_primary_click: () => {
+              for (const client of Hyprland.clients) {
+                if (client.class.toLowerCase().includes(term))
+                  return focus(client);
+              }
 
-                  launchApp(app);
-                },
-                on_middle_click: () => launchApp(app),
-                tooltip_text: app.name,
-                connections: [
-                  [
-                    Hyprland,
-                    (button) => {
-                      const running = Hyprland.clients.filter((client) =>
-                        client.class.toLowerCase().includes(term),
-                      );
+              launchApp(app);
+            },
+            on_middle_click: () => launchApp(app),
+            tooltip_text: app.name,
+            setup: (button) =>
+              button.hook(Hyprland, () => {
+                const running = Hyprland.clients.filter((client) =>
+                  client.class.toLowerCase().includes(term),
+                );
 
-                      const focused = running.find(
-                        (client) =>
-                          client.address === Hyprland.active.client.address,
-                      );
+                const focused = running.find(
+                  (client) => client.address === Hyprland.active.client.address,
+                );
 
-                      const index = running.findIndex((c) => c === focused);
+                const index = running.findIndex((c) => c === focused);
 
-                      for (let i = 0; i < 5; ++i) {
-                        const indicator = button.indicators.children[i];
-                        indicator.visible = i < running.length;
-                        indicator.toggleClassName("focused", i === index);
-                      }
+                for (let i = 0; i < 5; ++i) {
+                  const indicator = button.attribute.children[i];
+                  indicator.visible = i < running.length;
+                  indicator.toggleClassName("focused", i === index);
+                }
 
-                      button.set_tooltip_text(
-                        running.length === 1 ? running[0].title : app.name,
-                      );
-                    },
-                  ],
-                ],
+                button.set_tooltip_text(
+                  running.length === 1 ? running[0].title : app.name,
+                );
               }),
-            ),
-      ],
-    ],
+          }),
+        ),
+    ),
   });
 
 export default () => {
@@ -144,9 +126,14 @@ export default () => {
     vpack: "center",
     hpack: "center",
     orientation: 1,
-    connections: [
-      [Hyprland, (box) => (box.visible = taskbar.children.length > 0)],
-    ],
+    setup: (self) =>
+      self.hook(
+        taskbar,
+        () => {
+          self.visible = taskbar.children.length > 0;
+        },
+        "notify::children",
+      ),
   });
   return Widget.Box({
     class_name: "dock",

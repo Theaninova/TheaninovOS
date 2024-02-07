@@ -1,6 +1,10 @@
 import Widget from "resource:///com/github/Aylur/ags/widget.js";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 
+/** @param {import('types/widgets/box').BoxProps & {
+ *      width: number
+ *      height: number
+ * }} o */
 export default ({
   height = 18,
   width = 180,
@@ -27,31 +31,30 @@ export default ({
             min-height: ${height}px;
         `,
     children: [fill],
-    setup: (progress) =>
-      (progress.setValue = (value) => {
-        if (value < 0) return;
+    attribute: (value) => {
+      if (value < 0) return;
 
-        const axis = vertical ? "height" : "width";
-        const axisv = vertical ? height : width;
-        const min = vertical ? width : height;
-        const preferred = (axisv - min) * value + min;
+      const axis = vertical ? "height" : "width";
+      const axisv = vertical ? height : width;
+      const min = vertical ? width : height;
+      const preferred = (axisv - min) * value + min;
 
-        if (!fill_size) {
-          fill_size = preferred;
-          fill.setCss(`min-${axis}: ${preferred}px;`);
-          return;
-        }
+      if (!fill_size) {
+        fill_size = preferred;
+        fill.setCss(`min-${axis}: ${preferred}px;`);
+        return;
+      }
 
-        const frames = 10;
-        const goal = preferred - fill_size;
-        const step = goal / frames;
+      const frames = 10;
+      const goal = preferred - fill_size;
+      const step = goal / frames;
 
-        for (let i = 0; i < frames; ++i) {
-          Utils.timeout(5 * i, () => {
-            fill_size += step;
-            fill.setCss(`min-${axis}: ${fill_size}px`);
-          });
-        }
-      }),
+      for (let i = 0; i < frames; ++i) {
+        Utils.timeout(5 * i, () => {
+          fill_size += step;
+          fill.setCss(`min-${axis}: ${fill_size}px`);
+        });
+      }
+    },
   });
 };

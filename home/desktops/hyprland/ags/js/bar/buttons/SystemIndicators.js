@@ -28,7 +28,6 @@ const MicrophoneIndicator = () =>
       if (!Audio.microphone) return;
 
       const { muted, low, medium, high } = icons.audio.mic;
-      if (Audio.microphone.is_muted) return (icon.icon = muted);
 
       /** @type {Array<[number, string]>} */
       const cons = [
@@ -42,7 +41,7 @@ const MicrophoneIndicator = () =>
 
       icon.visible = Audio.recorders.length > 0 || Audio.microphone.is_muted;
     },
-    "speaker-changed",
+    "microphone-changed",
   );
 
 const DNDIndicator = () =>

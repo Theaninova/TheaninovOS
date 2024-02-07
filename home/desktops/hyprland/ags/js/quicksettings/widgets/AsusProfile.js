@@ -8,10 +8,10 @@ export const ProfileToggle = () =>
   ArrowToggleButton({
     name: "asusctl-profile",
     icon: Widget.Icon({
-      binds: [["icon", Asusctl, "profile", (p) => icons.asusctl.profile[p]]],
+      icon: Asusctl.bind("profile").transform((p) => icons.asusctl.profile[p]),
     }),
     label: Widget.Label({
-      binds: [["label", Asusctl, "profile"]],
+      label: Asusctl.bind("profile"),
     }),
     connection: [Asusctl, () => Asusctl.profile !== "Balanced"],
     activate: () => Asusctl.setProfile("Quiet"),
@@ -23,7 +23,7 @@ export const ProfileSelector = () =>
   Menu({
     name: "asusctl-profile",
     icon: Widget.Icon({
-      binds: [["icon", Asusctl, "profile", (p) => icons.asusctl.profile[p]]],
+      icon: Asusctl.bind("profile").transform((p) => icons.asusctl.profile[p]),
     }),
     title: Widget.Label("Profile Selector"),
     content: [

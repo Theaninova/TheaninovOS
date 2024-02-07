@@ -160,6 +160,7 @@
           brightnessctl
           ydotool
           kitty
+          hyprpicker
         ]}";
     };
     Install = {

@@ -32,7 +32,7 @@ export function forMonitors(widget) {
 }
 
 /**
- * @param {import('gi://Gtk').Gtk.Widget} widget
+ * @param {import('gi://Gtk?version=3.0').default.Widget} widget
  * @returns {any} - missing cairo type
  */
 export function createSurfaceFromWidget(widget) {

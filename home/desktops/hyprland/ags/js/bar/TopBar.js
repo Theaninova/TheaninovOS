@@ -1,6 +1,4 @@
 import SystemTray from "resource:///com/github/Aylur/ags/service/systemtray.js";
-import Widget from "resource:///com/github/Aylur/ags/widget.js";
-import Variable from "resource:///com/github/Aylur/ags/variable.js";
 import Notifications from "resource:///com/github/Aylur/ags/service/notifications.js";
 import Mpris from "resource:///com/github/Aylur/ags/service/mpris.js";
 import Battery from "resource:///com/github/Aylur/ags/service/battery.js";
@@ -28,25 +26,29 @@ SystemTray.connect("changed", () => {
 });
 
 /**
- * @template T
+ * @template {import('types/service').default} T
  * @param {T=} service
- * @param {(self: T) => boolean=} condition
+ * @param {(service: T) => boolean=} condition
  */
-const SeparatorDot = (service, condition) => {
-  const visibility = (self) => {
-    if (!options.bar.separators.value) return (self.visible = false);
-
-    self.visible =
-      condition && service ? condition(service) : options.bar.separators.value;
-  };
-
-  const conn = service ? [[service, visibility]] : [];
-  return Widget.Separator({
-    connections: [["draw", visibility], ...conn],
-    binds: [["visible", options.bar.separators]],
+const SeparatorDot = (service, condition) =>
+  Widget.Separator({
     vpack: "center",
+    setup: (self) => {
+      const visibility = () => {
+        if (!options.bar.separators.value) return (self.visible = false);
+
+        self.visible =
+          condition && service
+            ? condition(service)
+            : options.bar.separators.value;
+      };
+
+      if (service && condition) self.hook(service, visibility);
+
+      self.on("draw", visibility);
+      self.bind("visible", options.bar.separators);
+    },
   });
-};
 
 const Start = () =>
   Widget.Box({
@@ -99,14 +101,9 @@ export default (monitor) =>
     class_name: "transparent",
     exclusivity: "exclusive",
     monitor,
-    binds: [
-      [
-        "anchor",
-        options.bar.position,
-        "value",
-        (pos) => [pos, "left", "right"],
-      ],
-    ],
+    anchor: options.bar.position
+      .bind("value")
+      .transform((pos) => [pos, "left", "right"]),
     child: Widget.CenterBox({
       class_name: "panel",
       start_widget: Start(),

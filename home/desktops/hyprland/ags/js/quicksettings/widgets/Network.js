@@ -9,25 +9,13 @@ export const NetworkToggle = () =>
   ArrowToggleButton({
     name: "network",
     icon: Widget.Icon({
-      connections: [
-        [
-          Network,
-          (icon) => {
-            icon.icon = Network.wifi.icon_name || "";
-          },
-        ],
-      ],
+      icon: Network.wifi.bind("icon_name"),
     }),
     label: Widget.Label({
       truncate: "end",
-      connections: [
-        [
-          Network,
-          (label) => {
-            label.label = Network.wifi.ssid || "Not Connected";
-          },
-        ],
-      ],
+      label: Network.wifi
+        .bind("ssid")
+        .transform((ssid) => ssid || "Not Connected"),
     }),
     connection: [Network, () => Network.wifi.enabled],
     deactivate: () => (Network.wifi.enabled = false),
@@ -41,24 +29,17 @@ export const WifiSelection = () =>
   Menu({
     name: "network",
     icon: Widget.Icon({
-      connections: [
-        [
-          Network,
-          (icon) => {
-            icon.icon = Network.wifi.icon_name;
-          },
-        ],
-      ],
+      icon: Network.wifi.bind("icon_name"),
     }),
     title: Widget.Label("Wifi Selection"),
     content: [
       Widget.Box({
         vertical: true,
-        connections: [
-          [
+        setup: (self) =>
+          self.hook(
             Network,
-            (box) =>
-              (box.children = Network.wifi?.access_points.map((ap) =>
+            () =>
+              (self.children = Network.wifi?.access_points.map((ap) =>
                 Widget.Button({
                   on_clicked: () =>
                     Utils.execAsync(`nmcli device wifi connect ${ap.bssid}`),
@@ -76,8 +57,7 @@ export const WifiSelection = () =>
                   }),
                 }),
               )),
-          ],
-        ],
+          ),
       }),
       Widget.Separator(),
       Widget.Button({

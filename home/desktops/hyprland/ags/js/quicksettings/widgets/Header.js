@@ -6,6 +6,7 @@ import Avatar from "../../misc/Avatar.js";
 import icons from "../../icons.js";
 import { openSettings } from "../../settings/theme.js";
 import { uptime } from "../../variables.js";
+import DND from "./DND.js";
 
 export default () =>
   Widget.Box({
@@ -20,16 +21,17 @@ export default () =>
           /*Widget.Box({
             class_name: "battery horizontal",
             children: [
-              Widget.Icon({ binds: [["icon", Battery, "icon-name"]] }),
+              Widget.Icon({ icon: Battery.bind("icon_name") }),
               Widget.Label({
-                binds: [["label", Battery, "percent", (p) => `${p}%`]],
+                label: Battery.bind("percent").transform((p) => `${p}%`),
               }),
             ],
-          }),
+          }),*/
+          DND(),
           Widget.Label({
             class_name: "uptime",
-            binds: [["label", uptime, "value", (v) => `up: ${v}`]],
-          }),*/
+            label: uptime.bind().transform((v) => `up: ${v}`),
+          }),
           Widget.Button({
             on_clicked: openSettings,
             child: Widget.Icon(icons.ui.settings),

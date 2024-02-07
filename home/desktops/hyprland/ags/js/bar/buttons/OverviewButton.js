@@ -10,15 +10,8 @@ export default () =>
     window: "overview",
     on_clicked: () => App.toggleWindow("overview"),
     content: FontIcon({
-      binds: [
-        [
-          "icon",
-          options.bar.icon,
-          "value",
-          (v) => {
-            return v === "distro-icon" ? distroIcon : v;
-          },
-        ],
-      ],
+      label: options.bar.icon.bind("value").transform((v) => {
+        return v === "distro-icon" ? distroIcon : v;
+      }),
     }),
   });

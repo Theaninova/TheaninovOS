@@ -8,8 +8,8 @@ import { setTheme, openSettings } from "../../settings/theme.js";
 export const ThemeToggle = () =>
   ArrowToggleButton({
     name: "theme",
-    icon: Widget.Label({ binds: [["label", options.theme.icon]] }),
-    label: Widget.Label({ binds: [["label", options.theme.name]] }),
+    icon: Widget.Label().bind("label", options.theme.icon),
+    label: Widget.Label().bind("label", options.theme.name),
     connection: [opened, () => opened.value === "theme"],
     activate: () => opened.setValue("theme"),
     activateOnArrow: false,
@@ -19,9 +19,7 @@ export const ThemeToggle = () =>
 export const ThemeSelector = () =>
   Menu({
     name: "theme",
-    icon: Widget.Label({
-      binds: [["label", options.theme.icon]],
-    }),
+    icon: Widget.Label().bind("label", options.theme.icon),
     title: Widget.Label("Theme Selector"),
     content: [
       ...themes.map(({ name, icon }) =>
@@ -35,9 +33,9 @@ export const ThemeSelector = () =>
                 icon: icons.ui.tick,
                 hexpand: true,
                 hpack: "end",
-                binds: [
-                  ["visible", options.theme.name, "value", (v) => v === name],
-                ],
+                visible: options.theme.name
+                  .bind("value")
+                  .transform((v) => v === name),
               }),
             ],
           }),

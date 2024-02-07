@@ -1,7 +1,6 @@
 import App from "resource:///com/github/Aylur/ags/app.js";
 import * as Utils from "resource:///com/github/Aylur/ags/utils.js";
 import { getOptions } from "./option.js";
-import { dependencies } from "../utils.js";
 
 export function scssWatcher() {
   return Utils.subprocess(
@@ -26,8 +25,6 @@ export function scssWatcher() {
  * options.bar.style.value => $bar-style
  */
 export async function reloadScss() {
-  if (!dependencies(["sassc"])) return;
-
   const opts = getOptions();
   const vars = opts.map((opt) => {
     if (opt.scss === "exclude") return "";
