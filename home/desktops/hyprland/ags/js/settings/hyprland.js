@@ -29,11 +29,11 @@ function getColor(scss) {
 
 export function hyprlandInit() {
   sendBatch(
-    Array.from(App.windows).flatMap(([name]) => [
+    App.windows.flatMap(({ name }) => [
       `layerrule blur, ${name}`,
-      noIgnorealpha.some((skip) => name.includes(skip))
+      noIgnorealpha.some((skip) => name?.includes(skip))
         ? ""
-        : `layerrule ignorealpha 0.6, ${name}`,
+        : `layerrule ignorealpha 0.3, ${name}`,
     ]),
   );
 }
