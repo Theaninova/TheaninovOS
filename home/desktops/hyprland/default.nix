@@ -135,6 +135,7 @@
     enable = true;
     indicator = true;
   };
+  services.flameshot.enable = true;
   programs.ags = {
     enable = true;
     configDir = ./ags;
@@ -184,15 +185,6 @@
     wl-clipboard
     polkit_gnome
     xdg-desktop-portal-gtk
-    /*
-       TODO: (flameshot.overrideAttrs(prev: {
-      nativeBuildInputs = prev.nativeBuildInputs ++ [ git grim ];
-      cmakeFlags = [
-        "-DUSE_WAYLAND_CLIPBOARD=1"
-        "-DUSE_WAYLAND_GRIM=true"
-      ];
-    }))
-    */
     # gnome packages
     evince
     gnome.gvfs

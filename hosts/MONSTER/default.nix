@@ -134,6 +134,8 @@
   services.gvfs.enable = true;
   # fix pinentry on non-gnome
   services.dbus.packages = with pkgs; [gcr];
+  services.gnome.gnome-online-accounts.enable = true;
+  services.gnome.evolution-data-server.enable = true;
 
   services.udev.packages = with pkgs; [
     oversteer
