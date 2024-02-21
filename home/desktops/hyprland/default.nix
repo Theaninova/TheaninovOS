@@ -48,7 +48,6 @@
       input = {
         accel_profile = "flat";
         kb_layout = "cc1-thea";
-        mouse_refocus = false;
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;

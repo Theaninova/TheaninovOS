@@ -49,6 +49,15 @@
             ags = ags.packages.${prev.system}.default;
             gbmonctl = prev.callPackage ./overlays/gbmonctl {};
             lpc21isp = prev.callPackage ./overlays/lpc21isp {};
+            cura = prev.appimageTools.wrapType2 rec {
+              name = "cura";
+              version = "5.6.0";
+              src = prev.fetchurl {
+                url = "https://github.com/Ultimaker/Cura/releases/download/${version}/UltiMaker-Cura-${version}-linux-X64.AppImage";
+                hash = "sha256-EHiWoNpLKHPzv6rZrtNgEr7y//iVcRYeV/TaCn8QpEA=";
+              };
+              extraPkgs = pkgs: with pkgs; [];
+            };
           })
         ];
       });

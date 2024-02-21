@@ -563,6 +563,11 @@ in {
         };
         pylsp.enable = true;
 
+        clangd = {
+          enable = true;
+          cmd = ["clangd" "--offset-encoding=utf-16"];
+        };
+
         nixd.enable = true;
         lua-ls.enable = true;
         bashls.enable = true;
