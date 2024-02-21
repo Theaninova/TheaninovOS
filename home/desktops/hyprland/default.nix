@@ -76,7 +76,7 @@
         "move 22 72,${firefoxPip}"
         "move 22 72,${firefoxPipInitial}"
         # For some reason it really wants to be maximized
-        "nomaximizerequest,class:^(neovide)$"
+        "suppressevent maximize,class:^(neovide)$"
         # IntelliJ focus fixes
         "windowdance,class:^(jetbrains-.*)$"
         "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
