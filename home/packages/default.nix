@@ -44,6 +44,7 @@
     (blender.override {
       cudaSupport = true;
     })
+    openscad-unstable
 
     # development
     insomnia
@@ -70,6 +71,7 @@
     neofetch
     pinentry-gnome
     ranger
+    filezilla
     lazydocker
     libqalculate
     ripgrep

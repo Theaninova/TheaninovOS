@@ -631,6 +631,11 @@ in {
       suggestion.enabled = false;
     };
 
+    openscad = {
+      enable = true;
+      fuzzyFinder = "fzf";
+    };
+
     nix.enable = true;
   };
 
