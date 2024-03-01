@@ -434,7 +434,7 @@ in {
     ts-autotag.enable = true;
     leap.enable = true;
     harpoon = {
-      enable = false;
+      enable = true;
       enableTelescope = true;
       keymaps = {
         addFile = "hm";
@@ -473,61 +473,43 @@ in {
       nixvimInjections = true;
     };
 
-    none-ls = {
+    conform-nvim = {
       enable = true;
-      sources = {
-        code_actions = {
-          eslint_d.enable = true;
-          shellcheck.enable = true;
-        };
-        diagnostics = {
-          eslint_d = {
-            enable = true;
-            withArgs = ''
-              {only_local = "node_modules/.bin"}
-            '';
-          };
-          shellcheck.enable = true;
-        };
-        formatting = {
-          alejandra.enable = true;
-          prettier = {
-            enable = true;
-            withArgs = ''
-              {extra_filetypes = {"svelte"}}
-            '';
-          };
-          rustfmt.enable = true;
-          shfmt.enable = true;
-          stylua.enable = true;
-        };
+      formattersByFt = {
+        lua = ["stylua"];
+        javascript = ["prettier"];
+        markdown = ["prettier"];
+        typescript = ["prettier"];
+        json = ["prettier"];
+        yaml = ["prettier"];
+        html = ["prettier"];
+        css = ["prettier"];
+        scss = ["prettier"];
+        less = ["prettier"];
+        svelte = ["prettier"];
+        rust = ["rustfmt"];
+        bash = ["shfmt"];
+        nix = ["alejandra"];
       };
-      sourcesItems = [{__raw = "require('null-ls').builtins.diagnostics.stylelint";}];
-      onAttach =
-        /*
-        lua
-        */
-        ''
-          function(client, bufnr)
-            if client.supports_method("textDocument/formatting") then
-              vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                group = augroup,
-                buffer = bufnr,
-                callback = function()
-                  vim.lsp.buf.format({
-                    filter = function(client)
-                      return client.name == "null-ls"
-                    end,
-                    bufnr = bufnr,
-                    async = false,
-                  })
-                end,
-              })
-            end
-          end
-        '';
+      formatOnSave = {
+        timeoutMs = 500;
+        lspFallback = true;
+      };
     };
+
+    lint = {
+      enable = true;
+      lintersByFt = {
+        javascript = ["eslint"];
+        typescript = ["eslint"];
+        css = ["stylelint"];
+        scss = ["stylelint"];
+        less = ["stylelint"];
+        bash = ["shellcheck"];
+      };
+      autoCmd.event = "TextChanged";
+    };
+
     lsp = {
       enable = true;
       keymaps = {diagnostic = {};};
@@ -626,6 +608,11 @@ in {
       };
       experimental.ghost_text = true;
     };
+
+    which-key = {
+      enable = true;
+    };
+
     copilot-lua = {
       panel.enabled = false;
       suggestion.enabled = false;
