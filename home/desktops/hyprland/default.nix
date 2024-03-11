@@ -10,6 +10,10 @@
 
   wayland.windowManager.hyprland = {
     enable = true;
+    systemd = {
+      enable = true;
+      variables = ["--all"];
+    };
     settings = {
       env = [
         "LIBVA_DRIVER_NAME,nvidia"
@@ -20,18 +24,11 @@
         "__GL_GSYNC_ALLOWED,0"
         "__GL_VRR_ALLOWED,0"
         "NIXOS_OZONE_WL,1"
-        # Fixes black screen on Jellyfin
-        # https://github.com/jellyfin/jellyfin-media-player/issues/165#issuecomment-1569842393
-        "QT_QPA_PLATFORM,xcb"
-        # Potentially (?) fixes dialogs randomly closing again in IntelliJ
-        # https://github.com/hyprwm/Hyprland/issues/1947
-        "_JAVA_AWT_WM_NOREPARENTING,1"
         # Gnome file manager fix
         "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
       ];
       exec-once = [
-        "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
-        "dbus-update-activation-environment DISPLAY WAYLAND_DISPLAY XAUTHORITY"
+        "systemctl --user start hyprland-session.target"
         "gnome-keyring-daemon --start --components=secrets"
         "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
       ];
@@ -55,7 +52,7 @@
         "SUPER,SUPER_L,exec,pkill anyrun || anyrun"
       ];
       monitor = [
-        "DP-1,highrr,0x0,1,bitdepth,10"
+        "DP-1,highrr,0x0,1,bitdepth,8"
         "DP-1,addreserved,250,0,0,0"
       ];
       workspace = [
@@ -89,6 +86,9 @@
         "noborder,class:^(gcr-prompter)$"
         "rounding 10,class:^(gcr-prompter)$"
         "animation slide,class:^(gcr-prompter)$"
+        # Flameshot fixes
+        "float,class:^(flameshot)$"
+        "animation fade,class:^(flameshot)$"
       ];
       xwayland.force_zero_scaling = true;
       misc = {
@@ -134,7 +134,20 @@
     enable = true;
     indicator = true;
   };
-  services.flameshot.enable = true;
+  services.flameshot = {
+    enable = true;
+    package = pkgs.flameshot.overrideAttrs (final: prev: {
+      cmakeFlags = ["-DUSE_WAYLAND_CLIPBOARD=1" "-DUSE_WAYLAND_GRIM=true"];
+      nativeBuildInputs = prev.nativeBuildInputs ++ [pkgs.libsForQt5.kguiaddons];
+    });
+    settings = {
+      General = {
+        uiColor = "#99d1db";
+        showDesktopNotification = false;
+        disabledTrayIcon = true;
+      };
+    };
+  };
   programs.ags = {
     enable = true;
     configDir = ./ags;
@@ -177,13 +190,16 @@
     # fonts
     noto-fonts
     # essentials
-    xwaylandvideobridge
     hyprpicker
     grim
     slurp
     wl-clipboard
     polkit_gnome
     xdg-desktop-portal-gtk
+    # qt/kde packages
+    qt6.qtwayland
+    qt5.qtwayland
+    kdePackages.breeze-icons
     # gnome packages
     evince
     gnome.gvfs
@@ -213,8 +229,8 @@
       name = "adw-gtk3-dark";
       package = pkgs.adw-gtk3;
     };
-    gtk3.extraCss = builtins.readFile ./gtk.css;
-    gtk4.extraCss = builtins.readFile ./gtk.css;
+    #gtk3.extraCss = builtins.readFile ./gtk.css;
+    #gtk4.extraCss = builtins.readFile ./gtk.css;
     iconTheme = {
       name = "Tela";
       package = pkgs.tela-icon-theme;
@@ -222,7 +238,7 @@
   };
   qt = {
     enable = true;
-    platformTheme = "gtk";
+    platformTheme = "qtct";
   };
 
   programs.fish.loginShellInit =

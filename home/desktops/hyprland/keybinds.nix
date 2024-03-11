@@ -4,7 +4,7 @@
   "SUPER,TAB,exec,ags -t overview"
   "SUPER,C,togglespecialworkspace,calc"
   "SUPER_SHIFT,C,exec,hyprpicker | wl-copy"
-  "SUPER_SHIFT,V,exec,slurp | grim -g - - | wl-copy"
+  "SUPER_SHIFT,V,exec,XDG_CURRENT_DESKTOP=sway flameshot gui --clipboard"
   "SUPER,P,togglefloating,"
   "SUPER,P,pin,"
   "SUPER,D,fullscreen,1"

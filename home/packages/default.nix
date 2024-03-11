@@ -40,6 +40,7 @@
     scribus
     audacity
     pinta
+    kdePackages.kdenlive
     # friture TODO: broken
     (blender.override {
       cudaSupport = true;

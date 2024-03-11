@@ -18,7 +18,6 @@
 
   boot.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
   boot.initrd.kernelModules = ["nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"];
-  boot.extraModulePackages = [config.boot.kernelPackages.nvidia_x11_beta];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -28,7 +27,6 @@
     nvidiaSettings = false;
     # no idea if this actually does anything...
     nvidiaPersistenced = false;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
   };
 
   environment = {
@@ -37,8 +35,10 @@
       LIBVA_DRIVER_NAME = "nvidia";
     };
     systemPackages = with pkgs; [
+      glxinfo
       nvtop-nvidia
       libva-utils
+      vulkan-tools
     ];
   };
 }
