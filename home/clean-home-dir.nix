@@ -20,6 +20,8 @@
   };
   gtk.gtk2.configLocation = "${config.xdg.configHome}/gtk-2.0/gtkrc";
   programs.gpg.homedir = "${config.xdg.configHome}/gnupg";
+  programs.zsh.dotDir = "${config.xdg.configHome}/zsh";
+  programs.zsh.history.path = "${config.xdg.stateHome}/zsh/history";
   xdg.configFile.wgetrc.text = ''
     hsts-file="${config.xdg.cacheHome}/wget-hsts"
   '';

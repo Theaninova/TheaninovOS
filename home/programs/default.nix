@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, config, ...}: {
   programs = {
     home-manager.enable = true;
     rbw = import ./bitwarden.nix;
@@ -12,6 +12,13 @@
       settings = {
         vim_keys = true;
       };
+    };
+    zsh = {
+      enable = true;
+      enableCompletion = true;
+      enableAutosuggestions = true;
+      syntaxHighlighting.enable = true;
+      defaultKeymap = "viins";
     };
     fish = {
       enable = true;
