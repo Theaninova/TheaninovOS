@@ -4,7 +4,7 @@
     rbw = import ./bitwarden.nix;
     git = import ./git.nix;
     lazygit.enable = true;
-    nixvim = import ./nixvim.nix {inherit pkgs;};
+    nixvim = import ./nixvim {inherit pkgs;};
     firefox = import ./firefox.nix {inherit pkgs;};
     gpg.enable = true;
     btop = {

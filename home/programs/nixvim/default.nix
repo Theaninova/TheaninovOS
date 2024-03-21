@@ -1,6 +1,6 @@
 {pkgs}: let
   angular-ls =
-    (import ../packages/node-packages {
+    (import ../../packages/node-packages {
       inherit pkgs;
       nodejs = pkgs.nodejs_18;
     })
@@ -62,112 +62,7 @@ in {
     fillchars.eob = " ";
   };
 
-  keymaps = [
-    {
-      key = "<leader>u";
-      mode = "n";
-      action = "<cmd>:UndotreeToggle<CR>";
-    }
-    {
-      key = "<leader>ft";
-      action = "<cmd>:Neotree toggle<CR>";
-    }
-    {
-      key = "<leader>s";
-      action = "<cmd>:SymbolsOutline<CR>";
-    }
-    {
-      key = "J";
-      mode = "v";
-      action = ":m '>+1<CR>gv=gv";
-    }
-    {
-      key = "K";
-      mode = "v";
-      action = ":m '<-2<CR>gv=gv";
-    }
-
-    {
-      key = "<C-d>";
-      mode = "n";
-      action = "<C-d>zz";
-    }
-    {
-      key = "<C-u>";
-      mode = "n";
-      action = "<C-u>zz";
-    }
-    {
-      key = "<leader>p";
-      mode = "x";
-      action = ''"_dP'';
-    }
-    {
-      key = "<leader>p";
-      mode = "n";
-      action = ''"_dP'';
-    }
-    {
-      key = "<leader>p";
-      mode = "v";
-      action = ''"_dP'';
-    }
-    {
-      key = "<leader>n";
-      mode = "n";
-      options.silent = true;
-      action = "vim.lsp.buf.hover";
-      lua = true;
-    }
-    {
-      key = "hh";
-      mode = "n";
-      action = '':Telescope harpoon marks<CR>'';
-    }
-    {
-      key = "<leader>sa";
-      mode = "n";
-      options.silent = true;
-      lua = true;
-      action = "require('actions-preview').code_actions";
-    }
-    {
-      key = "<leader>xx";
-      mode = "n";
-      lua = true;
-      action = "require('trouble').toggle";
-    }
-    {
-      key = "<leader>xw";
-      mode = "n";
-      lua = true;
-      action = "function() require('trouble').toggle('workspace_diagnostics') end";
-    }
-    {
-      key = "<leader>xd";
-      mode = "n";
-      lua = true;
-      action = "function() require('trouble').toggle('document_diagnostics') end";
-    }
-    {
-      key = "<leader>xq";
-      mode = "n";
-      lua = true;
-      action = "function() require('trouble').toggle('quickfix') end";
-    }
-    {
-      key = "<leader>xl";
-      mode = "n";
-      lua = true;
-      action = "function() require('trouble').toggle('loclist') end";
-    }
-    {
-      key = "gR";
-      mode = "n";
-      lua = true;
-      action = "function() require('trouble').toggle('lsp_references') end";
-    }
-  ];
+  keymaps = import ./keymaps.nix;
 
   globals = {
     minimap_width = 10;
@@ -204,66 +99,7 @@ in {
     set noshowmode
   '';
 
-  extraConfigLua = ''
-    require("darkman").setup()
-    require("cmp-npm").setup({})
-    require("rest-nvim").setup({})
-    require("actions-preview").setup({})
-
-    if vim.g.neovide then
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "*",
-        callback = function()
-          local flavour = require("catppuccin").options.background[vim.o.background]
-          local palette = require("catppuccin.palettes").get_palette(flavour)
-          vim.cmd("hi Normal guibg=" .. palette.base)
-          vim.cmd("set pumblend=100")
-        end,
-      })
-    end
-
-    local signs = {
-      { name = "DiagnosticSignError", text = "" },
-      { name = "DiagnosticSignWarn", text = "" },
-      { name = "DiagnosticSignHint", text = "󰌵" },
-      { name = "DiagnosticSignInfo", text = "" },
-    }
-
-    for _, sign in ipairs(signs) do
-      vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-    end
-
-    vim.diagnostic.config({
-      virtual_text = true,
-      signs = true,
-      underline = true,
-      update_in_insert = true,
-      severity_sort = false,
-    })
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {border = "rounded"})
-
-    local Terminal  = require('toggleterm.terminal').Terminal
-    local lazygit = Terminal:new({
-      cmd = "lazygit",
-      dir = "git_dir",
-      direction = "float",
-
-      on_open = function(term)
-        vim.cmd("startinsert!")
-        vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", {noremap = true, silent = true})
-      end,
-      on_close = function(term)
-        vim.cmd("startinsert!")
-      end,
-    })
-
-
-    function _lazygit_toggle()
-      lazygit:toggle()
-    end
-
-    vim.api.nvim_set_keymap("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>", {noremap = true, silent = true})
-  '';
+  extraConfigLua = builtins.readFile ./extra-config.lua;
 
   colorschemes.catppuccin = {
     enable = true;
@@ -277,77 +113,7 @@ in {
       errors = ["undercurl"];
       warnings = ["undercurl"];
     };
-    customHighlights =
-      /*
-      lua
-      */
-      ''
-        function(colors)
-          return {
-            CmpItemKindCopilot = {fg = colors.teal},
-            CmpItemKindNpm = {fg = colors.maroon},
-
-            -- IntelliJ Theme
-            Constant = {fg = colors.mauve},
-            Character = {link = "Keyword"},
-            Number = {fg = colors.sapphire},
-            Boolean = {link = "Keyword"},
-            Identifier = {fg = colors.text},
-            Function = {fg = colors.blue},
-            Statement = {fg = colors.text},
-            Conditional = {link = "Keyword"},
-            Repeat = {link = "Keyword"},
-            Label = {link = "Keyword"},
-            Operator = {fg = colors.text},
-            Keyword = {fg = colors.peach},
-            Exception = {link = "Keyword"},
-            Include = {link = "Keyword"},
-            Structure = {fg = colors.yellow},
-            Type = {fg = colors.teal},
-
-            SpellBad = {sp = colors.green, style = {"underdotted"}},
-            SpellCap = {sp = colors.green, style = {"underdotted"}},
-            SpellLocal = {sp = colors.green, style = {"underdotted"}},
-            SpellRare = {sp = colors.green, style = {"underdotted"}},
-
-            ["@constructor"] = {link = "Keyword"},
-            ["@constructor.typescript"] = {link = "@constructor"},
-            ["@parameter"] = {link = "Identifier"},
-
-            ["@tag"] = {link = "Structure"},
-            ["@tag.delimiter"] = {link = "Structure"},
-            ["@tag.attribute"] = {fg = colors.mauve, style = {"italic"}}, -- Constant
-
-            ["@keyword.function"] = {link = "Keyword"},
-            ["@keyword.operator"] = {link = "Keyword"},
-            ["@keyword.return"] = {link = "Keyword"},
-            ["@keyword.export"] = {link = "Keyword"},
-
-            ["@punctuation.special"] = {link = "Operator"},
-            ["@conditional.ternary"] = {link = "Operator"},
-
-            ["@type.builtin"] = {link = "Keyword"},
-            ["@variable.builtin"] = {link = "Keyword"},
-            ["@lsp.typemod.class.defaultLibrary"] = {fg = colors.yellow, style = {"bold"}}, -- Structure
-            ["@lsp.typemod.variable.defaultLibrary"] = {fg = colors.mauve, style = {"bold"}}, -- Constant
-            ["@lsp.typemod.function.defaultLibrary"] = {fg = colors.blue, style = {"bold"}}, -- Function
-
-            ["@variable"] = {link = "Constant"},
-            ["@field"] = {link = "Constant"},
-            ["@label.json"] = {link = "Constant"},
-            ["@label.jsonc"] = {link = "Constant"},
-            ["@property"] = {link = "Constant"},
-            ["@property.typescript"] = {link = "@property"},
-            ["@lsp.type.property"] = {link = "Constant"},
-            ["@lsp.type.interface"] = {link = "Structure"},
-            ["@lsp.type.namespace"] = {link = "Structure"},
-            ["@attribute.typescript"] = {link = "Structure"},
-
-            ["@lsp.mod.local"] = {fg = colors.text},
-            ["@lsp.mod.readonly"] = {style = {"italic"}},
-          }
-        end
-      '';
+    customHighlights = builtins.readFile ./custom-highlights.lua;
   };
 
   plugins = {
@@ -518,13 +284,45 @@ in {
           name = "angularls";
           extraOptions = {
             cmd = [
-              "${angular-ls}"
+              "ngserver"
               "--stdio"
               "--tsProbeLocations"
-              "${pkgs.nodePackages.typescript-language-server}"
+              ""
               "--ngProbeLocations"
-              "${angular-ls}"
+              ""
             ];
+            on_new_config = {
+              __raw =
+                /*
+                lua
+                */
+                ''
+                  function(new_config, new_root_dir)
+                    new_config.cmd = {
+                      new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
+                      "--stdio",
+                      "--tsProbeLocations",
+                      new_root_dir .. "/node_modules",
+                      "--ngProbeLocations",
+                      new_root_dir .. "/node_modules",
+                    }
+                  end
+                '';
+            };
+            filetypes = ["typescript" "html" "typescriptreact" "typescript.tsx" "angular" "html.angular"];
+            on_attach = {
+              __raw =
+                /*
+                lua
+                */
+                ''
+                  function(client, bufnr)
+                    if vim.bo[bufnr].filetype == "html" then
+                      vim.bo[bufnr].filetype = "angular"
+                    end
+                  end
+                '';
+            };
           };
         }
       ];
@@ -626,9 +424,15 @@ in {
     nix.enable = true;
   };
 
-  extraPackages = [angular-ls pkgs.nodePackages.typescript-language-server pkgs.nodePackages.stylelint pkgs.jq pkgs.html-tidy];
+  extraPackages = [
+    angular-ls
+    pkgs.nodePackages.typescript-language-server
+    pkgs.nodePackages.stylelint
+    pkgs.jq
+    pkgs.html-tidy
+    pkgs.alejandra
+  ];
   extraPlugins = with pkgs.vimPlugins; [
-    vim-startuptime
     vim-mergetool
     lualine-so-fancy
     darkman
