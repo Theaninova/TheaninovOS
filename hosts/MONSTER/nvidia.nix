@@ -36,7 +36,7 @@
     };
     systemPackages = with pkgs; [
       glxinfo
-      nvtop-nvidia
+      nvtopPackages.nvidia
       libva-utils
       vulkan-tools
     ];

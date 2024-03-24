@@ -229,7 +229,7 @@ in {
 
     trouble = {
       enable = true;
-      useDiagnosticSigns = true;
+      settings.use_diagnostic_signs = true;
     };
 
     treesitter = {
@@ -377,34 +377,36 @@ in {
         Copilot = "";
       };
     };
-    nvim-cmp = {
+    cmp = {
       enable = true;
-      mapping = {
-        "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
-        "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-        "<C-Space>" = "cmp.mapping.confirm({select = true})";
-        "<C-Enter>" = "cmp.mapping.complete()";
+      settings = {
+        mapping = {
+          "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-Space>" = "cmp.mapping.confirm({select = true})";
+          "<C-Enter>" = "cmp.mapping.complete()";
+        };
+        sources = [
+          {name = "copilot";}
+          {name = "path";}
+          {name = "luasnip";}
+          {
+            name = "npm";
+            keywordLength = 4;
+            priority = 10;
+          }
+          {name = "nvim_lsp";}
+          {name = "nvim_lsp_signature_help";}
+          {name = "nvim_lsp_document_symbol";}
+        ];
+        formatting.fields = ["abbr" "kind"];
+        snippet.expand = "luasnip";
+        window = {
+          completion.border = "rounded";
+          documentation.border = "rounded";
+        };
+        experimental.ghost_text = true;
       };
-      sources = [
-        {name = "copilot";}
-        {name = "path";}
-        {name = "luasnip";}
-        {
-          name = "npm";
-          keywordLength = 4;
-          priority = 10;
-        }
-        {name = "nvim_lsp";}
-        {name = "nvim_lsp_signature_help";}
-        {name = "nvim_lsp_document_symbol";}
-      ];
-      formatting.fields = ["abbr" "kind"];
-      snippet.expand = "luasnip";
-      window = {
-        completion.border = "rounded";
-        documentation.border = "rounded";
-      };
-      experimental.ghost_text = true;
     };
 
     which-key = {

@@ -1,7 +1,18 @@
-{pkgs, config, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   programs = {
     home-manager.enable = true;
-    rbw = import ./bitwarden.nix;
+    rbw = {
+      enable = true;
+      settings = {
+        base_url = "pw.theaninova.de";
+        email = "pw@theaninova.de";
+        pinentry = pkgs.pinentry-gnome3;
+      };
+    };
     git = import ./git.nix;
     lazygit.enable = true;
     nixvim = import ./nixvim {inherit pkgs;};
@@ -16,7 +27,7 @@
     zsh = {
       enable = true;
       enableCompletion = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       defaultKeymap = "viins";
     };

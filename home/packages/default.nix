@@ -20,7 +20,7 @@
     # youtube-music.override {electron = pkgs.electron_28;})
     mpv
     makemkv
-    handbrake
+    # handbrake
     metadata-cleaner
     bitwarden
 
@@ -35,7 +35,7 @@
     apostrophe # markdown editor
 
     # creative
-    gimp-with-plugins
+    gimp
     inkscape-with-extensions
     scribus
     audacity
@@ -71,7 +71,6 @@
     gh
     git-filter-repo
     neofetch
-    pinentry-gnome
     ranger
     filezilla
     lazydocker
