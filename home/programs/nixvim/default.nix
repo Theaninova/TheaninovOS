@@ -286,20 +286,18 @@ in {
             ""
           ];
           on_new_config = {
-            __raw =
-              # lua
-              ''
-                function(new_config, new_root_dir)
-                  new_config.cmd = {
-                    new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
-                    "--stdio",
-                    "--tsProbeLocations",
-                    new_root_dir .. "/node_modules",
-                    "--ngProbeLocations",
-                    new_root_dir .. "/node_modules",
-                  }
-                end
-              '';
+            __raw = ''
+              function(new_config, new_root_dir)
+                new_config.cmd = {
+                  new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
+                  "--stdio",
+                  "--tsProbeLocations",
+                  new_root_dir .. "/node_modules",
+                  "--ngProbeLocations",
+                  new_root_dir .. "/node_modules",
+                }
+              end
+            '';
           };
           filetypes = [
             "typescript"
@@ -310,15 +308,13 @@ in {
             "html.angular"
           ];
           on_attach = {
-            __raw =
-              # lua
-              ''
-                function(client, bufnr)
-                  if vim.bo[bufnr].filetype == "html" then
-                    vim.bo[bufnr].filetype = "angular"
-                  end
+            __raw = ''
+              function(client, bufnr)
+                if vim.bo[bufnr].filetype == "html" then
+                  vim.bo[bufnr].filetype = "angular"
                 end
-              '';
+              end
+            '';
           };
         };
       }];
@@ -354,18 +350,16 @@ in {
       enable = true;
       mode = "symbol_text";
       cmp = {
-        after =
-          # lua
-          ''
-            function(entry, vim_item, kind)
-              if entry.source.name == "npm" then
-                kind.kind = ""
-                kind.kind_hl_group = "CmpItemKindNpm"
-              end
-              kind.kind = kind.kind .. " "
-              return kind
+        after = ''
+          function(entry, vim_item, kind)
+            if entry.source.name == "npm" then
+              kind.kind = ""
+              kind.kind_hl_group = "CmpItemKindNpm"
             end
-          '';
+            kind.kind = kind.kind .. " "
+            return kind
+          end
+        '';
       };
       symbolMap = { Copilot = ""; };
     };
@@ -395,7 +389,6 @@ in {
         ];
         formatting.fields = [ "abbr" "kind" ];
         snippet.expand =
-          # lua
           "function(args) require('luasnip').lsp_expand(args.body) end";
         window = {
           completion.border = "rounded";

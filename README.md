@@ -19,9 +19,12 @@ nix.settings.experimental-features = [ "nix-command" "flakes" ];
 ```
 
 ```sh
+sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos
+sudo nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+
 git clone git@github.com:Theaninova/home-manager-config.git ~/.config/home-manager
 cd ~/.config/home-manager
-sudo nixos-rebuild switch --flake .#
+sudo nixos-rebuild switch --flake .#MONSTER
 ```
 
 After that reload the shell
