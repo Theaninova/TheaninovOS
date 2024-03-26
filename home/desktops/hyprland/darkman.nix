@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{ pkgs, config, ... }: {
   services.darkman = let
     wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
   in {
@@ -20,7 +16,7 @@
 
       vendorHash = "sha256-xEPmNnaDwFU4l2G4cMvtNeQ9KneF5g9ViQSFrDkrafY=";
 
-      nativeBuildInputs = [pkgs.scdoc];
+      nativeBuildInputs = [ pkgs.scdoc ];
 
       postPatch = ''
         substituteInPlace darkman.service \
@@ -44,10 +40,11 @@
       '';
 
       meta = with pkgs.lib; {
-        description = "Framework for dark-mode and light-mode transitions on Linux desktop";
+        description =
+          "Framework for dark-mode and light-mode transitions on Linux desktop";
         homepage = "https://gitlab.com/WhyNotHugo/darkman";
         license = licenses.isc;
-        maintainers = [maintainers.ajgrf];
+        maintainers = [ maintainers.ajgrf ];
         platforms = platforms.linux;
         mainProgram = "darkman";
       };
@@ -58,18 +55,14 @@
     };
     darkModeScripts = {
       kitty-theme =
-        /*
-        bash
-        */
+        # bash
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
         '';
     };
     lightModeScripts = {
       kitty-theme =
-        /*
-        bash
-        */
+        # bash
         ''
           ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
         '';

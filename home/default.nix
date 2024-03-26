@@ -1,11 +1,4 @@
-{
-  username,
-  desktop,
-  stateVersion,
-  osConfig,
-  inputs,
-  ...
-}: rec {
+{ username, desktop, stateVersion, osConfig, inputs, ... }: rec {
   home = {
     inherit username stateVersion;
     homeDirectory = "/home/${username}";

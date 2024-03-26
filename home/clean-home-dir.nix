@@ -1,4 +1,4 @@
-{config, ...}: {
+{ config, ... }: {
   xdg.enable = true;
   xdg.userDirs.enable = true;
   home.sessionVariables = {
@@ -7,7 +7,8 @@
     NPM_CONFIG_CACHE = "${config.xdg.cacheHome}/npm";
     NPM_CONFIG_TMP = "${config.xdg.stateHome}/npm";
     WINEPREFIX = "${config.xdg.configHome}/wineprefixes/default";
-    _JAVA_OPTGRADLE_USER_HOMEIONS = ''-Djava.util.prefs.userRoot="${config.xdg.configHome}"/java'';
+    _JAVA_OPTGRADLE_USER_HOMEIONS =
+      ''-Djava.util.prefs.userRoot="${config.xdg.configHome}"/java'';
     GRADLE_USER_HOME = "${config.xdg.configHome}/gradle";
     DVDCSS_CACHE = "${config.xdg.cacheHome}/dvdcss";
     DOCKER_CONFIG = "${config.xdg.configHome}/docker";

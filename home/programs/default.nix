@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}: {
+{ pkgs, config, ... }: {
   programs = {
     home-manager.enable = true;
     rbw = {
@@ -15,14 +11,12 @@
     };
     git = import ./git.nix;
     lazygit.enable = true;
-    nixvim = import ./nixvim {inherit pkgs;};
-    firefox = import ./firefox.nix {inherit pkgs;};
+    nixvim = import ./nixvim { inherit pkgs; };
+    firefox = import ./firefox.nix { inherit pkgs; };
     gpg.enable = true;
     btop = {
       enable = true;
-      settings = {
-        vim_keys = true;
-      };
+      settings = { vim_keys = true; };
     };
     zsh = {
       enable = true;

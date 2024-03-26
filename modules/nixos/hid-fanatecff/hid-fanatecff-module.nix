@@ -1,9 +1,4 @@
-{
-  lib,
-  stdenv,
-  kernel,
-  fetchFromGitHub,
-}:
+{ lib, stdenv, kernel, fetchFromGitHub, }:
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff";
   version = "0.1.0";
@@ -17,12 +12,10 @@ stdenv.mkDerivation rec {
 
   nativeBuildInputs = kernel.moduleBuildDependencies;
 
-  makeFlags =
-    kernel.makeFlags
-    ++ [
-      "KVERSION=${kernel.modDirVersion}"
-      "KERNEL_SRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
-    ];
+  makeFlags = kernel.makeFlags ++ [
+    "KVERSION=${kernel.modDirVersion}"
+    "KERNEL_SRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
+  ];
 
   installFlags = [
     "-C"
@@ -30,10 +23,11 @@ stdenv.mkDerivation rec {
     "M=${src}"
     "INSTALL_MOD_PATH=${placeholder "out"}"
   ];
-  installTargets = ["modules_install"];
+  installTargets = [ "modules_install" ];
 
   meta = with lib; {
-    description = "Linux kernel driver that aims to add support for FANATEC devices";
+    description =
+      "Linux kernel driver that aims to add support for FANATEC devices";
     homepage = "https://github.com/gotzl/hid-fanatecff";
     license = licenses.gpl2Only;
     platforms = platforms.linux;

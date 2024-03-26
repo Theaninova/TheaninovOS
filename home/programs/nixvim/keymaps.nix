@@ -58,7 +58,7 @@
   {
     key = "hh";
     mode = "n";
-    action = '':Telescope harpoon marks<CR>'';
+    action = ":Telescope harpoon marks<CR>";
   }
   {
     key = "<leader>sa";
@@ -77,7 +77,8 @@
     key = "<leader>xw";
     mode = "n";
     lua = true;
-    action = "function() require('trouble').toggle('workspace_diagnostics') end";
+    action =
+      "function() require('trouble').toggle('workspace_diagnostics') end";
   }
   {
     key = "<leader>xd";

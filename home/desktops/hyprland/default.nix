@@ -1,18 +1,11 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}: {
-  imports = [
-    ./darkman.nix
-  ];
+{ config, pkgs, lib, ... }: {
+  imports = [ ./darkman.nix ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     systemd = {
       enable = true;
-      variables = ["--all"];
+      variables = [ "--all" ];
     };
     settings = {
       env = [
@@ -48,13 +41,8 @@
       };
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
-      bindr = [
-        "SUPER,SUPER_L,exec,pkill anyrun || anyrun"
-      ];
-      monitor = [
-        "DP-1,highrr,0x0,1,bitdepth,8"
-        "DP-1,addreserved,250,0,0,0"
-      ];
+      bindr = [ "SUPER,SUPER_L,exec,pkill anyrun || anyrun" ];
+      monitor = [ "DP-1,highrr,0x0,1,bitdepth,8" "DP-1,addreserved,250,0,0,0" ];
       workspace = [
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
@@ -96,10 +84,7 @@
         disable_splash_rendering = true;
         force_default_wallpaper = 0;
       };
-      layerrule = [
-        "blur, anyrun"
-        "ignorealpha 0.3, anyrun"
-      ];
+      layerrule = [ "blur, anyrun" "ignorealpha 0.3, anyrun" ];
       decoration = {
         drop_shadow = "yes";
         shadow_range = 16;
@@ -111,7 +96,7 @@
           enabled = true;
           size = 8;
           passes = 3;
-          noise = 0.01;
+          noise = 1.0e-2;
           contrast = 0.9;
           brightness = 0.8;
         };
@@ -137,8 +122,9 @@
   services.flameshot = {
     enable = true;
     package = pkgs.flameshot.overrideAttrs (final: prev: {
-      cmakeFlags = ["-DUSE_WAYLAND_CLIPBOARD=1" "-DUSE_WAYLAND_GRIM=true"];
-      nativeBuildInputs = prev.nativeBuildInputs ++ [pkgs.libsForQt5.kguiaddons];
+      cmakeFlags = [ "-DUSE_WAYLAND_CLIPBOARD=1" "-DUSE_WAYLAND_GRIM=true" ];
+      nativeBuildInputs = prev.nativeBuildInputs
+        ++ [ pkgs.libsForQt5.kguiaddons ];
     });
     settings = {
       General = {
@@ -158,30 +144,30 @@
   systemd.user.services.ags = {
     Unit = {
       Description = "ags";
-      PartOf = ["graphical-session.target" "tray.target"];
+      PartOf = [ "graphical-session.target" "tray.target" ];
     };
     Service = {
       ExecStart = "${pkgs.ags}/bin/ags";
       ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
       Restart = "always";
       KillMode = "mixed";
-      Environment = "PATH=/run/current-system/sw/bin/:${with pkgs;
-        lib.makeBinPath [
-          swww
-          sassc
-          glib
-          brightnessctl
-          ydotool
-          kitty
-          hyprpicker
-        ]}";
+      Environment = "PATH=/run/current-system/sw/bin/:${
+          with pkgs;
+          lib.makeBinPath [
+            swww
+            sassc
+            glib
+            brightnessctl
+            ydotool
+            kitty
+            hyprpicker
+          ]
+        }";
     };
-    Install = {
-      WantedBy = ["graphical-session.target"];
-    };
+    Install = { WantedBy = [ "graphical-session.target" ]; };
   };
-  programs.kitty = import ./kitty.nix {inherit pkgs;};
-  programs.anyrun = import ./anyrun.nix {inherit pkgs;};
+  programs.kitty = import ./kitty.nix { inherit pkgs; };
+  programs.anyrun = import ./anyrun.nix { inherit pkgs; };
   services.udiskie.enable = true;
   services.udiskie.tray = "never";
 
@@ -242,9 +228,7 @@
   };
 
   programs.fish.loginShellInit =
-    /*
-    fish
-    */
+    # fish
     ''
       Hyprland && echo "goodbye" && exit 0 \
       || echo "$status couldn't launch Hyprland" && tty | grep tty1 \

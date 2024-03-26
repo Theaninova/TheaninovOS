@@ -1,10 +1,9 @@
-{pkgs}: let
-  angular-ls =
-    (import ../../packages/node-packages {
-      inherit pkgs;
-      nodejs = pkgs.nodejs_18;
-    })
-    ."@angular/language-server";
+{ pkgs }:
+let
+  angular-ls = (import ../../packages/node-packages {
+    inherit pkgs;
+    nodejs = pkgs.nodejs_18;
+  })."@angular/language-server";
   darkman = pkgs.vimUtils.buildVimPlugin {
     name = "darkman";
     src = pkgs.buildGoModule rec {
@@ -47,7 +46,7 @@ in {
     smartindent = true;
     signcolumn = "yes";
 
-    undodir = {__raw = "os.getenv('HOME') .. '/.config/nvim/undodir'";};
+    undodir = { __raw = "os.getenv('HOME') .. '/.config/nvim/undodir'"; };
     undofile = true;
 
     scrolloff = 12;
@@ -68,8 +67,8 @@ in {
     minimap_width = 10;
     minimap_auto_start = 1;
     minimap_auto_start_win_enter = 1;
-    minimap_close_buftypes = ["nofile"];
-    minimap_block_filetypes = ["NvimTree"];
+    minimap_close_buftypes = [ "nofile" ];
+    minimap_block_filetypes = [ "NvimTree" ];
 
     mapleader = ";";
 
@@ -110,8 +109,8 @@ in {
       light = "latte";
     };
     integrations.native_lsp.underlines = {
-      errors = ["undercurl"];
-      warnings = ["undercurl"];
+      errors = [ "undercurl" ];
+      warnings = [ "undercurl" ];
     };
     customHighlights = builtins.readFile ./custom-highlights.lua;
   };
@@ -130,41 +129,37 @@ in {
         right = "┊";
       };
       sections = {
-        lualine_a = [
-          {
-            name = "mode";
-            separator = {
-              right = "";
-              left = "";
-            };
-            icon = "";
-          }
-        ];
+        lualine_a = [{
+          name = "mode";
+          separator = {
+            right = "";
+            left = "";
+          };
+          icon = "";
+        }];
         lualine_x = [
-          {name = "fancy_lsp_servers";}
+          { name = "fancy_lsp_servers"; }
           {
             name = "filetype";
-            extraConfig = {icon_only = true;};
+            extraConfig = { icon_only = true; };
             padding = {
               left = 1;
               right = 2;
             };
           }
         ];
-        lualine_z = [
-          {
-            name = "location";
-            separator = {
-              right = "";
-              left = "";
-            };
-          }
-        ];
+        lualine_z = [{
+          name = "location";
+          separator = {
+            right = "";
+            left = "";
+          };
+        }];
       };
     };
     auto-save = {
       enable = true;
-      triggerEvents = ["FocusLost" "BufLeave"];
+      triggerEvents = [ "FocusLost" "BufLeave" ];
     };
     indent-blankline = {
       enable = true;
@@ -242,20 +237,20 @@ in {
     conform-nvim = {
       enable = true;
       formattersByFt = {
-        lua = ["stylua"];
-        javascript = ["prettier"];
-        markdown = ["prettier"];
-        typescript = ["prettier"];
-        json = ["prettier"];
-        yaml = ["prettier"];
-        html = ["prettier"];
-        css = ["prettier"];
-        scss = ["prettier"];
-        less = ["prettier"];
-        svelte = ["prettier"];
-        rust = ["rustfmt"];
-        bash = ["shfmt"];
-        nix = ["alejandra"];
+        lua = [ "stylua" ];
+        javascript = [ "prettier" ];
+        markdown = [ "prettier" ];
+        typescript = [ "prettier" ];
+        json = [ "prettier" ];
+        yaml = [ "prettier" ];
+        html = [ "prettier" ];
+        css = [ "prettier" ];
+        scss = [ "prettier" ];
+        less = [ "prettier" ];
+        svelte = [ "prettier" ];
+        rust = [ "rustfmt" ];
+        bash = [ "shfmt" ];
+        nix = [ "nixfmt" ];
       };
       formatOnSave = {
         timeoutMs = 500;
@@ -266,66 +261,67 @@ in {
     lint = {
       enable = true;
       lintersByFt = {
-        javascript = ["eslint"];
-        typescript = ["eslint"];
-        css = ["stylelint"];
-        scss = ["stylelint"];
-        less = ["stylelint"];
-        bash = ["shellcheck"];
+        javascript = [ "eslint" ];
+        typescript = [ "eslint" ];
+        css = [ "stylelint" ];
+        scss = [ "stylelint" ];
+        less = [ "stylelint" ];
+        bash = [ "shellcheck" ];
       };
       autoCmd.event = "TextChanged";
     };
 
     lsp = {
       enable = true;
-      keymaps = {diagnostic = {};};
-      enabledServers = [
-        {
-          name = "angularls";
-          extraOptions = {
-            cmd = [
-              "ngserver"
-              "--stdio"
-              "--tsProbeLocations"
-              ""
-              "--ngProbeLocations"
-              ""
-            ];
-            on_new_config = {
-              __raw =
-                /*
-                lua
-                */
-                ''
-                  function(new_config, new_root_dir)
-                    new_config.cmd = {
-                      new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
-                      "--stdio",
-                      "--tsProbeLocations",
-                      new_root_dir .. "/node_modules",
-                      "--ngProbeLocations",
-                      new_root_dir .. "/node_modules",
-                    }
-                  end
-                '';
-            };
-            filetypes = ["typescript" "html" "typescriptreact" "typescript.tsx" "angular" "html.angular"];
-            on_attach = {
-              __raw =
-                /*
-                lua
-                */
-                ''
-                  function(client, bufnr)
-                    if vim.bo[bufnr].filetype == "html" then
-                      vim.bo[bufnr].filetype = "angular"
-                    end
-                  end
-                '';
-            };
+      keymaps = { diagnostic = { }; };
+      enabledServers = [{
+        name = "angularls";
+        extraOptions = {
+          cmd = [
+            "ngserver"
+            "--stdio"
+            "--tsProbeLocations"
+            ""
+            "--ngProbeLocations"
+            ""
+          ];
+          on_new_config = {
+            __raw =
+              # lua
+              ''
+                function(new_config, new_root_dir)
+                  new_config.cmd = {
+                    new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
+                    "--stdio",
+                    "--tsProbeLocations",
+                    new_root_dir .. "/node_modules",
+                    "--ngProbeLocations",
+                    new_root_dir .. "/node_modules",
+                  }
+                end
+              '';
           };
-        }
-      ];
+          filetypes = [
+            "typescript"
+            "html"
+            "typescriptreact"
+            "typescript.tsx"
+            "angular"
+            "html.angular"
+          ];
+          on_attach = {
+            __raw =
+              # lua
+              ''
+                function(client, bufnr)
+                  if vim.bo[bufnr].filetype == "html" then
+                    vim.bo[bufnr].filetype = "angular"
+                  end
+                end
+              '';
+          };
+        };
+      }];
       servers = {
         html.enable = true;
         cssls.enable = true;
@@ -345,7 +341,7 @@ in {
 
         clangd = {
           enable = true;
-          cmd = ["clangd" "--offset-encoding=utf-16"];
+          cmd = [ "clangd" "--offset-encoding=utf-16" ];
         };
 
         nixd.enable = true;
@@ -359,9 +355,7 @@ in {
       mode = "symbol_text";
       cmp = {
         after =
-          /*
-          lua
-          */
+          # lua
           ''
             function(entry, vim_item, kind)
               if entry.source.name == "npm" then
@@ -373,37 +367,35 @@ in {
             end
           '';
       };
-      symbolMap = {
-        Copilot = "";
-      };
+      symbolMap = { Copilot = ""; };
     };
     cmp = {
       enable = true;
       settings = {
         mapping = {
-          "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
-          "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-n>" =
+            "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-p>" =
+            "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
           "<C-Space>" = "cmp.mapping.confirm({select = true})";
           "<C-Enter>" = "cmp.mapping.complete()";
         };
         sources = [
-          {name = "copilot";}
-          {name = "path";}
-          {name = "luasnip";}
+          { name = "copilot"; }
+          { name = "path"; }
+          { name = "luasnip"; }
           {
             name = "npm";
             keywordLength = 4;
             priority = 10;
           }
-          {name = "nvim_lsp";}
-          {name = "nvim_lsp_signature_help";}
-          {name = "nvim_lsp_document_symbol";}
+          { name = "nvim_lsp"; }
+          { name = "nvim_lsp_signature_help"; }
+          { name = "nvim_lsp_document_symbol"; }
         ];
-        formatting.fields = ["abbr" "kind"];
+        formatting.fields = [ "abbr" "kind" ];
         snippet.expand =
-          /*
-          lua
-          */
+          # lua
           "function(args) require('luasnip').lsp_expand(args.body) end";
         window = {
           completion.border = "rounded";
@@ -413,9 +405,7 @@ in {
       };
     };
 
-    which-key = {
-      enable = true;
-    };
+    which-key = { enable = true; };
 
     copilot-lua = {
       panel.enabled = false;
@@ -434,9 +424,13 @@ in {
     angular-ls
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.stylelint
+    pkgs.nodePackages.prettier
     pkgs.jq
     pkgs.html-tidy
-    pkgs.alejandra
+    pkgs.nixfmt
+    pkgs.stylua
+    pkgs.shfmt
+    pkgs.fzf
   ];
   extraPlugins = with pkgs.vimPlugins; [
     vim-mergetool

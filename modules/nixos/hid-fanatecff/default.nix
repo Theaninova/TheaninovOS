@@ -1,13 +1,10 @@
-{
-  pkgs,
-  lib,
-  config,
-  ...
-}:
-with lib; let
+{ pkgs, lib, config, ... }:
+with lib;
+let
   cfg = config.hardware.hid-fanatecff;
   kernel = config.boot.kernelPackages.kernel;
-  fanatecKernelModule = pkgs.callPackage (import ./hid-fanatecff-module.nix) {kernel = kernel;};
+  fanatecKernelModule =
+    pkgs.callPackage (import ./hid-fanatecff-module.nix) { kernel = kernel; };
 in {
   options.hardware.hid-fanatecff = {
     enable = mkOption {
@@ -23,8 +20,8 @@ in {
   };
   config = lib.mkIf cfg.enable {
     boot = {
-      extraModulePackages = [fanatecKernelModule];
-      kernelModules = ["hid-fanatecff"];
+      extraModulePackages = [ fanatecKernelModule ];
+      kernelModules = [ "hid-fanatecff" ];
     };
   };
 }

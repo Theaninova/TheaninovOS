@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   xdg.configFile."ranger/rc.conf".source = ./ranger.conf;
   home.packages = with pkgs; [
     # nix
@@ -25,9 +25,9 @@
     bitwarden
 
     # chat apps
-    (import ./threema-desktop.nix {inherit pkgs;})
-    (vesktop.override {electron = pkgs.electron_28;})
-    (element-desktop.override {electron = pkgs.electron_28;})
+    (import ./threema-desktop.nix { inherit pkgs; })
+    (vesktop.override { electron = pkgs.electron_28; })
+    (element-desktop.override { electron = pkgs.electron_28; })
     slack
 
     # office
@@ -42,9 +42,7 @@
     pinta
     kdePackages.kdenlive
     # friture TODO: broken
-    (blender.override {
-      cudaSupport = true;
-    })
+    (blender.override { cudaSupport = true; })
     openscad-unstable
 
     # development
