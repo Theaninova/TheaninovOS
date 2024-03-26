@@ -400,7 +400,11 @@ in {
           {name = "nvim_lsp_document_symbol";}
         ];
         formatting.fields = ["abbr" "kind"];
-        snippet.expand = "luasnip";
+        snippet.expand =
+          /*
+          lua
+          */
+          "function(args) require('luasnip').lsp_expand(args.body) end";
         window = {
           completion.border = "rounded";
           documentation.border = "rounded";
