@@ -376,7 +376,6 @@ in {
           "<C-Enter>" = "cmp.mapping.complete()";
         };
         sources = [
-          { name = "copilot"; }
           { name = "path"; }
           { name = "luasnip"; }
           {
@@ -395,15 +394,14 @@ in {
           completion.border = "rounded";
           documentation.border = "rounded";
         };
-        experimental.ghost_text = true;
       };
     };
 
     which-key = { enable = true; };
 
     copilot-lua = {
-      panel.enabled = false;
-      suggestion.enabled = false;
+      enable = true;
+      suggestion.autoTrigger = true;
     };
 
     openscad = {
