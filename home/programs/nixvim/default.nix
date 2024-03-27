@@ -244,6 +244,7 @@ in {
         json = [ "prettier" ];
         yaml = [ "prettier" ];
         html = [ "prettier" ];
+        angular = [ "prettier" ];
         css = [ "prettier" ];
         scss = [ "prettier" ];
         less = [ "prettier" ];
