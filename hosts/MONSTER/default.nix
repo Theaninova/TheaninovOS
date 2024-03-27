@@ -206,29 +206,7 @@
         monospace = [ "FiraCode Nerd Font" ];
         sansSerif = [ "Noto Sans Nerd Font" ];
       };
-
-      localConf =
-        # xml
-        ''
-          <match target="font">
-            <test name="family" compare="contains">
-              <string>Fira</string>
-            </test>
-            <edit name="fontfeatures" mode="append">
-              <string>zero</string>
-              <string>onum</string>
-              <string>ss04</string>
-              <string>cv19</string>
-              <string>cv23</string>
-              <string>ss09</string>
-              <string>cv27</string>
-              <string>ss06</string>
-              <string>ss07</string>
-              <string>ss10</string>
-            </edit>
-          </match>
-        '';
-
+      localConf = builtins.readFile ./fontconfig.xml;
       subpixel.rgba = "bgr";
     };
   };

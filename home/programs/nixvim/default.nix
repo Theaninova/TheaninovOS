@@ -21,16 +21,6 @@ let
       '';
     };
   };
-  lualine-so-fancy = pkgs.vimUtils.buildVimPlugin {
-    name = "lualine-so-fancy";
-    version = "2128450";
-    src = pkgs.fetchFromGitHub {
-      owner = "meuter";
-      repo = "lualine-so-fancy.nvim";
-      rev = "21284504fed2776668fdea8743a528774de5d2e1";
-      hash = "sha256-JMz3Dv3poGoYQU+iq/jtgyHECZLx+6mLCvqUex/a0SY=";
-    };
-  };
 in {
   enable = true;
   defaultEditor = true;
@@ -456,7 +446,6 @@ in {
   ];
   extraPlugins = with pkgs.vimPlugins; [
     vim-mergetool
-    lualine-so-fancy
     darkman
     rest-nvim
     plenary-nvim

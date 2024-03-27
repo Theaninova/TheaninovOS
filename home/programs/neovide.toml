@@ -6,4 +6,14 @@ size = 16
 edging = "subpixelantialias"
 
 [font.features]
-"FiraCode Nerd Font" = ["+zero", "+onum", "+ss04", "+cv19", "+cv23", "+ss09", "+cv27", "+ss06", "+ss07", "+ss10"]
+"FiraCode Nerd Font" = [
+  "+zero",
+  "+onum",
+  "+ss04",
+  "+cv19",
+  "+cv23",
+  "+ss09",
+  "+ss06",
+  "+ss07",
+  "+ss10",
+]
