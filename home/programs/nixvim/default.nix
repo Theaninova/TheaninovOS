@@ -137,17 +137,7 @@ in {
           };
           icon = "";
         }];
-        lualine_x = [
-          { name = "fancy_lsp_servers"; }
-          {
-            name = "filetype";
-            extraConfig = { icon_only = true; };
-            padding = {
-              left = 1;
-              right = 2;
-            };
-          }
-        ];
+        lualine_x = [ { name = "filesize"; } { name = "filetype"; } ];
         lualine_z = [{
           name = "location";
           separator = {
@@ -187,7 +177,6 @@ in {
     };
     toggleterm = {
       enable = true;
-      openMapping = "<leader>t";
       direction = "vertical";
       size = 60;
     };
@@ -397,7 +386,48 @@ in {
       };
     };
 
-    which-key = { enable = true; };
+    which-key = {
+      enable = true;
+      registrations = {
+        "<leader>p" = "Paste Keep Buffer";
+        "<leader>n" = "Hover";
+        "<leader>g" = "Git";
+        "<leader>u" = "Undotree";
+        "<leader>s" = {
+          name = "LSP";
+          r = "References";
+          d = "Definitions";
+          i = "Implementations";
+          s = "Document Symbols";
+          w = "Workspace Symbols";
+          t = "Type Definitions";
+          h = "Diagnostics";
+          a = "Code Actions";
+        };
+        "<leader>x" = {
+          name = "Trouble";
+          x = "Toggle";
+          w = "Workspace Diagnostics";
+          d = "Document Diagnostics";
+          q = "Quickfix";
+          l = "Loclist";
+        };
+        "<leader>f" = {
+          name = "Find";
+          t = "Tree";
+          f = "File";
+          a = "Untracked Files";
+          g = "Grep";
+          b = "Buffer";
+        };
+        h = {
+          name = "Harpoon";
+          m = "Mark";
+          n = "Next";
+          p = "Prev";
+        };
+      };
+    };
 
     copilot-lua = {
       enable = true;

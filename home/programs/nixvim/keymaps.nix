@@ -4,13 +4,10 @@
     mode = "n";
     action = "<cmd>:UndotreeToggle<CR>";
   }
+  # Find/Navigate
   {
     key = "<leader>ft";
     action = "<cmd>:Neotree toggle<CR>";
-  }
-  {
-    key = "<leader>s";
-    action = "<cmd>:SymbolsOutline<CR>";
   }
   {
     key = "J";
@@ -60,6 +57,7 @@
     mode = "n";
     action = ":Telescope harpoon marks<CR>";
   }
+  # LSP Actions
   {
     key = "<leader>sa";
     mode = "n";
@@ -67,6 +65,7 @@
     lua = true;
     action = "require('actions-preview').code_actions";
   }
+  # Trouble
   {
     key = "<leader>xx";
     mode = "n";
@@ -97,11 +96,5 @@
     mode = "n";
     lua = true;
     action = "function() require('trouble').toggle('loclist') end";
-  }
-  {
-    key = "gR";
-    mode = "n";
-    lua = true;
-    action = "function() require('trouble').toggle('lsp_references') end";
   }
 ]
