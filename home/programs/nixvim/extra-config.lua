@@ -13,6 +13,8 @@ if vim.g.neovide then
 			vim.cmd("set pumblend=100")
 		end,
 	})
+	-- no idea why this is needed
+	vim.opt.linespace = -1
 end
 
 local signs = {
