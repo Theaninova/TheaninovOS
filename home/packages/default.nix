@@ -26,8 +26,8 @@
 
     # chat apps
     (import ./threema-desktop.nix { inherit pkgs; })
-    (vesktop.override { electron = pkgs.electron_28; })
-    (element-desktop.override { electron = pkgs.electron_28; })
+    (vesktop.override { electron = pkgs.electron_29; })
+    (element-desktop.override { electron = pkgs.electron_29; })
     slack
 
     # office
