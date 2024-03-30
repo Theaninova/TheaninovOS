@@ -9,6 +9,7 @@
     inputs.anyrun.homeManagerModules.default
     ./clean-home-dir.nix
     ./programs/neovide.nix
+    # ./default-apps.nix
     ./packages
     ./programs
     ./services
