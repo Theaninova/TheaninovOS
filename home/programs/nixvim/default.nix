@@ -143,8 +143,10 @@ in {
     };
     indent-blankline = {
       enable = true;
-      indent.char = "▏";
-      scope.showStart = false;
+      settings = {
+        indent.char = "▏";
+        scope.show_start = false;
+      };
     };
     illuminate.enable = true;
     nvim-autopairs.enable = true;

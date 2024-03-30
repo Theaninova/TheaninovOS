@@ -42,7 +42,7 @@
     pinta
     kdePackages.kdenlive
     # friture TODO: broken
-    (blender.override { cudaSupport = true; })
+    blender
     openscad-unstable
 
     # development
