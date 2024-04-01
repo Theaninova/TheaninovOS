@@ -65,6 +65,12 @@
     lua = true;
     action = "require('actions-preview').code_actions";
   }
+  {
+    key = "<leader>sf";
+    mode = "n";
+    options.silent = true;
+    action = "<cmd>:ConformToggle<CR>";
+  }
   # Trouble
   {
     key = "<leader>xx";

@@ -1,9 +1,5 @@
 { pkgs }:
 let
-  angular-ls = (import ../../packages/node-packages {
-    inherit pkgs;
-    nodejs = pkgs.nodejs_18;
-  })."@angular/language-server";
   darkman = pkgs.vimUtils.buildVimPlugin {
     name = "darkman";
     src = pkgs.buildGoModule rec {
@@ -127,7 +123,10 @@ in {
           };
           icon = "";
         }];
-        lualine_x = [ { name = "filesize"; } { name = "filetype"; } ];
+        lualine_x = [
+          "(vim.g.disable_autoformat or vim.b.disable_autoformat) and '󱌓' or nil"
+          { name = "filetype"; }
+        ];
         lualine_z = [{
           name = "location";
           separator = {
@@ -234,10 +233,14 @@ in {
         bash = [ "shfmt" ];
         nix = [ "nixfmt" ];
       };
-      formatOnSave = {
-        timeoutMs = 500;
-        lspFallback = true;
-      };
+      formatOnSave = ''
+        function(bufnr)
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 500, lsp_fallback = true };
+        end
+      '';
     };
 
     lint = {
@@ -395,6 +398,7 @@ in {
           t = "Type Definitions";
           h = "Diagnostics";
           a = "Code Actions";
+          f = "Auto Formatting";
         };
         "<leader>x" = {
           name = "Trouble";
@@ -435,7 +439,6 @@ in {
   };
 
   extraPackages = [
-    angular-ls
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.stylelint
     pkgs.nodePackages.prettier

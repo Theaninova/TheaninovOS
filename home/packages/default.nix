@@ -17,10 +17,10 @@
     youtube-dl
     tartube
     yt-dlp
-    # youtube-music.override {electron = pkgs.electron_28;})
+    f3d
     mpv
     makemkv
-    # handbrake
+    handbrake
     metadata-cleaner
     bitwarden
 
@@ -54,7 +54,6 @@
     lpc21isp
     dfu-util
     cura
-    orca-slicer
 
     # gaming
     steam

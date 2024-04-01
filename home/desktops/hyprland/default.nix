@@ -197,7 +197,6 @@
     gnome.gnome-clocks
     gnome.gnome-calculator
     gnome.simple-scan
-    gedit
     gnome.eog
     gnome.geary
     gnome.ghex
