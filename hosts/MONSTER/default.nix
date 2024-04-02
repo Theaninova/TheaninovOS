@@ -74,8 +74,6 @@
       "audio"
       "video"
       "plugdev"
-      "scanner"
-      "lp"
       "input"
       "adbusers"
       "cdrom"

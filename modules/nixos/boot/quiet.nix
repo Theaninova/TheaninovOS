@@ -14,12 +14,13 @@ in {
         systemd-boot.consoleMode = "max";
       };
 
+      plymouth.enable = true;
+
       kernelParams = [
         # Redirect all kernel messages to a console off screen
         #"fbcon=vc:2-6"
         #"console=tty1"
 
-        "video=3840x2160@144"
         "splash"
         "quiet"
 

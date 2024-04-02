@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, username, ... }:
 with lib;
 
 let cfg = config.services.airprint;
@@ -19,5 +19,6 @@ in {
       nssmdns4 = true;
       openFirewall = true;
     };
+    users.users.${username}.extraGroups = [ "lp" "scanner" ];
   };
 }
