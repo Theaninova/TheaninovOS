@@ -19,7 +19,7 @@ in {
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
+    boot.kernelParams = [ "fbdev=1" "nvidia_drm.fbdev=1" ];
     boot.kernelModules =
       [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
     boot.initrd.kernelModules =
@@ -39,6 +39,9 @@ in {
       variables = {
         VDPAU_DRIVER = "va_gl";
         LIBVA_DRIVER_NAME = "nvidia";
+        GBM_BACKEND = "nvidia-drm";
+        __GLX_VENDOR_LIBRARY_NAME = "nvidia";
+        WLR_NO_HARDWARE_CURSORS = "1";
       };
       systemPackages = with pkgs; [
         glxinfo

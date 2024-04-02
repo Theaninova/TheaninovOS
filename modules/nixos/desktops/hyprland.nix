@@ -10,29 +10,56 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.getty.autologinUser = "${username}";
-    services.getty.extraArgs = [ "--noclear" "--noissue" "--nonewline" ];
-    services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
-
-    services.dbus.enable = true;
     xdg.portal = {
       enable = true;
       extraPortals =
         [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-kde ];
     };
 
-    services.pcscd.enable = true;
+    services = {
+      getty.autologinUser = "${username}";
+      getty.extraArgs = [ "--noclear" "--noissue" "--nonewline" ];
+      getty.loginOptions = "-p -f -- \\u"; # preserve environment
 
-    # nautilus on non-gnome
-    services.gvfs.enable = true;
-    # fix pinentry on non-gnome
-    services.dbus.packages = with pkgs; [ gcr ];
-    services.gnome.gnome-online-accounts.enable = true;
-    services.gnome.evolution-data-server.enable = true;
+      dbus.enable = true;
 
-    programs.hyprland.enable = true;
-    programs.kdeconnect.enable = true;
+      pcscd.enable = true;
+
+      # nautilus on non-gnome
+      gvfs.enable = true;
+      # fix pinentry on non-gnome
+      dbus.packages = with pkgs; [ gcr ];
+      gnome.gnome-online-accounts.enable = true;
+      gnome.evolution-data-server.enable = true;
+    };
+
+    programs = {
+      hyprland.enable = true;
+      kdeconnect.enable = true;
+    };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+    /* systemd.services = {
+         plymouth-quit-hyprland = mkIf config.boot.quiet.enable {
+           description = "Pause plymouth animation";
+           conflicts = [ "plymouth-quit.service" ];
+           after = [
+             "plymouth-quit.service"
+             "rc-local.service"
+             "plymouth-start.service"
+             "systemd-user-sessions.service"
+           ];
+           serviceConfig = {
+             Type = "oneshot";
+             ExecStartPre = "${pkgs.plymouth}/bin/plymouth deactivate";
+             ExecStartPost = [
+               "${pkgs.coreutils}/bin/sleep 30"
+               "${pkgs.plymouth}/bin/plymouth quit --retain-splash"
+             ];
+           };
+         };
+       };
+    */
   };
 }

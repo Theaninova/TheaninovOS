@@ -14,21 +14,24 @@ in {
         systemd-boot.consoleMode = "max";
       };
 
-      plymouth.enable = true;
+      plymouth = {
+        enable = true;
+        theme = "text";
+      };
 
       kernelParams = [
         # Redirect all kernel messages to a console off screen
-        #"fbcon=vc:2-6"
-        #"console=tty1"
+        "fbcon=vc:2-6"
+        "console=tty1"
 
         "splash"
         "quiet"
 
-        #"rd.udev.log_level=3"
-        #"rd.systemd.show_status=false"
-        #"udev.log_priority=3"
-        #"boot.shell_on_fail"
-        #"vt.global_cursor_default=0" # no cursor blinking
+        "rd.udev.log_level=3"
+        "rd.systemd.show_status=false"
+        "udev.log_priority=3"
+        "boot.shell_on_fail"
+        "vt.global_cursor_default=0" # no cursor blinking
       ];
       consoleLogLevel = 0;
       initrd.verbose = false;

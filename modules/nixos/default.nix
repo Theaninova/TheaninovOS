@@ -10,7 +10,8 @@
 
     ./hardware/audio.nix
     ./hardware/gbmonctl.nix
-    ./hardware/nvidia.nix
+    ./hardware/nvidia-proprietary.nix
+    ./hardware/nvidia-nouveau.nix
     ./hardware/cc1.nix
     ./hardware/fv43u.nix
     ./hardware/virtual-camera.nix

@@ -8,11 +8,7 @@
       };
       settings = {
         env = [
-          "LIBVA_DRIVER_NAME,nvidia"
           "XDG_SESSION_TYPE,wayland"
-          "GBM_BACKEND,nvidia-drm"
-          "__GLX_VENDOR_LIBRARY_NAME,nvidia"
-          "WLR_NO_HARDWARE_CURSORS,1"
           "NIXOS_OZONE_WL,1"
           # Gnome file manager fix
           "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
@@ -72,6 +68,8 @@
         misc = {
           layers_hog_keyboard_focus = false;
           disable_splash_rendering = true;
+          disable_hyprland_logo = true;
+          background_color = "0x000000";
           force_default_wallpaper = 0;
           vrr = 1;
         };
