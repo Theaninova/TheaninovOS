@@ -67,7 +67,6 @@
         nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages.${system};
           modules = [
-            ./modules/nixos/hid-fanatecff
             ./modules/nixos/gbmonctl
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager

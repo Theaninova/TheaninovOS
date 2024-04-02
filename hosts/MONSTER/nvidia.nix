@@ -8,6 +8,7 @@
 
   services.xserver.videoDrivers = [ "nvidia" ];
 
+  boot.kernelParams = [ "nvidia_drm.fbdev=1" ];
   boot.kernelModules = [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
   boot.initrd.kernelModules =
     [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
@@ -16,7 +17,7 @@
     modesetting.enable = true;
     # seems to cause crashes on sleep
     powerManagement.enable = false;
-    open = false;
+    open = true;
     nvidiaSettings = false;
     # no idea if this actually does anything...
     nvidiaPersistenced = false;

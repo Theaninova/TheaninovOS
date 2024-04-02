@@ -23,7 +23,7 @@
         enable = true;
         editor = false;
         configurationLimit = 10;
-        consoleMode = "auto";
+        consoleMode = "max";
       };
       efi.canTouchEfiVariables = true;
     };
@@ -31,14 +31,19 @@
 
     # Silent Boot
     kernelParams = [
-      "splash"
-      "quiet"
-      "rd.udev.log_level=3"
-      "rd.systemd.show_status=false"
-      "udev.log_priority=3"
-      "boot.shell_on_fail"
-      "vt.global_cursor_default=0" # no cursor blinking
-      "fbdev=1" # NVIDIA
+      # Redirect all kernel messages to a console off screen
+      #"fbcon=vc:2-6"
+      #"console=tty1"
+
+      "video=3840x2160@144"
+      # "splash"
+      # "quiet"
+
+      #"rd.udev.log_level=3"
+      #"rd.systemd.show_status=false"
+      #"udev.log_priority=3"
+      #"boot.shell_on_fail"
+      #"vt.global_cursor_default=0" # no cursor blinking
     ];
     consoleLogLevel = 0;
     initrd.verbose = false;
@@ -48,11 +53,7 @@
     extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback.out ];
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
-      blacklist i2c_nvidia_gpu
-      blacklist hid-logitech
-      blacklist simpledrm
-      blacklist nouveau
-    ''; # NVIDIA
+    '';
   };
 
   # Audio
@@ -66,7 +67,8 @@
     jack.enable = true;
   };
 
-  hardware.hid-fanatecff.enable = true;
+  # https://github.com/NixOS/nixpkgs/pull/300682
+  # hardware.hid-fanatecff.enable = true;
   hardware.gbmonctl.enable = true;
 
   hardware.sane = {
@@ -137,6 +139,7 @@
   services.getty.autologinUser = "${username}";
   services.getty.extraArgs = [ "--noclear" "--noissue" "--nonewline" ];
   services.getty.loginOptions = "-p -f -- \\u"; # preserve environment
+
   programs.hyprland.enable = true;
   programs.fish.enable = true;
   programs.kdeconnect.enable = true;

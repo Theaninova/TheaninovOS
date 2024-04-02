@@ -14,8 +14,6 @@
         "GBM_BACKEND,nvidia-drm"
         "__GLX_VENDOR_LIBRARY_NAME,nvidia"
         "WLR_NO_HARDWARE_CURSORS,1"
-        "__GL_GSYNC_ALLOWED,0"
-        "__GL_VRR_ALLOWED,0"
         "NIXOS_OZONE_WL,1"
         # Gnome file manager fix
         "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
@@ -42,7 +40,7 @@
       bind = import ./keybinds.nix;
       bindm = import ./mousebinds.nix;
       bindr = [ "SUPER,SUPER_L,exec,pkill anyrun || anyrun" ];
-      monitor = [ "DP-1,highrr,0x0,1,bitdepth,8" "DP-1,addreserved,250,0,0,0" ];
+      monitor = [ "DP-1,highrr,0x0,1" "DP-1,addreserved,250,0,0,0" ];
       workspace = [
         "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
       ];
@@ -62,13 +60,6 @@
         "move 22 72,${firefoxPipInitial}"
         # For some reason it really wants to be maximized
         "suppressevent maximize,class:^(neovide)$"
-        # IntelliJ focus fixes
-        "windowdance,class:^(jetbrains-.*)$"
-        "dimaround,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
-        "center,class:^(jetbrains-.*)$,floating:1,title:^(?!win)"
-        "noanim,class:^(jetbrains-.*)$,title:^(win.*)$"
-        "noinitialfocus,class:^(jetbrains-.*)$,title:^(win.*)$"
-        "rounding 0,class:^(jetbrains-.*)$,title:^(win.*)$"
         # pinentry
         "dimaround,class:^(gcr-prompter)$"
         "noborder,class:^(gcr-prompter)$"
@@ -83,6 +74,7 @@
         layers_hog_keyboard_focus = false;
         disable_splash_rendering = true;
         force_default_wallpaper = 0;
+        vrr = 1;
       };
       layerrule = [ "blur, anyrun" "ignorealpha 0.3, anyrun" ];
       decoration = {
@@ -101,6 +93,7 @@
           brightness = 0.8;
         };
       };
+      opengl.nvidia_anti_flicker = true;
       animations = {
         enabled = "yes";
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
