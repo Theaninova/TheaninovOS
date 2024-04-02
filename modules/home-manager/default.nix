@@ -1,6 +1,7 @@
-{ username, desktop, stateVersion, osConfig, inputs, ... }: rec {
+{ username, desktop, stateVersion, osConfig, inputs, ... }: {
   home = {
-    inherit username stateVersion;
+    stateVersion = osConfig.system.stateVersion;
+    inherit username;
     homeDirectory = "/home/${username}";
   };
   imports = [
@@ -13,6 +14,6 @@
     ./packages
     ./programs
     ./services
-    ./desktops/${desktop}
+    ./desktops/hyprland
   ];
 }

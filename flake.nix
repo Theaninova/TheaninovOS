@@ -49,6 +49,7 @@
               ags = ags.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
+              darkman = prev.callPackage ./overlays/darkman { };
               cura = prev.appimageTools.wrapType2 rec {
                 name = "cura";
                 version = "5.6.0";
@@ -63,24 +64,24 @@
           ];
         });
 
-      mkHost = { hostname, username, desktop, system, stateVersion, }:
+      mkHost = { hostname, username, system }:
         nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages.${system};
           modules = [
-            ./modules/nixos/gbmonctl
+            ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {
               _module.args = { inherit username; };
               networking.hostName = hostname;
-              system.stateVersion = stateVersion;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = {
-                  inherit username desktop stateVersion inputs;
+                extraSpecialArgs = { inherit username inputs; };
+                users.${username} = {
+                  imports =
+                    [ ./modules/home-manager ./hosts/${hostname}/home.nix ];
                 };
-                users.${username} = import ./home;
               };
             }
           ];
@@ -90,9 +91,7 @@
       nixosConfigurations.MONSTER = mkHost {
         hostname = "MONSTER";
         username = "theaninova";
-        desktop = "hyprland";
         system = "x86_64-linux";
-        stateVersion = "23.05";
       };
     };
 }
