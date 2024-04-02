@@ -1,4 +1,4 @@
-# TheaninOS
+# TheaninovOS
 
 A NixOS based OS you can configure.
 
