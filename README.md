@@ -38,3 +38,51 @@ After that reload the shell
 nix flake update
 sudo nixos-rebuild switch --flake .#
 ```
+
+## Usage in your NixOS config
+
+`flake.nix`
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    theaninovos = {
+      url = "github:Theaninova/TheaninovOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    { nixpkgs, theaninovos, ... }@inputs:
+    let
+      inherit (nixpkgs.lib) genAttrs listToAttrs;
+      eachSystem = genAttrs [ "x86_64-linux" ];
+      legacyPackages = eachSystem (system:
+        import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+            allowUnsupportedSystem = true;
+            experimental-features = "nix-command flakes";
+          };
+        });
+
+      mkHost = { hostname, username, system }:
+        nixpkgs.lib.nixosSystem {
+          pkgs = legacyPackages.${system};
+          modules = [
+            theaninovos.nixosModules.theaninovos
+            # ... your stuff
+          ];
+          specialArgs = inputs;
+        };
+    in {
+      nixosConfigurations.MONSTER = mkHost {
+        hostname = "MONSTER";
+        username = "theaninova";
+        system = "x86_64-linux";
+      };
+    };
+}
+```
