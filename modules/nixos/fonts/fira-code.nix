@@ -7,7 +7,7 @@ in {
   options.fonts.fira-code = {
     enable = mkEnableOption "Enable the preset for Fira Code";
     stylisticSets = mkOption {
-      type = types.listOf types.string;
+      type = types.listOf types.str;
       description = mdDoc
         "[Stylistic sets](https://github.com/tonsky/FiraCode/wiki/How-to-enable-stylistic-sets) for Fira Code";
       default =
