@@ -57,13 +57,6 @@
     mode = "n";
     action = ":Telescope harpoon marks<CR>";
   }
-  {
-    key = "<leader>fp";
-    mode = "n";
-    options.silent = true;
-    lua = true;
-    action = "require('telescope').extensions.projects.projects";
-  }
   # LSP Actions
   {
     key = "<leader>sa";

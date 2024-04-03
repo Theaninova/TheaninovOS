@@ -184,11 +184,6 @@ in {
       };
     };
 
-    project-nvim = {
-      enable = true;
-      enableTelescope = true;
-    };
-
     telescope = {
       enable = true;
       keymaps = {
