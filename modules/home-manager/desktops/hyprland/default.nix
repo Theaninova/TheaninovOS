@@ -1,4 +1,11 @@
-{ config, pkgs, lib, osConfig, ... }: {
+{
+  config,
+  pkgs,
+  lib,
+  osConfig,
+  ...
+}:
+{
   config = lib.mkIf osConfig.desktops.hyprland.enable {
     wayland.windowManager.hyprland = {
       enable = true;
@@ -35,35 +42,40 @@
         bind = import ./keybinds.nix;
         bindm = import ./mousebinds.nix;
         bindr = [ "SUPER,SUPER_L,exec,pkill anyrun || anyrun" ];
-        monitor = [ "DP-1,highrr,0x0,1" "DP-1,addreserved,250,0,0,0" ];
+        monitor = [
+          "DP-1,highrr,0x0,1"
+          "DP-1,addreserved,250,0,0,0"
+        ];
         workspace = [
           "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
         ];
-        windowrulev2 = let
-          firefoxPip = "class:^(firefox)$,title:^(Picture-in-Picture)$";
-          firefoxPipInitial = "class:^(firefox)$,title:^(Firefox)$";
-        in [
-          "keepaspectratio,${firefoxPip}"
-          "noborder,${firefoxPip}"
-          "float,${firefoxPip}"
-          "float,${firefoxPipInitial}"
-          "pin,${firefoxPip}"
-          "pin,${firefoxPipInitial}"
-          "fakefullscreen,${firefoxPip}"
-          "fakefullscreen,${firefoxPipInitial}"
-          "move 22 72,${firefoxPip}"
-          "move 22 72,${firefoxPipInitial}"
-          # For some reason it really wants to be maximized
-          "suppressevent maximize,class:^(neovide)$"
-          # pinentry
-          "dimaround,class:^(gcr-prompter)$"
-          "noborder,class:^(gcr-prompter)$"
-          "rounding 10,class:^(gcr-prompter)$"
-          "animation slide,class:^(gcr-prompter)$"
-          # Flameshot fixes
-          "float,class:^(flameshot)$"
-          "animation fade,class:^(flameshot)$"
-        ];
+        windowrulev2 =
+          let
+            firefoxPip = "class:^(firefox)$,title:^(Picture-in-Picture)$";
+            firefoxPipInitial = "class:^(firefox)$,title:^(Firefox)$";
+          in
+          [
+            "keepaspectratio,${firefoxPip}"
+            "noborder,${firefoxPip}"
+            "float,${firefoxPip}"
+            "float,${firefoxPipInitial}"
+            "pin,${firefoxPip}"
+            "pin,${firefoxPipInitial}"
+            "fakefullscreen,${firefoxPip}"
+            "fakefullscreen,${firefoxPipInitial}"
+            "move 22 72,${firefoxPip}"
+            "move 22 72,${firefoxPipInitial}"
+            # For some reason it really wants to be maximized
+            "suppressevent maximize,class:^(neovide)$"
+            # pinentry
+            "dimaround,class:^(gcr-prompter)$"
+            "noborder,class:^(gcr-prompter)$"
+            "rounding 10,class:^(gcr-prompter)$"
+            "animation slide,class:^(gcr-prompter)$"
+            # Flameshot fixes
+            "float,class:^(flameshot)$"
+            "animation fade,class:^(flameshot)$"
+          ];
         xwayland.force_zero_scaling = true;
         misc = {
           layers_hog_keyboard_focus = false;
@@ -73,7 +85,10 @@
           force_default_wallpaper = 0;
           vrr = 1;
         };
-        layerrule = [ "blur, anyrun" "ignorealpha 0.3, anyrun" ];
+        layerrule = [
+          "blur, anyrun"
+          "ignorealpha 0.3, anyrun"
+        ];
         decoration = {
           drop_shadow = "yes";
           shadow_range = 16;
@@ -110,11 +125,15 @@
     };
     services.flameshot = {
       enable = true;
-      package = pkgs.flameshot.overrideAttrs (final: prev: {
-        cmakeFlags = [ "-DUSE_WAYLAND_CLIPBOARD=1" "-DUSE_WAYLAND_GRIM=true" ];
-        nativeBuildInputs = prev.nativeBuildInputs
-          ++ [ pkgs.libsForQt5.kguiaddons ];
-      });
+      package = pkgs.flameshot.overrideAttrs (
+        final: prev: {
+          cmakeFlags = [
+            "-DUSE_WAYLAND_CLIPBOARD=1"
+            "-DUSE_WAYLAND_GRIM=true"
+          ];
+          nativeBuildInputs = prev.nativeBuildInputs ++ [ pkgs.libsForQt5.kguiaddons ];
+        }
+      );
       settings = {
         General = {
           uiColor = "#99d1db";
@@ -124,25 +143,27 @@
       };
     };
 
-    services.darkman = let
-      wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
-    in {
-      enable = false;
-      settings = {
-        lat = 52.52;
-        lng = 13.405;
+    services.darkman =
+      let
+        wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
+      in
+      {
+        enable = false;
+        settings = {
+          lat = 52.52;
+          lng = 13.405;
+        };
+        darkModeScripts = {
+          kitty-theme = ''
+            ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
+          '';
+        };
+        lightModeScripts = {
+          kitty-theme = ''
+            ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
+          '';
+        };
       };
-      darkModeScripts = {
-        kitty-theme = ''
-          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
-        '';
-      };
-      lightModeScripts = {
-        kitty-theme = ''
-          ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
-        '';
-      };
-    };
     programs.ags = {
       enable = true;
       configDir = ./ags;
@@ -153,7 +174,10 @@
     systemd.user.services.ags = {
       Unit = {
         Description = "ags";
-        PartOf = [ "graphical-session.target" "tray.target" ];
+        PartOf = [
+          "graphical-session.target"
+          "tray.target"
+        ];
       };
       Service = {
         ExecStart = "${pkgs.ags}/bin/ags";
@@ -161,19 +185,21 @@
         Restart = "always";
         KillMode = "mixed";
         Environment = "PATH=/run/current-system/sw/bin/:${
-            with pkgs;
-            lib.makeBinPath [
-              swww
-              sassc
-              glib
-              brightnessctl
-              ydotool
-              kitty
-              hyprpicker
-            ]
-          }";
+          with pkgs;
+          lib.makeBinPath [
+            swww
+            sassc
+            glib
+            brightnessctl
+            ydotool
+            kitty
+            hyprpicker
+          ]
+        }";
       };
-      Install = { WantedBy = [ "graphical-session.target" ]; };
+      Install = {
+        WantedBy = [ "graphical-session.target" ];
+      };
     };
     programs.kitty = import ./kitty.nix { inherit pkgs; };
     programs.anyrun = import ./anyrun.nix { inherit pkgs; };
@@ -197,6 +223,7 @@
       kdePackages.breeze-icons
       # gnome packages
       evince
+      baobab
       gnome.gvfs
       gnome.gnome-keyring
       gnome.nautilus

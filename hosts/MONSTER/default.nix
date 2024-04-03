@@ -8,6 +8,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   nix = {
+    package = pkgs.nixVersions.unstable;
     settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -161,5 +162,5 @@
     fsType = "ntfs";
   };
 
-  system.stateVersion = "23.05";
+  system.stateVersion = "24.05";
 }
