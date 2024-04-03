@@ -20,8 +20,9 @@ let
 in {
   enable = true;
   defaultEditor = true;
+  vimAlias = true;
 
-  options = {
+  opts = {
     number = true;
     relativenumber = true;
 
@@ -444,7 +445,7 @@ in {
     pkgs.nodePackages.prettier
     pkgs.jq
     pkgs.html-tidy
-    pkgs.nixfmt
+    pkgs.nixfmt-rfc-style
     pkgs.stylua
     pkgs.shfmt
     pkgs.fzf
