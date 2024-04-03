@@ -42,7 +42,7 @@
     pinta
     kdePackages.kdenlive
     # friture TODO: broken
-    blender
+    blender-hip
     openscad-unstable
 
     # development

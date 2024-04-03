@@ -90,7 +90,6 @@
             brightness = 0.8;
           };
         };
-        opengl.nvidia_anti_flicker = true;
         animations = {
           enabled = "yes";
           bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
@@ -235,15 +234,6 @@
       enable = true;
       platformTheme = "qtct";
     };
-
-    programs.fish.loginShellInit =
-      # fish
-      ''
-        Hyprland && echo "goodbye" && exit 0 \
-        || echo "$status couldn't launch Hyprland" && tty | grep tty1 \
-        && echo "refusing to autologin without Hyprland on tty1" && exit 0 \
-        || echo "not on tty1, letting in"
-      '';
 
     home = {
       pointerCursor = {

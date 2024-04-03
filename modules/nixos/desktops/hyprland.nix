@@ -17,9 +17,16 @@ in {
     };
 
     services = {
-      getty.autologinUser = "${username}";
-      getty.extraArgs = [ "--noclear" "--noissue" "--nonewline" ];
-      getty.loginOptions = "-p -f -- \\u"; # preserve environment
+      greetd = {
+        enable = true;
+        settings = rec {
+          initial_session = {
+            command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
+            user = username;
+          };
+          default_session = initial_session;
+        };
+      };
 
       dbus.enable = true;
 
@@ -39,27 +46,5 @@ in {
     };
 
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-    /* systemd.services = {
-         plymouth-quit-hyprland = mkIf config.boot.quiet.enable {
-           description = "Pause plymouth animation";
-           conflicts = [ "plymouth-quit.service" ];
-           after = [
-             "plymouth-quit.service"
-             "rc-local.service"
-             "plymouth-start.service"
-             "systemd-user-sessions.service"
-           ];
-           serviceConfig = {
-             Type = "oneshot";
-             ExecStartPre = "${pkgs.plymouth}/bin/plymouth deactivate";
-             ExecStartPost = [
-               "${pkgs.coreutils}/bin/sleep 30"
-               "${pkgs.plymouth}/bin/plymouth quit --retain-splash"
-             ];
-           };
-         };
-       };
-    */
   };
 }

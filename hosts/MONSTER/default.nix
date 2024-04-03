@@ -31,7 +31,7 @@
   locale.preset.theaninova.enable = true;
 
   hardware = {
-    nvidia.preset.proprietary.enable = true;
+    amdgpu.preset.default.enable = true;
     audio.preset.pipewire.enable = true;
     cc1.enable = true;
     fv43u.enable = true;
