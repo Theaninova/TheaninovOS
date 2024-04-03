@@ -2,10 +2,13 @@
 
 with lib;
 
-let cfg = config.boot.quiet;
-
-in {
-  options.boot.quiet = { enable = mkEnableOption (mdDoc "Clean, quiet boot"); };
+let
+  cfg = config.boot.quiet;
+in
+{
+  options.boot.quiet = {
+    enable = mkEnableOption (mdDoc "Clean, quiet boot");
+  };
 
   config = mkIf cfg.enable {
     boot = {

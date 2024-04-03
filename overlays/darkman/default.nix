@@ -1,4 +1,11 @@
-{ lib, scdoc, buildGoModule, fetchFromGitLab, hidapi, udev, }:
+{
+  lib,
+  scdoc,
+  buildGoModule,
+  fetchFromGitLab,
+  hidapi,
+  udev,
+}:
 buildGoModule rec {
   pname = "darkman";
   version = "1.5.4";
@@ -36,8 +43,7 @@ buildGoModule rec {
   '';
 
   meta = with lib; {
-    description =
-      "Framework for dark-mode and light-mode transitions on Linux desktop";
+    description = "Framework for dark-mode and light-mode transitions on Linux desktop";
     homepage = "https://gitlab.com/WhyNotHugo/darkman";
     license = licenses.isc;
     maintainers = [ maintainers.ajgrf ];

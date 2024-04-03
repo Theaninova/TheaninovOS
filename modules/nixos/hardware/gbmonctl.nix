@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.gbmonctl;
-
-in {
+let
+  cfg = config.hardware.gbmonctl;
+in
+{
   options.hardware.gbmonctl = {
     enable = mkOption {
       type = types.bool;

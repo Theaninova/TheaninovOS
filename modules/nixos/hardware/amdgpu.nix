@@ -1,12 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.amdgpu.preset.default;
-
-in {
+let
+  cfg = config.hardware.amdgpu.preset.default;
+in
+{
   options.hardware.amdgpu.preset.default = {
-    enable =
-      mkEnableOption "Enable ADM GPU driver support with some sane defaults";
+    enable = mkEnableOption "Enable ADM GPU driver support with some sane defaults";
   };
 
   config = mkIf cfg.enable {
@@ -19,7 +24,10 @@ in {
 
     boot = {
       # https://docs.kernel.org/gpu/amdgpu/module-parameters.html
-      kernelParams = [ "amdgpu.seamless=1" "amdgpu.freesync_video=1" ];
+      kernelParams = [
+        "amdgpu.seamless=1"
+        "amdgpu.freesync_video=1"
+      ];
       initrd.kernelModules = [ "amdgpu" ];
     };
 

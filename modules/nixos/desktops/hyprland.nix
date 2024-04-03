@@ -1,10 +1,17 @@
-{ config, lib, pkgs, username, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  username,
+  ...
+}:
 
 with lib;
 
-let cfg = config.desktops.hyprland;
-
-in {
+let
+  cfg = config.desktops.hyprland;
+in
+{
   options.desktops.hyprland = {
     enable = mkEnableOption (mdDoc "Enable a DE based on Hyprland");
   };
@@ -12,8 +19,10 @@ in {
   config = mkIf cfg.enable {
     xdg.portal = {
       enable = true;
-      extraPortals =
-        [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-kde ];
+      extraPortals = [
+        pkgs.xdg-desktop-portal-gtk
+        pkgs.xdg-desktop-portal-kde
+      ];
     };
 
     services = {

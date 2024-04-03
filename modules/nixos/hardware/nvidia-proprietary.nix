@@ -1,12 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.nvidia.preset.proprietary;
-
-in {
+let
+  cfg = config.hardware.nvidia.preset.proprietary;
+in
+{
   options.hardware.nvidia.preset.proprietary = {
-    enable = mkEnableOption
-      "Enable proprietary NVIDIA driver support with some sane defaults";
+    enable = mkEnableOption "Enable proprietary NVIDIA driver support with some sane defaults";
   };
 
   config = mkIf cfg.enable {
@@ -14,16 +19,30 @@ in {
       enable = true;
       driSupport = true;
       driSupport32Bit = true;
-      extraPackages = with pkgs; [ libvdpau-va-gl nvidia-vaapi-driver ];
+      extraPackages = with pkgs; [
+        libvdpau-va-gl
+        nvidia-vaapi-driver
+      ];
     };
 
     services.xserver.videoDrivers = [ "nvidia" ];
 
-    boot.kernelParams = [ "fbdev=1" "nvidia_drm.fbdev=1" ];
-    boot.kernelModules =
-      [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
-    boot.initrd.kernelModules =
-      [ "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm" ];
+    boot.kernelParams = [
+      "fbdev=1"
+      "nvidia_drm.fbdev=1"
+    ];
+    boot.kernelModules = [
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
+    ];
+    boot.initrd.kernelModules = [
+      "nvidia"
+      "nvidia_modeset"
+      "nvidia_uvm"
+      "nvidia_drm"
+    ];
 
     hardware.nvidia = {
       modesetting.enable = true;

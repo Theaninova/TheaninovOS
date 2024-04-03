@@ -1,8 +1,17 @@
-{ config, pkgs, username, ... }: {
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
+{
   imports = [ ./hardware-configuration.nix ];
 
   nix = {
-    settings.experimental-features = [ "nix-command" "flakes" ];
+    settings.experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     gc = {
       automatic = true;
       randomizedDelaySec = "14m";
@@ -54,7 +63,10 @@
 
   services.airprint.enable = true;
 
-  services.udev.packages = with pkgs; [ oversteer android-udev-rules ];
+  services.udev.packages = with pkgs; [
+    oversteer
+    android-udev-rules
+  ];
 
   virtualisation.docker.rootless = {
     enable = true;
@@ -111,7 +123,11 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 8100 5037 5173 ];
+      allowedTCPPorts = [
+        8100
+        5037
+        5173
+      ];
       allowedUDPPorts = [ 50765 ];
     };
 
@@ -129,7 +145,10 @@
   fileSystems."/mnt/media" = {
     device = "kookaborrow:/media";
     fsType = "nfs";
-    options = [ "x-systemd-automount" "noauto" ];
+    options = [
+      "x-systemd-automount"
+      "noauto"
+    ];
   };
 
   fileSystems."/run/media/theaninova/heart-drive" = {

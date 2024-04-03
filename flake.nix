@@ -19,11 +19,21 @@
   };
 
   outputs =
-    { nixpkgs, nur, home-manager, ags, nixvim, anyrun, hyprland, ... }@inputs:
+    {
+      nixpkgs,
+      nur,
+      home-manager,
+      ags,
+      nixvim,
+      anyrun,
+      hyprland,
+      ...
+    }@inputs:
     let
       inherit (nixpkgs.lib) genAttrs listToAttrs;
       eachSystem = genAttrs [ "x86_64-linux" ];
-      legacyPackages = eachSystem (system:
+      legacyPackages = eachSystem (
+        system:
         import nixpkgs {
           inherit system;
           config = {
@@ -31,17 +41,14 @@
             allowUnsupportedSystem = true;
             experimental-features = "nix-command flakes";
             substituters = [ "https://hyprland.cachix.org" ];
-            trusted-public-keys = [
-              "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
-            ];
+            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
           };
           overlays = [
             nur.overlay
             (final: prev: {
               anyrunPlugins = anyrun.packages.${prev.system};
               hyprland = hyprland.packages.${prev.system}.hyprland;
-              xdg-desktop-portal-hyprland =
-                hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
+              xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
               ags = ags.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
@@ -49,9 +56,15 @@
               cura = prev.callPackage ./overlays/cura { };
             })
           ];
-        });
+        }
+      );
 
-      mkHost = { hostname, username, system }:
+      mkHost =
+        {
+          hostname,
+          username,
+          system,
+        }:
         nixpkgs.lib.nixosSystem {
           pkgs = legacyPackages.${system};
           modules = [
@@ -59,22 +72,29 @@
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
             {
-              _module.args = { inherit username; };
+              _module.args = {
+                inherit username;
+              };
               networking.hostName = hostname;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                extraSpecialArgs = { inherit username inputs; };
+                extraSpecialArgs = {
+                  inherit username inputs;
+                };
                 users.${username} = {
-                  imports =
-                    [ ./modules/home-manager ./hosts/${hostname}/home.nix ];
+                  imports = [
+                    ./modules/home-manager
+                    ./hosts/${hostname}/home.nix
+                  ];
                 };
               };
             }
           ];
           specialArgs = inputs;
         };
-    in {
+    in
+    {
       nixosConfigurations.MONSTER = mkHost {
         hostname = "MONSTER";
         username = "theaninova";

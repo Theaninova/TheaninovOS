@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   programs = {
     home-manager.enable = true;
     rbw = {
@@ -16,7 +17,9 @@
     gpg.enable = true;
     btop = {
       enable = true;
-      settings = { vim_keys = true; };
+      settings = {
+        vim_keys = true;
+      };
     };
     zsh = {
       enable = true;

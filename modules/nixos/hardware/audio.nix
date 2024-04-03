@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.audio.preset.pipewire;
-
-in {
+let
+  cfg = config.hardware.audio.preset.pipewire;
+in
+{
   options.hardware.audio.preset.pipewire = {
     enable = mkEnableOption "Enable pipewire with sane defaults";
   };

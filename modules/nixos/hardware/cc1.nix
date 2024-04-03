@@ -1,9 +1,16 @@
-{ pkgs, lib, config, username, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.cc1;
-
-in {
+let
+  cfg = config.hardware.cc1;
+in
+{
   options.hardware.cc1 = {
     enable = mkEnableOption "Enable CC1 optimizations";
     layout = mkOption {
@@ -19,7 +26,10 @@ in {
       layout = cfg.layout;
       extraLayouts.cc1-thea = {
         description = "A CC1 optimized layout";
-        languages = [ "eng" "ger" ];
+        languages = [
+          "eng"
+          "ger"
+        ];
         symbolsFile = ./${cfg.layout};
       };
     };

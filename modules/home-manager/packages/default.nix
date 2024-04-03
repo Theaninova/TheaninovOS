@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   xdg.configFile."ranger/rc.conf".source = ./ranger.conf;
   home.packages = with pkgs; [
     # nix
@@ -15,7 +16,7 @@
     # media
     jellyfin-media-player
     youtube-dl
-    tartube
+    # tartube
     yt-dlp
     f3d
     mpv
@@ -41,7 +42,6 @@
     audacity
     pinta
     kdePackages.kdenlive
-    # friture TODO: broken
     blender-hip
     openscad-unstable
 

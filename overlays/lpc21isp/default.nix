@@ -1,4 +1,9 @@
-{ stdenv, fetchFromGitHub, glibc, lib, }:
+{
+  stdenv,
+  fetchFromGitHub,
+  glibc,
+  lib,
+}:
 stdenv.mkDerivation {
   name = "lpc21isp";
   src = fetchFromGitHub {
@@ -13,8 +18,7 @@ stdenv.mkDerivation {
     cp lpc21isp $out/bin
   '';
   meta = with lib; {
-    description =
-      "Portable command line ISP for NXP LPC family and Analog Devices ADUC70xx";
+    description = "Portable command line ISP for NXP LPC family and Analog Devices ADUC70xx";
     homepage = "https://github.com/capiman/lpc21isp";
     license = licenses.lgpl3Plus;
     maintainers = [ maintainers.theaninova ];

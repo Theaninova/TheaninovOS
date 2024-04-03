@@ -17,7 +17,8 @@ let
       '';
     };
   };
-in {
+in
+{
   enable = true;
   defaultEditor = true;
   vimAlias = true;
@@ -33,7 +34,9 @@ in {
     smartindent = true;
     signcolumn = "yes";
 
-    undodir = { __raw = "os.getenv('HOME') .. '/.config/nvim/undodir'"; };
+    undodir = {
+      __raw = "os.getenv('HOME') .. '/.config/nvim/undodir'";
+    };
     undofile = true;
 
     scrolloff = 12;
@@ -116,30 +119,37 @@ in {
         right = "┊";
       };
       sections = {
-        lualine_a = [{
-          name = "mode";
-          separator = {
-            right = "";
-            left = "";
-          };
-          icon = "";
-        }];
+        lualine_a = [
+          {
+            name = "mode";
+            separator = {
+              right = "";
+              left = "";
+            };
+            icon = "";
+          }
+        ];
         lualine_x = [
           "(vim.g.disable_autoformat or vim.b.disable_autoformat) and '󱌓' or nil"
           { name = "filetype"; }
         ];
-        lualine_z = [{
-          name = "location";
-          separator = {
-            right = "";
-            left = "";
-          };
-        }];
+        lualine_z = [
+          {
+            name = "location";
+            separator = {
+              right = "";
+              left = "";
+            };
+          }
+        ];
       };
     };
     auto-save = {
       enable = true;
-      triggerEvents = [ "FocusLost" "BufLeave" ];
+      triggerEvents = [
+        "FocusLost"
+        "BufLeave"
+      ];
     };
     indent-blankline = {
       enable = true;
@@ -259,51 +269,55 @@ in {
 
     lsp = {
       enable = true;
-      keymaps = { diagnostic = { }; };
-      enabledServers = [{
-        name = "angularls";
-        extraOptions = {
-          cmd = [
-            "ngserver"
-            "--stdio"
-            "--tsProbeLocations"
-            ""
-            "--ngProbeLocations"
-            ""
-          ];
-          on_new_config = {
-            __raw = ''
-              function(new_config, new_root_dir)
-                new_config.cmd = {
-                  new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
-                  "--stdio",
-                  "--tsProbeLocations",
-                  new_root_dir .. "/node_modules",
-                  "--ngProbeLocations",
-                  new_root_dir .. "/node_modules",
-                }
-              end
-            '';
-          };
-          filetypes = [
-            "typescript"
-            "html"
-            "typescriptreact"
-            "typescript.tsx"
-            "angular"
-            "html.angular"
-          ];
-          on_attach = {
-            __raw = ''
-              function(client, bufnr)
-                if vim.bo[bufnr].filetype == "html" then
-                  vim.bo[bufnr].filetype = "angular"
+      keymaps = {
+        diagnostic = { };
+      };
+      enabledServers = [
+        {
+          name = "angularls";
+          extraOptions = {
+            cmd = [
+              "ngserver"
+              "--stdio"
+              "--tsProbeLocations"
+              ""
+              "--ngProbeLocations"
+              ""
+            ];
+            on_new_config = {
+              __raw = ''
+                function(new_config, new_root_dir)
+                  new_config.cmd = {
+                    new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
+                    "--stdio",
+                    "--tsProbeLocations",
+                    new_root_dir .. "/node_modules",
+                    "--ngProbeLocations",
+                    new_root_dir .. "/node_modules",
+                  }
                 end
-              end
-            '';
+              '';
+            };
+            filetypes = [
+              "typescript"
+              "html"
+              "typescriptreact"
+              "typescript.tsx"
+              "angular"
+              "html.angular"
+            ];
+            on_attach = {
+              __raw = ''
+                function(client, bufnr)
+                  if vim.bo[bufnr].filetype == "html" then
+                    vim.bo[bufnr].filetype = "angular"
+                  end
+                end
+              '';
+            };
           };
-        };
-      }];
+        }
+      ];
       servers = {
         html.enable = true;
         cssls.enable = true;
@@ -323,7 +337,10 @@ in {
 
         clangd = {
           enable = true;
-          cmd = [ "clangd" "--offset-encoding=utf-16" ];
+          cmd = [
+            "clangd"
+            "--offset-encoding=utf-16"
+          ];
         };
 
         nixd.enable = true;
@@ -347,16 +364,16 @@ in {
           end
         '';
       };
-      symbolMap = { Copilot = ""; };
+      symbolMap = {
+        Copilot = "";
+      };
     };
     cmp = {
       enable = true;
       settings = {
         mapping = {
-          "<C-n>" =
-            "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
-          "<C-p>" =
-            "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+          "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
           "<C-Space>" = "cmp.mapping.confirm({select = true})";
           "<C-Enter>" = "cmp.mapping.complete()";
         };
@@ -372,9 +389,11 @@ in {
           { name = "nvim_lsp_signature_help"; }
           { name = "nvim_lsp_document_symbol"; }
         ];
-        formatting.fields = [ "abbr" "kind" ];
-        snippet.expand =
-          "function(args) require('luasnip').lsp_expand(args.body) end";
+        formatting.fields = [
+          "abbr"
+          "kind"
+        ];
+        snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
         window = {
           completion.border = "rounded";
           documentation.border = "rounded";

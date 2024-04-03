@@ -82,8 +82,7 @@
     key = "<leader>xw";
     mode = "n";
     lua = true;
-    action =
-      "function() require('trouble').toggle('workspace_diagnostics') end";
+    action = "function() require('trouble').toggle('workspace_diagnostics') end";
   }
   {
     key = "<leader>xd";

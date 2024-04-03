@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.locale.preset.theaninova;
-
-in {
+let
+  cfg = config.locale.preset.theaninova;
+in
+{
   options.locale.preset.theaninova = {
     enable = mkEnableOption "Enable the locale preset for Theaninova";
   };

@@ -1,9 +1,15 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.fonts.nerdfonts;
-
-in {
+let
+  cfg = config.fonts.nerdfonts;
+in
+{
   options.fonts.nerdfonts = {
     enable = mkEnableOption "Enable nerdfonts";
     additionalFonts = mkOption {
@@ -15,12 +21,9 @@ in {
 
   config = mkIf cfg.enable {
     fonts = {
-      packages = with pkgs;
-        [
-          (nerdfonts.override {
-            fonts = [ "NerdFontsSymbolsOnly" ] ++ cfg.additionalFonts;
-          })
-        ];
+      packages = with pkgs; [
+        (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ] ++ cfg.additionalFonts; })
+      ];
     };
   };
 }

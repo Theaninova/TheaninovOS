@@ -1,12 +1,17 @@
-{ pkgs, lib, config, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.nvidia.preset.nouveau;
-
-in {
+let
+  cfg = config.hardware.nvidia.preset.nouveau;
+in
+{
   options.hardware.nvidia.preset.nouveau = {
-    enable = mkEnableOption
-      "Enable the free Nouveau NVIDIA driver with some sane defaults";
+    enable = mkEnableOption "Enable the free Nouveau NVIDIA driver with some sane defaults";
   };
 
   config = mkIf cfg.enable {

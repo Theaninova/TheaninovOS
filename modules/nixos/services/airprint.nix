@@ -1,9 +1,16 @@
-{ pkgs, lib, config, username, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
 with lib;
 
-let cfg = config.services.airprint;
-
-in {
+let
+  cfg = config.services.airprint;
+in
+{
   options.services.airprint = {
     enable = mkEnableOption "Enable printing over the air using sane and avahi";
   };
@@ -19,6 +26,9 @@ in {
       nssmdns4 = true;
       openFirewall = true;
     };
-    users.users.${username}.extraGroups = [ "lp" "scanner" ];
+    users.users.${username}.extraGroups = [
+      "lp"
+      "scanner"
+    ];
   };
 }

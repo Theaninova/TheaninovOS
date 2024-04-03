@@ -1,12 +1,18 @@
-{ pkgs, lib, config, username, ... }:
+{
+  pkgs,
+  lib,
+  config,
+  username,
+  ...
+}:
 with lib;
 
-let cfg = config.hardware.fv43u;
-
-in {
+let
+  cfg = config.hardware.fv43u;
+in
+{
   options.hardware.fv43u = {
-    enable =
-      mkEnableOption "Enable optimisations for the Gigabyte FV43U monitor";
+    enable = mkEnableOption "Enable optimisations for the Gigabyte FV43U monitor";
   };
 
   config = mkIf cfg.enable {

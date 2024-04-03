@@ -1,4 +1,5 @@
-{ pkgs, homeDirectory, ... }: {
+{ pkgs, homeDirectory, ... }:
+{
   services = {
     gpg-agent = {
       enable = true;

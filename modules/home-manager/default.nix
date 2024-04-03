@@ -1,4 +1,12 @@
-{ username, desktop, stateVersion, osConfig, inputs, ... }: {
+{
+  username,
+  desktop,
+  stateVersion,
+  osConfig,
+  inputs,
+  ...
+}:
+{
   home = {
     stateVersion = osConfig.system.stateVersion;
     inherit username;
