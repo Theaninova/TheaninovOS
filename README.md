@@ -39,6 +39,26 @@ nix flake update
 sudo nixos-rebuild switch --flake .#
 ```
 
+## Cleaning your system
+
+### Find (accidental) folders holding your gc back
+
+```sh
+sudo nix-store --gc --print-roots | grep /home
+```
+
+### Remove old generations
+
+```sh
+sudo nix-collect-garbage -d
+```
+
+### Cleanup store
+
+```sh
+nix-store --gc
+```
+
 ## Usage in your NixOS config
 
 `flake.nix`
