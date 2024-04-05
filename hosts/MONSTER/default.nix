@@ -37,7 +37,10 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
-  desktops.hyprland.enable = true;
+  desktops = {
+    hyprland.enable = true;
+    # gamescope.enable = true;
+  };
   locale.preset.theaninova.enable = true;
 
   hardware = {
@@ -118,6 +121,8 @@
     # system-wide wine
     lutris
     wine-staging
+    winetricks
+    protontricks
     # docker
     docker-compose
   ];

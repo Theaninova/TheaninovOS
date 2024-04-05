@@ -71,6 +71,13 @@
     options.silent = true;
     action = "<cmd>:ConformToggle<CR>";
   }
+  {
+    key = "<leader>sx";
+    mode = "n";
+    options.silent = true;
+    lua = true;
+    action = "vim.lsp.buf.format";
+  }
   # Trouble
   {
     key = "<leader>xx";

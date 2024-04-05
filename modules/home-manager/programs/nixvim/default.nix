@@ -254,17 +254,12 @@ in
       '';
     };
 
-    lint = {
+    none-ls = {
       enable = true;
-      lintersByFt = {
-        javascript = [ "eslint" ];
-        typescript = [ "eslint" ];
-        css = [ "stylelint" ];
-        scss = [ "stylelint" ];
-        less = [ "stylelint" ];
-        bash = [ "shellcheck" ];
+      sources = {
+        diagnostics.stylelint.enable = true;
+        formatting.stylelint.enable = true;
       };
-      autoCmd.event = "TextChanged";
     };
 
     lsp = {
@@ -323,6 +318,9 @@ in
         cssls.enable = true;
         svelte.enable = true;
         tsserver.enable = true;
+        eslint.enable = true;
+
+        dockerls.enable = true;
 
         yamlls.enable = true;
         jsonls.enable = true;
@@ -419,6 +417,7 @@ in
           h = "Diagnostics";
           a = "Code Actions";
           f = "Auto Formatting";
+          x = "LSP Format";
         };
         "<leader>x" = {
           name = "Trouble";

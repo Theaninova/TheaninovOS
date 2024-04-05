@@ -33,7 +33,10 @@ in
             command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
             user = username;
           };
-          default_session = initial_session;
+          default_session = {
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --sessions ${config.services.xserver.displayManager.sessionData.desktops}";
+            user = username;
+          };
         };
       };
 
