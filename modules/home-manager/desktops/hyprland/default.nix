@@ -83,7 +83,7 @@
           disable_hyprland_logo = true;
           background_color = "0x000000";
           force_default_wallpaper = 0;
-          vrr = 1;
+          vrr = 2;
         };
         layerrule = [
           "blur, anyrun"

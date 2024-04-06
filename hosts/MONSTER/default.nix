@@ -49,8 +49,7 @@
     cc1.enable = true;
     fv43u.enable = true;
     virtual-camera.enable = true;
-    # https://github.com/NixOS/nixpkgs/pull/300682
-    # hid-fanatecff.enable = true;
+    hid-fanatecff.enable = true;
   };
 
   fonts = {

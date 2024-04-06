@@ -10,6 +10,7 @@
     ./fonts/noto-sans.nix
     ./fonts/nerdfonts.nix
 
+    ./hardware/hid-fanatecff.nix
     ./hardware/audio.nix
     ./hardware/gbmonctl.nix
     ./hardware/nvidia-proprietary.nix
