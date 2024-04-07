@@ -1,4 +1,23 @@
 { pkgs }:
+let
+  darkman = pkgs.vimUtils.buildVimPlugin {
+    name = "darkman";
+    src = pkgs.buildGoModule rec {
+      pname = "darkman.nvim";
+      version = "0.0.1";
+      vendorHash = "sha256-HpyKzvKVN9hVRxxca4sdWRo91H32Ha9gxitr7Qg5MY8=";
+      src = pkgs.fetchFromGitHub {
+        owner = "4e554c4c";
+        repo = "darkman.nvim";
+        rev = "150aa63a13837c44abd87ff20d3a806321a17b2d";
+        sha256 = "sha256-ssEYdM460I1rufjgh63CEkLi4K+bEWbwku/6gQbytno=";
+      };
+      postInstall = ''
+        cp -r lua $out
+      '';
+    };
+  };
+in
 {
   enable = true;
   defaultEditor = true;
@@ -71,9 +90,25 @@
 
   extraConfigLua = builtins.readFile ./extra-config.lua;
 
+  colorschemes.catppuccin = {
+    enable = true;
+    terminalColors = true;
+    transparentBackground = true;
+    background = {
+      dark = "frappe";
+      light = "latte";
+    };
+    integrations.native_lsp.underlines = {
+      errors = [ "undercurl" ];
+      warnings = [ "undercurl" ];
+    };
+    customHighlights = builtins.readFile ./custom-highlights.lua;
+  };
+
   plugins = {
     lualine = {
       enable = true;
+      theme = "catppuccin";
       globalstatus = true;
       sectionSeparators = {
         left = "";
@@ -435,6 +470,7 @@
   ];
   extraPlugins = with pkgs.vimPlugins; [
     vim-mergetool
+    darkman
     rest-nvim
     plenary-nvim
     actions-preview-nvim

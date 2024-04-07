@@ -1,8 +1,18 @@
+require("darkman").setup()
 require("cmp-npm").setup({})
 require("rest-nvim").setup({})
 require("actions-preview").setup({})
 
 if vim.g.neovide then
+	vim.api.nvim_create_autocmd("ColorScheme", {
+		pattern = "*",
+		callback = function()
+			local flavour = require("catppuccin").options.background[vim.o.background]
+			local palette = require("catppuccin.palettes").get_palette(flavour)
+			vim.cmd("hi Normal guibg=" .. palette.base)
+			vim.cmd("set pumblend=100")
+		end,
+	})
 	-- no idea why this is needed
 	vim.opt.linespace = -1
 end

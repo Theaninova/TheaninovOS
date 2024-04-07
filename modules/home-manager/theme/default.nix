@@ -11,10 +11,7 @@ let
   cfg = config.theme.base16;
 in
 {
-  imports = [
-    ./integrations/kitty
-    ./integrations/neovim
-  ];
+  imports = [ ./integrations/kitty ];
 
   options.theme.base16 = {
     enable = mkEnableOption "Enable a global base16 theme";
