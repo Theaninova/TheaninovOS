@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   programs = {
     home-manager.enable = true;
@@ -23,27 +23,27 @@
     };
     zsh = {
       enable = true;
-      enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       defaultKeymap = "viins";
-    };
-    fish = {
-      enable = true;
-      shellInit = ''
-        fish_vi_key_bindings
+      plugins = with pkgs; [
+        {
+          name = "zsh-nix-shell";
+          file = "share/zsh-nix-shell/nix-shell.plugin.zsh";
+          src = zsh-nix-shell;
+        }
+      ];
+      initExtraFirst = ''
+        if [[ -r "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh" ]]; then
+          source "''${XDG_CACHE_HOME:-''$HOME/.cache}/p10k-instant-prompt-''${(%):-%n}.zsh"
+        fi
+        [[ ! -f ${./.p10k.zsh} ]] || source ${./.p10k.zsh}
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
       '';
-      interactiveShellInit = ''
-        set fish_greeting
-      '';
-    };
-    oh-my-posh = {
-      enable = true;
-      useTheme = "pararussel";
-      enableFishIntegration = true;
     };
     direnv = {
       enable = true;
+      enableZshIntegration = true;
       nix-direnv.enable = true;
     };
   };

@@ -1,9 +1,4 @@
-{
-  config,
-  pkgs,
-  username,
-  ...
-}:
+{ pkgs, username, ... }:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -76,11 +71,11 @@
     setSocketVariable = true;
   };
 
-  programs.fish.enable = true;
+  programs.zsh.enable = true;
   security.sudo.configFile = ''
     Defaults env_reset,pwfeedback,passprompt="󰟵  "
   '';
-  users.defaultUserShell = pkgs.fish;
+  users.defaultUserShell = pkgs.zsh;
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
