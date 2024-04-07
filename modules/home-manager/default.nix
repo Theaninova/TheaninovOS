@@ -1,5 +1,7 @@
 {
   username,
+  desktop,
+  stateVersion,
   osConfig,
   inputs,
   ...
@@ -16,9 +18,7 @@
     inputs.anyrun.homeManagerModules.default
     ./clean-home-dir.nix
     ./programs/neovide.nix
-
-    ./theme
-
+    # ./default-apps.nix
     ./packages
     ./programs
     ./services
