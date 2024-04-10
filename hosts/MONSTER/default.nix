@@ -112,11 +112,6 @@
     p7zip
     fzf
     eza
-    # system-wide wine
-    lutris
-    wine-staging
-    winetricks
-    protontricks
     # docker
     docker-compose
   ];

@@ -5,6 +5,7 @@
     # nix
     cachix
     lorri
+    vulnix
 
     # fix for proton games not launching without any error message
     libxcrypt
@@ -59,10 +60,20 @@
     steam
     oversteer
     obs-studio
-    cartridges
     bottles
+    (lutris.override {
+      extraLibraries =
+        pkgs: with pkgs; [
+          libgudev
+          libvdpau
+          libsoup
+        ];
+    })
+    wine
+    winetricks
     protontricks
     mangohud
+    gamescope
 
     # utils
     gh
