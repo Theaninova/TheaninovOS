@@ -24,7 +24,7 @@
     makemkv
     handbrake
     metadata-cleaner
-    bitwarden
+    #bitwarden
 
     # chat apps
     (import ./threema-desktop.nix { inherit pkgs; })
