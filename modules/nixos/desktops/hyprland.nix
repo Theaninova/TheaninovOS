@@ -28,15 +28,17 @@ in
     services = {
       greetd = {
         enable = true;
-        settings = rec {
+        settings = {
           initial_session = {
             command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
             user = username;
           };
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --sessions ${config.services.xserver.displayManager.sessionData.desktops}";
-            user = username;
-          };
+          /*
+            default_session = {
+              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --sessions ${config.services.xserver.displayManager.sessionData.desktops}";
+              user = username;
+            };
+          */
         };
       };
 
