@@ -60,7 +60,6 @@
     steam
     oversteer
     obs-studio
-    bottles
     (lutris.override {
       extraLibraries =
         pkgs: with pkgs; [
