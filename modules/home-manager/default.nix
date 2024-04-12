@@ -1,7 +1,5 @@
 {
   username,
-  desktop,
-  stateVersion,
   osConfig,
   inputs,
   ...

@@ -22,6 +22,10 @@
 
     ./locales/theaninova.nix
 
+    ./usecases/gaming.nix
+    ./usecases/3d-printing.nix
+    ./usecases/development.nix
+
     ./services/airprint.nix
   ];
 }

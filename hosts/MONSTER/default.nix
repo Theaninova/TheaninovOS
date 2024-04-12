@@ -32,6 +32,17 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  usecases = {
+    gaming.enable = true;
+    "3d-printing".enable = true;
+    development = {
+      enable = true;
+      angular.enable = true;
+      svelte.enable = true;
+      docker.enable = true;
+    };
+  };
+
   desktops = {
     hyprland.enable = true;
     # gamescope.enable = true;
@@ -61,15 +72,7 @@
 
   services.airprint.enable = true;
 
-  services.udev.packages = with pkgs; [
-    oversteer
-    android-udev-rules
-  ];
-
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
+  services.udev.packages = with pkgs; [ android-udev-rules ];
 
   programs.zsh.enable = true;
   security.sudo.configFile = ''
@@ -80,11 +83,9 @@
     isNormalUser = true;
     extraGroups = [
       "networkmanager"
-      "wheel"
       "audio"
       "video"
       "plugdev"
-      "input"
       "adbusers"
       "cdrom"
     ];
@@ -92,7 +93,6 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    gamemode
     # Essential utils
     usbutils
     uhubctl
@@ -113,18 +113,10 @@
     fzf
     eza
     # docker
-    docker-compose
   ];
 
   networking = {
-    firewall = {
-      allowedTCPPorts = [
-        8100
-        5037
-        5173
-      ];
-      allowedUDPPorts = [ 50765 ];
-    };
+    firewall.allowedUDPPorts = [ 50765 ];
 
     networkmanager = {
       enable = true;

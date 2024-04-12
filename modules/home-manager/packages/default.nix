@@ -7,9 +7,6 @@
     lorri
     vulnix
 
-    # fix for proton games not launching without any error message
-    libxcrypt
-
     # browsers
     chromium
     brave
@@ -30,7 +27,6 @@
     (import ./threema-desktop.nix { inherit pkgs; })
     (vesktop.override { electron = pkgs.electron_29; })
     (element-desktop.override { electron = pkgs.electron_29; })
-    slack
 
     # office
     libreoffice
@@ -44,46 +40,16 @@
     pinta
     kdePackages.kdenlive
     blender-hip
-    openscad-unstable
 
     # development
     insomnia
     avalonia-ilspy
     ghidra
 
-    # 3d printing
-    lpc21isp
-    dfu-util
-    cura
-
-    # gaming
-    steam
-    oversteer
-    obs-studio
-    (lutris.override {
-      extraLibraries =
-        pkgs: with pkgs; [
-          libgudev
-          libvdpau
-          libsoup
-        ];
-    })
-    wine
-    winetricks
-    protontricks
-    mangohud
-    gamescope
-
     # utils
-    gh
-    git-filter-repo
-    neofetch
-    ranger
-    filezilla
-    lazydocker
     libqalculate
-    ripgrep
-    jq
-    httpie
+    ranger
+    neofetch
+    filezilla
   ];
 }
