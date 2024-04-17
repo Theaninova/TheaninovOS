@@ -45,6 +45,7 @@
     insomnia
     avalonia-ilspy
     ghidra
+    ida-free
 
     # utils
     libqalculate

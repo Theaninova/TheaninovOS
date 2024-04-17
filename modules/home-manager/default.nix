@@ -14,6 +14,7 @@
     inputs.ags.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     inputs.anyrun.homeManagerModules.default
+    ./shell/asztal.nix
     ./clean-home-dir.nix
     ./programs/neovide.nix
     # ./default-apps.nix

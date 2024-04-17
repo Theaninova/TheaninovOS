@@ -119,6 +119,8 @@
       };
     };
 
+    shell.asztal.enable = true;
+
     services.kdeconnect = {
       enable = true;
       indicator = true;
@@ -164,43 +166,6 @@
           '';
         };
       };
-    programs.ags = {
-      enable = true;
-      configDir = ./ags;
-    };
-    xdg.configFile.ags.onChange = ''
-      ${pkgs.procps}/bin/pkill -u $USER -USR2 ags || true
-    '';
-    systemd.user.services.ags = {
-      Unit = {
-        Description = "ags";
-        PartOf = [
-          "graphical-session.target"
-          "tray.target"
-        ];
-      };
-      Service = {
-        ExecStart = "${pkgs.ags}/bin/ags";
-        ExecReload = "${pkgs.coreutils}/bin/kill -SIGUSR2 $MAINPID";
-        Restart = "always";
-        KillMode = "mixed";
-        Environment = "PATH=/run/current-system/sw/bin/:${
-          with pkgs;
-          lib.makeBinPath [
-            swww
-            sassc
-            glib
-            brightnessctl
-            ydotool
-            kitty
-            hyprpicker
-          ]
-        }";
-      };
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-    };
     programs.kitty = import ./kitty.nix { inherit pkgs; };
     programs.anyrun = import ./anyrun.nix { inherit pkgs; };
     services.udiskie.enable = true;
@@ -216,7 +181,6 @@
       slurp
       wl-clipboard
       polkit_gnome
-      xdg-desktop-portal-gtk
       # qt/kde packages
       qt6.qtwayland
       qt5.qtwayland
@@ -243,7 +207,6 @@
       xorg.xrandr
     ];
 
-    dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
     gtk = {
       enable = true;
       theme = {

@@ -27,6 +27,7 @@ in
       kernelParams = [
         "amdgpu.seamless=1"
         "amdgpu.freesync_video=1"
+        "initcall_blacklist=simpledrm_platform_driver_init"
       ];
       initrd.kernelModules = [ "amdgpu" ];
     };

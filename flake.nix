@@ -6,6 +6,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    matugen.url = "github:InioX/matugen";
     ags.url = "github:Aylur/ags";
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -27,6 +28,7 @@
       nixvim,
       anyrun,
       hyprland,
+      matugen,
       ...
     }@inputs:
     let
@@ -50,10 +52,12 @@
               hyprland = hyprland.packages.${prev.system}.hyprland;
               xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
               ags = ags.packages.${prev.system}.default;
+              matugen = matugen.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               darkman = prev.callPackage ./overlays/darkman { };
               cura = prev.callPackage ./overlays/cura { };
+              asztal = prev.callPackage ./overlays/asztal { };
             })
           ];
         }
