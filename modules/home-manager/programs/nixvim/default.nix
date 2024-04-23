@@ -92,17 +92,19 @@ in
 
   colorschemes.catppuccin = {
     enable = true;
-    terminalColors = true;
-    transparentBackground = true;
-    background = {
-      dark = "frappe";
-      light = "latte";
+    settings = {
+      term_colors = true;
+      transparent_background = true;
+      background = {
+        dark = "frappe";
+        light = "latte";
+      };
+      integrations.native_lsp.underlines = {
+        errors = [ "undercurl" ];
+        warnings = [ "undercurl" ];
+      };
+      custom_highlights = builtins.readFile ./custom-highlights.lua;
     };
-    integrations.native_lsp.underlines = {
-      errors = [ "undercurl" ];
-      warnings = [ "undercurl" ];
-    };
-    customHighlights = builtins.readFile ./custom-highlights.lua;
   };
 
   plugins = {
@@ -179,8 +181,10 @@ in
     };
     toggleterm = {
       enable = true;
-      direction = "vertical";
-      size = 60;
+      settings = {
+        direction = "vertical";
+        size = 60;
+      };
     };
     luasnip.enable = true;
     ts-autotag.enable = true;

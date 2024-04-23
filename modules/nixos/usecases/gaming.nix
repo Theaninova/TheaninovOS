@@ -23,6 +23,7 @@ in
     users.users.${username}.extraGroups = [
       "wheel"
       "input"
+      "games"
     ];
 
     environment.systemPackages = with pkgs; [
@@ -37,6 +38,7 @@ in
             libsoup
           ];
       })
+      rpcs3
       wine
       winetricks
       protontricks

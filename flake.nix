@@ -49,8 +49,6 @@
             nur.overlay
             (final: prev: {
               anyrunPlugins = anyrun.packages.${prev.system};
-              hyprland = hyprland.packages.${prev.system}.hyprland;
-              xdg-desktop-portal-hyprland = hyprland.packages.${prev.system}.xdg-desktop-portal-hyprland;
               ags = ags.packages.${prev.system}.default;
               matugen = matugen.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };

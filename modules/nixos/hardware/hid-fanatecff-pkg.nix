@@ -3,6 +3,8 @@
   stdenv,
   kernel,
   fetchFromGitHub,
+  linuxConsoleTools,
+  bash,
 }:
 
 stdenv.mkDerivation rec {
@@ -12,7 +14,7 @@ stdenv.mkDerivation rec {
   src = fetchFromGitHub {
     owner = "gotzl";
     repo = "hid-fanatecff";
-    rev = "0.1";
+    rev = lib.versions.majorMinor version;
     hash = "sha256-1Nm/34Er/qfel9LJp++IWd7cTh2Wi93Kgd28YLMVvWo=";
   };
 
@@ -23,11 +25,27 @@ stdenv.mkDerivation rec {
     "KERNEL_SRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
   ];
 
+  patchPhase = ''
+    runHook prePatch
+
+    substituteInPlace fanatec.rules \
+      --replace-fail "/bin/sh" "${bash}/bin/sh"
+    substituteInPlace fanatec.rules \
+      --replace-fail "/usr/bin/evdev-joystick" "${linuxConsoleTools}/bin/evdev-joystick"
+
+    runHook postPatch
+  '';
+
   installPhase = ''
+    runHook preInstall
+
     mkdir -p $out/etc/udev/rules.d
-    cp ${src}/fanatec.rules $out/etc/udev/rules.d/99-fanatec.rules
+    cp fanatec.rules $out/etc/udev/rules.d/99-fanatec.rules
+
     mkdir -p $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/hid
     cp hid-fanatec.ko $out/lib/modules/${kernel.modDirVersion}/kernel/drivers/hid
+
+    runHook postInstall
   '';
 
   meta = with lib; {

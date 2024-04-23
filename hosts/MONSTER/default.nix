@@ -15,6 +15,10 @@
     };
   };
 
+  # I'm not happy about this but if I try to get ESP IDF working
+  # on nix for any longer I'm gonna lose my sanity
+  programs.nix-ld.enable = true;
+
   # Bootloader.
   boot = {
     quiet.enable = true;
@@ -56,6 +60,12 @@
     fv43u.enable = true;
     virtual-camera.enable = true;
     hid-fanatecff.enable = true;
+
+    enableAllFirmware = true;
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
   };
 
   fonts = {

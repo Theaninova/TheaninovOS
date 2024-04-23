@@ -25,8 +25,8 @@
 
     # chat apps
     (import ./threema-desktop.nix { inherit pkgs; })
-    (vesktop.override { electron = pkgs.electron_29; })
-    (element-desktop.override { electron = pkgs.electron_29; })
+    (vesktop.override { withSystemVencord = false; })
+    element-desktop
 
     # office
     libreoffice
