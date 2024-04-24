@@ -29,5 +29,7 @@
     ./usecases/development.nix
 
     ./services/airprint.nix
+
+    ./xdg/forced-compliance.nix
   ];
 }

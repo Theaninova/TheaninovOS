@@ -36,6 +36,8 @@
     supportedFilesystems = [ "ntfs" ];
   };
 
+  xdg.forced-compliance.enable = true;
+
   usecases = {
     gaming.enable = true;
     "3d-printing".enable = true;
