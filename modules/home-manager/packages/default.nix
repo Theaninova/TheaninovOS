@@ -7,6 +7,8 @@
     lorri
     vulnix
 
+    matugen # TODO
+
     # browsers
     chromium
     brave

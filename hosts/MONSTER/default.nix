@@ -47,6 +47,7 @@
     };
   };
 
+  theming.matugen.enable = true;
   desktops = {
     hyprland.enable = true;
     # gamescope.enable = true;
