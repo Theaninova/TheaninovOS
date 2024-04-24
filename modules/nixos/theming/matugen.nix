@@ -32,7 +32,7 @@ in
           reload_apps = true;
           reload_apps_list = {
             kitty = true;
-            gtk_theme = true;
+            gtk_theme = false;
             waybar = false;
             dunst = false;
           };
@@ -40,19 +40,13 @@ in
           set_wallpaper = true;
           wallpaper_tool = "Swww";
 
-          colors_to_harmonize = {
+          custom_colors = {
             red = "#ff0000";
             green = "#00ff00";
             yellow = "#ffff00";
             blue = "#0000ff";
             magenta = "#ff00ff";
             cyan = "#00ffff";
-            bright_red = "#ff9999";
-            bright_green = "#99ff99";
-            bright_yellow = "#ffff99";
-            bright_blue = "#9999ff";
-            bright_magenta = "#ff99ff";
-            bright_cyan = "#99ffff";
           };
         };
 

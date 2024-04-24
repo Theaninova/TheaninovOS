@@ -6,7 +6,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    matugen.url = "github:InioX/matugen";
+    matugen.url = "github:Theaninova/matugen/custom-color-support";
     ags.url = "github:Aylur/ags";
     nixvim = {
       url = "github:nix-community/nixvim";

@@ -8,7 +8,7 @@
     font_size 13
   '';
   settings = {
-    #background_opacity = "0.8";
+    background_opacity = "0.8";
     window_padding_width = 10;
   };
 }
