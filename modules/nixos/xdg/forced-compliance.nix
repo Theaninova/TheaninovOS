@@ -34,14 +34,12 @@ in
       gpg = mkIntegrationOption "gpg";
       gradle = mkIntegrationOption "gradle";
       gtk2 = mkIntegrationOption "gtk2";
+      home-cursor = mkIntegrationOption "home-cursor";
       ionic-cli = mkIntegrationOption "ionic-cli";
       java = mkIntegrationOption "java"; # some apps just won't respect this
       # TODO: `.mozilla` (unsupported)
       nix = mkIntegrationOption "nix";
       npm = mkIntegrationOption "npm";
-      # TODO: `.icons`
-      # https://github.com/nix-community/home-manager/blob/bfa7c06436771e3a0c666ccc6ee01e815d4c33aa/modules/config/home-cursor.nix#L153
-      # deliberately blocked by home manager :(
       # TODO: `.pki`
       # Technically this is supporte out of the box, but some programs just
       # create it out of nowhere https://bugzilla.mozilla.org/show_bug.cgi?id=818686#c11
@@ -92,7 +90,13 @@ in
         XCOMPOSECACHE = lib.mkIf itgr.xcompose "${xdgConfig.cacheHome}/X11/xcompose";
         XCOMPOSEFILE = lib.mkIf itgr.xcompose "${xdgConfig.configHome}/X11/xcompose";
       };
-      home.file.".zshenv".enable = false;
+      home.file = {
+        ".zshenv".enable = lib.mkIf itgr.zsh false;
+        # This might break some stuff, see
+        # https://github.com/nix-community/home-manager/blob/bfa7c06436771e3a0c666ccc6ee01e815d4c33aa/modules/config/home-cursor.nix#L152
+        ".icons/default/index.theme".enable = lib.mkIf itgr.home-cursor false;
+        ".icons/${homeConfig.home.pointerCursor.name}".enable = lib.mkIf itgr.home-cursor false;
+      };
       gtk.gtk2.configLocation = lib.mkIf itgr.gtk2 "${xdgConfig.configHome}/gtk-2.0/gtkrc";
       programs = {
         gpg.homedir = lib.mkIf itgr.gpg "${xdgConfig.configHome}/gnupg";
