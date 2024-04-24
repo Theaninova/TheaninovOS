@@ -44,9 +44,19 @@ in
             red = "#ff0000";
             green = "#00ff00";
             yellow = "#ffff00";
+            orange = "#ff8000";
             blue = "#0000ff";
             magenta = "#ff00ff";
             cyan = "#00ffff";
+
+            warn = {
+              color = "#ffff00";
+              blend = false;
+            };
+            ok = {
+              color = "#00ff00";
+              blend = false;
+            };
           };
         };
 
@@ -54,6 +64,10 @@ in
           kitty = {
             input_path = ./kitty.conf;
             output_path = "${homeCfg.xdg.configHome}/kitty/theme.conf";
+          };
+          nvim = {
+            input_path = ./nvim.vim;
+            output_path = "${homeCfg.xdg.configHome}/nvim/colors/matugen.vim";
           };
         };
       };

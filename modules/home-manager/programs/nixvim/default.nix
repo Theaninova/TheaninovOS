@@ -2,7 +2,7 @@
 let
   darkman = pkgs.vimUtils.buildVimPlugin {
     name = "darkman";
-    src = pkgs.buildGoModule rec {
+    src = pkgs.buildGoModule {
       pname = "darkman.nvim";
       version = "0.0.1";
       vendorHash = "sha256-HpyKzvKVN9hVRxxca4sdWRo91H32Ha9gxitr7Qg5MY8=";
@@ -81,36 +81,11 @@ in
     providers.wl-copy.enable = true;
   };
 
-  extraConfigVim = ''
-    if !exists("g:neovide")
-      hi Normal guibg=NONE ctermbg=NONE
-    endif
-    set noshowmode
-  '';
-
   extraConfigLua = builtins.readFile ./extra-config.lua;
-
-  colorschemes.catppuccin = {
-    enable = true;
-    settings = {
-      term_colors = true;
-      transparent_background = true;
-      background = {
-        dark = "frappe";
-        light = "latte";
-      };
-      integrations.native_lsp.underlines = {
-        errors = [ "undercurl" ];
-        warnings = [ "undercurl" ];
-      };
-      custom_highlights = builtins.readFile ./custom-highlights.lua;
-    };
-  };
 
   plugins = {
     lualine = {
       enable = true;
-      theme = "catppuccin";
       globalstatus = true;
       sectionSeparators = {
         left = "";
