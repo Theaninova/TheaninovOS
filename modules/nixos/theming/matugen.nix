@@ -83,6 +83,10 @@ in
             for i in $(pgrep -u "$USER" -x nvim); do
               kill -USR1 "$i"
             done
+
+            if command -v hyprctl &> /dev/null; then
+              hyprctl reload
+            fi
           '';
         })
       ];
@@ -133,6 +137,14 @@ in
           nvim = {
             input_path = ./nvim.vim;
             output_path = "${homeCfg.xdg.configHome}/nvim/colors/matugen.vim";
+          };
+          hyprland = {
+            input_path = ./hyprland.conf;
+            output_path = "${homeCfg.xdg.configHome}/hypr/theme.conf";
+          };
+          anyrun = {
+            input_path = ./anyrun.css;
+            output_path = "${homeCfg.xdg.configHome}/anyrun/theme.css";
           };
         };
       };

@@ -13,6 +13,9 @@
         enable = true;
         variables = [ "--all" ];
       };
+      extraConfig = ''
+        source=./theme.conf
+      '';
       settings = {
         env = [
           "XDG_SESSION_TYPE,wayland"
@@ -29,6 +32,10 @@
         general = {
           layout = "master";
           resize_on_border = true;
+          extend_border_grab_area = 2;
+          border_size = 2;
+          gaps_in = 12;
+          gaps_out = 24;
         };
         master = {
           orientation = "center";
@@ -91,6 +98,7 @@
           "ignorealpha 0.3, anyrun"
         ];
         decoration = {
+          rounding = 24;
           drop_shadow = "yes";
           shadow_range = 16;
           "col.shadow" = "rgba(00000044)";
