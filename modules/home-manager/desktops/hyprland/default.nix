@@ -21,9 +21,10 @@
           "GIO_EXTRA_MODULES,${pkgs.gnome.gvfs}/lib/gio/modules"
         ];
         exec-once = [
-          "systemctl --user start hyprland-session.target"
           "gnome-keyring-daemon --start --components=secrets"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
+          "${pkgs.swww}/bin/swww-daemon"
+          "theme init"
         ];
         general = {
           layout = "master";
@@ -119,8 +120,6 @@
       };
     };
 
-    shell.asztal.enable = true;
-
     services.kdeconnect = {
       enable = true;
       indicator = true;
@@ -145,27 +144,6 @@
       };
     };
 
-    services.darkman =
-      let
-        wallpaperPath = "${config.home.homeDirectory}/.local/state/wallpaper.jpg";
-      in
-      {
-        enable = false;
-        settings = {
-          lat = 52.52;
-          lng = 13.405;
-        };
-        darkModeScripts = {
-          kitty-theme = ''
-            ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Frappe
-          '';
-        };
-        lightModeScripts = {
-          kitty-theme = ''
-            ${pkgs.kitty}/bin/kitty +kitten themes --reload-in=all --config-file-name ${config.home.homeDirectory}/.config/kitty/current-colors.conf Catppuccin-Latte
-          '';
-        };
-      };
     programs.kitty = import ./kitty.nix { inherit pkgs; };
     programs.anyrun = import ./anyrun.nix { inherit pkgs; };
     services.udiskie.enable = true;
@@ -209,10 +187,6 @@
 
     gtk = {
       enable = true;
-      theme = {
-        name = "adw-gtk3-dark";
-        package = pkgs.adw-gtk3;
-      };
       #gtk3.extraCss = builtins.readFile ./gtk.css;
       #gtk4.extraCss = builtins.readFile ./gtk.css;
       iconTheme = {

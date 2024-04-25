@@ -7,7 +7,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     matugen.url = "github:Theaninova/matugen/custom-color-support";
-    ags.url = "github:Aylur/ags";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +15,6 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/hyprland";
   };
 
   outputs =
@@ -24,15 +22,13 @@
       nixpkgs,
       nur,
       home-manager,
-      ags,
       nixvim,
       anyrun,
-      hyprland,
       matugen,
       ...
     }@inputs:
     let
-      inherit (nixpkgs.lib) genAttrs listToAttrs;
+      inherit (nixpkgs.lib) genAttrs;
       eachSystem = genAttrs [ "x86_64-linux" ];
       legacyPackages = eachSystem (
         system:
@@ -42,20 +38,16 @@
             allowUnfree = true;
             allowUnsupportedSystem = true;
             experimental-features = "nix-command flakes";
-            substituters = [ "https://hyprland.cachix.org" ];
-            trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
           };
           overlays = [
             nur.overlay
             (final: prev: {
               anyrunPlugins = anyrun.packages.${prev.system};
-              ags = ags.packages.${prev.system}.default;
               matugen = matugen.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               darkman = prev.callPackage ./overlays/darkman { };
               cura = prev.callPackage ./overlays/cura { };
-              asztal = prev.callPackage ./overlays/asztal { };
             })
           ];
         }

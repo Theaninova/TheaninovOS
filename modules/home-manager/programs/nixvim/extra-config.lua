@@ -1,4 +1,3 @@
-require("darkman").setup()
 require("cmp-npm").setup({})
 require("rest-nvim").setup({})
 require("actions-preview").setup({})

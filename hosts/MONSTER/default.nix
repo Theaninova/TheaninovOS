@@ -50,6 +50,10 @@
   };
 
   theming.matugen.enable = true;
+  shell.components = {
+    waybar.enable = true;
+    dunst.enable = true;
+  };
   desktops = {
     hyprland.enable = true;
     # gamescope.enable = true;

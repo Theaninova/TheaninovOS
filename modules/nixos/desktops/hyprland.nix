@@ -6,23 +6,32 @@
   ...
 }:
 
-with lib;
-
 let
   cfg = config.desktops.hyprland;
 in
 {
   options.desktops.hyprland = {
-    enable = mkEnableOption (mdDoc "Enable a DE based on Hyprland");
+    enable = lib.mkEnableOption "Enable a DE based on Hyprland";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
+    environment = {
+      sessionVariables.NIXOS_OZONE_WL = "1";
+      systemPackages = with pkgs; [ glib ];
+    };
+
+    programs.hyprland.enable = true;
     xdg.portal = {
       enable = true;
-      extraPortals = [
-        pkgs.xdg-desktop-portal-gtk
-        pkgs.xdg-desktop-portal-kde
-      ];
+      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      config.common = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+        "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
+      };
     };
 
     services = {
@@ -51,12 +60,5 @@ in
       gnome.gnome-online-accounts.enable = true;
       gnome.evolution-data-server.enable = true;
     };
-
-    programs = {
-      hyprland.enable = true;
-      kdeconnect.enable = true;
-    };
-
-    environment.sessionVariables.NIXOS_OZONE_WL = "1";
   };
 }

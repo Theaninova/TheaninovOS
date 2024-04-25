@@ -30,6 +30,9 @@
 
     ./services/airprint.nix
 
+    ./shell/waybar.nix
+    ./shell/dunst.nix
+
     ./xdg/forced-compliance.nix
   ];
 }
