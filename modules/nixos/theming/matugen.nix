@@ -76,9 +76,9 @@ in
             else
               GTK_THEME="adw-gtk3-dark"
             fi
+            matugen image "$WALLPAPER" --mode "$MODE"
             dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
             dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
-            matugen image "$WALLPAPER" --mode "$MODE"
 
             for i in $(pgrep -u "$USER" -x nvim); do
               kill -USR1 "$i"
@@ -96,6 +96,11 @@ in
       programs.kitty.extraConfig = ''
         include ${homeCfg.xdg.configHome}/kitty/theme.conf
       '';
+
+      gtk = {
+        gtk3.extraCss = "@import './theme.css';";
+        gtk4.extraCss = "@import './theme.css';";
+      };
 
       xdg.configFile."matugen/config.toml".source = (pkgs.formats.toml { }).generate "matugen" {
         config = {
@@ -145,6 +150,18 @@ in
           anyrun = {
             input_path = ./anyrun.css;
             output_path = "${homeCfg.xdg.configHome}/anyrun/theme.css";
+          };
+          gtk3 = {
+            input_path = ./gtk.css;
+            output_path = "${homeCfg.xdg.configHome}/gtk-3.0/theme.css";
+          };
+          gtk4 = {
+            input_path = ./gtk.css;
+            output_path = "${homeCfg.xdg.configHome}/gtk-4.0/theme.css";
+          };
+          vesktop = {
+            input_path = ./discord-b.css;
+            output_path = "${homeCfg.xdg.configHome}/vesktop/themes/matugen.theme.css";
           };
         };
       };

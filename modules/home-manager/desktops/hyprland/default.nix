@@ -32,8 +32,8 @@
         general = {
           layout = "master";
           resize_on_border = true;
-          extend_border_grab_area = 2;
-          border_size = 2;
+          extend_border_grab_area = 4;
+          border_size = 1;
           gaps_in = 12;
           gaps_out = 24;
         };
@@ -83,13 +83,15 @@
             # Flameshot fixes
             "float,class:^(flameshot)$"
             "animation fade,class:^(flameshot)$"
+
+            "float,class:^(zenity)$"
           ];
         xwayland.force_zero_scaling = true;
         misc = {
           layers_hog_keyboard_focus = false;
           disable_splash_rendering = true;
           disable_hyprland_logo = true;
-          background_color = "0x000000";
+          background_color = "rgb(000000)";
           force_default_wallpaper = 0;
           vrr = 2;
         };
@@ -195,8 +197,6 @@
 
     gtk = {
       enable = true;
-      #gtk3.extraCss = builtins.readFile ./gtk.css;
-      #gtk4.extraCss = builtins.readFile ./gtk.css;
       iconTheme = {
         name = "Tela";
         package = pkgs.tela-icon-theme;

@@ -1,4 +1,7 @@
 box#main {
-  background: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.4);
+  background: alpha({{colors.surface.default.hex}}, 0.4);
+}
+
+* {
   color: {{colors.on_surface.default.hex}};
 }
