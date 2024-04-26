@@ -107,7 +107,7 @@ in
           reload_apps = true;
           reload_apps_list = {
             kitty = homeCfg.programs.kitty.enable;
-            waybar = homeCfg.programs.waybar.enable;
+            waybar = false;
             dunst = homeCfg.services.dunst.enable;
           };
 

@@ -19,13 +19,35 @@ in
       enable = true;
       settings = {
         mainBar = {
-          modules-center = [ "clock" ];
+          height = 24;
+          reload_style_on_change = true;
+          exclusive = false;
+
+          modules-center = [
+            "clock"
+            "systemd-failed-units"
+          ];
           modules-right = [
             "privacy"
+            "gamemode"
             "tray"
+            "custom/theme"
+            #"network"
+            #"pulseaudio"
+            #"bluetooth"
           ];
 
-          "custom/theme" = { };
+          "custom/theme" = {
+            return-type = "json";
+            exec = pkgs.writeShellScript "waybar-theme" ''
+              if [ $(theme mode) = "dark" ]; then
+                echo '{"text": "", "tooltip": "Switch to light theme"}'
+              else
+                echo '{"text": "", "tooltip": "Switch to dark theme"}'
+              fi
+            '';
+            on-click = "theme toggle";
+          };
         };
       };
       systemd = lib.mkIf config.desktops.hyprland.enable {
