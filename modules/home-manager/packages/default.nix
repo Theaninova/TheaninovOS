@@ -26,7 +26,7 @@
     #bitwarden
 
     # chat apps
-    (import ./threema-desktop.nix { inherit pkgs; })
+    threema-desktop
     (vesktop.override { withSystemVencord = false; })
     element-desktop
 
