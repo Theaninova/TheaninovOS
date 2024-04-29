@@ -6,7 +6,7 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    matugen.url = "github:Theaninova/matugen/custom-color-support";
+    matugen.url = "github:Theaninova/matugen/add-home-manager-module";
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,6 +77,7 @@
                 };
                 users.${username} = {
                   imports = [
+                    matugen.homeManagerModules.default
                     ./modules/home-manager
                     ./hosts/${hostname}/home.nix
                   ];

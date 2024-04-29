@@ -220,16 +220,16 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1714402324,
-        "narHash": "sha256-VVT4K/r7REVT1g/UF7xgpCuR9h61q9KG1KW1BbbT7YA=",
+        "lastModified": 1714427480,
+        "narHash": "sha256-m6iICMLTIfcD6BQMR03Y946f+tmb6pseew+ZVwqY/YI=",
         "owner": "Theaninova",
         "repo": "matugen",
-        "rev": "6bbb7a6e8047f27c35f6c69b8de1c3a59b87b6cd",
+        "rev": "1d4cb4ee1b407df5cb9eec89e54a8e9912ea5a5b",
         "type": "github"
       },
       "original": {
         "owner": "Theaninova",
-        "ref": "custom-color-support",
+        "ref": "add-home-manager-module",
         "repo": "matugen",
         "type": "github"
       }

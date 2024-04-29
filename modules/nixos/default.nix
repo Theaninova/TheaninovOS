@@ -22,8 +22,6 @@
 
     ./locales/theaninova.nix
 
-    ./theming/md3-evo.nix
-
     ./usecases/gaming.nix
     ./usecases/3d-printing.nix
     ./usecases/development.nix

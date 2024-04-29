@@ -18,6 +18,7 @@
     ./packages
     ./programs
     ./services
+    ./theme/md3-evo.nix
     ./desktops/hyprland
   ];
 }

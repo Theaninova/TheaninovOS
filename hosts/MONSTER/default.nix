@@ -49,7 +49,6 @@
     };
   };
 
-  theming.md3-evo.enable = true;
   shell.components = {
     waybar.enable = true;
     dunst.enable = true;
