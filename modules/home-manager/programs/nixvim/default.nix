@@ -4,15 +4,6 @@
   defaultEditor = true;
   vimAlias = true;
 
-  colorscheme = "matugen";
-  autoCmd = [
-    {
-      event = [ "Signal" ];
-      pattern = [ "SIGUSR1" ];
-      command = "colorscheme matugen";
-    }
-  ];
-
   opts = {
     number = true;
     relativenumber = true;
@@ -30,8 +21,6 @@
     undofile = true;
 
     scrolloff = 12;
-
-    termguicolors = true;
 
     hlsearch = false;
     incsearch = true;

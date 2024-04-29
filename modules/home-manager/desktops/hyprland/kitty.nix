@@ -8,8 +8,6 @@
     font_size 13
   '';
   settings = {
-    background_opacity = "0.8";
-    background_tint = "0.0";
     window_padding_width = 10;
   };
 }

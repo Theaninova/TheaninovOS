@@ -13,9 +13,6 @@
         enable = true;
         variables = [ "--all" ];
       };
-      extraConfig = ''
-        source=./theme.conf
-      '';
       settings = {
         env = [
           "XDG_SESSION_TYPE,wayland"
@@ -26,16 +23,10 @@
         exec-once = [
           "gnome-keyring-daemon --start --components=secrets"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
-          "${pkgs.swww}/bin/swww-daemon"
-          "theme init"
         ];
         general = {
           layout = "master";
           resize_on_border = true;
-          extend_border_grab_area = 4;
-          border_size = 1;
-          gaps_in = 12;
-          gaps_out = 24;
         };
         master = {
           orientation = "center";
@@ -100,21 +91,9 @@
           "ignorealpha 0.3, anyrun"
         ];
         decoration = {
-          rounding = 24;
           drop_shadow = "yes";
           shadow_range = 16;
           "col.shadow" = "rgba(00000044)";
-
-          dim_inactive = false;
-
-          blur = {
-            enabled = true;
-            size = 8;
-            passes = 3;
-            noise = 1.0e-2;
-            contrast = 0.9;
-            brightness = 0.8;
-          };
         };
         animations = {
           enabled = "yes";

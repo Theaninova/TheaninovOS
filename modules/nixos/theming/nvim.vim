@@ -1,12 +1,12 @@
 set background=dark
 
-let g:neovide_transparency = 0.8
-let g:neovide_padding_top = 12
-let g:neovide_padding_bottom = 12
-let g:neovide_padding_left = 12
-let g:neovide_padding_right = 12
-let g:neovide_floating_blur_amount_x = 16
-let g:neovide_floating_blur_amount_y = 16
+let g:neovide_transparency = {{custom.transparency}}
+let g:neovide_padding_top = {{custom.padding}}
+let g:neovide_padding_bottom = {{custom.padding}}
+let g:neovide_padding_left = {{custom.padding}}
+let g:neovide_padding_right = {{custom.padding}}
+let g:neovide_floating_blur_amount_x = {{custom.blur}}
+let g:neovide_floating_blur_amount_y = {{custom.blur}}
 let g:neovide_floating_shadow = 0
 
 if exists("g:neovide")
