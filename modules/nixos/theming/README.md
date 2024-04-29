@@ -2,6 +2,11 @@
 
 MD3 Evo is a theming system derived from the Material Design 3 color sytem.
 
+<div>
+  <img src="./dark.png">
+  <img src="./light.png">
+</div>
+
 ## Features
 
 - Wallpaper colors
