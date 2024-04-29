@@ -55,14 +55,6 @@
     mergetool_layout = "mr";
     mergetool_prefer_revision = "local";
 
-    neovide_transparency = 0.8;
-    neovide_padding_top = 10;
-    neovide_padding_bottom = 10;
-    neovide_padding_left = 10;
-    neovide_padding_right = 10;
-    neovide_floating_blur_amount_x = 10;
-    neovide_floating_blur_amount_y = 10;
-    neovide_floating_shadow = false;
     neovide_cursor_vfx_mode = "pixiedust";
   };
 

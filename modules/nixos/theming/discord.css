@@ -5,79 +5,43 @@
  * @description reactive material theme
  */
 
-@import url("https://clearvision.github.io/ClearVision-v6/main.css");
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/BasicBackground/BasicBackground.css);
 
 :root {
-  --text-normal: {{colors.on_surface.default.hex}};
-  --main-color: {{colors.primary.default.hex}};
-  --hover-color: {{colors.tertiary.default.hex}};
-  --success-color: {{colors.ok.default.hex}};
-  --danger-color: {{colors.error.default.hex}};
-  --url-color: var(--main-color);
-  --background-image: transparent;
-  --background-shading: 0%;
-  --background-position: center;
-  --background-size: cover;
-  --background-repeat: no-repeat;
-  --background-attachment: fixed;
-  --background-brightness: 100%;
-  --background-contrast: 100%;
-  --background-saturation: 100%;
-  --background-grayscale: 0%;
-  --background-invert: 0%;
-  --background-blur: 0px;
-  --background-overlay: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.8);
-  --user-popout-image: url("https://clearvision.github.io/images/sapphire.jpg");
-  --user-popout-position: center;
-  --user-popout-size: cover;
-  --user-popout-repeat: no-repeat;
-  --user-popout-attachment: fixed;
-  --user-popout-brightness: 100%;
-  --user-popout-contrast: 100%;
-  --user-popout-saturation: 100%;
-  --user-popout-grayscale: 0%;
-  --user-popout-invert: 0%;
-  --user-popout-blur: 3px;
-  --user-modal-image: url("https://clearvision.github.io/images/sapphire.jpg");
-  --user-modal-position: center;
-  --user-modal-size: cover;
-  --user-modal-repeat: no-repeat;
-  --user-modal-attachment: fixed;
-  --user-modal-brightness: 100%;
-  --user-modal-contrast: 100%;
-  --user-modal-saturation: 100%;
-  --user-modal-grayscale: 0%;
-  --user-modal-invert: 0%;
-  --user-modal-blur: 3px;
-  --home-icon: url("https://clearvision.github.io/icons/discord.svg");
-  --home-position: center;
-  --home-size: 40px;
-  --channel-unread: var(--main-color);
-  --channel-color: {{colors.on_surface.default.hex}};
-  --muted-color: {{colors.outline.default.hex}};
-  --online-color: {{colors.green.default.hex}};
-  --idle-color: {{colors.yellow.default.hex}};
-  --dnd-color: {{colors.red.default.hex}};
-  --streaming-color: {{colors.magenta.default.hex}};
-  --offline-color: {{colors.outline.default.hex}};
-  --main-font: NotoSans Nerd Font;
-  --code-font: FiraCode Nerd Font;
-  --channels-width: 220px;
-  --members-width: 240px;
-  --backdrop-overlay: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.8);
-  --backdrop-image: var(--background-image);
-  --backdrop-position: var(--background-position);
-  --backdrop-size: var(--background-size);
-  --backdrop-repeat: var(--background-repeat);
-  --backdrop-attachment: var(--background-attachment);
-  --backdrop-brightness: var(--background-brightness);
-  --backdrop-contrast: var(--background-contrast);
-  --backdrop-saturation: var(--background-saturation);
-  --backdrop-invert: var(--background-invert);
-  --backdrop-grayscale: var(--background-grayscale);
-  --backdrop-sepia: var(--background-sepia);
-  --backdrop-blur: var(--background-blur);
-  --bd-blue: var(--main-color);
-  --bd-blue-hover: var(--hover-color);
-  --bd-blue-active: var(--hover-color);
+  --transparencycolor: {{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}};
+  --transparencyalpha: 0.8;
+  --messagetransparency: 0;
+  --guildchanneltransparency: 0;
+  --chatinputtransparency: 0;
+  --memberlisttransparency: 0;
+  --accentcolor: {{colors.surface_variant.default.red}}, {{colors.surface_variant.default.green}}, {{colors.surface_variant.default.blue}};
+
+  --settingsicons: 1;
+  --font: "NotoSans Nerd Font";
+  --textshadow: transparent;
+
+  --background: transparent;
+  --backgroundposition: center;
+  --backgroundsize: cover;
+  --backgroundblur: 0;
+
+  --popout: var(--background);
+  --popoutposition: var(--backgroundposition);
+  --popoutsize: var(--backgroundsize);
+  --popoutblur: var(--backgroundblur);
+
+  --backdrop: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.8);
+  --backdropposition: center;
+  --backdropsize: cover: --backdropblur: 0;
+
+  --textbrightest: {{colors.primary.default.red}}, {{colors.primary.default.green}}, {{colors.primary.default.blue}};
+  --textbrighter: {{colors.on_surface.default.red}}, {{colors.on_surface.default.green}}, {{colors.on_surface.default.blue}};
+  --textbright: {{colors.tertiary.default.red}}, {{colors.tertiary.default.green}}, {{colors.tertiary.default.blue}};
+  --textdark: {{colors.on_surface_variant.default.red}}, {{colors.on_surface_variant.default.green}}, {{colors.on_surface_variant.default.blue}};
+  --textdarker: {{colors.secondary.default.red}}, {{colors.secondary.default.green}}, {{colors.secondary.default.blue}};
+  --textdarkest: {{colors.outline.default.red}}, {{colors.outline.default.green}}, {{colors.outline.default.blue}};
+
+  --text-link: {{colors.primary.default.red}}, {{colors.primary.default.green}}, {{colors.primary.default.blue}};
+
+  --version1_0_5: none; /* DO NOT CHANGE THIS VARIABLE , USED TO HIDE UPDATE NOTICE										*/
 }

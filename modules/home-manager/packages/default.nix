@@ -27,7 +27,8 @@
 
     # chat apps
     threema-desktop
-    (vesktop.override { withSystemVencord = false; })
+    vesktop
+    discord
     element-desktop
 
     # office

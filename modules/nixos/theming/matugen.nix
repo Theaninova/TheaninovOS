@@ -76,17 +76,20 @@ in
             else
               GTK_THEME="adw-gtk3-dark"
             fi
+
             matugen image "$WALLPAPER" --mode "$MODE"
+            sed -i "s/set background=dark/set background=$MODE/g" ${homeCfg.xdg.configHome}/nvim/colors/matugen.vim
+
             dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
             dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
-
-            for i in $(pgrep -u "$USER" -x nvim); do
-              kill -USR1 "$i"
-            done
 
             if command -v hyprctl &> /dev/null; then
               hyprctl reload
             fi
+
+            for i in $(pgrep -u "$USER" -x nvim); do
+              kill -USR1 "$i"
+            done
           '';
         })
       ];
@@ -160,7 +163,7 @@ in
             output_path = "${homeCfg.xdg.configHome}/gtk-4.0/theme.css";
           };
           vesktop = {
-            input_path = ./discord-b.css;
+            input_path = ./discord.css;
             output_path = "${homeCfg.xdg.configHome}/vesktop/themes/matugen.theme.css";
           };
         };
