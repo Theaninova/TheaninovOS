@@ -52,6 +52,122 @@ in
       default = 16;
       description = "The blur amount of windows";
     };
+    semantic = {
+      blend = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Blend the colors";
+      };
+      danger = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff0000";
+        description = "The color of danger";
+      };
+      warning = lib.mkOption {
+        type = lib.types.str;
+        default = "#ffff00";
+        description = "The color of warning";
+      };
+      success = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ff00";
+        description = "The color of success";
+      };
+      info = lib.mkOption {
+        type = lib.types.str;
+        default = "#0000ff";
+        description = "The color of info";
+      };
+    };
+    syntax = {
+      blend = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Blend the colors";
+      };
+      keywords = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff8000";
+        description = "The color of keywords";
+      };
+      functions = lib.mkOption {
+        type = lib.types.str;
+        default = "#0000ff";
+        description = "The color of functions";
+      };
+      properties = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff00ff";
+        description = "The color of properties";
+      };
+      constants = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff00ff";
+        description = "The color of constants";
+      };
+      strings = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ff00";
+        description = "The color of variables";
+      };
+      numbers = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ffff";
+        description = "The color of numbers";
+      };
+      structures = lib.mkOption {
+        type = lib.types.str;
+        default = "#ffff00";
+        description = "The color of structures";
+      };
+      types = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ffff";
+        description = "The color of types";
+      };
+    };
+    ansi = {
+      blend = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Blend the colors";
+      };
+      red = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff0000";
+        description = "The color of red";
+      };
+      green = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ff00";
+        description = "The color of green";
+      };
+      yellow = lib.mkOption {
+        type = lib.types.str;
+        default = "#ffff00";
+        description = "The color of yellow";
+      };
+      orange = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff8000";
+        description = "The color of orange";
+      };
+      blue = lib.mkOption {
+        type = lib.types.str;
+        default = "#0000ff";
+        description = "The color of blue";
+      };
+      magenta = lib.mkOption {
+        type = lib.types.str;
+        default = "#ff00ff";
+        description = "The color of magenta";
+      };
+      cyan = lib.mkOption {
+        type = lib.types.str;
+        default = "#00ffff";
+        description = "The color of cyan";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -185,24 +301,36 @@ in
             set_wallpaper = true;
             wallpaper_tool = "Swww";
 
-            custom_colors = {
-              red = "#ff0000";
-              green = "#00ff00";
-              yellow = "#ffff00";
-              orange = "#ff8000";
-              blue = "#0000ff";
-              magenta = "#ff00ff";
-              cyan = "#00ffff";
+            custom_colors =
+              let
+                mkColor = category: color: {
+                  color = cfg.${category}.${color};
+                  blend = cfg.${category}.blend;
+                };
+              in
+              {
+                red = mkColor "ansi" "red";
+                green = mkColor "ansi" "green";
+                yellow = mkColor "ansi" "yellow";
+                orange = mkColor "ansi" "orange";
+                blue = mkColor "ansi" "blue";
+                magenta = mkColor "ansi" "magenta";
+                cyan = mkColor "ansi" "cyan";
 
-              warn = {
-                color = "#ffff00";
-                blend = false;
+                keywords = mkColor "syntax" "keywords";
+                functions = mkColor "syntax" "functions";
+                constants = mkColor "syntax" "constants";
+                properties = mkColor "syntax" "properties";
+                strings = mkColor "syntax" "strings";
+                numbers = mkColor "syntax" "numbers";
+                structures = mkColor "syntax" "structures";
+                types = mkColor "syntax" "types";
+
+                danger = mkColor "semantic" "danger";
+                warning = mkColor "semantic" "warning";
+                success = mkColor "semantic" "success";
+                info = mkColor "semantic" "info";
               };
-              ok = {
-                color = "#00ff00";
-                blend = false;
-              };
-            };
 
             custom_keywords = {
               padding = builtins.toString cfg.padding;

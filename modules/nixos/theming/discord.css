@@ -9,7 +9,7 @@
 
 :root {
   --transparencycolor: {{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}};
-  --transparencyalpha: 0.8;
+  --transparencyalpha: {{custom.transparency}};
   --messagetransparency: 0;
   --guildchanneltransparency: 0;
   --chatinputtransparency: 0;
@@ -30,7 +30,7 @@
   --popoutsize: var(--backgroundsize);
   --popoutblur: var(--backgroundblur);
 
-  --backdrop: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, 0.8);
+  --backdrop: rgba({{colors.surface.default.red}}, {{colors.surface.default.green}}, {{colors.surface.default.blue}}, {{custom.transparency}});
   --backdropposition: center;
   --backdropsize: cover: --backdropblur: 0;
 
