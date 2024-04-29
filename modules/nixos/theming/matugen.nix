@@ -24,7 +24,7 @@ in
         "rainbow"
         "tonal-spot"
       ];
-      default = "content";
+      default = "tonal-spot";
       description = "The flavour of the theme";
     };
     contrast = lib.mkOption {
@@ -168,9 +168,11 @@ in
       };
 
       xdg.configFile."matugen/config.toml" = {
-        onChange = ''
-          theme init
-        '';
+        /*
+          onChange = ''
+            theme init
+          '';
+        */
         source = (pkgs.formats.toml { }).generate "matugen" {
           config = {
             reload_apps = true;

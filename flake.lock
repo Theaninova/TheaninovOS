@@ -220,11 +220,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1713978374,
-        "narHash": "sha256-6hsDcW5Ke1429SFjRgDNhmaOhdxDLteMeHXdz0Petqo=",
+        "lastModified": 1714402324,
+        "narHash": "sha256-VVT4K/r7REVT1g/UF7xgpCuR9h61q9KG1KW1BbbT7YA=",
         "owner": "Theaninova",
         "repo": "matugen",
-        "rev": "c50741a6432ac5ed1719737fc96051d2da878057",
+        "rev": "6bbb7a6e8047f27c35f6c69b8de1c3a59b87b6cd",
         "type": "github"
       },
       "original": {
