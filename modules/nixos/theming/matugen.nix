@@ -116,7 +116,7 @@ in
             fi
 
             matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
-            sed -i "s/set background=dark/set background=$MODE/g" ${homeCfg.xdg.configHome}/nvim/colors/matugen.vim
+            sed -i "s/set background=dark/set background=$MODE/g" ${homeCfg.xdg.configHome}/nvim/colors/md3-evo.vim
 
             dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
             dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
@@ -147,7 +147,7 @@ in
           {
             event = [ "Signal" ];
             pattern = [ "SIGUSR1" ];
-            command = "colorscheme matugen";
+            command = "colorscheme md3-evo";
           }
         ];
       };
