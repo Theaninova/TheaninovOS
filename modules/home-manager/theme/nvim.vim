@@ -163,6 +163,8 @@ hi Function guifg={{colors.functions.default.hex}}
 hi Structure guifg={{colors.structures.default.hex}}
 hi def link PreProc Structure
 hi def link Tag Structure
+hi def link @attribute.typescript Structure
+
 hi Type gui=none guifg={{colors.types.default.hex}}
 hi def link @lsp.type.interface Type
 
