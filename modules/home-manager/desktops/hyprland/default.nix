@@ -41,10 +41,6 @@
         bind = import ./keybinds.nix;
         bindm = import ./mousebinds.nix;
         bindr = [ "SUPER,SUPER_L,exec,pkill anyrun || anyrun" ];
-        monitor = [
-          "DP-1,highrr,0x0,1"
-          "DP-1,addreserved,250,0,0,0"
-        ];
         workspace = [
           "special:calc,border:false,gapsout:200,on-created-empty:[noanim;silent] kitty -e qalc"
         ];
