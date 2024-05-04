@@ -8,6 +8,7 @@
   };
   extraConfig = {
     pull.rebase = true;
+    init.defaultBranch = "main";
     merge = {
       tool = "nvim-mergetool";
       conflictstyle = "diff3";

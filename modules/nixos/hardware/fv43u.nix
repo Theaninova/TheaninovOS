@@ -19,10 +19,21 @@ in
     hardware.gbmonctl.enable = true;
     boot.kernelParams = [ "video=3840x2160@144" ];
 
-    home-manager.users.${username}.wayland.windowManager.hyprland.settings.monitor = [
-      "DP-1,highrr,0x0,1"
-      "DP-1,addreserved,300,0,0,0"
-    ];
+    home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
+      general.layout = "master";
+      master = {
+        orientation = "center";
+        new_is_master = true;
+        always_center_master = true;
+        mfact = 0.4;
+      };
+      monitor = [
+        "DP-1,highrr,0x0,1"
+        "DP-1,addreserved,340,0,0,0"
+      ];
+      xwayland.force_zero_scaling = true;
+      misc.vrr = 2; # VA suffers from VRR flicker
+    };
 
     programs.steam.gamescopeSession = {
       env = {

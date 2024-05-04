@@ -24,16 +24,6 @@
           "gnome-keyring-daemon --start --components=secrets"
           "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1"
         ];
-        general = {
-          layout = "master";
-          resize_on_border = true;
-        };
-        master = {
-          orientation = "center";
-          new_is_master = true;
-          always_center_master = true;
-          mfact = 0.4;
-        };
         input = {
           accel_profile = "flat";
           kb_layout = "cc1-thea";
@@ -73,14 +63,12 @@
 
             "float,class:^(zenity)$"
           ];
-        xwayland.force_zero_scaling = true;
         misc = {
           layers_hog_keyboard_focus = false;
           disable_splash_rendering = true;
           disable_hyprland_logo = true;
           background_color = "rgb(000000)";
           force_default_wallpaper = 0;
-          vrr = 2;
         };
         layerrule = [
           "blur, anyrun"

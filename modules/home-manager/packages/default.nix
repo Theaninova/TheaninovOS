@@ -7,8 +7,6 @@
     lorri
     vulnix
 
-    matugen # TODO
-
     # browsers
     chromium
     brave
@@ -42,6 +40,8 @@
     audacity
     pinta
     kdePackages.kdenlive
+    losslesscut-bin
+    shotcut
     blender-hip
 
     # development

@@ -68,6 +68,7 @@
     hid-fanatecff.enable = true;
 
     enableAllFirmware = true;
+    sane.enable = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true;
@@ -98,6 +99,8 @@
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
+      "scanner"
+      "lp"
       "networkmanager"
       "audio"
       "video"
