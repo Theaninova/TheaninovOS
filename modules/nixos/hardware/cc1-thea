@@ -4,13 +4,13 @@ xkb_symbols "cc1-thea"
   include "level3(ralt_switch)"
 
   key <AE11> {[minus, underscore, at]};
-  key <AE12> {[equal, question, ssharp]};
+  key <AE12> {[equal, plus, mu]};
   key <LatQ> {[q, Q, asterisk]};
   key <LatW> {[w, W, 9]};
   key <LatE> {[e, E, braceleft]};
   key <LatR> {[r, R, 1]};
   key <LatT> {[t, T, braceright]};
-  key <LatY> {[y, Y, bar]};
+  key <LatY> {[y, Y, ssharp]};
   key <LatU> {[u, U, 5]};
   key <LatI> {[i, I, exclam]};
   key <LatO> {[o, O, 3]};
@@ -21,19 +21,20 @@ xkb_symbols "cc1-thea"
   key <LatF> {[f, F, 6]};
   key <LatG> {[g, G, asciicircum]};
   key <LatH> {[h, H, bracketright]};
-  key <LatJ> {[j, J, percent]};
+  key <LatJ> {[j, J, EuroSign]};
   key <LatK> {[k, K, 7]};
-  key <LatL> {[l, L, slash]};
-  key <AC10> {[semicolon, colon, dollar, EuroSign]};
+  key <LatL> {[l, L, percent]};
+  key <AC10> {[semicolon, colon, dollar]};
   key <AC11> {[apostrophe, quotedbl, ampersand]};
   key <LatZ> {[z, Z, dead_diaeresis]};
-  key <LatX> {[x, X, plus]};
+  key <LatX> {[x, X, numbersign]};
   key <LatC> {[c, C, parenleft]};
   key <LatV> {[v, V, less]};
   key <LatB> {[b, B, 8]};
   key <LatN> {[n, N, 2]};
-  key <LatM> {[m, M, bracketleft, mu]};
-  key <AB08> {[comma, numbersign, grave]};
-  key <AB09> {[period, asciitilde, backslash]};
+  key <LatM> {[m, M, bracketleft]};
+  key <AB08> {[comma, degree, grave]};
+  key <AB09> {[period, asciitilde, bar]};
+  key <AB10> {[slash, question, backslash]};
 };
   

@@ -21,7 +21,7 @@ in
         mainBar = {
           height = 24;
           reload_style_on_change = true;
-          exclusive = false;
+          exclusive = true;
 
           modules-center = [
             "clock"

@@ -3,7 +3,7 @@
   imports = [ ./hardware-configuration.nix ];
 
   nix = {
-    package = pkgs.nixVersions.unstable;
+    package = pkgs.nixVersions.git;
     settings.experimental-features = [
       "nix-command"
       "flakes"
@@ -63,7 +63,7 @@
     amdgpu.preset.default.enable = true;
     audio.preset.pipewire.enable = true;
     cc1.enable = true;
-    fv43u.enable = true;
+    q3279vwf.enable = true;
     virtual-camera.enable = true;
     hid-fanatecff.enable = true;
 
