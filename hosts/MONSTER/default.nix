@@ -28,12 +28,10 @@
     loader = {
       systemd-boot = {
         enable = true;
-        editor = false;
         configurationLimit = 10;
       };
       efi.canTouchEfiVariables = true;
     };
-    supportedFilesystems = [ "ntfs" ];
   };
 
   xdg.forced-compliance.enable = true;
@@ -141,30 +139,6 @@
       enable = true;
       plugins = with pkgs; [ networkmanager-openconnect ];
     };
-
-    hosts = {
-      "192.168.0.219" = [ "kookaborrow" ];
-      "192.168.0.1" = [ "router" ];
-    };
-  };
-
-  fileSystems."/mnt/media" = {
-    device = "kookaborrow:/media";
-    fsType = "nfs";
-    options = [
-      "x-systemd-automount"
-      "noauto"
-    ];
-  };
-
-  fileSystems."/run/media/theaninova/heart-drive" = {
-    device = "/dev/sdb2";
-    fsType = "ntfs";
-  };
-
-  fileSystems."/run/media/theaninova/windows" = {
-    device = "/dev/sda2";
-    fsType = "ntfs";
   };
 
   system.stateVersion = "24.05";

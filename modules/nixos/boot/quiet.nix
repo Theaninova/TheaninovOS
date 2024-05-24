@@ -14,7 +14,7 @@ in
     boot = {
       loader.timeout = 0;
 
-      plymouth.enable = true;
+      # plymouth.enable = true;
 
       kernelParams = [
         "quiet"
