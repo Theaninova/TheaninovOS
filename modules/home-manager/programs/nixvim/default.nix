@@ -420,7 +420,6 @@
   ];
   extraPlugins = with pkgs.vimPlugins; [
     vim-mergetool
-    rest-nvim
     plenary-nvim
     actions-preview-nvim
   ];

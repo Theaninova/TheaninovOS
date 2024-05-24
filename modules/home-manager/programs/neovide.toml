@@ -3,7 +3,7 @@ srgb = true
 
 [font]
 normal = ["FiraCode Nerd Font"]
-size = 16
+size = 13
 edging = "subpixelantialias"
 
 [font.features]
