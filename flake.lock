@@ -217,11 +217,11 @@
         "systems": "systems"
       },
       "locked": {
-        "lastModified": 1714427782,
-        "narHash": "sha256-Wn9klbm8qK4cH3IAqf0lfSQMLVFQlWNSVi9lA7rzgjY=",
+        "lastModified": 1716548249,
+        "narHash": "sha256-9jvSsYOCYpG7JN1YDdptu19EhG+fZuX278IbiTJ7814=",
         "owner": "Theaninova",
         "repo": "matugen",
-        "rev": "37196e2f5372be6eb278db9a66eb6dcf812bb3f6",
+        "rev": "f79700eb42e5a6b7062ccdfcec3956e26573fc01",
         "type": "github"
       },
       "original": {
@@ -254,11 +254,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1691186842,
-        "narHash": "sha256-wxBVCvZUwq+XS4N4t9NqsHV4E64cPVqQ2fdDISpjcw0=",
+        "lastModified": 1716330097,
+        "narHash": "sha256-8BO3B7e3BiyIDsaKA0tY8O88rClYRTjvAp66y+VBUeU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "18036c0be90f4e308ae3ebcab0e14aae0336fe42",
+        "rev": "5710852ba686cc1fd0d3b8e22b3117d43ba374c2",
         "type": "github"
       },
       "original": {
