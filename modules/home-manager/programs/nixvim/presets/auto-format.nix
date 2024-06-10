@@ -24,6 +24,10 @@ in
           else
             vim.g.${cfg.varName} = not vim.g.${cfg.varName}
           end
+          local lualine, lib = pcall(require, 'lualine')
+          if lualine then
+            lib.refresh()
+          end
         end
       '';
 

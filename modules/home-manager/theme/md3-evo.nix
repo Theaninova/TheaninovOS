@@ -257,9 +257,13 @@ in
         {
           event = [ "Signal" ];
           pattern = [ "SIGUSR1" ];
-          command = "colorscheme md3-evo";
+          command = # vim
+            "colorscheme md3-evo";
+          nested = true;
         }
       ];
+      plugins.lualine.theme.__raw = # lua
+        "function() return vim.g.lualine_theme end";
     };
 
     gtk = {

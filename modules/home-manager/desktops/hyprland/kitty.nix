@@ -9,5 +9,6 @@
   '';
   settings = {
     window_padding_width = 10;
+    text_composition_strategy = "1.0 0";
   };
 }

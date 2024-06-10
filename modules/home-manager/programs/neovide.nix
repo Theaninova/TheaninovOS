@@ -33,6 +33,14 @@
   programs.nixvim = {
     extraConfigLua = # lua
       "if vim.g.neovide then vim.opt.linespace = -1 end";
-    globals.neovide_cursor_vfx_mode = "pixiedust";
+    globals = {
+      neovide_text_gamma = 0.0;
+      neovide_text_contrast = 0.0;
+      neovide_position_animation_length = 0.3;
+      neovide_remember_window_size = false;
+      neovide_hide_mouse_when_typing = true;
+      experimental_layer_grouping = true;
+      neovide_cursor_vfx_mode = "pixiedust";
+    };
   };
 }

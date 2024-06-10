@@ -13,7 +13,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua = # lua
+    extraConfigLuaPre = # lua
       ''
         require("actions-preview").setup({})
 

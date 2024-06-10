@@ -37,6 +37,7 @@
     lazygit.enable = true;
     mergetool.enable = true;
     trouble.enable = true;
+    undotree.enable = true;
     base = {
       completion.enable = true;
       diagnostics.enable = true;
