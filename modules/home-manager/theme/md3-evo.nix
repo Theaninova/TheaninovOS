@@ -263,8 +263,10 @@ in
     };
 
     gtk = {
-      gtk3.extraCss = "@import './theme.css';";
-      gtk4.extraCss = "@import './theme.css';";
+      gtk3.extraCss = # css
+        "@import './theme.css';";
+      gtk4.extraCss = # css
+        "@import './theme.css';";
     };
 
     wayland.windowManager.hyprland = {

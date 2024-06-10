@@ -14,9 +14,8 @@
       conflictstyle = "diff3";
     };
     mergetool.nvim-mergetool = {
-      cmd = ''
-        nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"
-      '';
+      cmd = # sh
+        ''nvim -f -c "MergetoolStart" "$MERGED" "$BASE" "$LOCAL" "$REMOTE"'';
       trustExitCode = true;
     };
     mergetool.prompt = false;
