@@ -55,5 +55,6 @@
     ranger
     neofetch
     filezilla
+    # rquickshare
   ];
 }

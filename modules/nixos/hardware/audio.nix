@@ -11,10 +11,11 @@ let
 in
 {
   options.hardware.audio.preset.pipewire = {
-    enable = mkEnableOption "Enable pipewire with sane defaults";
+    enable = mkEnableOption "pipewire with sane defaults";
   };
 
   config = mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [ pavucontrol ];
     hardware.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

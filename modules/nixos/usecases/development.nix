@@ -13,6 +13,7 @@ let
 in
 {
   imports = [
+    ./development/android.nix
     ./development/angular.nix
     ./development/svelte.nix
     ./development/docker.nix

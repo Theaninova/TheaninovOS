@@ -46,6 +46,7 @@
               matugen = matugen.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
+              rquickshare = prev.callPackage ./overlays/rquickshare { };
               cura = prev.callPackage ./overlays/cura { };
             })
           ];

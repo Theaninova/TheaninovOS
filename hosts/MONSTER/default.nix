@@ -15,10 +15,6 @@
     };
   };
 
-  # I'm not happy about this but if I try to get ESP IDF working
-  # on nix for any longer I'm gonna lose my sanity
-  programs.nix-ld.enable = true;
-
   # Bootloader.
   boot = {
     quiet.enable = true;
@@ -42,6 +38,7 @@
     development = {
       enable = true;
       angular.enable = true;
+      android.enable = true;
       svelte.enable = true;
       docker.enable = true;
     };
@@ -103,8 +100,8 @@
       "audio"
       "video"
       "plugdev"
-      "adbusers"
       "cdrom"
+      "kvm"
     ];
   };
 

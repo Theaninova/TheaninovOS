@@ -13,8 +13,8 @@
   imports = [
     inputs.nixvim.homeManagerModules.nixvim
     inputs.anyrun.homeManagerModules.default
+    ./programs/nixvim/presets
     ./programs/neovide.nix
-    # ./default-apps.nix
     ./packages
     ./programs
     ./services
