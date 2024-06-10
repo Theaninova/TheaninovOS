@@ -14,10 +14,14 @@
     maximized = false;
     fork = true;
     font = {
-      normal = [ "FiraCode Nerd Font" ];
-      size = 12.5;
+      normal = [
+        "Fira Code"
+        "Symbols Nerd Font Mono"
+      ];
+      size = 12.75;
       edging = "subpixelantialias";
-      features."FiraCode Nerd Font" = [
+      hinting = "full";
+      features."Fira Code" = [
         "+zero"
         "+onum"
         "+ss04"
@@ -31,8 +35,8 @@
     };
   };
   programs.nixvim = {
-    extraConfigLua = # lua
-      "if vim.g.neovide then vim.opt.linespace = -1 end";
+    #extraConfigLua = # lua
+    #  "if vim.g.neovide then vim.opt.linespace = -1 end";
     globals = {
       neovide_text_gamma = 0.0;
       neovide_text_contrast = 0.0;

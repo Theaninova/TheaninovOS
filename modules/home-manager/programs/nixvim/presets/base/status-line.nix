@@ -24,8 +24,8 @@ in
         enable = true;
         globalstatus = true;
         sectionSeparators = {
-          left = "";
-          right = "";
+          left = ""; # "";
+          right = ""; # "";
         };
         componentSeparators = {
           left = "┊";
@@ -36,8 +36,8 @@ in
             {
               name = "mode";
               separator = {
-                right = "";
-                left = "";
+                right = ""; # "";
+                left = ""; # "";
               };
               icon = "";
             }
@@ -47,8 +47,8 @@ in
             {
               name = "location";
               separator = {
-                right = "";
-                left = "";
+                right = ""; # "";
+                left = ""; # "";
               };
             }
           ];
