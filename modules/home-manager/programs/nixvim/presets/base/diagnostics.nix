@@ -42,16 +42,15 @@ in
         key = "<leader>sa";
         mode = "n";
         options.silent = true;
-        lua = true;
-        action = # lua
+        action.__raw = # lua
           "require('actions-preview').code_actions";
       }
       {
         key = "<leader>sx";
         mode = "n";
         options.silent = true;
-        lua = true;
-        action = "vim.lsp.buf.format";
+        action.__raw = # lua
+          "vim.lsp.buf.format";
       }
       {
         key = "<leader>sR";
@@ -63,8 +62,8 @@ in
         key = "<leader>sn";
         mode = "n";
         options.silent = true;
-        action = "vim.lsp.buf.hover";
-        lua = true;
+        action.__raw = # lua
+          "vim.lsp.buf.hover";
       }
     ];
     plugins = {

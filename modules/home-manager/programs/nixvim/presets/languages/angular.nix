@@ -21,8 +21,8 @@ in
               "--ngProbeLocations"
               ""
             ];
-            on_new_config = {
-              __raw = ''
+            on_new_config.__raw = # lua
+              ''
                 function(new_config, new_root_dir)
                   new_config.cmd = {
                     new_root_dir .. "/node_modules/@angular/language-server/bin/ngserver",
@@ -34,7 +34,6 @@ in
                   }
                 end
               '';
-            };
             filetypes = [
               "typescript"
               "html"
@@ -43,15 +42,14 @@ in
               "angular"
               "html.angular"
             ];
-            on_attach = {
-              __raw = ''
+            on_attach.__raw = # lua
+              ''
                 function(client, bufnr)
                   if vim.bo[bufnr].filetype == "html" then
                     vim.bo[bufnr].filetype = "angular"
                   end
                 end
               '';
-            };
           };
         }
       ];

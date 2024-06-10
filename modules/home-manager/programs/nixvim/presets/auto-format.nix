@@ -16,20 +16,16 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    userCommands.${cfg.commandName} = {
-      command = {
-        __raw = # lua
-          ''
-            function(args)
-              if args.bang then
-                vim.b.${cfg.varName} = not vim.b.${cfg.varName}
-              else
-                vim.g.${cfg.varName} = not vim.g.${cfg.varName}
-              end
-            end
-          '';
-      };
-    };
+    userCommands.${cfg.commandName}.command.__raw = # lua
+      ''
+        function(args)
+          if args.bang then
+            vim.b.${cfg.varName} = not vim.b.${cfg.varName}
+          else
+            vim.g.${cfg.varName} = not vim.g.${cfg.varName}
+          end
+        end
+      '';
 
     keymaps = [
       {

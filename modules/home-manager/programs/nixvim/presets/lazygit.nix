@@ -42,16 +42,12 @@ in
         end
       '';
 
-    userCommands.${cfg.commandName} = {
-      command = {
-        __raw = # lua
-          ''
-            function()
-              LazygitTerminal:toggle()
-            end
-          '';
-      };
-    };
+    userCommands.${cfg.commandName}.command.__raw = # lua
+      ''
+        function()
+          LazygitTerminal:toggle()
+        end
+      '';
 
     keymaps = [
       {

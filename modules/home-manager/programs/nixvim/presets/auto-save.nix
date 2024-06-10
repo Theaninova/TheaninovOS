@@ -47,18 +47,16 @@ in
 
     userCommands.${cfg.commandName} = {
       bang = true;
-      command = {
-        __raw = # lua
-          ''
-            function(args)
-              if args.bang then
-                vim.b.${cfg.varName} = not vim.b.${cfg.varName}
-              else
-                vim.g.${cfg.varName} = not vim.g.${cfg.varName}
-              end
+      command.__raw = # lua
+        ''
+          function(args)
+            if args.bang then
+              vim.b.${cfg.varName} = not vim.b.${cfg.varName}
+            else
+              vim.g.${cfg.varName} = not vim.g.${cfg.varName}
             end
-          '';
-      };
+          end
+        '';
     };
 
     keymaps = [
@@ -85,11 +83,12 @@ in
         };
       };
 
-      neo-tree.eventHandlers.window_before_open = ''
-        function()
-          AutoSave()
-        end
-      '';
+      neo-tree.eventHandlers.window_before_open = # lua
+        ''
+          function()
+            AutoSave()
+          end
+        '';
 
       lualine.sections.lualine_x = lib.mkOrder 700 [
         "(vim.g.${cfg.varName} or vim.b.${cfg.varName}) and '󱙃' or nil"

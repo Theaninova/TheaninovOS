@@ -15,21 +15,24 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua = lib.mkIf cfg.npm ''
-      require("cmp-npm").setup({})
-    '';
+    extraConfigLua =
+      lib.mkIf cfg.npm # lua
+        ''
+          require("cmp-npm").setup({})
+        '';
     plugins = {
       lspkind = lib.mkIf cfg.npm {
-        cmp.after = ''
-          function(entry, vim_item, kind)
-            if entry.source.name == "npm" then
-              kind.kind = ""
-              kind.kind_hl_group = "CmpItemKindNpm"
+        cmp.after = # lua
+          ''
+            function(entry, vim_item, kind)
+              if entry.source.name == "npm" then
+                kind.kind = ""
+                kind.kind_hl_group = "CmpItemKindNpm"
+              end
+              kind.kind = kind.kind .. " "
+              return kind
             end
-            kind.kind = kind.kind .. " "
-            return kind
-          end
-        '';
+          '';
       };
       cmp.settings.sources = lib.mkIf cfg.npm [
         {

@@ -9,10 +9,8 @@ in
 
   config = lib.mkIf cfg.enable {
     opts = {
-      undodir = {
-        __raw = # lua
-          "os.getenv('HOME') .. '/.config/nvim/undodir'";
-      };
+      undodir.__raw = # lua
+        "os.getenv('HOME') .. '/.config/nvim/undodir'";
       undofile = true;
     };
     plugins = {
