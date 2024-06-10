@@ -22,7 +22,8 @@
     };
   };
   programs.nixvim = {
-    extraConfigLua = "if vim.g.neovide then vim.opt.linespace = -1 end";
+    extraConfigLua = # lua
+      "if vim.g.neovide then vim.opt.linespace = -1 end";
     globals.neovide_cursor_vfx_mode = "pixiedust";
   };
 }

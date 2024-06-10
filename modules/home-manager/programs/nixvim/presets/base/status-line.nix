@@ -8,11 +8,18 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    opts.showmode = false;
     plugins = {
       notify = {
         enable = true;
-        backgroundColour = "#000000";
+        stages = "static";
       };
+      telescope = {
+        enable = true;
+        keymaps."<leader>n" = # vim
+          "notify";
+      };
+      which-key.registrations."<leader>n" = "Notifications";
       lualine = {
         enable = true;
         globalstatus = true;

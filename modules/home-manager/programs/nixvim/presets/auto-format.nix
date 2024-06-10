@@ -18,15 +18,16 @@ in
   config = lib.mkIf cfg.enable {
     userCommands.${cfg.commandName} = {
       command = {
-        __raw = ''
-          function(args)
-            if args.bang then
-              vim.b.${cfg.varName} = not vim.b.${cfg.varName}
-            else
-              vim.g.${cfg.varName} = not vim.g.${cfg.varName}
+        __raw = # lua
+          ''
+            function(args)
+              if args.bang then
+                vim.b.${cfg.varName} = not vim.b.${cfg.varName}
+              else
+                vim.g.${cfg.varName} = not vim.g.${cfg.varName}
+              end
             end
-          end
-        '';
+          '';
       };
     };
 
@@ -54,14 +55,15 @@ in
         };
       };
 
-      conform-nvim.formatAfterSave = ''
-        function(bufnr)
-          if vim.g.${cfg.varName} or vim.b[bufnr].${cfg.varName} then
-            return
+      conform-nvim.formatAfterSave = # lua
+        ''
+          function(bufnr)
+            if vim.g.${cfg.varName} or vim.b[bufnr].${cfg.varName} then
+              return
+            end
+            return { timeout_ms = 500, lsp_fallback = true };
           end
-          return { timeout_ms = 500, lsp_fallback = true };
-        end
-      '';
+        '';
 
       lualine.sections.lualine_x = lib.mkOrder 600 [
         "(vim.g.${cfg.varName} or vim.b.${cfg.varName}) and '󱌓' or nil"

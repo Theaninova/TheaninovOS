@@ -13,36 +13,38 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua = ''
-      require("actions-preview").setup({})
+    extraConfigLua = # lua
+      ''
+        require("actions-preview").setup({})
 
-      local signs = {
-      	{ name = "DiagnosticSignError", text = "" },
-      	{ name = "DiagnosticSignWarn", text = "" },
-      	{ name = "DiagnosticSignHint", text = "󰌵" },
-      	{ name = "DiagnosticSignInfo", text = "" },
-      }
+        local signs = {
+        	{ name = "DiagnosticSignError", text = "" },
+        	{ name = "DiagnosticSignWarn", text = "" },
+        	{ name = "DiagnosticSignHint", text = "󰌵" },
+        	{ name = "DiagnosticSignInfo", text = "" },
+        }
 
-      for _, sign in ipairs(signs) do
-      	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-      end
+        for _, sign in ipairs(signs) do
+        	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
+        end
 
-      vim.diagnostic.config({
-      	virtual_text = true,
-      	signs = true,
-      	underline = true,
-      	update_in_insert = true,
-      	severity_sort = false,
-      })
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-    '';
+        vim.diagnostic.config({
+        	virtual_text = true,
+        	signs = true,
+        	underline = true,
+        	update_in_insert = true,
+        	severity_sort = false,
+        })
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      '';
     keymaps = [
       {
         key = "<leader>sa";
         mode = "n";
         options.silent = true;
         lua = true;
-        action = "require('actions-preview').code_actions";
+        action = # lua
+          "require('actions-preview').code_actions";
       }
       {
         key = "<leader>sx";

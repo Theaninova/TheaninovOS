@@ -23,18 +23,19 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua = ''
-      function AutoSave()
-        if not vim.b.${cfg.varName} and not vim.g.${cfg.varName} then
-          local bufnr = vim.api.nvim_get_current_buf()
-          local modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
-          if modified then
-            vim.cmd('silent! w')
-            print("Auto save at " .. os.date("%H:%M:%S"))
+    extraConfigLua = # lua
+      ''
+        function AutoSave()
+          if not vim.b.${cfg.varName} and not vim.g.${cfg.varName} then
+            local bufnr = vim.api.nvim_get_current_buf()
+            local modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
+            if modified then
+              vim.cmd('silent! w')
+              print("Auto save at " .. os.date("%H:%M:%S"))
+            end
           end
         end
-      end
-    '';
+      '';
 
     autoCmd = [
       {
@@ -47,15 +48,16 @@ in
     userCommands.${cfg.commandName} = {
       bang = true;
       command = {
-        __raw = ''
-          function(args)
-            if args.bang then
-              vim.b.${cfg.varName} = not vim.b.${cfg.varName}
-            else
-              vim.g.${cfg.varName} = not vim.g.${cfg.varName}
+        __raw = # lua
+          ''
+            function(args)
+              if args.bang then
+                vim.b.${cfg.varName} = not vim.b.${cfg.varName}
+              else
+                vim.g.${cfg.varName} = not vim.g.${cfg.varName}
+              end
             end
-          end
-        '';
+          '';
       };
     };
 

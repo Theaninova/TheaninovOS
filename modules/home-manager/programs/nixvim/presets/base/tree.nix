@@ -23,11 +23,12 @@ in
           filteredItems.visible = true;
         };
         popupBorderStyle = "rounded";
-        eventHandlers.file_opened = ''
-          function()
-            require('neo-tree').close_all()
-          end
-        '';
+        eventHandlers.file_opened = # lua
+          ''
+            function()
+              require('neo-tree').close_all()
+            end
+          '';
       };
       which-key.registrations."<leader>f".t = "Tree";
     };

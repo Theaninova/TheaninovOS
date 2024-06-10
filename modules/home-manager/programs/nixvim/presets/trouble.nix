@@ -13,31 +13,36 @@ in
         key = "<leader>xx";
         mode = "n";
         lua = true;
-        action = "require('trouble').toggle";
+        action = # lua
+          "require('trouble').toggle";
       }
       {
         key = "<leader>xw";
         mode = "n";
         lua = true;
-        action = "function() require('trouble').toggle('workspace_diagnostics') end";
+        action = # lua
+          "function() require('trouble').toggle('workspace_diagnostics') end";
       }
       {
         key = "<leader>xd";
         mode = "n";
         lua = true;
-        action = "function() require('trouble').toggle('document_diagnostics') end";
+        action = # lua
+          "function() require('trouble').toggle('document_diagnostics') end";
       }
       {
         key = "<leader>xq";
         mode = "n";
         lua = true;
-        action = "function() require('trouble').toggle('quickfix') end";
+        action = # lua
+          "function() require('trouble').toggle('quickfix') end";
       }
       {
         key = "<leader>xl";
         mode = "n";
         lua = true;
-        action = "function() require('trouble').toggle('loclist') end";
+        action = # lua
+          "function() require('trouble').toggle('loclist') end";
       }
     ];
     plugins = {

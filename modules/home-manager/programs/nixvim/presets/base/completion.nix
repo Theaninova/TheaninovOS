@@ -18,10 +18,14 @@ in
         enable = true;
         settings = {
           mapping = {
-            "<C-n>" = "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
-            "<C-p>" = "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-            "<C-Space>" = "cmp.mapping.confirm({select = true})";
-            "<C-Enter>" = "cmp.mapping.complete()";
+            "<C-n>" = # lua
+              "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
+            "<C-p>" = # lua
+              "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
+            "<C-Space>" = # lua
+              "cmp.mapping.confirm({select = true})";
+            "<C-Enter>" = # lua
+              "cmp.mapping.complete()";
           };
           sources = [
             { name = "path"; }
@@ -34,7 +38,8 @@ in
             "abbr"
             "kind"
           ];
-          snippet.expand = "function(args) require('luasnip').lsp_expand(args.body) end";
+          snippet.expand = # lua
+            "function(args) require('luasnip').lsp_expand(args.body) end";
           window = {
             completion.border = "rounded";
             documentation.border = "rounded";

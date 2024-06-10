@@ -21,33 +21,35 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua = ''
-      LazygitTerminal = require("toggleterm.terminal").Terminal:new({
-      	cmd = "${lib.getExe pkgs.lazygit}",
-      	dir = "git_dir",
-      	direction = "float",
+    extraConfigLua = # lua
+      ''
+        LazygitTerminal = require("toggleterm.terminal").Terminal:new({
+        	cmd = "${lib.getExe pkgs.lazygit}",
+        	dir = "git_dir",
+        	direction = "float",
 
-      	on_open = function(term)
-      		vim.cmd("startinsert!")
-      		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
-      	end,
-      	on_close = function(_)
-      		vim.cmd("startinsert!")
-      	end,
-      })
+        	on_open = function(term)
+        		vim.cmd("startinsert!")
+        		vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+        	end,
+        	on_close = function(_)
+        		vim.cmd("startinsert!")
+        	end,
+        })
 
-      function LazygitToggle()
-      	lazygit:toggle()
-      end
-    '';
+        function LazygitToggle()
+        	lazygit:toggle()
+        end
+      '';
 
     userCommands.${cfg.commandName} = {
       command = {
-        __raw = ''
-          function()
-            LazygitTerminal:toggle()
-          end
-        '';
+        __raw = # lua
+          ''
+            function()
+              LazygitTerminal:toggle()
+            end
+          '';
       };
     };
 
