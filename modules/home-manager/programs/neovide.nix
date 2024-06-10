@@ -15,7 +15,7 @@
     fork = true;
     font = {
       normal = [ "FiraCode Nerd Font" ];
-      size = 13;
+      size = 12.5;
       edging = "subpixelantialias";
       features."FiraCode Nerd Font" = [
         "+zero"
@@ -24,8 +24,8 @@
         "+cv19"
         "+cv23"
         "+ss09"
+        "+cv26"
         "+ss06"
-        "+ss07"
         "+ss10"
       ];
     };
