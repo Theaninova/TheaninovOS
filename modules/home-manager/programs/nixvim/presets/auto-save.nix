@@ -23,20 +23,24 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    extraConfigLua = ''
+      function AutoSave()
+        if not vim.b.${cfg.varName} and not vim.g.${cfg.varName} then
+          local bufnr = vim.api.nvim_get_current_buf()
+          local modified = vim.api.nvim_buf_get_option(bufnr, 'modified')
+          if modified then
+            vim.cmd('silent! w')
+            print("Auto save at " .. os.date("%H:%M:%S"))
+          end
+        end
+      end
+    '';
+
     autoCmd = [
       {
         event = cfg.event;
         pattern = [ "*" ];
-        callback = {
-          __raw = ''
-            function()
-              if not vim.b.${cfg.varName} and not vim.g.${cfg.varName} then
-                vim.cmd('silent! w')
-                print("Auto save at " .. os.date("%H:%M:%S"))
-              end
-            end
-          '';
-        };
+        command = "lua AutoSave()";
       }
     ];
 
@@ -78,6 +82,12 @@ in
           S = "Toggle auto-save (buffer)";
         };
       };
+
+      neo-tree.eventHandlers.window_before_open = ''
+        function()
+          AutoSave()
+        end
+      '';
 
       lualine.sections.lualine_x = lib.mkOrder 700 [
         "(vim.g.${cfg.varName} or vim.b.${cfg.varName}) and '󱙃' or nil"

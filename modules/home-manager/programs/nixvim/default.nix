@@ -39,7 +39,6 @@
     trouble.enable = true;
     base = {
       completion.enable = true;
-      
       diagnostics.enable = true;
       find.enable = true;
       formatting = {

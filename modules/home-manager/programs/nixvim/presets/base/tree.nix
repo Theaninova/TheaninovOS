@@ -17,14 +17,17 @@ in
     plugins = {
       neo-tree = {
         enable = true;
-        filesystem.filteredItems.visible = true;
-        eventHandlers = {
-          file_opened = ''
-            function()
-              require('neo-tree').close_all()
-            end
-          '';
+        filesystem = {
+          useLibuvFileWatcher = true;
+          followCurrentFile.enabled = true;
+          filteredItems.visible = true;
         };
+        popupBorderStyle = "rounded";
+        eventHandlers.file_opened = ''
+          function()
+            require('neo-tree').close_all()
+          end
+        '';
       };
       which-key.registrations."<leader>f".t = "Tree";
     };
