@@ -44,6 +44,9 @@ end
 
 hi! Pmenu ctermbg=none guibg=none guifg={{colors.on_surface.default.hex}}
 hi! PmenuSel guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
+hi! PmenuThumb guifg=none guifg={{colors.primary.default.hex}}
+hi! link NormalFloat Normal
+hi! FloatBorder guifg={{colors.primary.default.hex}}
 hi! CursorColumn guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
 hi! CursorLine guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
 hi! WildMenu guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
@@ -109,9 +112,9 @@ hi! NeoTreeGitConflict guifg={{colors.danger.default.hex}}
 hi! NeoTreeGitUntracked guifg={{colors.blue.default.hex}}
 
 hi! NonText guifg={{colors.outline_variant.default.hex}}
-hi! LineNr guifg={{colors.outline_variant.default.hex}}
 hi! CursorLineNr guifg={{colors.on_surface.default.hex}}
 hi! SignColumn guibg=none guifg={{colors.on_surface.default.hex}}
+hi! LineNr guifg={{colors.secondary.default.hex}}
 
 hi! IblScope guifg={{colors.on_surface.default.hex}}
 hi! @ibl.scope.char.1 guifg={{colors.on_surface.default.hex}}
@@ -129,7 +132,9 @@ hi! @variable guifg={{colors.on_surface.default.hex}}
 hi! Operator guifg={{colors.on_surface.default.hex}}
 hi! Delimiter guifg={{colors.on_surface.default.hex}}
 hi! Statement gui=bold guifg={{colors.on_surface.default.hex}}
+
 hi! link Operator Normal
+hi! link @punctuation.special @punctuation
 hi! @conditional.ternary guifg={{colors.on_surface.default.hex}}
 hi! link @keyword.conditional.ternary Operator
 hi! link Delimiter Normal
@@ -140,6 +145,11 @@ hi! @lsp.mod.defaultLibrary gui=bold
 hi! @lsp.mod.readonly gui=italic
 
 hi! Constant guifg={{colors.constants.default.hex}}
+hi! link @variable Constant
+hi! link @variable.parameter Identifier
+hi! link @lsp.typemod.variable.local Identifier
+hi! link @variable.python Identifier
+hi! link @variable.lua Identifier
 
 hi! @property guifg={{colors.properties.default.hex}}
 hi! link @field @property
@@ -150,9 +160,6 @@ hi! link @property.typescript @property
 hi! link @lsp.type.property @property
 hi! link @attribute @property
 hi! link @tag.attribute @property
-
-hi! link @lsp.type.variable Constant
-hi! link @lsp.typemod.variable.local Identifier
 
 hi! Keyword guifg={{colors.keywords.default.hex}}
 hi! Special guifg={{colors.keywords.default.hex}}
@@ -165,6 +172,17 @@ hi! link Include Keyword
 hi! link Conditional Keyword
 hi! link @type.builtin Keyword
 
+hi! link NotifyERRORIcon NotifyERRORBorder
+hi! link NotifyWARNIcon NotifyWARNBorder
+hi! link NotifyINFOIcon NotifyINFOBorder
+hi! link NotifyTRACEIcon NotifyTRACEBorder
+hi! link NotifyDEBUGIcon NotifyDEBUGBorder
+hi! link NotifyERRORTitle NotifyERRORBorder
+hi! link NotifyWARNTitle NotifyWARNBorder
+hi! link NotifyINFOTitle NotifyINFOBorder
+hi! link NotifyTRACETitle NotifyTRACEBorder
+hi! link NotifyDEBUGTitle NotifyDEBUGBorder
+
 hi! Number guifg={{colors.numbers.default.hex}}
 hi! Function guifg={{colors.functions.default.hex}}
 
@@ -172,6 +190,11 @@ hi! Structure guifg={{colors.structures.default.hex}}
 hi! link PreProc Structure
 hi! link Tag Structure
 hi! link @attribute.typescript Structure
+hi! link @lsp.type.decorator Structure
+hi! link @lsp.type.attributeBracket Structure
+hi! link @keyword.directive.cpp PreProc
+hi! link @keyword.directive.define.cpp PreProc
+hi! link @keyword.import.cpp PreProc
 
 hi! Type gui=none guifg={{colors.types.default.hex}}
 hi! link @lsp.type.interface Type

@@ -87,7 +87,6 @@ in
         R = "Restart LSP";
         d = "Definitions";
         i = "Implementations";
-        s = "Document Symbols";
         w = "Workspace Symbols";
         t = "Type Definitions";
         h = "Diagnostics";

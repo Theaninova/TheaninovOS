@@ -13,6 +13,10 @@ in
         key = "<leader>ft";
         action = "<cmd>:Neotree toggle<CR>";
       }
+      {
+        key = "<leader>ss";
+        action = "<cmd>:Neotree document_symbols right toggle<CR>";
+      }
     ];
     plugins = {
       neo-tree = {
@@ -22,15 +26,19 @@ in
           followCurrentFile.enabled = true;
           filteredItems.visible = true;
         };
+        extraSources = [ "document_symbols" ];
         popupBorderStyle = "rounded";
-        eventHandlers.file_opened = # lua
+        eventHandlers.neo_tree_buffer_leave = # lua
           ''
             function()
               require('neo-tree').close_all()
             end
           '';
       };
-      which-key.registrations."<leader>f".t = "Tree";
+      which-key.registrations = {
+        "<leader>f".t = "Tree";
+        "<leader>s".s = "Document Symbols";
+      };
     };
   };
 }
