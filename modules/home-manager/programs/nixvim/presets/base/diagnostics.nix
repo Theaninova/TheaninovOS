@@ -59,6 +59,11 @@ in
         action = "<cmd>:LspRestart<CR>";
       }
       {
+        key = "<leader>sc";
+        mode = "n";
+        action = ":IncRename ";
+      }
+      {
         key = "<leader>sn";
         mode = "n";
         options.silent = true;
@@ -74,16 +79,17 @@ in
           "<leader>sr" = "lsp_references";
           "<leader>sd" = "lsp_definitions";
           "<leader>si" = "lsp_implementations";
-          "<leader>ss" = "lsp_document_symbols";
           "<leader>sw" = "lsp_workspace_symbols";
           "<leader>st" = "lsp_type_definitions";
           "<leader>sh" = "diagnostics";
         };
       };
+      inc-rename.enable = true;
       which-key.registrations."<leader>s" = {
         name = "LSP";
         n = "Hover";
         r = "References";
+        c = "Incremental Rename";
         R = "Restart LSP";
         d = "Definitions";
         i = "Implementations";
