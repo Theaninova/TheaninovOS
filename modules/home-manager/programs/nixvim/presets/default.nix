@@ -30,6 +30,10 @@
           ./languages/python.nix
           ./languages/rust.nix
           ./languages/shell.nix
+
+          ./remaps/half-page-scroll.nix
+          ./remaps/no-accidental-macro.nix
+          ./remaps/paste-keep-buffer.nix
         ];
       }
     );

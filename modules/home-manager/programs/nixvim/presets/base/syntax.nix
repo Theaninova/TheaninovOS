@@ -30,7 +30,10 @@ in
       illuminate.enable = lib.mkDefault true;
       nvim-autopairs.enable = lib.mkDefault true;
       nvim-colorizer.enable = lib.mkDefault true;
-      ts-autotag.enable = lib.mkDefault true;
+      ts-autotag = {
+        enable = lib.mkDefault true;
+        settings.opts.enable_close_on_slash = lib.mkDefault true;
+      };
     };
   };
 }

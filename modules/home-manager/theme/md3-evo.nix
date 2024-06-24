@@ -344,36 +344,40 @@ in
           };
         };
 
-        templates = {
-          kitty = {
-            input_path = ./kitty.conf;
-            output_path = "${config.xdg.configHome}/kitty/theme.conf";
+        templates =
+          let
+            gtk = pkgs.writeText "gtk4.css" (import ./gtk.nix);
+          in
+          {
+            kitty = {
+              input_path = ./kitty.conf;
+              output_path = "${config.xdg.configHome}/kitty/theme.conf";
+            };
+            nvim = {
+              input_path = ./nvim.vim;
+              output_path = "${config.xdg.configHome}/nvim/colors/md3-evo.vim";
+            };
+            hyprland = {
+              input_path = ./hyprland.conf;
+              output_path = "${config.xdg.configHome}/hypr/theme.conf";
+            };
+            anyrun = {
+              input_path = ./anyrun.css;
+              output_path = "${config.xdg.configHome}/anyrun/theme.css";
+            };
+            gtk3 = {
+              input_path = gtk;
+              output_path = "${config.xdg.configHome}/gtk-3.0/theme.css";
+            };
+            gtk4 = {
+              input_path = gtk;
+              output_path = "${config.xdg.configHome}/gtk-4.0/theme.css";
+            };
+            vesktop = {
+              input_path = ./discord.css;
+              output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
+            };
           };
-          nvim = {
-            input_path = ./nvim.vim;
-            output_path = "${config.xdg.configHome}/nvim/colors/md3-evo.vim";
-          };
-          hyprland = {
-            input_path = ./hyprland.conf;
-            output_path = "${config.xdg.configHome}/hypr/theme.conf";
-          };
-          anyrun = {
-            input_path = ./anyrun.css;
-            output_path = "${config.xdg.configHome}/anyrun/theme.css";
-          };
-          gtk3 = {
-            input_path = ./gtk.css;
-            output_path = "${config.xdg.configHome}/gtk-3.0/theme.css";
-          };
-          gtk4 = {
-            input_path = ./gtk.css;
-            output_path = "${config.xdg.configHome}/gtk-4.0/theme.css";
-          };
-          vesktop = {
-            input_path = ./discord.css;
-            output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
-          };
-        };
       };
     };
   };

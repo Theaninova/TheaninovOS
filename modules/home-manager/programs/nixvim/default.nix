@@ -68,55 +68,18 @@
       rust.enable = true;
       shell.enable = true;
     };
+    remaps = {
+      half-page-scroll.enable = true;
+      no-accidental-macro.enable = true;
+      paste-keep-buffer.enable = true;
+    };
   };
-
-  keymaps = [
-    {
-      key = "<leader>u";
-      mode = "n";
-      action = "<cmd>:UndotreeToggle<CR>";
-    }
-    # Find/Navigate
-    {
-      key = "J";
-      mode = "v";
-      action = ":m '>+1<CR>gv=gv";
-    }
-    {
-      key = "K";
-      mode = "v";
-      action = ":m '<-2<CR>gv=gv";
-    }
-
-    {
-      key = "<C-d>";
-      mode = "n";
-      action = "<C-d>zz";
-    }
-    {
-      key = "<C-u>";
-      mode = "n";
-      action = "<C-u>zz";
-    }
-    {
-      key = "<leader>p";
-      mode = "x";
-      action = ''"_dP'';
-    }
-    {
-      key = "<leader>p";
-      mode = "n";
-      action = ''"_dP'';
-    }
-    {
-      key = "<leader>p";
-      mode = "v";
-      action = ''"_dP'';
-    }
-  ];
 
   plugins = {
     leap.enable = true;
+    surround.enable = true;
+    which-key.enable = true;
+    schemastore.enable = true;
 
     lsp.servers = {
       html.enable = true;
@@ -127,10 +90,6 @@
       yamlls.enable = true;
       jsonls.enable = true;
       taplo.enable = true;
-    };
-    which-key = {
-      enable = true;
-      registrations."<leader>p" = "Paste Keep Buffer";
     };
 
     copilot-lua = {
