@@ -57,6 +57,7 @@
         enable = true;
         stylelint = true;
       };
+      dart.enable = true;
       js = {
         enable = true;
         eslint = true;

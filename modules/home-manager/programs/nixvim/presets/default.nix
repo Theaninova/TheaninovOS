@@ -24,6 +24,7 @@
           ./languages/angular.nix
           ./languages/c.nix
           ./languages/css.nix
+          ./languages/dart.nix
           ./languages/js.nix
           ./languages/lua.nix
           ./languages/nix.nix

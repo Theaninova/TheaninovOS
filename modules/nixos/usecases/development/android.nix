@@ -16,7 +16,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    programs.adb.enable = true;
     users.users.${username}.extraGroups = [ "adbusers" ];
     networking.firewall.allowedTCPPorts = [ 5037 ];
   };

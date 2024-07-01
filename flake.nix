@@ -48,6 +48,11 @@
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
               cura = prev.callPackage ./overlays/cura { };
+              /*
+                kitty = prev.kitty.overrideAttrs (prev: {
+                  patches = prev.patches ++ [ ./kitty.patch ];
+                });
+              */
             })
           ];
         }

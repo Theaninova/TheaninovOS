@@ -1,0 +1,35 @@
+diff --git a/kitty/cell_fragment.glsl b/kitty/cell_fragment.glsl
+index ac310dd1f..dfab7e30a 100644
+--- a/kitty/cell_fragment.glsl
++++ b/kitty/cell_fragment.glsl
+@@ -169,7 +169,7 @@ void main() {
+     vec4 text_fg_premul = calculate_premul_foreground_from_sprites(text_fg);
+ #ifdef TRANSPARENT
+     final_color = alpha_blend_premul(text_fg_premul, vec4_premul(background, bg_alpha));
+-    final_color.a = adjust_alpha_for_incorrect_blending_by_compositor(text_fg_premul.a, final_color.a);
++    // final_color.a = adjust_alpha_for_incorrect_blending_by_compositor(text_fg_premul.a, final_color.a);
+ #else
+     final_color = alpha_blend_premul(text_fg_premul, background);
+ #endif
+@@ -197,7 +197,7 @@ void main() {
+     vec4 text_fg_premul = calculate_premul_foreground_from_sprites(text_fg);
+     final_color = text_fg_premul;
+ #ifdef TRANSPARENT
+-    final_color.a = adjust_alpha_for_incorrect_blending_by_compositor(text_fg_premul.a, final_color.a);
++    // final_color.a = adjust_alpha_for_incorrect_blending_by_compositor(text_fg_premul.a, final_color.a);
+ #endif
+ #endif
+ 
+diff --git a/kitty/shaders.c b/kitty/shaders.c
+index bcda16822..4f38c4388 100644
+--- a/kitty/shaders.c
++++ b/kitty/shaders.c
+@@ -914,7 +914,7 @@ draw_cells_interleaved_premult(ssize_t vao_idx, Screen *screen, OSWindow *os_win
+ void
+ blank_canvas(float background_opacity, color_type color) {
+     // See https://github.com/glfw/glfw/issues/1538 for why we use pre-multiplied alpha
+-#define C(shift) srgb_color((color >> shift) & 0xFF)
++#define C(shift) srgb_color((color >> shift) & 0xFF) * background_opacity
+     glClearColor(C(16), C(8), C(0), background_opacity);
+ #undef C
+     glClear(GL_COLOR_BUFFER_BIT);

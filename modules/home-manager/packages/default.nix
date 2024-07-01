@@ -28,6 +28,7 @@
     vesktop
     discord
     element-desktop
+    cinny-desktop
 
     # office
     libreoffice
