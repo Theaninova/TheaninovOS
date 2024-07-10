@@ -45,6 +45,22 @@
       }
     },
     "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1717312683,
+        "narHash": "sha256-FrlieJH50AuvagamEvWMIE6D2OAnERuDboFDYAED/dE=",
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "rev": "38fd3954cf65ce6faf3d0d45cd26059e059f07ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
+    "flake-compat_2": {
       "locked": {
         "lastModified": 1696426674,
         "narHash": "sha256-kvjfFW7WAETZlt09AgDn1MrtKzP7t90Vf7vypd3OL1U=",
@@ -58,7 +74,7 @@
         "url": "https://flakehub.com/f/edolstra/flake-compat/1.tar.gz"
       }
     },
-    "flake-compat_2": {
+    "flake-compat_3": {
       "flake": false,
       "locked": {
         "lastModified": 1696426674,
@@ -136,7 +152,7 @@
     },
     "git-hooks": {
       "inputs": {
-        "flake-compat": "flake-compat_2",
+        "flake-compat": "flake-compat_3",
         "gitignore": "gitignore",
         "nixpkgs": [
           "nixvim",
@@ -265,6 +281,28 @@
         "type": "github"
       }
     },
+    "nixos-cosmic": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": "nixpkgs-stable"
+      },
+      "locked": {
+        "lastModified": 1719885773,
+        "narHash": "sha256-dFuBTBoLUP/qfphSof3DNP9PKvAlU96lmqLMJggMyqA=",
+        "owner": "lilyinstarlight",
+        "repo": "nixos-cosmic",
+        "rev": "6eae355a1071a94465502c11c5efb241caf1dc0e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lilyinstarlight",
+        "repo": "nixos-cosmic",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1716330097,
@@ -277,6 +315,22 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-stable": {
+      "locked": {
+        "lastModified": 1719838683,
+        "narHash": "sha256-Zw9rQjHz1ilNIimEXFeVa1ERNRBF8DoXDhLAZq5B4pE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "d032c1a6dfad4eedec7e35e91986becc699d7d69",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-24.05",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -300,7 +354,7 @@
     "nixvim": {
       "inputs": {
         "devshell": "devshell",
-        "flake-compat": "flake-compat",
+        "flake-compat": "flake-compat_2",
         "flake-parts": "flake-parts_2",
         "git-hooks": "git-hooks",
         "home-manager": "home-manager_2",
@@ -311,11 +365,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1719835160,
-        "narHash": "sha256-AyZJM2la6+CAdKKSC3y80sbneW8dH/2lb+OxKzi2cAw=",
+        "lastModified": 1719860300,
+        "narHash": "sha256-ZeF+zI+/53HeS567/mXS2Gw+w8k9FsjRC/TzoVQOpi4=",
         "owner": "nix-community",
         "repo": "nixvim",
-        "rev": "7cc1685eafdcf04cf1058949647ea2c7560f2d65",
+        "rev": "079c2c479b5707adf0b03f817be30945c92c15cf",
         "type": "github"
       },
       "original": {
@@ -326,11 +380,11 @@
     },
     "nur": {
       "locked": {
-        "lastModified": 1719837916,
-        "narHash": "sha256-dV1URYa5SezYyz/1IDb1BHmIZ4tM0WtpPfVkFGH8xfY=",
+        "lastModified": 1719908032,
+        "narHash": "sha256-veUPZ3anuH+PQn/CLcNlP0oiuHctzeIDa2w+DzVGE4E=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "0575d7fb334ea662a0a03620780c87df0612eb9a",
+        "rev": "6206fd683edcb79c4a0592cf25e610449ed0d82d",
         "type": "github"
       },
       "original": {
@@ -344,6 +398,7 @@
         "anyrun": "anyrun",
         "home-manager": "home-manager",
         "matugen": "matugen",
+        "nixos-cosmic": "nixos-cosmic",
         "nixpkgs": "nixpkgs_2",
         "nixvim": "nixvim",
         "nur": "nur"

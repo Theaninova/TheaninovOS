@@ -26,7 +26,8 @@
         ];
         input = {
           accel_profile = "flat";
-          kb_layout = "cc1-thea";
+          kb_layout = osConfig.services.xserver.xkb.layout;
+          kb_variant = osConfig.services.xserver.xkb.variant;
         };
         bind = import ./keybinds.nix;
         bindm = import ./mousebinds.nix;

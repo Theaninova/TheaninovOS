@@ -23,7 +23,7 @@ in
     # TODO: per-device layout?
     console.useXkbConfig = true;
     services.xserver.xkb = {
-      layout = cfg.layout;
+      layout = lib.mkDefault cfg.layout;
       extraLayouts.cc1-thea = {
         description = "A CC1 optimized layout";
         languages = [

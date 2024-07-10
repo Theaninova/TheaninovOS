@@ -48,12 +48,16 @@
     waybar.enable = true;
     dunst.enable = true;
   };
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
   desktops = {
     hyprland.enable = true;
     # gamescope.enable = true;
   };
   locale.preset.theaninova.enable = true;
 
+  services.xserver.xkb.variant = "altgr-intl";
+  services.xserver.xkb.layout = "us";
   hardware = {
     amdgpu.preset.default.enable = true;
     audio.preset.pipewire.enable = true;

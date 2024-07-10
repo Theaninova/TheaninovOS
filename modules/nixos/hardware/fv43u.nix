@@ -23,7 +23,6 @@ in
       general.layout = "master";
       master = {
         orientation = "center";
-        new_is_master = true;
         always_center_master = true;
         mfact = 0.4;
       };

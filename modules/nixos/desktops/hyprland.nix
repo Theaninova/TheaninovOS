@@ -35,19 +35,21 @@ in
     };
 
     services = {
-      greetd = {
-        enable = true;
-        settings = {
-          initial_session = {
-            command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
-            user = username;
-          };
-          default_session = {
-            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks";
-            user = username;
+      /*
+        greetd = {
+          enable = true;
+          settings = {
+            initial_session = {
+              command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
+              user = username;
+            };
+            default_session = {
+              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks";
+              user = username;
+            };
           };
         };
-      };
+      */
 
       dbus.enable = true;
 

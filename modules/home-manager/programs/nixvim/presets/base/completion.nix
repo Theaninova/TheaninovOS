@@ -22,7 +22,7 @@ in
               "cmp.mapping.select_next_item({behavior = cmp.SelectBehavior.Select})";
             "<C-p>" = # lua
               "cmp.mapping.select_prev_item({behavior = cmp.SelectBehavior.Select})";
-            "<C-Space>" = # lua
+            "<C-.>" = # lua
               "cmp.mapping.confirm({select = true})";
             "<C-Enter>" = # lua
               "cmp.mapping.complete()";

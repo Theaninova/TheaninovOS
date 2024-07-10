@@ -15,6 +15,10 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -25,6 +29,7 @@
       nixvim,
       anyrun,
       matugen,
+      nixos-cosmic,
       ...
     }@inputs:
     let
@@ -48,11 +53,6 @@
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
               cura = prev.callPackage ./overlays/cura { };
-              /*
-                kitty = prev.kitty.overrideAttrs (prev: {
-                  patches = prev.patches ++ [ ./kitty.patch ];
-                });
-              */
             })
           ];
         }
@@ -70,6 +70,13 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
+            nixos-cosmic.nixosModules.default
+            {
+              nix.settings = {
+                substituters = [ "https://cosmic.cachix.org/" ];
+                trusted-public-keys = [ "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE=" ];
+              };
+            }
             {
               _module.args = {
                 inherit username;
