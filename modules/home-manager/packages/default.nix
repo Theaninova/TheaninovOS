@@ -13,18 +13,14 @@
 
     # media
     jellyfin-media-player
-    youtube-dl
-    # tartube
     yt-dlp
     f3d
     mpv
     makemkv
     handbrake
     metadata-cleaner
-    #bitwarden
 
     # chat apps
-    threema-desktop
     vesktop
     discord
     element-desktop

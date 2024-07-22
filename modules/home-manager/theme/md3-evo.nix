@@ -176,7 +176,7 @@ in
         runtimeInputs = [
           pkgs.matugen
           pkgs.swww
-          pkgs.gnome.zenity
+          pkgs.zenity
         ];
         text = ''
           WALLPAPER=${config.xdg.configHome}/matugen/wallpaper

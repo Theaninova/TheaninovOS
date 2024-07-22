@@ -141,20 +141,20 @@
       evince
       baobab
       gnome.gvfs
-      gnome.gnome-keyring
-      gnome.nautilus
-      gnome.gnome-calendar
+      gnome-keyring
+      nautilus
+      gnome-calendar
       gnome.gnome-characters
       gnome.gnome-contacts
       gnome.gnome-clocks
-      gnome.gnome-calculator
-      gnome.simple-scan
-      gnome.eog
-      gnome.geary
-      gnome.ghex
+      gnome-calculator
+      simple-scan
+      eog
+      geary
+      ghex
       gnome.gnome-weather
-      gnome.gnome-keyring
-      gnome.gnome-disk-utility
+      gnome-keyring
+      gnome-disk-utility
       # fixes
       xorg.xrandr
     ];
