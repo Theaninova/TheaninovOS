@@ -16,7 +16,13 @@ in
     plugins = {
       treesitter = {
         enable = true;
-        indent = true;
+        settings = {
+          highlight = {
+            additional_vim_regex_highlighting = true;
+            enable = true;
+          };
+          indent.enable = true;
+        };
         grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
         nixvimInjections = true;
       };

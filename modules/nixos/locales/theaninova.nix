@@ -18,7 +18,8 @@ in
     time.timeZone = "Europe/Berlin";
     i18n = {
       inputMethod = {
-        enabled = "ibus";
+        enable = true;
+        type = "ibus";
         ibus.engines = [ pkgs.ibus-engines.anthy ];
       };
       defaultLocale = "en_GB.UTF-8";

@@ -81,6 +81,8 @@
     surround.enable = true;
     which-key.enable = true;
     schemastore.enable = true;
+    # TODO: looks weird with neovide
+    # treesitter-context.enable = true;
 
     lsp.servers = {
       html.enable = true;
