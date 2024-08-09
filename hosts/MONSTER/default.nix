@@ -62,7 +62,7 @@
     amdgpu.preset.default.enable = true;
     audio.preset.pipewire.enable = true;
     cc1.enable = true;
-    q3279vwf.enable = true;
+    fv43u.enable = true;
     virtual-camera.enable = true;
     hid-fanatecff.enable = true;
 
