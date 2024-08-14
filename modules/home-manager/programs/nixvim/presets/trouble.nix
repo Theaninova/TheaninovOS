@@ -45,14 +45,41 @@ in
         enable = true;
         settings.use_diagnostic_signs = true;
       };
-      which-key.registrations."<leader>x" = {
-        name = "Trouble";
-        x = "Toggle";
-        w = "Workspace Diagnostics";
-        d = "Document Diagnostics";
-        q = "Quickfix";
-        l = "Loclist";
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>x";
+          group = "Trouble";
+          icon = {
+            icon = "";
+            color = "red";
+          };
+        }
+        {
+          __unkeyed-1 = "<leader>xx";
+          desc = "Toggle";
+          icon = "󰺲";
+        }
+        {
+          __unkeyed-1 = "<leader>xw";
+          desc = "Workspace Diagnostics";
+          icon = "󰙅";
+        }
+        {
+          __unkeyed-1 = "<leader>xd";
+          desc = "Document Diagnostics";
+          icon = "󱪗";
+        }
+        {
+          __unkeyed-1 = "<leader>xq";
+          desc = "Quickfix";
+          icon = "";
+        }
+        {
+          __unkeyed-1 = "<leader>xl";
+          desc = "Loclist";
+          icon = "󰷐";
+        }
+      ];
     };
   };
 }

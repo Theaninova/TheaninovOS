@@ -35,10 +35,18 @@ in
             end
           '';
       };
-      which-key.registrations = {
-        "<leader>f".t = "Tree";
-        "<leader>s".s = "Document Symbols";
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>ft";
+          desc = "Tree";
+          icon = "󰙅";
+        }
+        {
+          __unkeyed-1 = "<leader>ss";
+          desc = "Document Symbols";
+          icon = "󱏒";
+        }
+      ];
     };
   };
 }

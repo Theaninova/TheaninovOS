@@ -78,16 +78,28 @@ in
     ];
 
     plugins = {
-      which-key.registrations = {
-        "<leader>a" = {
-          name = "Auto Actions";
-          s = "Toggle auto-save";
-          S = "Toggle auto-save (buffer)";
-        };
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>a";
+          group = "Auto Actions";
+          icon = "󰁨";
+        }
+        {
+          __unkeyed-1 = "<leader>as";
+          desc = "Tggle auto-save";
+          icon = "󱙃";
+        }
+        {
+          __unkeyed-1 = "<leader>aS";
+          desc = "Tggle auto-save (buffer)";
+          icon = "󱙃";
+        }
+      ];
 
-      /*neo-tree.eventHandlers.window_before_open = # lua
-        "function() PerformAutoSave() end";*/
+      /*
+        neo-tree.eventHandlers.window_before_open = # lua
+        "function() PerformAutoSave() end";
+      */
 
       lualine.sections.lualine_x = lib.mkOrder 700 [
         # lua

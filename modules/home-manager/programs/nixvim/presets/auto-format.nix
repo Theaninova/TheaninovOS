@@ -47,13 +47,23 @@ in
     ];
 
     plugins = {
-      which-key.registrations = {
-        "<leader>a" = {
-          name = "Auto Actions";
-          f = "Toggle auto-format";
-          F = "Toggle auto-format (buffer)";
-        };
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>a";
+          group = "Auto Actions";
+          icon = "󰁨";
+        }
+        {
+          __unkeyed-1 = "<leader>af";
+          desc = "Tggle auto-format";
+          icon = "󱌓";
+        }
+        {
+          __unkeyed-1 = "<leader>aF";
+          desc = "Tggle auto-format (buffer)";
+          icon = "󱌓";
+        }
+      ];
 
       conform-nvim.formatAfterSave = # lua
         ''

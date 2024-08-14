@@ -19,7 +19,13 @@ in
         keymaps."<leader>n" = # vim
           "notify";
       };
-      which-key.registrations."<leader>n" = "Notifications";
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>n";
+          desc = "Notifications";
+          icon = "󰍩";
+        }
+      ];
       lualine = {
         enable = true;
         globalstatus = true;

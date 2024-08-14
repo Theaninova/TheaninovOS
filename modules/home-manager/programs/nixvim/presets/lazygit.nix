@@ -67,7 +67,13 @@ in
         };
       };
 
-      which-key.registrations.${cfg.toggleBind} = "Git";
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = cfg.toggleBind;
+          desc = "Git";
+          icon = "";
+        }
+      ];
     };
   };
 }

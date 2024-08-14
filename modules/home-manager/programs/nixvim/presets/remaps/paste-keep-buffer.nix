@@ -21,7 +21,13 @@ in
     ];
     plugins.which-key = {
       enable = true;
-      registrations."<leader>p" = "Paste Keep Buffer";
+      settings.spec = [
+        {
+          __unkeyed-1 = "<leader>p";
+          desc = "Paste Keep Buffer";
+          icon = "";
+        }
+      ];
     };
   };
 }

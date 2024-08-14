@@ -85,20 +85,68 @@ in
         };
       };
       inc-rename.enable = true;
-      which-key.registrations."<leader>s" = {
-        name = "LSP";
-        n = "Hover";
-        r = "References";
-        c = "Incremental Rename";
-        R = "Restart LSP";
-        d = "Definitions";
-        i = "Implementations";
-        w = "Workspace Symbols";
-        t = "Type Definitions";
-        h = "Diagnostics";
-        a = "Code Actions";
-        x = "LSP Format";
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>s";
+          group = "LSP";
+          icon = "󱐋";
+        }
+        {
+          __unkeyed-1 = "<leader>sn";
+          desc = "Hover";
+          icon = "";
+        }
+        {
+          __unkeyed-1 = "<leader>sr";
+          desc = "References";
+          icon = "󱁉";
+        }
+        {
+          __unkeyed-1 = "<leader>sc";
+          desc = "Incremental Rename";
+          icon = "󰑕";
+        }
+        {
+          __unkeyed-1 = "<leader>sR";
+          desc = "Restart LSP";
+          icon = "󰜉";
+        }
+        {
+          __unkeyed-1 = "<leader>sd";
+          desc = "Definitions";
+          icon = "󰜬";
+        }
+        {
+          __unkeyed-1 = "<leader>si";
+          desc = "Implementations";
+          icon = "󰴽";
+        }
+        {
+          __unkeyed-1 = "<leader>sw";
+          desc = "Workspace Symbols";
+          icon = "󰷐";
+        }
+        {
+          __unkeyed-1 = "<leader>st";
+          desc = "Type Definitions";
+          icon = "󱍕";
+        }
+        {
+          __unkeyed-1 = "<leader>sh";
+          icon = "󱖫";
+          desc = "Diagnostics";
+        }
+        {
+          __unkeyed-1 = "<leader>sa";
+          desc = "Code Actions";
+          icon = "";
+        }
+        {
+          __unkeyed-1 = "<leader>sx";
+          desc = "LSP Format";
+          icon = "󰉢";
+        }
+      ];
     };
     extraPlugins = [ pkgs.vimPlugins.actions-preview-nvim ];
   };

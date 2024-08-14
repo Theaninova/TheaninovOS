@@ -18,13 +18,33 @@ in
           "<leader>fb" = "buffers";
         };
       };
-      which-key.registrations."<leader>f" = {
-        name = "Find";
-        f = "File";
-        a = "Untracked Files";
-        g = "Grep";
-        b = "Buffer";
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>f";
+          group = "Find";
+          icon = "󰍉";
+        }
+        {
+          __unkeyed-1 = "<leader>ff";
+          desc = "File";
+          icon = "󰈢";
+        }
+        {
+          __unkeyed-1 = "<leader>fa";
+          desc = "Untracked Files";
+          icon = "󱪡";
+        }
+        {
+          __unkeyed-1 = "<leader>fg";
+          desc = "Grep";
+          icon = "󰑑";
+        }
+        {
+          __unkeyed-1 = "<leader>fb";
+          desc = "Buffer";
+          icon = "󰈙";
+        }
+      ];
     };
   };
 }

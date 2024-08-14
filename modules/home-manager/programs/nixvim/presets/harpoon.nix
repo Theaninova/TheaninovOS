@@ -26,13 +26,33 @@ in
           navPrev = "hp";
         };
       };
-      which-key.registrations.h = {
-        name = "Harpoon";
-        h = "Marks";
-        m = "Mark";
-        n = "Next";
-        p = "Prev";
-      };
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "h";
+          group = "Harpoon";
+          icon = "󱀺";
+        }
+        {
+          __unkeyed-1 = "hh";
+          desc = "Marks";
+          icon = "󰈢";
+        }
+        {
+          __unkeyed-1 = "hm";
+          desc = "Add File";
+          icon = "󱪝";
+        }
+        {
+          __unkeyed-1 = "hn";
+          desc = "Next";
+          icon = "";
+        }
+        {
+          __unkeyed-1 = "hp";
+          desc = "Prev";
+          icon = "";
+        }
+      ];
     };
   };
 }

@@ -22,7 +22,13 @@ in
     ];
     plugins = {
       undotree.enable = true;
-      which-key.registrations."<leader>u" = "Undotree";
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>u";
+          desc = "Undotree";
+          icon = "󰕌";
+        }
+      ];
     };
   };
 }
