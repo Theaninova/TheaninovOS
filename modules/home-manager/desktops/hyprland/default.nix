@@ -47,8 +47,8 @@
             "float,${firefoxPipInitial}"
             "pin,${firefoxPip}"
             "pin,${firefoxPipInitial}"
-            "fakefullscreen,${firefoxPip}"
-            "fakefullscreen,${firefoxPipInitial}"
+            "fullscreenstate 2 0,${firefoxPip}"
+            "fullscreenstate 2 0,${firefoxPipInitial}"
             "move 22 72,${firefoxPip}"
             "move 22 72,${firefoxPipInitial}"
             # For some reason it really wants to be maximized

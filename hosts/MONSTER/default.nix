@@ -56,6 +56,11 @@
   };
   locale.preset.theaninova.enable = true;
 
+  services.ollama = {
+    enable = true;
+    acceleration = "rocm";
+  };
+
   services.xserver.xkb.variant = "altgr-intl";
   services.xserver.xkb.layout = "us";
   hardware = {

@@ -20,6 +20,7 @@ in
       lpc21isp
       dfu-util
       cura
+      orca-slicer
       openscad-unstable
       freecad
     ];

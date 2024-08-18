@@ -4,7 +4,7 @@
   home.packages = with pkgs; [
     # nix
     cachix
-    lorri
+    # lorri
     vulnix
 
     # browsers
@@ -24,7 +24,7 @@
     vesktop
     discord
     element-desktop
-    cinny-desktop
+    # cinny-desktop
 
     # office
     libreoffice
