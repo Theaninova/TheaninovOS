@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt.lua = [ "stylua" ];
+      conform-nvim.settings.formatters_by_ft.lua = [ "stylua" ];
       lsp.servers.lua-ls.enable = true;
     };
     extraPackages = [ pkgs.stylua ];

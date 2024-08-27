@@ -144,15 +144,15 @@
       gnome-keyring
       nautilus
       gnome-calendar
-      gnome.gnome-characters
-      gnome.gnome-contacts
-      gnome.gnome-clocks
+      gnome-characters
+      gnome-contacts
+      gnome-clocks
       gnome-calculator
       simple-scan
       eog
       geary
       ghex
-      gnome.gnome-weather
+      gnome-weather
       gnome-keyring
       gnome-disk-utility
       # fixes

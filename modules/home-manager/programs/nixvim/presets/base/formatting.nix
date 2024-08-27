@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     plugins.conform-nvim = {
       enable = true;
-      formattersByFt = lib.mkIf cfg.prettier {
+      settings.formatters_by_ft = lib.mkIf cfg.prettier {
         javascript = [ "prettierd" ];
         markdown = [ "prettierd" ];
         typescript = [ "prettierd" ];

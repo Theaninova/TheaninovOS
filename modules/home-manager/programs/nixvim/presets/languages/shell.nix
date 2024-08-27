@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt.sh = [ "shfmt" ];
+      conform-nvim.settings.formatters_by_ft.sh = [ "shfmt" ];
       lsp.servers.bashls.enable = true;
     };
     extraPackages = [ pkgs.shfmt ];

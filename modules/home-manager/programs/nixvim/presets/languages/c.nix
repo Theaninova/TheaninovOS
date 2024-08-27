@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt = {
+      conform-nvim.settings.formatters_by_ft = {
         c = [ "clang-format" ];
         cpp = [ "clang-format" ];
       };

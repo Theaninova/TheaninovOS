@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt.rust = [ "rustfmt" ];
+      conform-nvim.settings.formattters_by_ft.rust = [ "rustfmt" ];
       lsp.servers.rust-analyzer = {
         enable = true;
         installCargo = false;

@@ -14,7 +14,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt.nix = [ "nixfmt" ];
+      conform-nvim.settings.formatters_by_ft.nix = [ "nixfmt" ];
       lsp.servers.nil-ls.enable = true;
       nix.enable = true;
     };

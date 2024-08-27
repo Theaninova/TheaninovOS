@@ -9,7 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      conform-nvim.formattersByFt.dart = [ "dart_format" ];
+      conform-nvim.settings.formatters_by_ft.dart = [ "dart_format" ];
       lsp.servers.dartls.enable = true;
     };
   };

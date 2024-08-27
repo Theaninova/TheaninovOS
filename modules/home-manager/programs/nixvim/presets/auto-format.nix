@@ -65,7 +65,7 @@ in
         }
       ];
 
-      conform-nvim.formatAfterSave = # lua
+      conform-nvim.settings.format_after_save = # lua
         ''
           function(bufnr)
             if vim.g.${cfg.varName} or vim.b[bufnr].${cfg.varName} then
