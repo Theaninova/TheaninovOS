@@ -42,7 +42,7 @@ in
         }
       ];
       lsp.servers = {
-        tsserver.enable = true;
+        ts-ls.enable = true;
         eslint.enable = lib.mkIf cfg.eslint true;
       };
     };

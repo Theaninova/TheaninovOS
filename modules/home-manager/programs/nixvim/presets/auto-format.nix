@@ -75,7 +75,7 @@ in
           end
         '';
 
-      lualine.sections.lualine_x = lib.mkOrder 600 [
+      lualine.settings.sections.lualine_x = lib.mkOrder 600 [
         "(vim.g.${cfg.varName} or vim.b.${cfg.varName}) and '󱌓' or nil"
       ];
     };

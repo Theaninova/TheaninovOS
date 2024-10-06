@@ -43,6 +43,7 @@
             allowUnfree = true;
             allowUnsupportedSystem = true;
             experimental-features = "nix-command flakes";
+            permittedInsecurePackages = [ "nix-2.25.0pre20240807_cfe66dbe" ];
           };
           overlays = [
             nur.overlay

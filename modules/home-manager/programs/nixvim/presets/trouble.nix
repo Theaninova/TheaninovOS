@@ -41,6 +41,7 @@ in
       }
     ];
     plugins = {
+      web-devicons.enable = true;
       trouble = {
         enable = true;
         settings.use_diagnostic_signs = true;

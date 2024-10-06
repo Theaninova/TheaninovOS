@@ -9,6 +9,7 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
+      web-devicons.enable = true;
       telescope = {
         enable = true;
         keymaps = {

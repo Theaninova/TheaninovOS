@@ -21,7 +21,6 @@ in
       dfu-util
       cura
       orca-slicer
-      openscad-unstable
       freecad
     ];
   };

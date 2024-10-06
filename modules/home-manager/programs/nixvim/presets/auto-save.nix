@@ -101,7 +101,7 @@ in
         "function() PerformAutoSave() end";
       */
 
-      lualine.sections.lualine_x = lib.mkOrder 700 [
+      lualine.settings.sections.lualine_x = lib.mkOrder 700 [
         # lua
         "(vim.g.disable_autosave or vim.b.disable_autosave) and '󱙃' or nil"
       ];

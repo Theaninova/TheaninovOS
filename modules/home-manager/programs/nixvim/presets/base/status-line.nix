@@ -28,36 +28,40 @@ in
       ];
       lualine = {
         enable = true;
-        globalstatus = true;
-        sectionSeparators = {
-          left = ""; # "";
-          right = ""; # "";
-        };
-        componentSeparators = {
-          left = "┊";
-          right = "┊";
-        };
-        sections = {
-          lualine_a = [
-            {
-              name = "mode";
-              separator = {
-                right = ""; # "";
-                left = ""; # "";
-              };
-              icon = "";
-            }
-          ];
-          lualine_x = lib.mkAfter [ { name = "filetype"; } ];
-          lualine_z = [
-            {
-              name = "location";
-              separator = {
-                right = ""; # "";
-                left = ""; # "";
-              };
-            }
-          ];
+        settings = {
+          options = {
+            globalstatus = true;
+            section_separators = {
+              left = ""; # "";
+              right = ""; # "";
+            };
+            component_separators = {
+              left = "┊";
+              right = "┊";
+            };
+          };
+          sections = {
+            lualine_a = [
+              {
+                __unkeyed-1 = "mode";
+                separator = {
+                  right = ""; # "";
+                  left = ""; # "";
+                };
+                icon = "";
+              }
+            ];
+            lualine_x = lib.mkAfter [ { __unkeyed-1 = "filetype"; } ];
+            lualine_z = [
+              {
+                __unkeyed-1 = "location";
+                separator = {
+                  right = ""; # "";
+                  left = ""; # "";
+                };
+              }
+            ];
+          };
         };
       };
     };

@@ -78,7 +78,7 @@
 
   plugins = {
     leap.enable = true;
-    surround.enable = true;
+    vim-surround.enable = true;
     which-key.enable = true;
     schemastore.enable = true;
     # TODO: looks weird with neovide

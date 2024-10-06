@@ -24,6 +24,7 @@
     vesktop
     discord
     element-desktop
+    thunderbird
     # cinny-desktop
 
     # office
@@ -44,8 +45,8 @@
     # development
     insomnia
     avalonia-ilspy
-    ghidra
-    ida-free
+    # ghidra
+    # ida-free
 
     # utils
     libqalculate

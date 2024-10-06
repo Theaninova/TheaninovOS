@@ -262,7 +262,7 @@ in
           nested = true;
         }
       ];
-      plugins.lualine.theme.__raw = # lua
+      plugins.lualine.settings.options.theme.__raw = # lua
         "function() return vim.g.lualine_theme end";
     };
 
