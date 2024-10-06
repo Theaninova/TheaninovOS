@@ -39,6 +39,7 @@
           let
             firefoxPip = "class:^(firefox)$,title:^(Picture-in-Picture)$";
             firefoxPipInitial = "class:^(firefox)$,title:^(Firefox)$";
+            pipPadding = toString (config.theme.md3-evo.padding * 2);
           in
           [
             "keepaspectratio,${firefoxPip}"
@@ -49,8 +50,8 @@
             "pin,${firefoxPipInitial}"
             "fullscreenstate 2 0,${firefoxPip}"
             "fullscreenstate 2 0,${firefoxPipInitial}"
-            "move 22 72,${firefoxPip}"
-            "move 22 72,${firefoxPipInitial}"
+            "move ${pipPadding} ${pipPadding},${firefoxPip}"
+            "move ${pipPadding} ${pipPadding},${firefoxPipInitial}"
             # For some reason it really wants to be maximized
             "suppressevent maximize,class:^(neovide)$"
             # pinentry
