@@ -42,6 +42,7 @@
       svelte.enable = true;
       docker.enable = true;
     };
+    windows-vm.enable = true;
   };
 
   shell.components = {

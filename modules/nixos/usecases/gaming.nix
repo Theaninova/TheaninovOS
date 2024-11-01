@@ -39,7 +39,7 @@ in
           ];
       })
       rpcs3
-      wine
+      wine64
       winetricks
       protontricks
       mangohud

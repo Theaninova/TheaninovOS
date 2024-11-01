@@ -10,5 +10,10 @@ in
     enable = mkEnableOption "Enable Angular develompent";
   };
 
-  config = mkIf cfg.enable { networking.firewall.allowedTCPPorts = [ 8100 ]; };
+  config = mkIf cfg.enable {
+    networking.firewall.allowedTCPPorts = [
+      3000
+      8100
+    ];
+  };
 }
