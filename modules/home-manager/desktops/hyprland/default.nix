@@ -76,10 +76,10 @@
           "blur, anyrun"
           "ignorealpha 0.3, anyrun"
         ];
-        decoration = {
-          drop_shadow = "yes";
-          shadow_range = 16;
-          "col.shadow" = "rgba(00000044)";
+        decoration.shadow = {
+          enabled = true;
+          range = 16;
+          color = "rgba(00000044)";
         };
         animations = {
           enabled = "yes";
