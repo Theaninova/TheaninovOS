@@ -21,6 +21,7 @@ in
       dfu-util
       cura
       openscad
+      bambu-studio
       (orca-slicer.overrideAttrs (
         final: prev: {
           version = "2.2.0";
