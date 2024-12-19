@@ -19,7 +19,6 @@ in
     environment.systemPackages = with pkgs; [
       lpc21isp
       dfu-util
-      cura
       openscad
       bambu-studio
       (orca-slicer.overrideAttrs (

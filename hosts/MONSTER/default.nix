@@ -89,7 +89,7 @@
       enable = true;
       default = true;
     };
-    nerdfonts.enable = true;
+    nerd-fonts.enable = true;
   };
 
   services.airprint.enable = true;

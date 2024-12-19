@@ -21,15 +21,17 @@ in
 
   config = mkIf cfg.enable {
     fonts = {
-      packages = with pkgs; [
-        noto-fonts
-        noto-fonts-cjk-sans
-        noto-fonts-emoji
-      ];
-      nerdfonts.additionalFonts = [ "Noto" ];
+      packages =
+        with pkgs;
+        [
+          noto-fonts
+          noto-fonts-cjk-sans
+          noto-fonts-emoji
+        ]
+        ++ (if (config.fonts.nerd-fonts.enable) then [ nerd-fonts.noto ] else [ ]);
       fontconfig = {
         defaultFonts.sansSerif = mkIf cfg.default [
-          (if (config.fonts.nerdfonts.enable) then "Noto Sans Nerd Font" else "Noto Sans")
+          (if (config.fonts.nerd-fonts.enable) then "Noto Sans Nerd Font" else "Noto Sans")
         ];
       };
     };

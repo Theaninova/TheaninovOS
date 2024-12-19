@@ -12,7 +12,6 @@
     };
     git = import ./git.nix;
     nixvim = import ./nixvim { inherit pkgs; };
-    firefox = import ./firefox.nix { inherit pkgs; };
     gpg.enable = true;
     btop = {
       enable = true;

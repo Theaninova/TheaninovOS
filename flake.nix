@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nur.url = "github:nix-community/NUR";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,7 +23,6 @@
   outputs =
     {
       nixpkgs,
-      nur,
       home-manager,
       nixvim,
       anyrun,
@@ -46,14 +44,12 @@
             permittedInsecurePackages = [ "nix-2.25.0pre20240807_cfe66dbe" ];
           };
           overlays = [
-            nur.overlay
             (final: prev: {
               anyrunPlugins = anyrun.packages.${prev.system};
               matugen = matugen.packages.${prev.system}.default;
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
-              cura = prev.callPackage ./overlays/cura { };
             })
           ];
         }

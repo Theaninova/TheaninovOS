@@ -36,11 +36,15 @@ in
 
   config = mkIf cfg.enable {
     fonts = {
-      packages = with pkgs; [ fira-code ];
-      nerdfonts.additionalFonts = [ "FiraCode" ];
+      packages =
+        with pkgs;
+        [
+          fira-code
+        ]
+        ++ (if (config.fonts.nerd-fonts.enable) then [ nerd-fonts.fira-code ] else [ ]);
       fontconfig = {
         defaultFonts.monospace = mkIf cfg.default [
-          (if (config.fonts.nerdfonts.enable) then "Fira Code Nerd Font" else "FiraCode")
+          (if (config.fonts.nerd-fonts.enable) then "Fira Code Nerd Font" else "FiraCode")
         ];
         localConf = ''
           <match target="font">

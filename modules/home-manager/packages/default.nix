@@ -8,6 +8,7 @@
     vulnix
 
     # browsers
+    firefox
     chromium
     brave
 
@@ -29,7 +30,7 @@
 
     # office
     libreoffice
-    apostrophe # markdown editor
+    apostrophe
 
     # creative
     gimp
@@ -44,7 +45,7 @@
 
     # development
     insomnia
-    avalonia-ilspy
+    # TODO: .NET 6 avalonia-ilspy
     # ghidra
     # ida-free
 

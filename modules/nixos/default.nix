@@ -8,7 +8,7 @@
 
     ./fonts/fira-code.nix
     ./fonts/noto-sans.nix
-    ./fonts/nerdfonts.nix
+    ./fonts/nerd-fonts.nix
 
     ./hardware/hid-fanatecff.nix
     ./hardware/audio.nix
