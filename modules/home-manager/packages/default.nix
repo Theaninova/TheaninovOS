@@ -54,6 +54,7 @@
     ranger
     neofetch
     filezilla
+    yubikey-manager
     # rquickshare
   ];
 }

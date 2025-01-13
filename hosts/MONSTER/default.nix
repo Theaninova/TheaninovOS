@@ -62,6 +62,13 @@
     acceleration = "rocm";
   };
 
+  services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+      rastertokpsl-re
+    ];
+  };
+
   services.xserver.xkb.variant = "altgr-intl";
   services.xserver.xkb.layout = "us";
   hardware = {
@@ -129,6 +136,8 @@
     graphicsmagick
     ffmpeg
     nfs-utils
+    opensc
+    openssl
     # Essential command line apps
     neovim
     mc

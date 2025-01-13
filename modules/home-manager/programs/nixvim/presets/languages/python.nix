@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     plugins = {
       conform-nvim.settings.formatters_by_ft.python = [ "black" ];
-      lsp.servers.pylsp.enable = true;
+      lsp.servers.pyright.enable = true;
     };
     extraPackages = [ pkgs.black ];
   };

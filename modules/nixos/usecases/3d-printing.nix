@@ -21,22 +21,8 @@ in
       dfu-util
       openscad
       bambu-studio
-      (orca-slicer.overrideAttrs (
-        final: prev: {
-          version = "2.2.0";
-          src = fetchFromGitHub {
-            owner = "SoftFever";
-            repo = "OrcaSlicer";
-            rev = "v${final.version}";
-            hash = "sha256-h+cHWhrp894KEbb3ic2N4fNTn13WlOSYoMsaof0RvRI=";
-          };
-          patches = builtins.filter (
-            p:
-            (builtins.baseNameOf p) != "0002-fix-build-for-gcc-13.diff"
-            && (builtins.baseNameOf p) != "meshboolean-const.patch"
-          ) prev.patches;
-        }
-      ))
+      prusa-slicer # gcode viewer!
+      orca-slicer
       freecad
     ];
   };

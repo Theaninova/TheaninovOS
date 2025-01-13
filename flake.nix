@@ -50,6 +50,7 @@
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
+              rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
             })
           ];
         }
