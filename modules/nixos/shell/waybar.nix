@@ -23,6 +23,9 @@ in
           reload_style_on_change = true;
           exclusive = true;
 
+          modules-left = [
+            # "hyprland/workspaces"
+          ];
           modules-center = [
             "clock"
             "systemd-failed-units"
@@ -31,14 +34,27 @@ in
             "privacy"
             "gamemode"
             "tray"
+            "custom/brightness"
             "custom/theme"
-            #"network"
-            #"pulseaudio"
-            #"bluetooth"
           ];
+
+          "hyprland/workspaces" = {
+            format = "{windows}";
+            window-rewrite = {
+              "class<firefox>" = "󰈹";
+              "class<thunderbird>" = "";
+              "class<neovide>" = "";
+              "class<kitty>" = "";
+              "class<OrcaSlicer>" = "󰹛";
+              "class<blender>" = "";
+              "class<steam>" = "";
+            };
+            window-rewrite-default = "";
+          };
 
           "custom/theme" = {
             return-type = "json";
+            exec-on-event = true;
             exec = pkgs.writeShellScript "waybar-theme" ''
               if [ $(theme mode) = "dark" ]; then
                 echo '{"text": "", "tooltip": "Switch to light theme"}'
@@ -46,6 +62,8 @@ in
                 echo '{"text": "", "tooltip": "Switch to dark theme"}'
               fi
             '';
+            exec-if = "sleep 1";
+            interval = "once";
             on-click = "theme toggle";
           };
         };
