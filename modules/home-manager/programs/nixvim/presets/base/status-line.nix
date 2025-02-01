@@ -32,8 +32,8 @@ in
           options = {
             globalstatus = true;
             section_separators = {
-              left = ""; # "";
-              right = ""; # "";
+              left = "";
+              right = "";
             };
             component_separators = {
               left = "┊";
@@ -45,8 +45,8 @@ in
               {
                 __unkeyed-1 = "mode";
                 separator = {
-                  right = ""; # "";
-                  left = ""; # "";
+                  right = "";
+                  left = "";
                 };
                 icon = "";
               }
@@ -56,8 +56,8 @@ in
               {
                 __unkeyed-1 = "location";
                 separator = {
-                  right = ""; # "";
-                  left = ""; # "";
+                  right = "";
+                  left = "";
                 };
               }
             ];

@@ -15,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     extraConfigLuaPre = # lua
       ''
+        vim.lsp.set_log_level("off")
         require("actions-preview").setup({})
 
         local signs = {
@@ -28,15 +29,19 @@ in
         	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
         end
 
-        vim.diagnostic.config({
-        	virtual_text = true,
-        	signs = true,
-        	underline = true,
-        	update_in_insert = true,
-        	severity_sort = false,
-        })
-        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+        vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "solid" })
       '';
+    diagnostics = {
+      signs.text = {
+        "__rawKey__vim.diagnostic.severity.ERROR" = "";
+        "__rawKey__vim.diagnostic.severity.WARN" = "";
+        "__rawKey__vim.diagnostic.severity.INFO" = "";
+        "__rawKey__vim.diagnostic.severity.HINT" = "󰌵";
+      };
+      underline = true;
+      update_in_insert = true;
+      severity_sort = true;
+    };
     keymaps = [
       {
         key = "<leader>sa";
@@ -70,9 +75,19 @@ in
         action.__raw = # lua
           "vim.lsp.buf.hover";
       }
+      {
+        key = "<leader>sh";
+        mode = "n";
+        options.silent = true;
+        action.__raw = # lua
+          "function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({0}), {0}) end";
+      }
     ];
     plugins = {
-      lsp.enable = true;
+      lsp = {
+        enable = true;
+        inlayHints = false;
+      };
       telescope = {
         enable = true;
         keymaps = {
@@ -81,7 +96,6 @@ in
           "<leader>si" = "lsp_implementations";
           "<leader>sw" = "lsp_workspace_symbols";
           "<leader>st" = "lsp_type_definitions";
-          "<leader>sh" = "diagnostics";
         };
       };
       inc-rename.enable = true;
@@ -133,8 +147,8 @@ in
         }
         {
           __unkeyed-1 = "<leader>sh";
-          icon = "󱖫";
-          desc = "Diagnostics";
+          icon = "󰞂";
+          desc = "Inlay Hints";
         }
         {
           __unkeyed-1 = "<leader>sa";

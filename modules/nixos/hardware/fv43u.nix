@@ -18,7 +18,7 @@ in
   config = mkIf cfg.enable {
     fonts.fontconfig.subpixel.rgba = "bgr";
     hardware.gbmonctl.enable = true;
-    boot.kernelParams = [ "video=3840x2160@120" ];
+    boot.kernelParams = [ "video=3840x2160@144" ];
 
     home-manager.users.${username} = {
       wayland.windowManager.hyprland.settings = {
@@ -29,7 +29,7 @@ in
           mfact = 0.4;
         };
         monitor = [
-          "DP-3,3840x2160@120,0x0,1,bitdepth,10"
+          "DP-3,3840x2160@144,0x0,1,bitdepth,10"
           "DP-3,addreserved,340,0,0,0"
         ];
         xwayland.force_zero_scaling = true;

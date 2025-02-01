@@ -28,7 +28,7 @@ in
           filteredItems.visible = true;
         };
         extraSources = [ "document_symbols" ];
-        popupBorderStyle = "rounded";
+        popupBorderStyle = "solid";
         eventHandlers.neo_tree_buffer_leave = # lua
           ''
             function()

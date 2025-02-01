@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 
@@ -20,10 +21,17 @@ in
       lpc21isp
       dfu-util
       openscad
-      bambu-studio
-      prusa-slicer # gcode viewer!
       orca-slicer
-      freecad
     ];
+    home-manager.users.${username} = {
+      services.flatpak.packages = [
+        "com.bambulab.BambuStudio"
+        "org.freecad.FreeCAD"
+        "com.prusa3d.PrusaSlicer" # gcode viewer!
+      ];
+      programs = {
+        lazygit.enable = true;
+      };
+    };
   };
 }

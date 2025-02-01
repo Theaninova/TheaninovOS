@@ -15,7 +15,6 @@
     };
   };
 
-  # Bootloader.
   boot = {
     quiet.enable = true;
 
@@ -49,11 +48,8 @@
     waybar.enable = true;
     dunst.enable = true;
   };
-  services.desktopManager.cosmic.enable = true;
-  services.displayManager.cosmic-greeter.enable = true;
   desktops = {
     hyprland.enable = true;
-    # gamescope.enable = true;
   };
   locale.preset.theaninova.enable = true;
 
@@ -65,7 +61,7 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [
-      rastertokpsl-re
+      # rastertokpsl-re
     ];
   };
 

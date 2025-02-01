@@ -1,12 +1,11 @@
 {
   lib,
-  pkgs,
   buildGoModule,
   fetchFromGitHub,
   hidapi,
   udev,
 }:
-buildGoModule rec {
+buildGoModule {
   pname = "gbmonctl";
   version = "1d01a090";
   src = fetchFromGitHub {
@@ -28,5 +27,6 @@ buildGoModule rec {
   meta = with lib; {
     description = "A CLI tool to change monitor settings over USB to the Gigabyte M32U";
     homepage = "https://github.com/kelvie/gbmonctl";
+    maintainers = with maintainers; [ theaninova ];
   };
 }

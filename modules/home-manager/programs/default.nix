@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  services.flatpak.update.auto = {
+    enable = true;
+    onCalendar = "weekly";
+  };
   programs = {
     home-manager.enable = true;
     rbw = {

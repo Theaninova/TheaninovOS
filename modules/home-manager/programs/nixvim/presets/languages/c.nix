@@ -1,10 +1,15 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  ...
+}:
 let
   cfg = config.presets.languages.c;
 in
 {
   options.presets.languages.c = {
     enable = lib.mkEnableOption "C/C++";
+    cppcheck = lib.mkEnableOption "cppcheck";
   };
 
   config = lib.mkIf cfg.enable {
@@ -13,12 +18,28 @@ in
         c = [ "clang-format" ];
         cpp = [ "clang-format" ];
       };
-      lsp.servers.clangd = {
+      none-ls = {
         enable = true;
-        cmd = [
-          "clangd"
-          "--offset-encoding=utf-16"
-        ];
+        sources.diagnostics = {
+          cppcheck = lib.mkIf cfg.cppcheck {
+            enable = true;
+          };
+        };
+      };
+      lsp.servers = {
+        clangd = {
+          enable = true;
+          cmd = [
+            "clangd"
+            "--offset-encoding=utf-16"
+          ];
+          settings.InlayHints = {
+            Designators = true;
+            Enabled = true;
+            ParameterNames = true;
+            DeducedTypes = true;
+          };
+        };
       };
     };
   };

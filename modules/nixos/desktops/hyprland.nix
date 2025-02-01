@@ -34,22 +34,28 @@ in
       };
     };
 
+    # https://github.com/sjcobb2022/nixos-config/blob/70fb548b961c19e9855d2de86ee9569a7a88d976/hosts/common/optional/greetd.nix#L23C1-L33C2
+    systemd.services.greetd.serviceConfig = {
+      Type = "idle";
+      StandardInput = "tty";
+      StandardOutput = "tty";
+      StandardError = "journal"; # Without this errors will spam on screen
+      # Without these bootlogs will spam on screen
+      TTYReset = true;
+      TTYVHangup = true;
+      TTYVTDisallocate = true;
+    };
+
     services = {
-      /*
-        greetd = {
-          enable = true;
-          settings = {
-            initial_session = {
-              command = "${pkgs.hyprland}/bin/Hyprland &> /dev/null";
-              user = username;
-            };
-            default_session = {
-              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks";
-              user = username;
-            };
+      greetd = {
+        enable = true;
+        settings = {
+          default_session = {
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --asterisks --remember --remember-session --sessions ${pkgs.hyprland}/share/wayland-sessions";
+            user = username;
           };
         };
-      */
+      };
 
       dbus.enable = true;
 

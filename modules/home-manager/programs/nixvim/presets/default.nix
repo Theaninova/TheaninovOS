@@ -1,7 +1,10 @@
-{ lib, ... }:
+{ lib, pkgs, ... }:
 {
   options.programs.nixvim = lib.mkOption {
-    type = lib.types.submoduleWith {
+    type = pkgs.lib.types.submoduleWith {
+      specialArgs = {
+        inherit pkgs;
+      };
       modules = [
         ./auto-save.nix
         ./auto-format.nix
@@ -15,6 +18,7 @@
         ./base/diagnostics.nix
         ./base/find.nix
         ./base/formatting.nix
+        ./base/spellcheck.nix
         ./base/status-line.nix
         ./base/syntax.nix
         ./base/tree.nix
@@ -29,10 +33,12 @@
         ./languages/python.nix
         ./languages/rust.nix
         ./languages/shell.nix
+        ./languages/svelte.nix
 
         ./remaps/half-page-scroll.nix
         ./remaps/no-accidental-macro.nix
         ./remaps/paste-keep-buffer.nix
+        ./remaps/wrapped-line-nav.nix
       ];
     };
   };

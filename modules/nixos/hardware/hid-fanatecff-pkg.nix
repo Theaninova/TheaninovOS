@@ -23,6 +23,7 @@ stdenv.mkDerivation rec {
   makeFlags = kernel.makeFlags ++ [
     "KVERSION=${kernel.modDirVersion}"
     "KERNEL_SRC=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
+    "KBUILD_OUTPUT=${kernel.dev}/lib/modules/${kernel.modDirVersion}/build"
   ];
 
   patchPhase = ''

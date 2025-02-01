@@ -6,6 +6,7 @@
     cachix
     # lorri
     vulnix
+    gccdiag
 
     # browsers
     firefox
@@ -44,17 +45,19 @@
     blender-hip
 
     # development
-    insomnia
     # TODO: .NET 6 avalonia-ilspy
     # ghidra
-    # ida-free
 
     # utils
     libqalculate
     ranger
-    neofetch
     filezilla
     yubikey-manager
-    # rquickshare
+    (pkgs.writeShellApplication {
+      name = "fix-yubikey";
+      text = ''
+        gpg-connect-agent --hex "scd apdu 00 f1 00 00" /bye
+      '';
+    })
   ];
 }

@@ -41,8 +41,14 @@ in
           snippet.expand = # lua
             "function(args) require('luasnip').lsp_expand(args.body) end";
           window = {
-            completion.border = "rounded";
-            documentation.border = "rounded";
+            completion = {
+              border = "solid";
+              zindex = 10;
+            };
+            documentation = {
+              border = "solid";
+              zindex = 10;
+            };
           };
         };
       };

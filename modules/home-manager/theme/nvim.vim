@@ -4,14 +4,19 @@ if exists("syntax_on")
 endif
 let g:colors_name="md3-evo"
 
-let g:neovide_transparency = {{custom.transparency}}
+let g:neovide_transparency = 1.0
+let g:neovide_floating_corner_radius = 0.5
+let g:neovide_normal_opacity = {{custom.transparency}}
 let g:neovide_padding_top = {{custom.padding}}
 let g:neovide_padding_bottom = {{custom.padding}}
 let g:neovide_padding_left = {{custom.padding}}
 let g:neovide_padding_right = {{custom.padding}}
 let g:neovide_floating_blur_amount_x = {{custom.blur}}
 let g:neovide_floating_blur_amount_y = {{custom.blur}}
-let g:neovide_floating_shadow = 0
+let g:neovide_floating_shadow = v:true
+let g:neovide_floating_z_height = 10
+let g:neovide_light_angle_degrees = 45
+let g:neovide_light_radius = 5
 
 let g:terminal_color_0 = "{{colors.surface.default.hex}}"
 let g:terminal_color_1 = "{{colors.red.default.hex}}"
@@ -203,6 +208,8 @@ hi! IlluminatedWordText gui=none guibg={{colors.surface_container_highest.defaul
 hi! IlluminatedWordRead gui=none guibg={{colors.surface_container_highest.default.hex}}
 hi! IlluminatedWordWrite gui=none guibg={{colors.surface_container_highest.default.hex}}
 hi! MatchParen gui=none guibg={{colors.surface_container_highest.default.hex}}
+
+hi! LspInlayHint guifg={{colors.on_surface_variant.default.hex}} guibg={{colors.surface_variant.default.hex}}
 
 let g:lualine_theme = {
   \  "insert": {

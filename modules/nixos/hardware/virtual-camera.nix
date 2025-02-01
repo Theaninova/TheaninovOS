@@ -1,5 +1,4 @@
 {
-  pkgs,
   lib,
   config,
   ...
@@ -16,7 +15,6 @@ in
 
   config = mkIf cfg.enable {
     boot = {
-      # Virtual Camera/Mic
       kernelModules = [
         "v4l2loopback"
         "snd-aloop"

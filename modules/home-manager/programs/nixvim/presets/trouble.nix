@@ -13,7 +13,7 @@ in
         key = "<leader>xx";
         mode = "n";
         action.__raw = # lua
-          "require('trouble').toggle";
+          "function() require('trouble').toggle('diagnostics') end";
       }
       {
         key = "<leader>xw";
@@ -42,10 +42,7 @@ in
     ];
     plugins = {
       web-devicons.enable = true;
-      trouble = {
-        enable = true;
-        settings.use_diagnostic_signs = true;
-      };
+      trouble.enable = true;
       which-key.settings.spec = [
         {
           __unkeyed-1 = "<leader>x";

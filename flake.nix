@@ -14,10 +14,7 @@
       url = "github:Kirottu/anyrun";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs =
@@ -27,7 +24,7 @@
       nixvim,
       anyrun,
       matugen,
-      nixos-cosmic,
+      nix-flatpak,
       ...
     }@inputs:
     let
@@ -47,6 +44,7 @@
             (final: prev: {
               anyrunPlugins = anyrun.packages.${prev.system};
               matugen = matugen.packages.${prev.system}.default;
+              gccdiag = prev.callPackage ./overlays/gccdiag { };
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
@@ -68,22 +66,13 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            nixos-cosmic.nixosModules.default
-            {
-              nix.settings = {
-                substituters = [
-                  "https://cosmic.cachix.org/"
-                ];
-                trusted-public-keys = [
-                  "cosmic.cachix.org-1:Dya9IyXD4xdBehWjrkPv6rtxpmMdRel02smYzA85dPE="
-                ];
-              };
-            }
+            nix-flatpak.nixosModules.nix-flatpak
             {
               _module.args = {
                 inherit username;
               };
               networking.hostName = hostname;
+              services.flatpak.enable = true;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
@@ -93,6 +82,7 @@
                 users.${username} = {
                   imports = [
                     matugen.homeManagerModules.default
+                    nix-flatpak.homeManagerModules.nix-flatpak
                     ./modules/home-manager
                     ./hosts/${hostname}/home.nix
                   ];
