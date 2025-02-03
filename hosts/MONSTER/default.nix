@@ -45,28 +45,41 @@
   };
 
   shell.components = {
-    waybar.enable = true;
     dunst.enable = true;
+    firefox-pip.enable = true;
+    flameshot.enable = true;
+    gnome-keyring.enable = true;
+    hyprpicker.enable = true;
+    kitty.enable = true;
+    walker.enable = true;
+    waybar.enable = true;
   };
   desktops = {
     hyprland.enable = true;
   };
   locale.preset.theaninova.enable = true;
 
-  services.ollama = {
-    enable = true;
-    acceleration = "rocm";
+  services = {
+    ollama = {
+      enable = false;
+      acceleration = "rocm";
+    };
+
+    printing = {
+      enable = true;
+      drivers = with pkgs; [
+        # rastertokpsl-re
+      ];
+    };
+
+    xserver.xkb.variant = "altgr-intl";
+    xserver.xkb.layout = "us";
+
+    airprint.enable = true;
+
+    udev.packages = with pkgs; [ android-udev-rules ];
   };
 
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      # rastertokpsl-re
-    ];
-  };
-
-  services.xserver.xkb.variant = "altgr-intl";
-  services.xserver.xkb.layout = "us";
   hardware = {
     amdgpu.preset.default.enable = true;
     audio.preset.pipewire.enable = true;
@@ -94,10 +107,6 @@
     };
     nerd-fonts.enable = true;
   };
-
-  services.airprint.enable = true;
-
-  services.udev.packages = with pkgs; [ android-udev-rules ];
 
   programs.zsh.enable = true;
   security.sudo.configFile = ''

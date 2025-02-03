@@ -68,9 +68,9 @@ in
           };
         };
       };
-      systemd = lib.mkIf config.desktops.hyprland.enable {
+      systemd = {
         enable = true;
-        target = "hyprland-session.target";
+        target = "graphical-session.target";
       };
     };
   };

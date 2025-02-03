@@ -21,12 +21,26 @@ in
       extraPackages = with pkgs; [ rocmPackages.clr.icd ];
     };
 
+    systemd.tmpfiles.rules =
+      let
+        rocmEnv = pkgs.symlinkJoin {
+          name = "rocm-combined";
+          paths = with pkgs.rocmPackages; [
+            rocblas
+            hipblas
+            clr
+          ];
+        };
+      in
+      [
+        "L+    /opt/rocm   -    -    -     -    ${rocmEnv}"
+      ];
+
     boot = {
       # https://docs.kernel.org/gpu/amdgpu/module-parameters.html
       kernelParams = [
         "amdgpu.seamless=1"
         "amdgpu.freesync_video=1"
-        "initcall_blacklist=simpledrm_platform_driver_init"
       ];
       initrd.kernelModules = [ "amdgpu" ];
     };
@@ -36,6 +50,7 @@ in
       glxinfo
       libva-utils
       vulkan-tools
+      clinfo
     ];
   };
 }

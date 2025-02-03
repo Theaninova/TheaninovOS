@@ -1,17 +1,16 @@
 {
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    matugen.url = "github:Theaninova/matugen/add-home-manager-module";
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    matugen = {
+      url = "github:Theaninova/matugen/add-home-manager-module";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    anyrun = {
-      url = "github:Kirottu/anyrun";
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -22,7 +21,6 @@
       nixpkgs,
       home-manager,
       nixvim,
-      anyrun,
       matugen,
       nix-flatpak,
       ...
@@ -42,13 +40,17 @@
           };
           overlays = [
             (final: prev: {
-              anyrunPlugins = anyrun.packages.${prev.system};
               matugen = matugen.packages.${prev.system}.default;
               gccdiag = prev.callPackage ./overlays/gccdiag { };
               gbmonctl = prev.callPackage ./overlays/gbmonctl { };
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
               rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
+              plymouth = prev.plymouth.overrideAttrs (
+                final: prev: {
+                  patches = prev.patches ++ [ ];
+                }
+              );
             })
           ];
         }

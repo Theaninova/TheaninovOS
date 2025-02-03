@@ -4,7 +4,6 @@
     ./boot/quiet.nix
 
     ./desktops/hyprland.nix
-    ./desktops/gamescope.nix
 
     ./fonts/fira-code.nix
     ./fonts/noto-sans.nix
@@ -30,8 +29,14 @@
 
     ./services/airprint.nix
 
-    ./shell/waybar.nix
     ./shell/dunst.nix
+    ./shell/firefox-pip.nix
+    ./shell/flameshot.nix
+    ./shell/gnome-keyring.nix
+    ./shell/hyprpicker.nix
+    ./shell/kitty.nix
+    ./shell/walker.nix
+    ./shell/waybar.nix
 
     ./xdg/forced-compliance.nix
   ];

@@ -22,6 +22,10 @@
       ];
     };
   };
+  wayland.windowManager.hyprland.settings.windowrulev2 = [
+    # For some reason it really wants to be maximized
+    "suppressevent maximize,class:^(neovide)$"
+  ];
   programs.nixvim = {
     globals = {
       neovide_text_gamma = 0.0;

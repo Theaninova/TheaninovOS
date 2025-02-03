@@ -168,217 +168,274 @@ in
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    home.packages = [
-      pkgs.adw-gtk3
-      (pkgs.writeShellApplication {
-        name = "theme";
-        runtimeInputs = [
-          pkgs.matugen
-          pkgs.swww
-          pkgs.zenity
-        ];
-        text = ''
-          WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
+  config =
+    let
+      theme-script = (
+        pkgs.writeShellApplication {
+          name = "theme";
+          runtimeInputs = [
+            pkgs.matugen
+            pkgs.swww
+            pkgs.zenity
+          ];
+          text = ''
+            WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
 
-          SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
-          if [ "$SCHEME" = "'prefer-light'" ]; then
-            MODE="light"
-          else
-            MODE="dark"
-          fi
-
-          if [ $# -eq 0 ]; then
-            echo -e "\033[1mUsage:\033[0m mode|light|dark|toggle|wallpaper"
-            exit 1
-          elif [ "$1" = "mode" ]; then
-            echo -e "$MODE"
-            exit 0
-          elif [ "$1" = "wallpaper" ]; then
-            if [ $# -eq 1 ]; then
-              PICKED=$(zenity --file-selection --file-filter='Images | *.png *.jpg *.jpeg *.svg *.bmp *.gif')
-              cp "$PICKED" "$WALLPAPER"
-            else
-              cp "$2" "$WALLPAPER"
-            fi
-          elif [ "$1" = "toggle" ]; then
-            if [ "$MODE" = "light" ]; then
-              MODE="dark"
-            else
+            SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
+            if [ "$SCHEME" = "'prefer-light'" ]; then
               MODE="light"
+            else
+              MODE="dark"
             fi
-          elif [ "$1" = "light" ] || [ "$1" = "dark" ]; then
-            MODE="$1"
-          elif [ "$1" = "init" ]; then
-            echo -e "\033[1mSetting up matugen\033[0m"
-          else
-            echo -e "\033[31mInvalid argument\033[0m"
-            exit 1
-          fi
 
-          if [ ! -f $WALLPAPER ]; then
-            echo -e "\033[31,1mNo wallpaper set\033[0m"
-            exit 1
-          fi
+            if [ $# -eq 0 ]; then
+              echo -e "\033[1mUsage:\033[0m mode|light|dark|toggle|wallpaper"
+              exit 1
+            elif [ "$1" = "mode" ]; then
+              echo -e "$MODE"
+              exit 0
+            elif [ "$1" = "wallpaper" ]; then
+              if [ $# -eq 1 ]; then
+                PICKED=$(zenity --file-selection --file-filter='Images | *.png *.jpg *.jpeg *.svg *.bmp *.gif')
+                cp "$PICKED" "$WALLPAPER"
+              else
+                cp "$2" "$WALLPAPER"
+              fi
+            elif [ "$1" = "toggle" ]; then
+              if [ "$MODE" = "light" ]; then
+                MODE="dark"
+              else
+                MODE="light"
+              fi
+            elif [ "$1" = "light" ] || [ "$1" = "dark" ]; then
+              MODE="$1"
+            elif [ "$1" = "init" ]; then
+              echo -e "\033[1mSetting up matugen\033[0m"
+            else
+              echo -e "\033[31mInvalid argument\033[0m"
+              exit 1
+            fi
 
-          if [ "$MODE" = "light" ]; then
-            GTK_THEME="adw-gtk3"
-          else
-            GTK_THEME="adw-gtk3-dark"
-          fi
+            if [ ! -f $WALLPAPER ]; then
+              echo -e "\033[31,1mNo wallpaper set\033[0m"
+              exit 1
+            fi
 
-          matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
-          sed -i "s/set background=dark/set background=$MODE/g" ${config.xdg.configHome}/nvim/colors/md3-evo.vim
+            if [ "$MODE" = "light" ]; then
+              GTK_THEME="adw-gtk3"
+            else
+              GTK_THEME="adw-gtk3-dark"
+            fi
 
-          dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
-          dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
+            matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
+            sed -i "s/set background=dark/set background=$MODE/g" ${config.xdg.configHome}/nvim/colors/md3-evo.vim
 
-          if command -v hyprctl &> /dev/null; then
-            hyprctl reload
-          fi
+            dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
+            dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
 
-          for i in $(pgrep -u "$USER" -x nvim); do
-            kill -USR1 "$i"
-          done
-        '';
-      })
-    ];
+            if command -v hyprctl &> /dev/null; then
+              hyprctl reload
+            fi
 
-    programs.kitty = {
-      extraConfig = ''
-        include ${config.xdg.configHome}/kitty/theme.conf
-      '';
-    };
-
-    programs.nixvim = {
-      opts.termguicolors = true;
-      colorscheme = "md3-evo";
-      autoCmd = [
-        {
-          event = [ "Signal" ];
-          pattern = [ "SIGUSR1" ];
-          command = # vim
-            "colorscheme md3-evo";
-          nested = true;
+            for i in $(pgrep -u "$USER" -x nvim); do
+              kill -USR1 "$i"
+            done
+          '';
         }
+      );
+    in
+    lib.mkIf cfg.enable {
+      home.packages = [
+        pkgs.adw-gtk3
+        theme-script
       ];
-      plugins.lualine.settings.options.theme.__raw = # lua
-        "function() return vim.g.lualine_theme end";
-    };
 
-    gtk = {
-      gtk3.extraCss = # css
-        "@import './theme.css';";
-      gtk4.extraCss = # css
-        "@import './theme.css';";
-    };
+      gtk = {
+        gtk3.extraCss = # css
+          "@import './theme.css';";
+        gtk4.extraCss = # css
+          "@import './theme.css';";
+        iconTheme = {
+          name = "Tela";
+          package = pkgs.tela-icon-theme;
+        };
+      };
+      qt.platformTheme.name = "qtct";
 
-    wayland.windowManager.hyprland = {
-      settings.exec-once = [
-        "${pkgs.swww}/bin/swww-daemon"
-        "theme init"
-      ];
-      extraConfig = ''
-        source=./theme.conf
-      '';
-    };
-
-    programs.matugen = {
-      enable = true;
-      settings = {
-        config = {
-          reload_apps = true;
-          reload_apps_list = {
-            kitty = config.programs.kitty.enable;
-            waybar = false;
-            dunst = config.services.dunst.enable;
-          };
-
-          set_wallpaper = true;
-          wallpaper_tool = "Swww";
-
-          custom_colors =
-            let
-              mkColor = category: color: {
-                color = cfg.${category}.${color};
-                blend = cfg.${category}.blend;
-              };
-            in
-            {
-              red = mkColor "ansi" "red";
-              green = mkColor "ansi" "green";
-              yellow = mkColor "ansi" "yellow";
-              orange = mkColor "ansi" "orange";
-              blue = mkColor "ansi" "blue";
-              magenta = mkColor "ansi" "magenta";
-              cyan = mkColor "ansi" "cyan";
-
-              keywords = mkColor "syntax" "keywords";
-              functions = mkColor "syntax" "functions";
-              constants = mkColor "syntax" "constants";
-              properties = mkColor "syntax" "properties";
-              strings = mkColor "syntax" "strings";
-              numbers = mkColor "syntax" "numbers";
-              structures = mkColor "syntax" "structures";
-              types = mkColor "syntax" "types";
-
-              danger = mkColor "semantic" "danger";
-              warning = mkColor "semantic" "warning";
-              success = mkColor "semantic" "success";
-              info = mkColor "semantic" "info";
+      systemd.user.services = {
+        /*
+          swww-daemon = {
+            Unit = {
+              Description = "Swww Daemon";
+              After = [ "graphical-session.target" ];
             };
-
-          custom_keywords = {
-            padding = builtins.toString cfg.padding;
-            double_padding = builtins.toString (cfg.padding * 2);
-            radius = builtins.toString cfg.radius;
-            transparency = builtins.toString cfg.transparency;
-            blur = builtins.toString cfg.blur;
-            flavour = cfg.flavour;
-            contrast = builtins.toString cfg.contrast;
-            transparency_hex =
-              let
-                zeroPad = hex: if builtins.stringLength hex == 1 then "0${hex}" else hex;
-              in
-              zeroPad (lib.trivial.toHexString (builtins.floor (cfg.transparency * 255)));
+            Install.WantedBy = [ "graphical-session.target" ];
+            Service = {
+              ExecStart = "${pkgs.swww}/bin/swww-daemon";
+              Restart = "on-failure";
+            };
+          };
+        */
+        theme-init = {
+          Unit = {
+            Description = "MD3 Evo Theme Init";
+            After = [
+              "graphical-session.target"
+              "swww-daemon.service"
+            ];
+          };
+          Install.WantedBy = [ "graphical-session.target" ];
+          Service = {
+            ExecStart = "${lib.getExe theme-script} init";
+            Restart = "on-failure";
           };
         };
+      };
 
-        templates =
-          let
-            gtk = pkgs.writeText "gtk4.css" (import ./gtk.nix);
-          in
-          {
-            kitty = {
-              input_path = ./kitty.conf;
-              output_path = "${config.xdg.configHome}/kitty/theme.conf";
-            };
-            nvim = {
-              input_path = ./nvim.vim;
-              output_path = "${config.xdg.configHome}/nvim/colors/md3-evo.vim";
-            };
-            hyprland = {
-              input_path = ./hyprland.conf;
-              output_path = "${config.xdg.configHome}/hypr/theme.conf";
-            };
-            anyrun = {
-              input_path = ./anyrun.css;
-              output_path = "${config.xdg.configHome}/anyrun/theme.css";
-            };
-            gtk3 = {
-              input_path = gtk;
-              output_path = "${config.xdg.configHome}/gtk-3.0/theme.css";
-            };
-            gtk4 = {
-              input_path = gtk;
-              output_path = "${config.xdg.configHome}/gtk-4.0/theme.css";
-            };
-            vesktop = {
-              input_path = ./discord.css;
-              output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
-            };
+      wayland.windowManager.hyprland = {
+        settings = {
+          windowrulev2 = [ "float,class:^(zenity)$" ];
+          decoration.shadow = {
+            enabled = true;
+            range = 16;
+            color = "rgba(00000044)";
           };
+          animations = {
+            enabled = "yes";
+            bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+            animation = [
+              "windows, 1, 5, myBezier"
+              "windowsOut, 1, 7, default, popin 80%"
+              "border, 1, 10, default"
+              "fade, 1, 7, default"
+              "workspaces, 1, 6, default"
+            ];
+          };
+        };
+        extraConfig = ''
+          source=./theme.conf
+        '';
+      };
+
+      programs = {
+        kitty = {
+          extraConfig = ''
+            include ${config.xdg.configHome}/kitty/theme.conf
+          '';
+        };
+
+        nixvim = {
+          opts.termguicolors = true;
+          colorscheme = "md3-evo";
+          autoCmd = [
+            {
+              event = [ "Signal" ];
+              pattern = [ "SIGUSR1" ];
+              command = # vim
+                "colorscheme md3-evo";
+              nested = true;
+            }
+          ];
+          plugins.lualine.settings.options.theme.__raw = # lua
+            "function() return vim.g.lualine_theme end";
+        };
+        matugen = {
+          enable = true;
+          settings = {
+            config = {
+              reload_apps = true;
+              reload_apps_list = {
+                kitty = config.programs.kitty.enable;
+                waybar = false;
+                dunst = config.services.dunst.enable;
+              };
+
+              set_wallpaper = true;
+              wallpaper_tool = "Swww";
+
+              custom_colors =
+                let
+                  mkColor = category: color: {
+                    inherit (cfg.${category}) blend;
+                    color = cfg.${category}.${color};
+                  };
+                in
+                {
+                  red = mkColor "ansi" "red";
+                  green = mkColor "ansi" "green";
+                  yellow = mkColor "ansi" "yellow";
+                  orange = mkColor "ansi" "orange";
+                  blue = mkColor "ansi" "blue";
+                  magenta = mkColor "ansi" "magenta";
+                  cyan = mkColor "ansi" "cyan";
+
+                  keywords = mkColor "syntax" "keywords";
+                  functions = mkColor "syntax" "functions";
+                  constants = mkColor "syntax" "constants";
+                  properties = mkColor "syntax" "properties";
+                  strings = mkColor "syntax" "strings";
+                  numbers = mkColor "syntax" "numbers";
+                  structures = mkColor "syntax" "structures";
+                  types = mkColor "syntax" "types";
+
+                  danger = mkColor "semantic" "danger";
+                  warning = mkColor "semantic" "warning";
+                  success = mkColor "semantic" "success";
+                  info = mkColor "semantic" "info";
+                };
+
+              custom_keywords = {
+                inherit (cfg) flavour;
+                padding = builtins.toString cfg.padding;
+                double_padding = builtins.toString (cfg.padding * 2);
+                radius = builtins.toString cfg.radius;
+                transparency = builtins.toString cfg.transparency;
+                blur = builtins.toString cfg.blur;
+                contrast = builtins.toString cfg.contrast;
+                transparency_hex =
+                  let
+                    zeroPad = hex: if builtins.stringLength hex == 1 then "0${hex}" else hex;
+                  in
+                  zeroPad (lib.trivial.toHexString (builtins.floor (cfg.transparency * 255)));
+              };
+            };
+
+            templates =
+              let
+                gtk = pkgs.writeText "gtk4.css" (import ./gtk.nix);
+              in
+              {
+                kitty = {
+                  input_path = ./kitty.conf;
+                  output_path = "${config.xdg.configHome}/kitty/theme.conf";
+                };
+                nvim = {
+                  input_path = ./nvim.vim;
+                  output_path = "${config.xdg.configHome}/nvim/colors/md3-evo.vim";
+                };
+                hyprland = {
+                  input_path = ./hyprland.conf;
+                  output_path = "${config.xdg.configHome}/hypr/theme.conf";
+                };
+                anyrun = {
+                  input_path = ./anyrun.css;
+                  output_path = "${config.xdg.configHome}/anyrun/theme.css";
+                };
+                gtk3 = {
+                  input_path = gtk;
+                  output_path = "${config.xdg.configHome}/gtk-3.0/theme.css";
+                };
+                gtk4 = {
+                  input_path = gtk;
+                  output_path = "${config.xdg.configHome}/gtk-4.0/theme.css";
+                };
+                vesktop = {
+                  input_path = ./discord.css;
+                  output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
+                };
+              };
+          };
+        };
       };
     };
-  };
 }
