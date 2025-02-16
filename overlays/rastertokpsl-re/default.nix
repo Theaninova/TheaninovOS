@@ -18,6 +18,7 @@ stdenv.mkDerivation {
     cmake
     cups
   ];
+  cmakeFlags = [ "-DCMAKE_C_FLAGS=-D_GNU_SOURCE" ];
   nativeBuildInputs = [ patchPpdFilesHook ];
   installPhase = ''
     runHook preInstall

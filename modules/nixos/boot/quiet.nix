@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   username,
   ...
 }:
@@ -25,6 +26,9 @@ in
       kernelParams = [
         "quiet"
 
+        #"fbcon=nodefer"
+        #"fbcon=map:123"
+
         "rd.udev.log_level=3"
         "rd.systemd.show_status=false"
         "udev.log_priority=3"
@@ -42,20 +46,61 @@ in
         };
       };
     };
-    services.greetd.greeterManagesPlymouth = true;
-    /*
-      systemd.services = {
-        plymouth-quit-wait = {
-          overrideStrategy = "asDropin";
-          after = [ "graphical-session.target" ];
-          wantedBy = lib.mkForce [ "graphical-session.target" ];
-        };
-        plymouth-quit = {
-          overrideStrategy = "asDropin";
-          after = [ "graphical-session.target" ];
-          wantedBy = lib.mkForce [ "graphical-session.target" ];
-        };
+    systemd.services = {
+      plymouth-quit-wait = {
+        after = lib.mkForce [ ];
+        wantedBy = lib.mkForce [ ];
       };
-    */
+      plymouth-quit = {
+        after = lib.mkForce [
+          "graphical.target"
+          "greetd.service"
+        ];
+        wantedBy = lib.mkForce [ "graphical.target" ];
+        serviceConfig = {
+          ExecStart = [
+            ""
+            "-${pkgs.plymouth}/bin/plymouth quit --retain-splash"
+            /*
+              "-${
+                (lib.getExe (
+                  pkgs.writeShellApplication {
+                    name = "plymouth-quit-delayed";
+                    text = ''
+                      ${pkgs.kbd}/bin/chvt 2; ${pkgs.coreutils}/bin/sleep 1; exec ${pkgs.plymouth}/bin/plymouth quit --retain-splash
+                    '';
+                  }
+                ))
+              }"
+            */
+          ];
+          TTYVTDisallocate = true;
+        };
+        /*
+          serviceConfig = {
+            Type = "forking";
+            ExecStart = [
+              ""
+              (lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "plymouth-quit-delayed";
+                  text = ''
+                    ${pkgs.coreutils}/bin/sleep 5
+                    ${pkgs.plymouth}/bin/plymouth quit --retain-splash
+                  '';
+                }
+              ))
+            ];
+          };
+          /*
+            after = lib.mkForce [ ];
+            wantedBy = lib.mkForce [ ];
+            serviceConfig.ExecStart = [
+              "-${pkgs.coreutils}/bin/sleep 5"
+              "-${pkgs.plymouth}/bin/plymouth quit"
+            ];
+        */
+      };
+    };
   };
 }

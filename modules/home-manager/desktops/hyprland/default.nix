@@ -15,7 +15,7 @@
           kb_variant = osConfig.services.xserver.xkb.variant;
         };
         bind = [
-          "SUPER,Q,killactive"
+          "SUPER,C,killactive"
           "SUPER,P,togglefloating,"
           "SUPER,P,pin,"
           "SUPER,D,fullscreen,1"

@@ -68,7 +68,7 @@
     printing = {
       enable = true;
       drivers = with pkgs; [
-        # rastertokpsl-re
+        rastertokpsl-re
       ];
     };
 

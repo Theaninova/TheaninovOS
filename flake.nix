@@ -48,7 +48,7 @@
               rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
               plymouth = prev.plymouth.overrideAttrs (
                 final: prev: {
-                  patches = prev.patches ++ [ ];
+                  patches = prev.patches ++ [ ./overlays/plymouth/drm-close-fb.patch ];
                 }
               );
             })
