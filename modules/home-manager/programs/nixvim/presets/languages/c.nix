@@ -32,6 +32,7 @@ in
           cmd = [
             "clangd"
             "--offset-encoding=utf-16"
+            "--clang-tidy"
           ];
           settings.InlayHints = {
             Designators = true;
