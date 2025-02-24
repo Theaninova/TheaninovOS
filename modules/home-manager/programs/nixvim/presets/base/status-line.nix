@@ -12,7 +12,7 @@ in
     plugins = {
       notify = {
         enable = true;
-        stages = "static";
+        settings.stages = "static";
       };
       telescope = {
         enable = true;
