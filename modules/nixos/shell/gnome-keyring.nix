@@ -24,7 +24,11 @@ in
       ];
       home.packages = with pkgs; [
         polkit_gnome
-        gnome-keyring
+        (gnome-keyring.overrideAttrs (oldAttrs: {
+          configureFlags = oldAttrs.configureFlags ++ [
+            "--disable-ssh-agent"
+          ];
+        }))
       ];
       /*
         systemd.user.services = {
