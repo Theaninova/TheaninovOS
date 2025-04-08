@@ -38,9 +38,11 @@
     mergetool.enable = true;
     trouble.enable = true;
     undotree.enable = true;
+    aerial.enable = true;
     base = {
       completion.enable = true;
       diagnostics.enable = true;
+      coverage.enable = true;
       find.enable = true;
       formatting = {
         enable = true;

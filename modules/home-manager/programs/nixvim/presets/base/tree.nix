@@ -10,12 +10,10 @@ in
   config = lib.mkIf cfg.enable {
     keymaps = [
       {
-        key = "<leader>ft";
-        action = "<cmd>:Neotree toggle<CR>";
-      }
-      {
-        key = "<leader>ss";
-        action = "<cmd>:Neotree document_symbols right toggle<CR>";
+        key = "ft";
+        mode = "n";
+        action = # vim
+          "<cmd>:Neotree toggle<CR>";
       }
     ];
     plugins = {
@@ -27,8 +25,9 @@ in
           followCurrentFile.enabled = true;
           filteredItems.visible = true;
         };
-        extraSources = [ "document_symbols" ];
-        popupBorderStyle = "solid";
+        popupBorderStyle = "rounded";
+        filesystem.window.mappings.f = "noop";
+        window.mappings.f = "noop";
         eventHandlers.neo_tree_buffer_leave = # lua
           ''
             function()
@@ -38,14 +37,9 @@ in
       };
       which-key.settings.spec = [
         {
-          __unkeyed-1 = "<leader>ft";
+          __unkeyed-1 = "ft";
           desc = "Tree";
           icon = "󰙅";
-        }
-        {
-          __unkeyed-1 = "<leader>ss";
-          desc = "Document Symbols";
-          icon = "󱏒";
         }
       ];
     };

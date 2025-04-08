@@ -6,6 +6,7 @@
         inherit pkgs;
       };
       modules = [
+        ./aerial.nix
         ./auto-save.nix
         ./auto-format.nix
         ./harpoon.nix
@@ -15,6 +16,7 @@
         ./undotree.nix
 
         ./base/completion.nix
+        ./base/coverage.nix
         ./base/diagnostics.nix
         ./base/find.nix
         ./base/formatting.nix

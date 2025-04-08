@@ -82,6 +82,10 @@ hi! ErrorMsg guibg={{colors.danger_container.default.hex}} guifg={{colors.on_dan
 hi! WarningMsg guibg={{colors.warning_container.default.hex}} guifg={{colors.on_warning_container.default.hex}}
 hi! NvimInternalError guibg={{colors.danger.default.hex}} guifg={{colors.on_danger.default.hex}}
 
+hi! CoverageCovered guifg={{colors.success.default.hex}}
+hi! CoverageUncovered guifg={{colors.danger.default.hex}}
+hi! CoveragePartial guifg={{colors.warning.default.hex}}
+
 hi! DiagnosticError guifg={{colors.danger.default.hex}}
 hi! DiagnosticWarn guifg={{colors.warning.default.hex}}
 hi! DiagnosticInfo guifg={{colors.info.default.hex}}
@@ -204,6 +208,7 @@ hi! link @keyword.import.cpp PreProc
 hi! Type gui=none guifg={{colors.types.default.hex}}
 hi! link @lsp.type.interface Type
 
+hi! link AerialLine CursorLine
 hi! IlluminatedWordText gui=none guibg={{colors.surface_container_highest.default.hex}}
 hi! IlluminatedWordRead gui=none guibg={{colors.surface_container_highest.default.hex}}
 hi! IlluminatedWordWrite gui=none guibg={{colors.surface_container_highest.default.hex}}
