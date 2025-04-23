@@ -214,7 +214,7 @@ hi! IlluminatedWordRead gui=none guibg={{colors.surface_container_highest.defaul
 hi! IlluminatedWordWrite gui=none guibg={{colors.surface_container_highest.default.hex}}
 hi! MatchParen gui=none guibg={{colors.surface_container_highest.default.hex}}
 
-hi! LspInlayHint guifg={{colors.on_surface_variant.default.hex}} guibg={{colors.surface_variant.default.hex}}
+hi! LspInlayHint gui=italic guifg={{colors.outline.default.hex}} guibg={{colors.surface_container_highest.default.hex}}
 
 let g:lualine_theme = {
   \  "insert": {

@@ -16,27 +16,17 @@ in
     extraConfigLuaPre = # lua
       ''
         vim.lsp.set_log_level("off")
-        require("actions-preview").setup({})
-
-        local signs = {
-        	{ name = "DiagnosticSignError", text = "" },
-        	{ name = "DiagnosticSignWarn", text = "" },
-        	{ name = "DiagnosticSignHint", text = "󰌵" },
-        	{ name = "DiagnosticSignInfo", text = "" },
-        }
-
-        for _, sign in ipairs(signs) do
-        	vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-        end
-
         vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "solid" })
       '';
     diagnostics = {
-      signs.text = {
-        "__rawKey__vim.diagnostic.severity.ERROR" = "";
-        "__rawKey__vim.diagnostic.severity.WARN" = "";
-        "__rawKey__vim.diagnostic.severity.INFO" = "";
-        "__rawKey__vim.diagnostic.severity.HINT" = "󰌵";
+      virtual_text.prefix = "●";
+      signs = false;
+      float = {
+        focusable = false;
+        header = "";
+        border = "solid";
+        scope = "cursor";
+        prefix = "";
       };
       underline = true;
       update_in_insert = true;
@@ -44,11 +34,11 @@ in
     };
     keymaps = [
       {
-        key = "<leader>sa";
+        key = "<leader>sn";
         mode = "n";
         options.silent = true;
         action.__raw = # lua
-          "require('actions-preview').code_actions";
+          "function() vim.diagnostic.open_float(nil) end";
       }
       {
         key = "<leader>sx";
@@ -69,13 +59,6 @@ in
         action = ":IncRename ";
       }
       {
-        key = "<leader>sn";
-        mode = "n";
-        options.silent = true;
-        action.__raw = # lua
-          "vim.lsp.buf.hover";
-      }
-      {
         key = "<leader>sh";
         mode = "n";
         options.silent = true;
@@ -86,7 +69,7 @@ in
     plugins = {
       lsp = {
         enable = true;
-        inlayHints = false;
+        inlayHints = true;
       };
       telescope = {
         enable = true;
@@ -96,6 +79,7 @@ in
           "<leader>si" = "lsp_implementations";
           "<leader>sw" = "lsp_workspace_symbols";
           "<leader>st" = "lsp_type_definitions";
+          "<leader>sa" = "quickfix";
         };
       };
       inc-rename.enable = true;
@@ -104,11 +88,6 @@ in
           __unkeyed-1 = "<leader>s";
           group = "LSP";
           icon = "󱐋";
-        }
-        {
-          __unkeyed-1 = "<leader>sn";
-          desc = "Hover";
-          icon = "";
         }
         {
           __unkeyed-1 = "<leader>sr";
@@ -156,12 +135,16 @@ in
           icon = "";
         }
         {
+          __unkeyed-1 = "<leader>sn";
+          desc = "Diagnostics";
+          icon = "";
+        }
+        {
           __unkeyed-1 = "<leader>sx";
           desc = "LSP Format";
           icon = "󰉢";
         }
       ];
     };
-    extraPlugins = [ pkgs.vimPlugins.actions-preview-nvim ];
   };
 }

@@ -1,18 +1,66 @@
-{ lib, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 let
   cfg = config.presets.base.completion;
 in
 {
   options.presets.base.completion = {
     enable = lib.mkEnableOption "completion";
+    copilot = lib.mkEnableOption "Copilot";
+    ollama = lib.mkEnableOption "Ollama";
   };
 
   config = lib.mkIf cfg.enable {
+    extraConfigLua =
+      lib.mkIf cfg.ollama
+        #lua
+        ''
+          require('minuet').setup({
+            provider = 'openai_fim_compatible',
+            n_completions = 1,
+            context_window = 1024,
+            provider_options = {
+              openai_fim_compatible = {
+                api_key = 'TERM',
+                name = 'Ollama',
+                end_point = 'http://localhost:11434/v1/completions',
+                model = 'deepseek-coder-v2:16b',
+                optional = {
+                  max_tokens = 56,
+                  stop = { '\n' },
+                  top_p = 0.9,
+                },
+              },
+            },
+            virtualtext = {
+              show_on_completion_menu = true,
+              auto_trigger_ft = { "*" },
+              keymap = {
+                accept = '<A-l>',
+              },
+            },
+            throttle = 0,
+            debounce = 0,
+          })
+        '';
     plugins = {
       luasnip.enable = true;
       lspkind = {
         enable = true;
         mode = "symbol_text";
+      };
+      lualine.settings.sections.lualine_x = lib.mkIf cfg.ollama (
+        lib.mkBefore [
+          { __unkeyed-1.__raw = "require('minuet.lualine')"; }
+        ]
+      );
+      copilot-lua = lib.mkIf cfg.copilot {
+        enable = true;
+        settings.suggestion.auto_trigger = true;
       };
       cmp = {
         enable = true;
@@ -53,5 +101,6 @@ in
         };
       };
     };
+    extraPlugins = lib.mkIf cfg.ollama [ pkgs.vimPlugins.minuet-ai-nvim ];
   };
 }

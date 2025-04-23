@@ -1,6 +1,12 @@
 { pkgs, ... }:
 {
   xdg.configFile."ranger/rc.conf".source = ./ranger.conf;
+  services.flatpak.packages = [
+    {
+      flatpakref = "https://releases.threema.ch/flatpak/threema-desktop/ch.threema.threema-desktop.flatpakref";
+      sha256 = "0lghiiiphbkqgiprqirxifldvix0j4k04jh1z9f911shrzjgqq4s";
+    }
+  ];
   home.packages = with pkgs; [
     # nix
     cachix
@@ -27,6 +33,7 @@
     discord
     element-desktop
     thunderbird
+    signal-desktop
     # cinny-desktop
 
     # office

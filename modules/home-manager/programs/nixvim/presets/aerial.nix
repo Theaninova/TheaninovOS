@@ -37,7 +37,7 @@ in
           autojump = true;
           highlight_on_jump = false;
           filter_kind = false;
-          open_automatic = true;
+          open_automatic = false;
           show_guides = true;
           backends = [
             "lsp"

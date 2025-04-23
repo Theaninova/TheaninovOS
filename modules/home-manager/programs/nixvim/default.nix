@@ -40,7 +40,10 @@
     undotree.enable = true;
     aerial.enable = true;
     base = {
-      completion.enable = true;
+      completion = {
+        enable = true;
+        copilot = true;
+      };
       diagnostics.enable = true;
       coverage.enable = true;
       find.enable = true;
@@ -84,41 +87,7 @@
     };
   };
 
-  extraPlugins = [ pkgs.vimPlugins.tiny-inline-diagnostic-nvim ];
-  extraConfigLua = ''
-    require("tiny-inline-diagnostic").setup({
-        preset = "modern",
-        hi = {
-          arrow = "LineNr",
-          background = "LineNr",
-        },
-        options = {
-            show_source = true,
-            use_icons_from_diagnostic = true,
-            add_messages = true,
-            throttle = 0,
-            softwrap = 30,
-            multiple_diag_under_cursor = true,
-            multilines = {
-                enabled = true,
-                always_show = true,
-            },
-            show_all_diags_on_cursorline = false,
-            enable_on_insert = false,
-            enable_on_select = false,
-            severity = {
-                vim.diagnostic.severity.ERROR,
-                vim.diagnostic.severity.WARN,
-                vim.diagnostic.severity.INFO,
-                vim.diagnostic.severity.HINT,
-            },
-        },
-    })
-  '';
-  diagnostics.virtual_text = false;
-
   plugins = {
-    leap.enable = true;
     vim-surround.enable = true;
     which-key.enable = true;
     schemastore.enable = true;
@@ -131,7 +100,6 @@
         line_numbers = false;
       };
     };
-    none-ls.settings.debug = true;
 
     lsp.servers = {
       html.enable = true;
@@ -142,11 +110,6 @@
       yamlls.enable = true;
       jsonls.enable = true;
       taplo.enable = true;
-    };
-
-    copilot-lua = {
-      enable = true;
-      settings.suggestion.auto_trigger = true;
     };
   };
 }
