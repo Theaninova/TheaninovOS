@@ -34,9 +34,23 @@ in
             "privacy"
             "gamemode"
             "tray"
+            "pulseaudio"
             "custom/brightness"
             "custom/theme"
           ];
+
+          "pulseaudio" = {
+            format = "{icon} {volume}%";
+            format-icons = {
+              "alsa_output.usb-Turtle_Beach_Turtle_Beach_Stealth_700_G2_MAX-01.iec958-stereo" = "󰋋";
+              "alsa_output.pci-0000_0a_00.4.analog-stereo" = "󰓃";
+              "alsa_output.pci-0000_08_00.1.hdmi-stereo-extra4" = "󰽟";
+              "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2018_11_12_79383-00.analog-stereo" =
+                "󰍬";
+              "default" = "󰕾";
+            };
+            on-click = "pavucontrol --tab=3";
+          };
 
           "hyprland/workspaces" = {
             format = "{windows}";
@@ -58,6 +72,8 @@ in
             exec = pkgs.writeShellScript "waybar-theme" ''
               if [ $(theme mode) = "dark" ]; then
                 echo '{"text": "", "tooltip": "Switch to light theme"}'
+              elif [ $(theme mode) = "auto" ]; then
+                echo '{"text": "󰖛", "tooltip": "Switch to dark theme"}'
               else
                 echo '{"text": "", "tooltip": "Switch to dark theme"}'
               fi
@@ -65,6 +81,8 @@ in
             exec-if = "sleep 1";
             interval = "once";
             on-click = "theme toggle";
+            on-click-right = "theme auto";
+            on-click-middle = "theme wallpaper";
           };
         };
       };

@@ -21,6 +21,13 @@
         "+ss10"
       ];
     };
+    box-drawing = {
+      mode = "native";
+      sizes.default = [
+        1
+        3
+      ];
+    };
   };
   wayland.windowManager.hyprland.settings.windowrulev2 = [
     # For some reason it really wants to be maximized
@@ -35,6 +42,7 @@
       neovide_hide_mouse_when_typing = true;
       experimental_layer_grouping = true;
       neovide_cursor_vfx_mode = "pixiedust";
+      neovide_cursor_trail_size = 0.7;
     };
   };
 }

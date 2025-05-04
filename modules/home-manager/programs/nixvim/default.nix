@@ -33,7 +33,7 @@
   presets = {
     auto-save.enable = true;
     auto-format.enable = true;
-    harpoon.enable = true;
+    # harpoon.enable = true;
     lazygit.enable = true;
     mergetool.enable = true;
     trouble.enable = true;

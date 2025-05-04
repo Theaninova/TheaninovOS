@@ -45,12 +45,14 @@
   };
 
   shell.components = {
-    dunst.enable = true;
+    #dunst.enable = true;
     firefox-pip.enable = true;
     flameshot.enable = true;
     gnome-keyring.enable = true;
     hyprpicker.enable = true;
+    kde-connect.enable = true;
     kitty.enable = true;
+    swaync.enable = true;
     walker.enable = true;
     waybar.enable = true;
   };

@@ -4,7 +4,7 @@ if exists("syntax_on")
 endif
 let g:colors_name="md3-evo"
 
-let g:neovide_transparency = 1.0
+let g:neovide_opacity = 1.0
 let g:neovide_floating_corner_radius = 0.5
 let g:neovide_normal_opacity = {{custom.transparency}}
 let g:neovide_padding_top = {{custom.padding}}

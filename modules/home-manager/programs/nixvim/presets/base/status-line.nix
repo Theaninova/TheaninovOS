@@ -31,10 +31,12 @@ in
         settings = {
           options = {
             globalstatus = true;
-            section_separators = {
-              left = "";
-              right = "";
-            };
+            /*
+              section_separators = {
+                left = "";
+                right = "";
+              };
+            */
             component_separators = {
               left = "┊";
               right = "┊";
@@ -44,10 +46,12 @@ in
             lualine_a = [
               {
                 __unkeyed-1 = "mode";
-                separator = {
-                  right = "";
-                  left = "";
-                };
+                /*
+                  separator = {
+                    right = "";
+                    left = "";
+                  };
+                */
                 icon = "";
               }
             ];
@@ -55,10 +59,12 @@ in
             lualine_z = [
               {
                 __unkeyed-1 = "location";
-                separator = {
-                  right = "";
-                  left = "";
-                };
+                /*
+                  separator = {
+                    right = "";
+                    left = "";
+                  };
+                */
               }
             ];
           };

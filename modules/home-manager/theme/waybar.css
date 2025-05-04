@@ -1,0 +1,70 @@
+window#waybar {
+  background: none;
+  border-bottom: none;
+}
+
+window#waybar > box.horizontal {
+  margin: 12px 24px 0;
+}
+
+.module {
+  color: white;
+  background: none;
+  margin: 0 8px;
+}
+
+#clock {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+#privacy-item {
+  padding: 0 16px;
+  border-radius: 16px;
+}
+
+
+#pulseaudio-slider {
+  margin: 0 6px;
+  padding: 0;
+}
+
+#pulseaudio-slider slider {
+  background: none;
+  min-height: 12px;
+  min-width: 12px;
+  border-radius: 100%;
+  margin: 0;
+  opacity: 0;
+  background-image: none;
+  border: none;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-height: 12px;
+  min-width: 80px;
+  border-radius: 6px;
+  background-color: {{colors.on_primary.default.hex}};
+}
+
+#pulseaudio-slider highlight {
+  min-width: 12px;
+  border-radius: 6px;
+  background-color: {{colors.primary.default.hex}};
+}
+
+#privacy-item.audio-in {
+  background: {{colors.primary.default.hex}};
+  color: {{colors.on_primary.default.hex}};
+}
+
+#privacy-item.audio-out {
+  background: {{colors.secondary.default.hex}};
+  color: {{colors.on_secondary.default.hex}};
+}
+
+#privacy-item.screenshare {
+  background: {{colors.tertiary.default.hex}};
+  color: {{colors.on_tertiary.default.hex}};
+}

@@ -69,7 +69,7 @@ in
     plugins = {
       lsp = {
         enable = true;
-        inlayHints = true;
+        inlayHints = false;
       };
       telescope = {
         enable = true;

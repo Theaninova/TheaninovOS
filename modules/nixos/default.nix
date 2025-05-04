@@ -34,7 +34,9 @@
     ./shell/flameshot.nix
     ./shell/gnome-keyring.nix
     ./shell/hyprpicker.nix
+    ./shell/kde-connect.nix
     ./shell/kitty.nix
+    ./shell/swaync.nix
     ./shell/walker.nix
     ./shell/waybar.nix
 

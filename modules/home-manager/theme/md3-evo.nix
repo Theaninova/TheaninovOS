@@ -11,6 +11,15 @@ in
 {
   options.theme.md3-evo = {
     enable = lib.mkEnableOption "the MD3-EVO theme";
+    auto-dark = {
+      enable = lib.mkEnableOption "Automatically switch between light and dark mode";
+      lon = lib.mkOption {
+        type = lib.types.float;
+      };
+      lat = lib.mkOption {
+        type = lib.types.float;
+      };
+    };
     flavour = lib.mkOption {
       type = lib.types.enum [
         "content"
@@ -177,9 +186,11 @@ in
             pkgs.matugen
             pkgs.swww
             pkgs.zenity
+            pkgs.sunwait
           ];
           text = ''
             WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
+            STATE=${config.xdg.stateHome}/md3-evo
 
             SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
             if [ "$SCHEME" = "'prefer-light'" ]; then
@@ -188,8 +199,15 @@ in
               MODE="dark"
             fi
 
+            if [ ! -d "$STATE" ]; then
+              mkdir -p "$STATE"
+            fi
+            if [ -f "$STATE/mode" ]; then
+              MODE=$(cat "$STATE/mode")
+            fi
+
             if [ $# -eq 0 ]; then
-              echo -e "\033[1mUsage:\033[0m mode|light|dark|toggle|wallpaper"
+              echo -e "\033[1mUsage:\033[0m mode|light|dark|auto|toggle|wallpaper"
               exit 1
             elif [ "$1" = "mode" ]; then
               echo -e "$MODE"
@@ -207,8 +225,10 @@ in
               else
                 MODE="light"
               fi
-            elif [ "$1" = "light" ] || [ "$1" = "dark" ]; then
+              echo "$MODE" > "$STATE/mode"
+            elif [ "$1" = "light" ] || [ "$1" = "dark" ] || [ "$1" == "auto" ]; then
               MODE="$1"
+              echo "$MODE" > "$STATE/mode"
             elif [ "$1" = "init" ]; then
               echo -e "\033[1mSetting up matugen\033[0m"
             else
@@ -220,6 +240,35 @@ in
               echo -e "\033[31,1mNo wallpaper set\033[0m"
               exit 1
             fi
+
+
+            THEME_SERVICE_PATH="${config.xdg.configHome}/systemd/user/theme-init.timer"
+            if [ "$MODE" = "auto" ]; then
+              TIME=$(sunwait poll ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E || :)
+              if [ "$TIME" = "DAY" ]; then
+                MODE="light"
+                NEXT=6
+              else
+                MODE="dark"
+                NEXT=4
+              fi
+              NEXT=$(sunwait report ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E | awk "/Daylight:/ {print \$$NEXT}")
+              cat <<EOF | tee "$THEME_SERVICE_PATH" > /dev/null
+            [Unit]
+            Description=Next theme change timer
+
+            [Timer]
+            OnCalendar=*-*-* $(date -d "$NEXT today + 5 minutes" +'%H:%M'):00
+            AccuracySec=1min
+
+            [Install]
+            WantedBy=timers.target
+            EOF
+            else
+              rm -f "$THEME_SERVICE_PATH"
+            fi
+            systemctl --user daemon-reload &> /dev/null || :
+            systemctl --user restart theme-init.timer &> /dev/null || :
 
             if [ "$MODE" = "light" ]; then
               GTK_THEME="adw-gtk3"
@@ -237,6 +286,10 @@ in
               hyprctl reload
             fi
 
+            if which swaync-client; then
+              swaync-client --reload-css
+            fi
+
             for i in $(pgrep -u "$USER" -x nvim); do
               kill -USR1 "$i"
             done
@@ -247,6 +300,7 @@ in
     lib.mkIf cfg.enable {
       home.packages = [
         pkgs.adw-gtk3
+        pkgs.swww
         theme-script
       ];
 
@@ -263,19 +317,17 @@ in
       qt.platformTheme.name = "qtct";
 
       systemd.user.services = {
-        /*
-          swww-daemon = {
-            Unit = {
-              Description = "Swww Daemon";
-              After = [ "graphical-session.target" ];
-            };
-            Install.WantedBy = [ "graphical-session.target" ];
-            Service = {
-              ExecStart = "${pkgs.swww}/bin/swww-daemon";
-              Restart = "on-failure";
-            };
+        swww-daemon = {
+          Unit = {
+            Description = "Swww Daemon";
+            After = [ "graphical-session.target" ];
           };
-        */
+          Install.WantedBy = [ "graphical-session.target" ];
+          Service = {
+            ExecStart = "${pkgs.swww}/bin/swww-daemon";
+            Restart = "always";
+          };
+        };
         theme-init = {
           Unit = {
             Description = "MD3 Evo Theme Init";
@@ -346,7 +398,7 @@ in
               reload_apps = true;
               reload_apps_list = {
                 kitty = config.programs.kitty.enable;
-                waybar = false;
+                waybar = config.programs.waybar.enable;
                 dunst = config.services.dunst.enable;
               };
 
@@ -432,6 +484,14 @@ in
                 vesktop = {
                   input_path = ./discord.css;
                   output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
+                };
+                waybar = {
+                  input_path = ./waybar.css;
+                  output_path = "${config.xdg.configHome}/waybar/style.css";
+                };
+                swaync = {
+                  input_path = ./swaync.css;
+                  output_path = "${config.xdg.configHome}/swaync/style.css";
                 };
               };
           };

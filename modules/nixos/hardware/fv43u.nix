@@ -49,12 +49,16 @@ in
         DXVK_HDR = "1";
       };
       wayland.windowManager.hyprland.settings = {
-        general.layout = "master";
+        general = {
+          layout = "master";
+          allow_tearing = true;
+        };
         master = {
           orientation = "center";
           slave_count_for_center_master = 0;
           mfact = 0.4;
         };
+        render.direct_scanout = 1;
         monitor = [
           "DP-3,3840x2160@144,0x0,1,bitdepth,10"
           "DP-3,addreserved,340,0,0,0"
@@ -63,7 +67,7 @@ in
         misc.vrr = 2; # VA suffers from VRR flicker
         cursor = {
           min_refresh_rate = 48;
-          no_break_fs_vrr = true;
+          no_break_fs_vrr = 1;
         };
         experimental = {
           xx_color_management_v4 = true;
