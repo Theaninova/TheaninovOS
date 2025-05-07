@@ -41,7 +41,7 @@
     apostrophe
 
     # creative
-    gimp
+    gimp3
     inkscape-with-extensions
     scribus
     audacity

@@ -121,6 +121,7 @@
     extraGroups = [
       "scanner"
       "lp"
+      "storage"
       "networkmanager"
       "audio"
       "video"
@@ -134,6 +135,7 @@
   environment.systemPackages = with pkgs; [
     # Essential utils
     usbutils
+    usbimager
     uhubctl
     pciutils
     htop

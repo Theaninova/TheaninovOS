@@ -23,7 +23,10 @@ in
     };
     home-manager.users.${username} = {
       wayland.windowManager.hyprland = {
+        enable = true;
         systemd.enable = false;
+        package = null;
+        portalPackage = null;
       };
       home = {
         packages = with pkgs; [ grim ];
@@ -49,6 +52,7 @@ in
           Wants = [ "network-online.target" ];
         };
       };
+      services.polkit-gnome.enable = true;
     };
 
     systemd.services = {
@@ -66,16 +70,11 @@ in
           "hyprland"
           "gtk"
         ];
-        "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
     };
 
     services = {
-      seatd = {
-        enable = true;
-        user = username;
-      };
       kmscon = {
         enable = true;
         hwRender = true;
