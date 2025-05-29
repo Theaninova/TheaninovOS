@@ -62,7 +62,7 @@
           username,
           system,
         }:
-        nixpkgs.lib.nixosSystem {
+        nixpkgs.lib.nixosSystem rec {
           pkgs = legacyPackages.${system};
           modules = [
             ./modules/nixos
@@ -70,9 +70,24 @@
             home-manager.nixosModules.home-manager
             nix-flatpak.nixosModules.nix-flatpak
             {
-              _module.args = {
-                inherit username;
-              };
+              _module.args =
+                let
+                  patchDesktop =
+                    pkg: appName: from: to:
+                    pkgs.lib.hiPrio (
+                      pkgs.runCommand "$patched-desktop-entry-for-${appName}" { } ''
+                        ${pkgs.coreutils}/bin/mkdir -p $out/share/applications
+                        ${pkgs.gnused}/bin/sed 's#${from}#${to}#g' < ${pkg}/share/applications/${appName}.desktop > $out/share/applications/${appName}.desktop
+                      ''
+                    );
+                  GPUOffloadApp = pkg: desktopName: patchDesktop pkg desktopName "^Exec=" "Exec=nvidia-offload ";
+                  gpu-offload =
+                    config: pkg: desktopName:
+                    if config.hardware.nvidia.prime.offload.enable then GPUOffloadApp pkg desktopName else pkg;
+                in
+                {
+                  inherit username gpu-offload;
+                };
               networking.hostName = hostname;
               services.flatpak.enable = true;
               home-manager = {
@@ -96,10 +111,17 @@
         };
     in
     {
-      nixosConfigurations.MONSTER = mkHost {
-        hostname = "MONSTER";
-        username = "theaninova";
-        system = "x86_64-linux";
+      nixosConfigurations = {
+        MONSTER = mkHost {
+          hostname = "MONSTER";
+          username = "theaninova";
+          system = "x86_64-linux";
+        };
+        aero = mkHost {
+          hostname = "aero";
+          username = "theaninova";
+          system = "x86_64-linux";
+        };
       };
 
       nixosModules.theaninovos = import ./modules/nixos;

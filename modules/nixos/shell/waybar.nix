@@ -12,6 +12,7 @@ in
 {
   options.shell.components.waybar = {
     enable = lib.mkEnableOption (lib.mdDoc "Enable a pre-configured waybar setup");
+    mobile = lib.mkEnableOption (lib.mdDoc "Mobile PC");
   };
 
   config = lib.mkIf cfg.enable {
@@ -23,21 +24,36 @@ in
           reload_style_on_change = true;
           exclusive = true;
 
-          modules-left = [
-            # "hyprland/workspaces"
-          ];
+          modules-left = (
+            if cfg.mobile then
+              [
+                "battery"
+              ]
+            else
+              [ ]
+          );
           modules-center = [
             "clock"
-            "systemd-failed-units"
           ];
-          modules-right = [
-            "privacy"
-            "gamemode"
-            "tray"
-            "pulseaudio"
-            "custom/brightness"
-            "custom/theme"
-          ];
+          modules-right =
+            [
+              "privacy"
+              "gamemode"
+              "tray"
+              "pulseaudio"
+            ]
+            ++ (
+              if cfg.mobile then
+                [ "backlight" ]
+              else
+                [
+                  "custom/brightness"
+                ]
+            )
+            ++ [
+              # "custom/theme"
+              # "network"
+            ];
 
           "pulseaudio" = {
             format = "{icon} {volume}%";
@@ -52,6 +68,20 @@ in
             on-click = "pavucontrol --tab=3";
           };
 
+          "backlight" = {
+            "format" = "{icon}";
+            "format-icons" = [
+              "󰃚"
+              "󰃛"
+              "󰃜"
+              "󰃝"
+              "󰃞"
+              "󰃟"
+              "󰃠"
+            ];
+            "tooltip-format" = "{percent}%";
+          };
+
           "hyprland/workspaces" = {
             format = "{windows}";
             window-rewrite = {
@@ -64,6 +94,39 @@ in
               "class<steam>" = "";
             };
             window-rewrite-default = "";
+          };
+
+          "network" = {
+            "format-icons" = [
+              "󰤯"
+              "󰤟"
+              "󰤢"
+              "󰤥"
+              "󰤨"
+            ];
+            "format" = "󰛳";
+            "format-wifi" = "{icon}";
+            "format-ethernet" = "󰈀";
+            "format-disconnected" = if cfg.mobile then "󰤭" else "󰲛";
+          };
+
+          "battery" = {
+            "format-icons" = [
+              "󰂎"
+              "󰁺"
+              "󰁻"
+              "󰁼"
+              "󰁽"
+              "󰁾"
+              "󰁿"
+              "󰂀"
+              "󰂁"
+              "󰂂"
+              "󰁹"
+            ];
+            "format" = "{icon}";
+            "format-time" = "{H}:{m}";
+            "tooltip-format" = "{capacity}%";
           };
 
           "custom/theme" = {
