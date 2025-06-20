@@ -1,6 +1,10 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    lix-module = {
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.0.tar.gz";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,6 +25,7 @@
       nixpkgs,
       home-manager,
       nixvim,
+      lix-module,
       matugen,
       nix-flatpak,
       ...
@@ -36,7 +41,6 @@
             allowUnfree = true;
             allowUnsupportedSystem = true;
             experimental-features = "nix-command flakes";
-            permittedInsecurePackages = [ "nix-2.25.0pre20240807_cfe66dbe" ];
           };
           overlays = [
             (final: prev: {
@@ -68,6 +72,7 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
+            lix-module.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
             {
               _module.args =
@@ -100,7 +105,7 @@
                 sharedModules = [
                   matugen.homeManagerModules.default
                   nix-flatpak.homeManagerModules.nix-flatpak
-                  inputs.nixvim.homeManagerModules.nixvim
+                  nixvim.homeManagerModules.nixvim
                   ./modules/home-manager/modules/nixvim
                 ];
                 users.${username} = {
