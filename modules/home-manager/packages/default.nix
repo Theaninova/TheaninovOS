@@ -53,7 +53,7 @@
 
     # development
     # TODO: .NET 6 avalonia-ilspy
-    # ghidra
+    ghidra
 
     # utils
     libqalculate

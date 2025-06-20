@@ -37,6 +37,8 @@ in
           QT_WAYLAND_DISABLE_WINDOWDECORATION = "1";
           SDL_VIDEODRIVER = "wayland";
           CLUTTER_BACKEND = "wayland";
+          # https://github.com/swaywm/sway/issues/6272
+          _JAVA_AWT_WM_NONREPARENTING = "1";
         };
       };
       xdg.configFile."uwsm/env".source = pkgs.writeText "env" (
