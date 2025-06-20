@@ -1,9 +1,15 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  hostname,
+  username,
+  ...
+}:
 {
   options.programs.nixvim = lib.mkOption {
     type = pkgs.lib.types.submoduleWith {
       specialArgs = {
-        inherit pkgs;
+        inherit pkgs hostname username;
       };
       modules = [
         ./aerial.nix

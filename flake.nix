@@ -86,20 +86,25 @@
                     if config.hardware.nvidia.prime.offload.enable then GPUOffloadApp pkg desktopName else pkg;
                 in
                 {
-                  inherit username gpu-offload;
+                  inherit username hostname gpu-offload;
                 };
+              nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
               networking.hostName = hostname;
               services.flatpak.enable = true;
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit username inputs;
+                  inherit username hostname inputs;
                 };
+                sharedModules = [
+                  matugen.homeManagerModules.default
+                  nix-flatpak.homeManagerModules.nix-flatpak
+                  inputs.nixvim.homeManagerModules.nixvim
+                  ./modules/home-manager/modules/nixvim
+                ];
                 users.${username} = {
                   imports = [
-                    matugen.homeManagerModules.default
-                    nix-flatpak.homeManagerModules.nix-flatpak
                     ./modules/home-manager
                     ./hosts/${hostname}/home.nix
                   ];

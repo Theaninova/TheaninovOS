@@ -1,7 +1,6 @@
 {
   username,
   osConfig,
-  inputs,
   ...
 }:
 {
@@ -11,9 +10,9 @@
     homeDirectory = "/home/${username}";
   };
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
-    ./programs/nixvim/presets
     ./programs/neovide.nix
+    ./programs/nixvim.nix
+    ./programs/git.nix
     ./packages
     ./programs
     ./services

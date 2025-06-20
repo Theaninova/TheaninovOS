@@ -41,6 +41,13 @@ in
           "function() vim.diagnostic.open_float(nil) end";
       }
       {
+        key = "<leader>sa";
+        mode = "n";
+        options.silent = true;
+        action.__raw = # lua
+          "require('actions-preview').code_actions";
+      }
+      {
         key = "<leader>sx";
         mode = "n";
         options.silent = true;
@@ -67,6 +74,7 @@ in
       }
     ];
     plugins = {
+      actions-preview.enable = true;
       lsp = {
         enable = true;
         inlayHints = false;
@@ -79,7 +87,6 @@ in
           "<leader>si" = "lsp_implementations";
           "<leader>sw" = "lsp_workspace_symbols";
           "<leader>st" = "lsp_type_definitions";
-          "<leader>sa" = "quickfix";
         };
       };
       inc-rename.enable = true;

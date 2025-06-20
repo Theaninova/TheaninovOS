@@ -14,8 +14,6 @@
         pinentry = pkgs.pinentry-gnome3;
       };
     };
-    git = import ./git.nix;
-    nixvim = import ./nixvim { inherit pkgs; };
     gpg.enable = true;
     btop = {
       enable = true;
