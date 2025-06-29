@@ -79,6 +79,7 @@ in
         enable = true;
         inlayHints = false;
       };
+      lsp-signature.enable = true;
       telescope = {
         enable = true;
         keymaps = {

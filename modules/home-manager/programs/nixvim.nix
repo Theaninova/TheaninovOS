@@ -88,12 +88,25 @@
     };
 
     plugins = {
-      vim-surround.enable = true;
       which-key.enable = true;
       schemastore.enable = true;
       comment.enable = true;
       debugprint.enable = true;
       todo-comments.enable = true;
+      origami.enable = false;
+      nvim-surround.enable = true;
+      hardtime = {
+        enable = true;
+        settings = {
+          disable_mouse = false;
+          disabled_keys = {
+            "<Up>".__raw = "false";
+            "<Down>".__raw = "false";
+            "<Left>".__raw = "false";
+            "<Right>".__raw = "false";
+          };
+        };
+      };
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings = {

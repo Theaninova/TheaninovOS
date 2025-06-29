@@ -110,7 +110,15 @@
     nerd-fonts.enable = true;
   };
 
-  programs.zsh.enable = true;
+  programs = {
+    zsh.enable = true;
+    wireshark = {
+      enable = true;
+      package = pkgs.wireshark;
+      usbmon.enable = true;
+    };
+  };
+
   security.sudo.configFile = ''
     Defaults env_reset,pwfeedback,passprompt="󰟵  "
   '';
@@ -118,6 +126,7 @@
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
+      "wireshark"
       "scanner"
       "lp"
       "storage"

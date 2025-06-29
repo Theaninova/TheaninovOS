@@ -27,6 +27,7 @@ in
         };
       };
       lsp.servers = {
+        cmake.enable = true;
         clangd = {
           enable = true;
           cmd = [
