@@ -9,7 +9,13 @@
     };
   };
   programs.zoxide.enable = true;
-  home.packages = with pkgs; [ blueman ];
+  home = {
+    packages = with pkgs; [ blueman ];
+  };
+  wayland.windowManager.hyprland.settings.monitor = [
+    "eDP-1,3840x2160@60,0x0,2,bitdepth,10,cm,auto"
+    "HDMI-A-4,2560x1440@75,1920x-768,1,bitdepth,10,cm,auto"
+  ];
   systemd.user.services = {
     nm-applet = {
       Unit = {

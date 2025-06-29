@@ -49,7 +49,6 @@ in
           "SUPER,mouse_up,workspace,r+1"
           "SUPER,mouse_down,workspace,r-1"
         ];
-        monitor = lib.mkAfter [ ",highrr,auto,1" ];
         bindm = [
           "SUPER,mouse:272,movewindow"
           "SUPER,mouse:273,resizewindow"
