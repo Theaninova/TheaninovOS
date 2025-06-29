@@ -49,10 +49,7 @@ in
         DXVK_HDR = "1";
       };
       wayland.windowManager.hyprland.settings = {
-        general = {
-          layout = "master";
-          allow_tearing = true;
-        };
+        general.layout = "master";
         master = {
           orientation = "center";
           slave_count_for_center_master = 0;
