@@ -28,6 +28,8 @@
     handbrake
     metadata-cleaner
 
+    prismlauncher
+
     # chat apps
     vesktop
     discord
