@@ -50,6 +50,16 @@
               lpc21isp = prev.callPackage ./overlays/lpc21isp { };
               rquickshare = prev.callPackage ./overlays/rquickshare { };
               rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
+              usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
+              wireshark = prev.wireshark.overrideAttrs (
+                finalAttrs: prevAttrs: {
+                  postInstall =
+                    prevAttrs.postInstall
+                    + ''
+                      ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
+                    '';
+                }
+              );
               plymouth = prev.plymouth.overrideAttrs (
                 final: prev: {
                   patches = prev.patches ++ [ ./overlays/plymouth/drm-close-fb.patch ];

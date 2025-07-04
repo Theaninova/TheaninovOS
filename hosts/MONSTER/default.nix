@@ -79,7 +79,10 @@
 
     airprint.enable = true;
 
-    udev.packages = with pkgs; [ android-udev-rules ];
+    udev.packages = with pkgs; [
+      android-udev-rules
+      usb-sniffer
+    ];
   };
 
   hardware = {
@@ -96,6 +99,17 @@
       enable = true;
       powerOnBoot = true;
     };
+  };
+
+  virtualisation.oci-containers.containers.craftoria = {
+    image = "eclipse-temurin:21-jre";
+    volumes = [ "/home/theaninova/.config/craftoria:/craftoria" ];
+    environment = { };
+    ports = [ "25565:25565" ];
+    workdir = "/craftoria";
+    entrypoint = "/bin/bash";
+    cmd = [ "startserver.sh" ];
+    extraOptions = [ "--network=host" ];
   };
 
   fonts = {
@@ -145,6 +159,7 @@
     usbutils
     usbimager
     uhubctl
+    usb-sniffer
     pciutils
     htop
     unar
@@ -167,7 +182,13 @@
   ];
 
   networking = {
-    firewall.allowedUDPPorts = [ 50765 ];
+    firewall = {
+      allowedTCPPorts = [ 25565 ];
+      allowedUDPPorts = [
+        25565
+        50765
+      ];
+    };
 
     networkmanager = {
       enable = true;
