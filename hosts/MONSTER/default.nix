@@ -101,15 +101,29 @@
     };
   };
 
-  virtualisation.oci-containers.containers.craftoria = {
-    image = "eclipse-temurin:21-jre";
-    volumes = [ "/home/theaninova/.config/craftoria:/craftoria" ];
-    environment = { };
-    ports = [ "25565:25565" ];
-    workdir = "/craftoria";
-    entrypoint = "/bin/bash";
-    cmd = [ "startserver.sh" ];
-    extraOptions = [ "--network=host" ];
+  virtualisation.oci-containers.containers = {
+    statech = {
+      image = "eclipse-temurin:21-jre";
+      volumes = [ "/home/theaninova/.config/statech:/statech" ];
+      environment = { };
+      ports = [ "25565:25565" ];
+      workdir = "/statech";
+      entrypoint = "/bin/bash";
+      cmd = [ "start.sh" ];
+      extraOptions = [ "--network=host" ];
+    };
+    /*
+      craftoria = {
+        image = "eclipse-temurin:21-jre";
+        volumes = [ "/home/theaninova/.config/craftoria:/craftoria" ];
+        environment = { };
+        ports = [ "25565:25565" ];
+        workdir = "/craftoria";
+        entrypoint = "/bin/bash";
+        cmd = [ "startserver.sh" ];
+        extraOptions = [ "--network=host" ];
+      };
+    */
   };
 
   fonts = {
