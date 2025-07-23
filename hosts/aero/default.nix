@@ -55,8 +55,8 @@
 
   shell.components = {
     firefox-pip.enable = true;
-    flameshot.enable = true;
     gnome-keyring.enable = true;
+    grimblast.enable = true;
     hyprpicker.enable = true;
     kde-connect.enable = true;
     kitty.enable = true;

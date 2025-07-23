@@ -10,6 +10,7 @@
     ./fonts/nerd-fonts.nix
 
     ./hardware/hid-fanatecff.nix
+    ./hardware/astro-a50.nix
     ./hardware/audio.nix
     ./hardware/gbmonctl.nix
     ./hardware/nvidia-proprietary.nix
@@ -33,6 +34,7 @@
     ./shell/firefox-pip.nix
     ./shell/flameshot.nix
     ./shell/gnome-keyring.nix
+    ./shell/grimblast.nix
     ./shell/hyprpicker.nix
     ./shell/kde-connect.nix
     ./shell/kitty.nix

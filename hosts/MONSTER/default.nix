@@ -44,9 +44,8 @@
   };
 
   shell.components = {
-    #dunst.enable = true;
     firefox-pip.enable = true;
-    flameshot.enable = true;
+    grimblast.enable = true;
     gnome-keyring.enable = true;
     hyprpicker.enable = true;
     kde-connect.enable = true;
@@ -90,6 +89,7 @@
     audio.preset.pipewire.enable = true;
     cc1.enable = true;
     fv43u.enable = true;
+    astro-a50.enable = true;
     # virtual-camera.enable = true;
     # hid-fanatecff.enable = true;
 
