@@ -76,7 +76,6 @@ in
       # qt/kde packages
       qt6.qtwayland
       qt5.qtwayland
-      kdePackages.breeze-icons
       # gnome packages
       evince
       baobab
