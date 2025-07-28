@@ -86,30 +86,12 @@
     cc1.enable = true;
 
     nvidia = {
-      modesetting.enable = true;
-      powerManagement.enable = false;
-      open = true;
-      nvidiaSettings = false;
-      nvidiaPersistenced = false;
+      preset.proprietary.enable = true;
       prime = {
-        /*
-          offload = {
-            enable = true;
-            enableOffloadCmd = true;
-          };
-        */
-        sync.enable = true;
+        reverseSync.enable = true;
         intelBusId = "PCI:0:2:0";
         nvidiaBusId = "PCI:1:0:0";
       };
-    };
-    graphics = {
-      enable = true;
-      enable32Bit = true;
-      extraPackages = with pkgs; [
-        libvdpau-va-gl
-        nvidia-vaapi-driver
-      ];
     };
 
     enableAllFirmware = true;

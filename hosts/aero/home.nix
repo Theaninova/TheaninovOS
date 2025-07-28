@@ -10,7 +10,10 @@
   };
   programs.zoxide.enable = true;
   home = {
-    packages = with pkgs; [ blueman ];
+    packages = with pkgs; [
+      blueman
+      kdePackages.okular
+    ];
   };
   wayland.windowManager.hyprland.settings.monitor = [
     "eDP-1,3840x2160@60,0x0,2"

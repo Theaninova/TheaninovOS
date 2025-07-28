@@ -2,6 +2,7 @@
   pkgs,
   lib,
   config,
+  username,
   ...
 }:
 with lib;
@@ -27,10 +28,6 @@ in
     services.xserver.videoDrivers = [ "nvidia" ];
 
     boot = {
-      kernelParams = [
-        "fbdev=1"
-        "nvidia_drm.fbdev=1"
-      ];
       kernelModules = [
         "nvidia"
         "nvidia_modeset"
@@ -53,6 +50,10 @@ in
       nvidiaSettings = false;
       # no idea if this actually does anything...
       nvidiaPersistenced = false;
+    };
+
+    home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
+      cursor.no_hardware_cursors = true;
     };
 
     environment = {
