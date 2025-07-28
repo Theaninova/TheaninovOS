@@ -35,7 +35,6 @@ in
           pkgs: with pkgs; [
             libgudev
             libvdpau
-            libsoup_2_4
           ];
       })
       rpcs3

@@ -89,7 +89,10 @@ in
       xorg.xrandr
     ];
 
-    gtk.enable = true;
+    gtk = {
+      enable = true;
+      font.name = builtins.elemAt osConfig.fonts.fontconfig.defaultFonts.sansSerif 0;
+    };
     qt.enable = true;
 
     home.pointerCursor = {

@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.2-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -53,11 +53,9 @@
               usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
               wireshark = prev.wireshark.overrideAttrs (
                 finalAttrs: prevAttrs: {
-                  postInstall =
-                    prevAttrs.postInstall
-                    + ''
-                      ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
-                    '';
+                  postInstall = prevAttrs.postInstall + ''
+                    ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
+                  '';
                 }
               );
               plymouth = prev.plymouth.overrideAttrs (

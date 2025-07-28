@@ -8,6 +8,7 @@
     ./fonts/fira-code.nix
     ./fonts/noto-sans.nix
     ./fonts/nerd-fonts.nix
+    ./fonts/open-dyslexic.nix
 
     ./hardware/hid-fanatecff.nix
     ./hardware/astro-a50.nix
