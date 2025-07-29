@@ -102,9 +102,11 @@
   };
 
   fonts = {
-    fira-code.enable = true;
-    noto-sans.enable = true;
-    open-dyslexic = {
+    fira-code = {
+      enable = true;
+      default = true;
+    };
+    noto-sans = {
       enable = true;
       default = true;
     };

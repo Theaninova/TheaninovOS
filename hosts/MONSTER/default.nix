@@ -135,7 +135,6 @@
       enable = true;
       default = true;
     };
-    open-dyslexic.enable = true;
     nerd-fonts.enable = true;
   };
 
