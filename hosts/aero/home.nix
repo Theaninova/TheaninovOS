@@ -15,10 +15,18 @@
       kdePackages.okular
     ];
   };
-  wayland.windowManager.hyprland.settings.monitor = [
-    "eDP-1,3840x2160@60,0x0,2"
-    "HDMI-A-4,2560x1440@75,1920x-768,1"
-  ];
+  wayland.windowManager.hyprland.settings = {
+    general.layout = "master";
+    master = {
+      orientation = "right";
+      mfact = 0.65;
+      always_keep_position = true;
+    };
+    monitor = [
+      "eDP-1,3840x2160@60,0x0,2"
+      "HDMI-A-4,2560x1440@75,1920x-768,1"
+    ];
+  };
   systemd.user.services = {
     nm-applet = {
       Unit = {
