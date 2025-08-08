@@ -60,9 +60,7 @@ in
                     "filter.smart" = true;
                     "filter.smart.target" = filter 24;
                   };
-                  "playback.props" = {
-                    "node.name" = "EQ Output";
-                  };
+                  "playback.props"."node.name" = "EQ Output";
                 };
               }
             ];

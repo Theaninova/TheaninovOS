@@ -46,7 +46,7 @@
     gimp3
     inkscape-with-extensions
     scribus
-    audacity
+    # audacity
     pinta
     kdePackages.kdenlive
     losslesscut-bin

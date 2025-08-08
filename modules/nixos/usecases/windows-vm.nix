@@ -21,6 +21,13 @@ in
 
     users.users.${username}.extraGroups = [ "libvirtd" ];
 
+    boot = {
+      kernelParams = [
+        "amd_iommu=on"
+        "iommu=pt"
+      ];
+    };
+
     environment.systemPackages = with pkgs; [
       virt-manager
       virt-viewer

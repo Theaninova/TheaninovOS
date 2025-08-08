@@ -102,16 +102,18 @@
   };
 
   virtualisation.oci-containers.containers = {
-    statech = {
-      image = "eclipse-temurin:21-jre";
-      volumes = [ "/home/theaninova/.config/statech:/statech" ];
-      environment = { };
-      ports = [ "25565:25565" ];
-      workdir = "/statech";
-      entrypoint = "/bin/bash";
-      cmd = [ "start.sh" ];
-      extraOptions = [ "--network=host" ];
-    };
+    /*
+      statech = {
+        image = "eclipse-temurin:21-jre";
+        volumes = [ "/home/theaninova/.config/statech:/statech" ];
+        environment = { };
+        ports = [ "25565:25565" ];
+        workdir = "/statech";
+        entrypoint = "/bin/bash";
+        cmd = [ "start.sh" ];
+        extraOptions = [ "--network=host" ];
+      };
+    */
     /*
       craftoria = {
         image = "eclipse-temurin:21-jre";

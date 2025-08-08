@@ -102,7 +102,7 @@ in
         gpg.homedir = lib.mkIf itgr.gpg "${xdgConfig.configHome}/gnupg";
         bash.historyFile = lib.mkIf itgr.bash "${xdgConfig.stateHome}/bash/history";
         zsh = lib.mkIf itgr.zsh {
-          dotDir = ".config/zsh";
+          dotDir = "${xdgConfig.configHome}/zsh";
           history.path = "${xdgConfig.stateHome}/zsh/history";
         };
       };

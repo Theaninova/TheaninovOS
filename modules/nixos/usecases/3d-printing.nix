@@ -21,7 +21,7 @@ in
       lpc21isp
       dfu-util
       openscad
-      orca-slicer
+      # orca-slicer
     ];
     home-manager.users.${username} = {
       services.flatpak.packages = [
