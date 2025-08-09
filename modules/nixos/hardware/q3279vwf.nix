@@ -21,11 +21,11 @@ in
     home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
       general.layout = "master";
       master = {
-        orientation = "center";
-        always_center_master = true;
-        mfact = 0.4;
+        orientation = "right";
+        mfact = 0.65;
+        always_keep_position = true;
       };
-      monitor = [ "DP-1,highrr,0x0,1" ];
+      monitor = [ "DP-1,2560x1440@75,0x0,1" ];
       xwayland.force_zero_scaling = true;
       misc.vrr = 2; # VA suffers from VRR flicker
     };

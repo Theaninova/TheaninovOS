@@ -140,6 +140,11 @@
           username = "theaninova";
           system = "x86_64-linux";
         };
+        shark = mkHost {
+          hostname = "shark";
+          username = "luci";
+          system = "x86_64-linux";
+        };
       };
 
       nixosModules.theaninovos = import ./modules/nixos;
