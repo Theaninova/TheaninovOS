@@ -119,6 +119,18 @@
   '';
   security.tpm2.enable = true;
   users.defaultUserShell = pkgs.zsh;
+
+  services.openssh = {
+    enable = true;
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+    };
+  };
+  users.users.root.openssh.authorizedKeys.keys = [
+    (builtins.readFile ../../admins/theaninova.id_ed25519_sk.pub)
+  ];
+
   users.users.${username} = {
     isNormalUser = true;
     extraGroups = [
