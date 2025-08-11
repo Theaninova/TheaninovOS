@@ -66,13 +66,6 @@
       rocmOverrideGfx = "10.3.0";
     };
 
-    printing = {
-      enable = true;
-      drivers = with pkgs; [
-        rastertokpsl-re
-      ];
-    };
-
     xserver.xkb.variant = "altgr-intl";
     xserver.xkb.layout = "us";
 
@@ -94,7 +87,6 @@
     # hid-fanatecff.enable = true;
 
     enableAllFirmware = true;
-    sane.enable = true;
     bluetooth = {
       enable = true;
       powerOnBoot = true;

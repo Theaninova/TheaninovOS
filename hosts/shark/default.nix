@@ -22,6 +22,8 @@
   boot = {
     quiet.enable = true;
 
+    kernelParams = [ "module_blacklist=i915" ];
+
     kernelPackages = pkgs.linuxPackages_latest;
 
     loader = {
@@ -76,6 +78,8 @@
     };
     videoDrivers = [ "nvidia" ];
   };
+
+  services.airprint.enable = true;
 
   hardware = {
     q3279vwf.enable = true;

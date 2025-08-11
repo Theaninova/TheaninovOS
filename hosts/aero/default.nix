@@ -113,6 +113,8 @@
     nerd-fonts.enable = true;
   };
 
+  services.airprint.enable = true;
+
   programs.zsh.enable = true;
   security.sudo.configFile = ''
     Defaults env_reset,pwfeedback,passprompt="󰟵  "

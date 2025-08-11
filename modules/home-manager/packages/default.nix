@@ -17,7 +17,6 @@
     # browsers
     firefox
     chromium
-    brave
 
     # media
     jellyfin-media-player

@@ -50,6 +50,12 @@ in
       };
       spiceUSBRedirection.enable = true;
     };
-    services.spice-vdagentd.enable = true;
+
+    networking.firewall.trustedInterfaces = [ "virbr0" ];
+
+    services = {
+      spice-vdagentd.enable = true;
+      spice-webdavd.enable = true;
+    };
   };
 }

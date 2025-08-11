@@ -27,6 +27,10 @@ in
         systemd.enable = false;
         package = null;
         portalPackage = null;
+        settings.ecosystem = {
+          no_update_news = true;
+          no_donation_nag = true;
+        };
       };
       home = {
         packages = with pkgs; [ grim ];

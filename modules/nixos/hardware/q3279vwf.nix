@@ -27,7 +27,7 @@ in
       };
       monitor = [ "DP-1,2560x1440@75,0x0,1" ];
       xwayland.force_zero_scaling = true;
-      misc.vrr = 2; # VA suffers from VRR flicker
+      misc.vrr = 0; # VA suffers from VRR flicker
     };
   };
 }

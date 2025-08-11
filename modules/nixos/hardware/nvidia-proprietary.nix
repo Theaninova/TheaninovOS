@@ -54,6 +54,8 @@ in
 
     home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
       cursor.no_hardware_cursors = true;
+      opengl.nvidia_anti_flicker = true;
+      # render.direct_scanout = 1;
     };
 
     environment = {

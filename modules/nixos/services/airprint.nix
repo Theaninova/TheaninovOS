@@ -20,7 +20,10 @@ in
       enable = true;
       extraBackends = [ pkgs.sane-airscan ];
     };
-    services.printing.enable = true;
+    services.printing = {
+      enable = true;
+      stateless = true;
+    };
     services.avahi = {
       enable = true;
       nssmdns4 = true;
