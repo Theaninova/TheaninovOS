@@ -23,9 +23,13 @@
     yt-dlp
     f3d
     mpv
+    jellyfin-mpv-shim
     makemkv
+    libfaketime
     handbrake
     metadata-cleaner
+    mediainfo
+    mediainfo-gui
 
     prismlauncher
 
@@ -53,7 +57,6 @@
     blender-hip
 
     # development
-    # TODO: .NET 6 avalonia-ilspy
     ghidra
 
     # utils

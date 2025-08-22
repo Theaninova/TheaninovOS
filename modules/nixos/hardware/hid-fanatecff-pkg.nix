@@ -9,13 +9,13 @@
 
 stdenv.mkDerivation rec {
   pname = "hid-fanatecff";
-  version = "0.1.0";
+  version = "0.2.1";
 
   src = fetchFromGitHub {
     owner = "gotzl";
     repo = "hid-fanatecff";
-    rev = lib.versions.majorMinor version;
-    hash = "sha256-1Nm/34Er/qfel9LJp++IWd7cTh2Wi93Kgd28YLMVvWo=";
+    rev = version;
+    hash = "sha256-M2jm8pyxHRiswV4iJEawo57GkJ2XOclIo3NxEFgK+q0=";
   };
 
   nativeBuildInputs = kernel.moduleBuildDependencies;

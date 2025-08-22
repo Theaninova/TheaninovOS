@@ -38,7 +38,7 @@ in
           ];
       })
       rpcs3
-      wine64
+      wineWowPackages.stagingFull
       winetricks
       protontricks
       mangohud

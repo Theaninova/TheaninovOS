@@ -18,6 +18,7 @@
     quiet.enable = true;
 
     kernelPackages = pkgs.linuxPackages_latest;
+    kernelModules = [ "sg" ];
 
     loader = {
       systemd-boot = {
@@ -84,7 +85,7 @@
     fv43u.enable = true;
     astro-a50.enable = true;
     # virtual-camera.enable = true;
-    # hid-fanatecff.enable = true;
+    hid-fanatecff.enable = true;
 
     enableAllFirmware = true;
     bluetooth = {
