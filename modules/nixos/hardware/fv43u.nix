@@ -15,7 +15,7 @@ in
     enable = mkEnableOption "Enable optimisations for the Gigabyte FV43U monitor";
     hdr = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Enable HDR support for the Gigabyte FV43U monitor.";
     };
   };
@@ -64,7 +64,7 @@ in
             slave_count_for_center_master = 0;
             mfact = 0.4;
           };
-          render.direct_scanout = 1;
+          render.direct_scanout = 0;
           /*
             monitor = [
               "${monitorline},sdrbrightness,1.3"
@@ -78,7 +78,7 @@ in
             scale = 1;
             bitdepth = 10;
             addreserved = "340,0,0,0";
-            cm = "hdr";
+            cm = if cfg.hdr then "hdr" else "srgb";
             sdr_min_luminance = 0.25;
             sdr_max_luminance = 400;
           };

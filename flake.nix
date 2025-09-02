@@ -101,7 +101,21 @@
                 {
                   inherit username hostname gpu-offload;
                 };
-              nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+              nix = {
+                nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+                settings = {
+                  auto-optimise-store = true;
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                };
+                gc = {
+                  automatic = true;
+                  randomizedDelaySec = "14m";
+                  options = "--deleteOlderThan 10d";
+                };
+              };
               networking.hostName = hostname;
               services.flatpak.enable = true;
               home-manager = {
@@ -117,6 +131,11 @@
                   ./modules/home-manager/modules/nixvim
                 ];
                 users.${username} = {
+                  nix.gc = {
+                    automatic = true;
+                    randomizedDelaySec = "14m";
+                    options = "--deleteOlderThan 10d";
+                  };
                   imports = [
                     ./modules/home-manager
                     ./hosts/${hostname}/home.nix

@@ -7,18 +7,6 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  nix = {
-    settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    gc = {
-      automatic = true;
-      randomizedDelaySec = "14m";
-      options = "--deleteOlderThan 10d";
-    };
-  };
-
   boot = {
     quiet.enable = true;
 
