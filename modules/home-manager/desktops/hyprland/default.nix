@@ -59,8 +59,8 @@ in
           disable_splash_rendering = true;
           vrr = lib.mkDefault 2;
         };
+        decoration.border_part_of_window = false;
         input.touchpad.natural_scroll = true;
-        gestures.workspace_swipe = true;
       };
     };
 

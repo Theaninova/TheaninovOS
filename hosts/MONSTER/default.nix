@@ -48,11 +48,20 @@
   };
   locale.preset.theaninova.enable = true;
 
+  networking.hosts = {
+    "127.0.0.1:57461" = [ "ai.local" ];
+  };
   services = {
-    ollama = {
+    ollama.enable = true;
+    open-webui = {
       enable = true;
-      acceleration = "rocm";
-      rocmOverrideGfx = "10.3.0";
+      port = 57461;
+      environment = {
+        ANONYMIZED_TELEMETRY = "False";
+        DO_NOT_TRACK = "True";
+        SCARF_NO_ANALYTICS = "True";
+        WEBUI_AUTH = "False";
+      };
     };
 
     xserver.xkb.variant = "altgr-intl";
@@ -73,7 +82,7 @@
     fv43u.enable = true;
     astro-a50.enable = true;
     # virtual-camera.enable = true;
-    hid-fanatecff.enable = true;
+    # hid-fanatecff.enable = true;
 
     enableAllFirmware = true;
     bluetooth = {

@@ -19,7 +19,6 @@
     chromium
 
     # media
-    jellyfin-media-player
     yt-dlp
     f3d
     mpv

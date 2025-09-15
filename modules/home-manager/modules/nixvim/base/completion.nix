@@ -51,7 +51,7 @@ in
       luasnip.enable = true;
       lspkind = {
         enable = true;
-        mode = "symbol_text";
+        settings.mode = "symbol_text";
       };
       lualine.settings.sections.lualine_x = lib.mkIf cfg.ollama (
         lib.mkBefore [

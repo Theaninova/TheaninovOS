@@ -13,6 +13,7 @@
     packages = with pkgs; [
       blueman
       kdePackages.okular
+      bitbox
     ];
   };
   systemd.user.services = {

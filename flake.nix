@@ -2,7 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-1.tar.gz";
+      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-2.tar.gz";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -33,54 +33,57 @@
     let
       inherit (nixpkgs.lib) genAttrs;
       eachSystem = genAttrs [ "x86_64-linux" ];
-      legacyPackages = eachSystem (
-        system:
-        import nixpkgs {
-          inherit system;
-          config = {
-            allowUnfree = true;
-            allowUnsupportedSystem = true;
-            experimental-features = "nix-command flakes";
-          };
-          overlays = [
-            (final: prev: {
-              matugen = matugen.packages.${prev.system}.default;
-              gccdiag = prev.callPackage ./overlays/gccdiag { };
-              gbmonctl = prev.callPackage ./overlays/gbmonctl { };
-              lpc21isp = prev.callPackage ./overlays/lpc21isp { };
-              rquickshare = prev.callPackage ./overlays/rquickshare { };
-              rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
-              usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
-              wireshark = prev.wireshark.overrideAttrs (
-                finalAttrs: prevAttrs: {
-                  postInstall = prevAttrs.postInstall + ''
-                    ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
-                  '';
-                }
-              );
-              plymouth = prev.plymouth.overrideAttrs (
-                final: prev: {
-                  patches = prev.patches ++ [ ./overlays/plymouth/drm-close-fb.patch ];
-                }
-              );
-            })
-          ];
-        }
-      );
+      legacyPackages =
+        config:
+        (eachSystem (
+          system:
+          import nixpkgs {
+            inherit system;
+            config = config // {
+              allowUnfree = true;
+              allowUnsupportedSystem = true;
+              experimental-features = "nix-command flakes";
+            };
+            overlays = [
+              (final: prev: {
+                matugen = matugen.packages.${prev.system}.default;
+                gccdiag = prev.callPackage ./overlays/gccdiag { };
+                gbmonctl = prev.callPackage ./overlays/gbmonctl { };
+                lpc21isp = prev.callPackage ./overlays/lpc21isp { };
+                rquickshare = prev.callPackage ./overlays/rquickshare { };
+                rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
+                usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
+                wireshark = prev.wireshark.overrideAttrs (
+                  finalAttrs: prevAttrs: {
+                    postInstall = prevAttrs.postInstall + ''
+                      ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
+                    '';
+                  }
+                );
+                plymouth = prev.plymouth.overrideAttrs (
+                  final: prev: {
+                    patches = prev.patches ++ [ ./overlays/plymouth/drm-close-fb.patch ];
+                  }
+                );
+              })
+            ];
+          }
+        ));
 
       mkHost =
         {
           hostname,
           username,
           system,
+          config ? { },
         }:
         nixpkgs.lib.nixosSystem rec {
-          pkgs = legacyPackages.${system};
+          pkgs = (legacyPackages config).${system};
           modules = [
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            lix-module.nixosModules.default
+            # lix-module.nixosModules.default
             nix-flatpak.nixosModules.nix-flatpak
             {
               _module.args =
@@ -127,7 +130,7 @@
                 sharedModules = [
                   matugen.homeManagerModules.default
                   nix-flatpak.homeManagerModules.nix-flatpak
-                  nixvim.homeManagerModules.nixvim
+                  nixvim.homeModules.nixvim
                   ./modules/home-manager/modules/nixvim
                 ];
                 users.${username} = {
@@ -153,6 +156,9 @@
           hostname = "MONSTER";
           username = "theaninova";
           system = "x86_64-linux";
+          config = {
+            rocmSupport = true;
+          };
         };
         aero = mkHost {
           hostname = "aero";

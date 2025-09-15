@@ -94,7 +94,7 @@ in
             user = username;
           };
           default_session = {
-            command = "${lib.getExe pkgs.greetd.tuigreet} --asterisks --remember --user-menu --cmd 'uwsm start hyprland-uwsm.desktop'";
+            command = "${lib.getExe pkgs.tuigreet} --asterisks --remember --user-menu --cmd 'uwsm start hyprland-uwsm.desktop'";
             user = username;
           };
         };
