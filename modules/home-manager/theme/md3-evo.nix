@@ -41,7 +41,7 @@ in
     };
     transparency = lib.mkOption {
       type = lib.types.numbers.between 0 1;
-      default = 0.8;
+      default = 0.9;
       description = "The transparency of apps";
     };
     radius = lib.mkOption {

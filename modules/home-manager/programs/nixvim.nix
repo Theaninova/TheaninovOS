@@ -34,10 +34,8 @@
     presets = {
       auto-save.enable = true;
       auto-format.enable = true;
-      harpoon.enable = false;
       lazygit.enable = true;
       mergetool.enable = true;
-      trouble.enable = false;
       undotree.enable = true;
       aerial.enable = true;
       base = {
@@ -46,7 +44,7 @@
           copilot = true;
         };
         diagnostics.enable = true;
-        coverage.enable = true;
+        coverage.enable = false;
         find.enable = true;
         formatting = {
           enable = true;
@@ -59,9 +57,7 @@
       };
       languages = {
         angular.enable = true;
-        c = {
-          enable = true;
-        };
+        c.enable = true;
         css = {
           enable = true;
           stylelint = true;
@@ -90,28 +86,12 @@
     plugins = {
       which-key.enable = true;
       schemastore.enable = true;
-      comment.enable = true;
-      debugprint.enable = true;
       todo-comments.enable = true;
       origami.enable = false;
       nvim-surround.enable = true;
-      hardtime = {
-        enable = true;
-        settings = {
-          disable_mouse = false;
-          disabled_keys = {
-            "<Up>".__raw = "false";
-            "<Down>".__raw = "false";
-            "<Left>".__raw = "false";
-            "<Right>".__raw = "false";
-          };
-        };
-      };
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
-        settings = {
-          line_numbers = false;
-        };
+        settings.line_numbers = false;
       };
 
       lsp.servers = {

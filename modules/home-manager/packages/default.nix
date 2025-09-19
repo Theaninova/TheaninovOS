@@ -7,6 +7,7 @@
       sha256 = "0lghiiiphbkqgiprqirxifldvix0j4k04jh1z9f911shrzjgqq4s";
     }
   ];
+  programs.mpv.enable = true;
   home.packages = with pkgs; [
     # nix
     cachix
@@ -21,7 +22,6 @@
     # media
     yt-dlp
     f3d
-    mpv
     jellyfin-mpv-shim
     makemkv
     libfaketime
