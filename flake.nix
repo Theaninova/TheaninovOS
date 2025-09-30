@@ -53,6 +53,7 @@
                 rquickshare = prev.callPackage ./overlays/rquickshare { };
                 rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
                 usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
+                gamma-launcher = prev.callPackage ./overlays/gamma-launcher { };
                 wireshark = prev.wireshark.overrideAttrs (
                   finalAttrs: prevAttrs: {
                     postInstall = prevAttrs.postInstall + ''

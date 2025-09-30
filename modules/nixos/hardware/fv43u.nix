@@ -15,7 +15,7 @@ in
     enable = mkEnableOption "Enable optimisations for the Gigabyte FV43U monitor";
     hdr = mkOption {
       type = types.bool;
-      default = true;
+      default = false;
       description = "Enable HDR support for the Gigabyte FV43U monitor.";
     };
   };
@@ -64,9 +64,9 @@ in
             scale = 1;
             bitdepth = 10;
             addreserved = "340,0,0,0";
-            cm = if cfg.hdr then "hdr" else "srgb";
+            cm = if cfg.hdr then "hdredid" else "srgb";
             sdr_min_luminance = 0.25;
-            sdr_max_luminance = 400;
+            sdr_max_luminance = 250;
           };
           xwayland.force_zero_scaling = true;
           misc.vrr = 2; # VA suffers from VRR flicker

@@ -19,6 +19,7 @@
     ./hardware/amdgpu.nix
     ./hardware/cc1.nix
     ./hardware/fv43u.nix
+    ./hardware/pimax.nix
     ./hardware/q3279vwf.nix
     ./hardware/virtual-camera.nix
 

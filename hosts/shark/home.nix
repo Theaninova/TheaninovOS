@@ -14,6 +14,7 @@
       blueman
       kdePackages.okular
       bitbox
+      gamma-launcher
     ];
   };
   systemd.user.services = {
