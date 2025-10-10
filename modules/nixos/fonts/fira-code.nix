@@ -16,7 +16,6 @@ in
       type = types.listOf types.str;
       description = mdDoc "[Stylistic sets](https://github.com/tonsky/FiraCode/wiki/How-to-enable-stylistic-sets) for Fira Code";
       default = [
-        "zero"
         "onum"
         "ss04"
         "cv19"

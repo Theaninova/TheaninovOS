@@ -30,10 +30,14 @@ in
         cmake.enable = true;
         clangd = {
           enable = true;
+          packageFallback = true;
           cmd = [
             "clangd"
             "--offset-encoding=utf-16"
             "--clang-tidy"
+            "--background-index"
+            "--limit-references=0"
+            "--cross-file-rename"
           ];
           settings.InlayHints = {
             Designators = true;
