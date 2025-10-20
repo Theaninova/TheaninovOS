@@ -34,18 +34,16 @@
 
   shell.components = {
     firefox-pip.enable = true;
-    grimblast.enable = true;
-    gnome-keyring.enable = true;
-    hyprpicker.enable = true;
+    # grimblast.enable = true;
+    # gnome-keyring.enable = true;
+    # hyprpicker.enable = true;
     kde-connect.enable = true;
     kitty.enable = true;
-    swaync.enable = true;
-    walker.enable = true;
-    waybar.enable = true;
+    # swaync.enable = true;
+    # walker.enable = true;
+    # waybar.enable = true;
   };
-  desktops = {
-    hyprland.enable = true;
-  };
+  desktops.niri.enable = true;
   locale.preset.theaninova.enable = true;
 
   networking.hosts = {
@@ -162,6 +160,7 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     # Essential utils
+    alacritty
     usbutils
     usbimager
     uhubctl

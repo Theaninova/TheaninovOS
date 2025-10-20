@@ -18,6 +18,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    dank-material-shell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +36,8 @@
       lix-module,
       matugen,
       nix-flatpak,
+      niri,
+      dank-material-shell,
       ...
     }@inputs:
     let
@@ -45,6 +55,7 @@
               experimental-features = "nix-command flakes";
             };
             overlays = [
+              niri.overlays.niri
               (final: prev: {
                 matugen = matugen.packages.${prev.system}.default;
                 gccdiag = prev.callPackage ./overlays/gccdiag { };
@@ -84,7 +95,8 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            # lix-module.nixosModules.default
+            dank-material-shell.nixosModules.greeter
+            niri.nixosModules.niri
             nix-flatpak.nixosModules.nix-flatpak
             {
               _module.args =
@@ -132,6 +144,9 @@
                   matugen.homeManagerModules.default
                   nix-flatpak.homeManagerModules.nix-flatpak
                   nixvim.homeModules.nixvim
+                  # niri.homeModules.niri
+                  dank-material-shell.homeModules.dankMaterialShell.default
+                  dank-material-shell.homeModules.dankMaterialShell.niri
                   ./modules/home-manager/modules/nixvim
                 ];
                 users.${username} = {

@@ -94,8 +94,8 @@ in
         ".zshenv".enable = lib.mkIf itgr.zsh false;
         # This might break some stuff, see
         # https://github.com/nix-community/home-manager/blob/bfa7c06436771e3a0c666ccc6ee01e815d4c33aa/modules/config/home-cursor.nix#L152
-        ".icons/default/index.theme".enable = lib.mkIf itgr.home-cursor false;
-        ".icons/${homeConfig.home.pointerCursor.name}".enable = lib.mkIf itgr.home-cursor false;
+        # ".icons/default/index.theme".enable = lib.mkIf itgr.home-cursor false;
+        # ".icons/${homeConfig.home.pointerCursor.name}".enable = lib.mkIf itgr.home-cursor false;
       };
       gtk.gtk2.configLocation = lib.mkIf itgr.gtk2 "${xdgConfig.configHome}/gtk-2.0/gtkrc";
       programs = {

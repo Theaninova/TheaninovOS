@@ -43,12 +43,26 @@ in
           gpu-context = "waylandvk";
           target-colorspace-hint = "auto";
         };
+        programs.niri.settings = {
+          prefer-no-csd = true;
+          outputs."DP-3" = {
+            scale = 1;
+            mode = {
+              width = 3840;
+              height = 2160;
+              refresh = 143.999;
+            };
+            variable-refresh-rate = "on-demand";
+          };
+          layout.struts.top = 340;
+        };
         wayland.windowManager.hyprland.settings = {
           general.layout = "master";
           master = {
             orientation = "center";
             slave_count_for_center_master = 0;
             mfact = 0.4;
+            allow_small_split = true;
           };
           render.direct_scanout = 0;
           /*

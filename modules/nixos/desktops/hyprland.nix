@@ -27,10 +27,14 @@ in
         systemd.enable = false;
         package = null;
         portalPackage = null;
-        settings.ecosystem = {
-          no_update_news = true;
-          no_donation_nag = true;
+        settings = {
+          ecosystem = {
+            no_update_news = true;
+            no_donation_nag = true;
+          };
         };
+        plugins = with pkgs.hyprlandPlugins; [
+        ];
       };
       home = {
         packages = with pkgs; [ grim ];

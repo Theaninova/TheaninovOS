@@ -347,19 +347,29 @@ in
       wayland.windowManager.hyprland = {
         settings = {
           windowrulev2 = [ "float,class:^(zenity)$" ];
-          decoration.shadow = {
-            enabled = true;
-            range = 16;
-            color = "rgba(00000044)";
+          decoration = {
+            inactive_opacity = 0.8;
+            shadow = {
+              enabled = true;
+              range = 32;
+              render_power = 8;
+              color = "rgba(000000aa)";
+              color_inactive = "rgba(00000011)";
+            };
           };
           animations = {
             enabled = "yes";
-            bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
+            bezier = [
+              "expoOut, 0.16, 1, 0.3, 1"
+            ];
             animation = [
-              "windows, 1, 5, myBezier"
-              "windowsOut, 1, 7, default, popin 80%"
+              "windowsIn, 1, 5, expoOut, slide bottom"
+              "windows, 1, 5, expoOut, slide"
+              "windowsOut, 1, 5, expoOut, slide bottom"
               "border, 1, 10, default"
               "fade, 1, 7, default"
+              "fadeShadow, 1, 10, default"
+              "fadeDim, 1, 10, default"
               "workspaces, 1, 6, default"
             ];
           };
