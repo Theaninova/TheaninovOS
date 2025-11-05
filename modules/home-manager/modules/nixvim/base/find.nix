@@ -13,19 +13,19 @@ in
       telescope = {
         enable = true;
         keymaps = {
-          "ff" = {
+          "<leader>ff" = {
             action = "git_files";
             mode = "n";
           };
-          "fa" = {
+          "<leader>fa" = {
             action = "find_files";
             mode = "n";
           };
-          "fg" = {
+          "<leader>fg" = {
             action = "live_grep";
             mode = "n";
           };
-          "fc" = {
+          "<leader>fc" = {
             action = "buffers";
             mode = "n";
           };
@@ -33,27 +33,27 @@ in
       };
       which-key.settings.spec = [
         {
-          __unkeyed-1 = "f";
+          __unkeyed-1 = "<leader>f";
           group = "Find";
           icon = "󰍉";
         }
         {
-          __unkeyed-1 = "ff";
+          __unkeyed-1 = "<leader>ff";
           desc = "File";
           icon = "󰈢";
         }
         {
-          __unkeyed-1 = "fa";
+          __unkeyed-1 = "<leader>fa";
           desc = "All Files";
           icon = "󱪡";
         }
         {
-          __unkeyed-1 = "fg";
+          __unkeyed-1 = "<leader>fg";
           desc = "Grep";
           icon = "󰑑";
         }
         {
-          __unkeyed-1 = "fc";
+          __unkeyed-1 = "<leader>fc";
           desc = "Current";
           icon = "󰈙";
         }

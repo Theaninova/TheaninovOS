@@ -10,7 +10,7 @@ in
   config = lib.mkIf cfg.enable {
     keymaps = [
       {
-        key = "ft";
+        key = "<leader>t";
         mode = "n";
         action = # vim
           "<cmd>:Neotree toggle<CR>";
@@ -20,24 +20,28 @@ in
       web-devicons.enable = true;
       neo-tree = {
         enable = true;
-        filesystem = {
-          useLibuvFileWatcher = true;
-          followCurrentFile.enabled = true;
-          filteredItems.visible = true;
+        settings = {
+          event_handlers = [
+            {
+              event = "neo_tree_buffer_leave";
+              handler.__raw = ''
+                function()
+                  require('neo-tree').close_all()
+                end
+              '';
+            }
+          ];
+          filesystem = {
+            use_libuv_file_watcher = true;
+            follow_current_file.enabled = true;
+            filtered_items.visible = true;
+          };
+          popupBorderStyle = "rounded";
         };
-        popupBorderStyle = "rounded";
-        filesystem.window.mappings.f = "noop";
-        window.mappings.f = "noop";
-        eventHandlers.neo_tree_buffer_leave = # lua
-          ''
-            function()
-              require('neo-tree').close_all()
-            end
-          '';
       };
       which-key.settings.spec = [
         {
-          __unkeyed-1 = "ft";
+          __unkeyed-1 = "<leader>t";
           desc = "Tree";
           icon = "󰙅";
         }

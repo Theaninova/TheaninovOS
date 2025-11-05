@@ -1,0 +1,12 @@
+layout {
+  gaps {{custom.padding}}
+  struts {{custom.double_padding}}
+}
+
+overview {
+  backdrop-color "{{colors.surface.default.hex}}"
+}
+
+window-rule {
+  geometry-corner-radius {{custom.radius}}
+}

@@ -24,7 +24,7 @@ in
           ":AerialNext<CR>";
       }
       {
-        key = "fs";
+        key = "<leader>fs";
         mode = "n";
         action = # vim
           ":Telescope aerial<CR>";
@@ -54,7 +54,7 @@ in
       };
       which-key.settings.spec = [
         {
-          __unkeyed-1 = "fs";
+          __unkeyed-1 = "<leader>fs";
           group = "Symbols";
           icon = "󰡱";
         }

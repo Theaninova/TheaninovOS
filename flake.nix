@@ -10,7 +10,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     matugen = {
-      url = "github:Theaninova/matugen/add-home-manager-module";
+      url = "github:InioX/matugen?ref=v2.4.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {
@@ -141,10 +141,9 @@
                   inherit username hostname inputs;
                 };
                 sharedModules = [
-                  matugen.homeManagerModules.default
+                  ./overlays/matugen/hm-module.nix
                   nix-flatpak.homeManagerModules.nix-flatpak
                   nixvim.homeModules.nixvim
-                  # niri.homeModules.niri
                   dank-material-shell.homeModules.dankMaterialShell.default
                   dank-material-shell.homeModules.dankMaterialShell.niri
                   ./modules/home-manager/modules/nixvim

@@ -25,6 +25,7 @@ in
           "ignorealpha 0.3, anyrun"
         ];
       };
+      programs.niri.settings.binds."Mod+Space".action.spawn = [ (lib.getExe pkgs.walker) ];
       home.packages = with pkgs; [
         walker
         wl-clipboard

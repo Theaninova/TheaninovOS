@@ -37,7 +37,7 @@ let g:terminal_color_14 = "{{colors.cyan.default.hex}}"
 let g:terminal_color_15 = "{{colors.on_surface_variant.default.hex}}"
 set termguicolors
 
-set background=dark
+set background={{mode | to_lower}}
 
 if exists("g:neovide")
   hi! Normal guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}

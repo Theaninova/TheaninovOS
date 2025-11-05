@@ -22,8 +22,8 @@ in
       home = {
         sessionVariables = {
           NIXOS_OZONE_WL = "1";
-          GDK_BACKEND = "wayland,x11,*";
-          QT_QPA_PLATFORM = "wayland;xcb";
+          GDK_BACKEND = "wayland";
+          QT_QPA_PLATFORM = "wayland";
           SDL_VIDEODRIVER = "wayland";
         };
 
@@ -32,6 +32,7 @@ in
           # fonts
           noto-fonts
           # gnome packages
+          qalculate-gtk
           evince
           baobab
           gnome.gvfs
@@ -52,13 +53,6 @@ in
       };
 
       programs = {
-        dankMaterialShell = {
-          enable = true;
-          niri = {
-            enableSpawn = true;
-            enableKeybinds = false;
-          };
-        };
         niri.settings = {
           binds = {
             "Mod+Left".action.focus-column-left = [ ];
@@ -75,29 +69,30 @@ in
             "Mod+Shift+Down".action.move-window-down-or-to-workspace-down = [ ];
 
             "Mod+C".action.close-window = [ ];
-            "Mod+M".action.center-window = [ ];
+            /*
+              "Mod+M".action.spawn = [
+                (pkgs.writeShellScript "qalculate" ''
+                  if niri msg --json windows | jq -e 'any(.[]; .app_id == "qalculate-gtk")'; then
+                    pkill qalculate-gtk
+                  else
+                    qalculate-gtk &
+                  fi
+                '')
+              ];
+            */
 
             "Mod+T".action.spawn = [ "kitty" ];
 
             "Mod+V".action.maximize-column = [ ];
-            "Mod+P".action.fullscreen-window = [ ];
+            "Mod+D".action.fullscreen-window = [ ];
+            "Mod+P".action.toggle-window-floating = [ ];
 
-            "Mod+Space".action.spawn = [
-              "dms"
-              "ipc"
-              "spotlight"
-              "toggle"
-            ];
-            "Mod+MouseMiddle".action.toggle-overview = [ ];
+            "Mod+Shift+V".action.screenshot = [ ];
+            # "Mod+Shift+C".action.pick-color = [ ];
           };
+          overview.zoom = 0.8;
           window-rules = [
             {
-              geometry-corner-radius = {
-                top-left = 24.0;
-                top-right = 24.0;
-                bottom-left = 24.0;
-                bottom-right = 24.0;
-              };
               clip-to-geometry = true;
               tiled-state = true;
             }
@@ -108,6 +103,17 @@ in
             {
               matches = [ { app-id = "firefox"; } ];
               default-column-width.fixed = 1500;
+            }
+            {
+              matches = [ { app-id = "qalculate-gtk"; } ];
+              open-floating = true;
+              default-column-width.fixed = 1000;
+              default-window-height.fixed = 800;
+              default-floating-position = {
+                x = 0;
+                y = 0;
+                relative-to = "bottom";
+              };
             }
           ];
           layout = {
@@ -128,17 +134,31 @@ in
       };
     };
 
-    programs.dankMaterialShell.greeter = {
-      enable = true;
-      compositor.name = "niri";
-      configHome = "/home/${username}";
-    };
-
     services = {
       kmscon = {
         enable = true;
         hwRender = true;
       };
+      greetd = {
+        enable = true;
+        greeterManagesPlymouth = false;
+        settings = {
+          initial_session = {
+            command = "${pkgs.niri}/bin/niri-session";
+            user = username;
+          };
+          default_session = {
+            command = "${lib.getExe pkgs.tuigreet} --asterisks --remember --user-menu --cmd '${pkgs.niri}/bin/niri-session'";
+            user = username;
+          };
+        };
+      };
+      dbus = {
+        enable = true;
+        implementation = "broker";
+      };
+      pcscd.enable = true;
+      gvfs.enable = true;
     };
   };
 }

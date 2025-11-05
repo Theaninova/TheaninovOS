@@ -20,6 +20,8 @@ in
       enable = true;
       settings = {
         mainBar = {
+          layer = "top";
+
           height = 24;
           reload_style_on_change = true;
           exclusive = true;
@@ -35,25 +37,24 @@ in
           modules-center = [
             "clock"
           ];
-          modules-right =
-            [
-              "privacy"
-              "gamemode"
-              "tray"
-              "pulseaudio"
-            ]
-            ++ (
-              if cfg.mobile then
-                [ "backlight" ]
-              else
-                [
-                  "custom/brightness"
-                ]
-            )
-            ++ [
-              # "custom/theme"
-              # "network"
-            ];
+          modules-right = [
+            "privacy"
+            "gamemode"
+            "tray"
+            "pulseaudio"
+          ]
+          ++ (
+            if cfg.mobile then
+              [ "backlight" ]
+            else
+              [
+                "custom/brightness"
+              ]
+          )
+          ++ [
+            # "custom/theme"
+            # "network"
+          ];
 
           "pulseaudio" = {
             format = "{icon} {volume}%";

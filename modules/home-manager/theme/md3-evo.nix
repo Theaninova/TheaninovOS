@@ -1,6 +1,7 @@
 {
   pkgs,
   lib,
+  osConfig,
   config,
   ...
 }:
@@ -241,7 +242,6 @@ in
               exit 1
             fi
 
-
             THEME_SERVICE_PATH="${config.xdg.configHome}/systemd/user/theme-init.timer"
             if [ "$MODE" = "auto" ]; then
               TIME=$(sunwait poll ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E || :)
@@ -270,29 +270,21 @@ in
             systemctl --user daemon-reload &> /dev/null || :
             systemctl --user restart theme-init.timer &> /dev/null || :
 
+            if command -v niri &> /dev/null; then
+              niri msg action do-screen-transition --delay-ms 500
+            fi
+
             if [ "$MODE" = "light" ]; then
-              GTK_THEME="adw-gtk3"
+             GTK_THEME="adw-gtk3"
             else
-              GTK_THEME="adw-gtk3-dark"
+             GTK_THEME="adw-gtk3-dark"
             fi
 
             matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
-            sed -i "s/set background=dark/set background=$MODE/g" ${config.xdg.configHome}/nvim/colors/md3-evo.vim
 
             dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
             dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
-
-            if command -v hyprctl &> /dev/null; then
-              hyprctl reload
-            fi
-
-            if which swaync-client; then
-              swaync-client --reload-css
-            fi
-
-            for i in $(pgrep -u "$USER" -x nvim); do
-              kill -USR1 "$i"
-            done
+            dconf write /org/gnome/desktop/interface/icon-theme "'Adwaita'"
           '';
         }
       );
@@ -309,6 +301,9 @@ in
           "@import './theme.css';";
         gtk4.extraCss = # css
           "@import './theme.css';";
+        theme = {
+          name = "Adwaita";
+        };
         iconTheme = {
           name = "Tela";
           package = pkgs.tela-icon-theme;
@@ -379,12 +374,23 @@ in
         '';
       };
 
-      programs = {
-        kitty = {
-          extraConfig = ''
-            include ${config.xdg.configHome}/kitty/theme.conf
+      # TODO: include is coming in the next release
+      /*
+        xdg.configFile.niri-config = {
+          enable = osConfig.programs.niri.enable;
+          target = "niri/override.kdl";
+          text = ''
+            include "${config.xdg.configHome}/niri/config.kdl"
+            include "${config.programs.matugen.settings.templates.niri.output_path}"
           '';
         };
+        home.sessionVariables.NIRI_CONFIG = "${config.xdg.configHome}/niri/override.kdl";
+      */
+
+      programs = {
+        kitty.extraConfig = ''
+          include ${config.programs.matugen.settings.templates.kitty.output_path}
+        '';
 
         nixvim = {
           opts.termguicolors = true;
@@ -405,15 +411,14 @@ in
           enable = true;
           settings = {
             config = {
-              reload_apps = true;
+              version_check = false;
+
               reload_apps_list = {
-                kitty = config.programs.kitty.enable;
                 waybar = config.programs.waybar.enable;
                 dunst = config.services.dunst.enable;
               };
 
-              set_wallpaper = true;
-              wallpaper_tool = "Swww";
+              wallpaper.command = lib.getExe pkgs.swww;
 
               custom_colors =
                 let
@@ -465,23 +470,17 @@ in
             templates =
               let
                 gtk = pkgs.writeText "gtk4.css" (import ./gtk.nix);
+                signal =
+                  name: signal:
+                  (pkgs.writeShellScript "kill-${name}" ''
+                    pkill -${signal} -u "$USER" -x ${name} || :
+                  '');
               in
               {
-                kitty = {
-                  input_path = ./kitty.conf;
-                  output_path = "${config.xdg.configHome}/kitty/theme.conf";
-                };
                 nvim = {
                   input_path = ./nvim.vim;
                   output_path = "${config.xdg.configHome}/nvim/colors/md3-evo.vim";
-                };
-                hyprland = {
-                  input_path = ./hyprland.conf;
-                  output_path = "${config.xdg.configHome}/hypr/theme.conf";
-                };
-                anyrun = {
-                  input_path = ./anyrun.css;
-                  output_path = "${config.xdg.configHome}/anyrun/theme.css";
+                  post_hook = signal "nvim" "USR1";
                 };
                 gtk3 = {
                   input_path = gtk;
@@ -495,15 +494,49 @@ in
                   input_path = ./discord.css;
                   output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
                 };
+              }
+              // (lib.optionalAttrs osConfig.programs.niri.enable {
+                niri = {
+                  input_path = ./niri.kdl;
+                  output_path = "${config.xdg.configHome}/niri/md3-evo.kdl";
+                };
+              })
+              // (lib.optionalAttrs config.programs.kitty.enable {
+                kitty = {
+                  input_path = ./kitty.conf;
+                  output_path = "${config.xdg.configHome}/kitty/theme.conf";
+                  post_hook = signal ".kitty-wrapped" "USR1";
+                };
+              })
+              // (lib.optionalAttrs osConfig.programs.hyprland.enable {
+                hyprland = {
+                  input_path = ./hyprland.conf;
+                  output_path = "${config.xdg.configHome}/hypr/theme.conf";
+                  post_hook = pkgs.writeShellScript "reload-hyprland-theme" ''
+                    if command -v hyprctl &> /dev/null; then
+                      hyprctl reload
+                    fi
+                  '';
+                };
+              })
+              // (lib.optionalAttrs config.programs.waybar.enable {
                 waybar = {
                   input_path = ./waybar.css;
                   output_path = "${config.xdg.configHome}/waybar/style.css";
+                  post_hook = signal "waybar" "USR2";
                 };
+              })
+              // (lib.optionalAttrs config.services.swaync.enable {
                 swaync = {
                   input_path = ./swaync.css;
                   output_path = "${config.xdg.configHome}/swaync/style.css";
+                  post_hook = pkgs.writeShellScript "reload-swaync" ''
+                    if which swaync-client; then
+                      swaync-client --reload-css
+                    fi
+                  '';
                 };
-              };
+              });
           };
         };
       };

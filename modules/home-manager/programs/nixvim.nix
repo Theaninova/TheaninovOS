@@ -56,7 +56,6 @@
         tree.enable = true;
       };
       languages = {
-        angular.enable = true;
         c.enable = true;
         css = {
           enable = true;

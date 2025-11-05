@@ -35,13 +35,13 @@
   shell.components = {
     firefox-pip.enable = true;
     # grimblast.enable = true;
-    # gnome-keyring.enable = true;
+    gnome-keyring.enable = true;
     # hyprpicker.enable = true;
     kde-connect.enable = true;
     kitty.enable = true;
-    # swaync.enable = true;
-    # walker.enable = true;
-    # waybar.enable = true;
+    swaync.enable = true;
+    walker.enable = true;
+    waybar.enable = true;
   };
   desktops.niri.enable = true;
   locale.preset.theaninova.enable = true;
@@ -50,9 +50,9 @@
     "127.0.0.1:57461" = [ "ai.local" ];
   };
   services = {
-    ollama.enable = true;
+    ollama.enable = false;
     open-webui = {
-      enable = true;
+      enable = false;
       port = 57461;
       environment = {
         ANONYMIZED_TELEMETRY = "False";
