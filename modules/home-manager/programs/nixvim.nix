@@ -88,6 +88,10 @@
       todo-comments.enable = true;
       origami.enable = false;
       nvim-surround.enable = true;
+      flash = {
+        enable = true;
+        settings.modes.search.enabled = true;
+      };
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;

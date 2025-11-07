@@ -68,7 +68,6 @@
     airprint.enable = true;
 
     udev.packages = with pkgs; [
-      android-udev-rules
       usb-sniffer
     ];
   };
@@ -131,7 +130,7 @@
   programs = {
     zsh.enable = true;
     wireshark = {
-      enable = true;
+      enable = false;
       package = pkgs.wireshark;
       usbmon.enable = true;
     };
@@ -160,6 +159,7 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     # Essential utils
+    nix-output-monitor
     alacritty
     usbutils
     usbimager

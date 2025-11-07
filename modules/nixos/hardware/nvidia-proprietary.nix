@@ -67,7 +67,7 @@ in
         WLR_NO_HARDWARE_CURSORS = "1";
       };
       systemPackages = with pkgs; [
-        glxinfo
+        mesa-demos
         nvtopPackages.nvidia
         libva-utils
         vulkan-tools

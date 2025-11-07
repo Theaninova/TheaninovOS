@@ -47,7 +47,7 @@ in
 
     environment.systemPackages = with pkgs; [
       amdgpu_top
-      glxinfo
+      mesa-demos
       libva-utils
       vulkan-tools
       clinfo

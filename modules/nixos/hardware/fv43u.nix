@@ -26,7 +26,7 @@ in
     boot.kernelParams = [ "video=DP-3:3840x2160-30@144" ];
     services.colord.enable = true;
     environment.systemPackages = [
-      (pkgs.runCommandNoCC "fv43u_icc" { } ''
+      (pkgs.runCommand "fv43u_icc" { } ''
         mkdir -p $out/share/color/icc
         cp ${./fv43u.icc} $out/share/color/icc/fv43u.icc
       '')

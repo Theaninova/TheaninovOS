@@ -26,7 +26,7 @@ in
         [
           noto-fonts
           noto-fonts-cjk-sans
-          noto-fonts-emoji
+          noto-fonts-color-emoji
         ]
         ++ (if (config.fonts.nerd-fonts.enable) then [ nerd-fonts.noto ] else [ ]);
       fontconfig = {

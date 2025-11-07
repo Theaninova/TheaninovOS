@@ -1,10 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    lix-module = {
-      url = "https://git.lix.systems/lix-project/nixos-module/archive/2.93.3-2.tar.gz";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,10 +18,6 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    dank-material-shell = {
-      url = "github:AvengeMedia/DankMaterialShell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -33,11 +25,9 @@
       nixpkgs,
       home-manager,
       nixvim,
-      lix-module,
       matugen,
       nix-flatpak,
       niri,
-      dank-material-shell,
       ...
     }@inputs:
     let
@@ -95,7 +85,6 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            dank-material-shell.nixosModules.greeter
             niri.nixosModules.niri
             nix-flatpak.nixosModules.nix-flatpak
             {
@@ -144,8 +133,6 @@
                   ./overlays/matugen/hm-module.nix
                   nix-flatpak.homeManagerModules.nix-flatpak
                   nixvim.homeModules.nixvim
-                  dank-material-shell.homeModules.dankMaterialShell.default
-                  dank-material-shell.homeModules.dankMaterialShell.niri
                   ./modules/home-manager/modules/nixvim
                 ];
                 users.${username} = {
@@ -172,7 +159,7 @@
           username = "theaninova";
           system = "x86_64-linux";
           config = {
-            rocmSupport = true;
+            # rocmSupport = true;
           };
         };
         aero = mkHost {

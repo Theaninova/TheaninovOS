@@ -27,7 +27,7 @@ in
     };
 
     environment.systemPackages = with pkgs; [
-      glxinfo
+      mesa-demos
       libva-utils
       vulkan-tools
     ];
