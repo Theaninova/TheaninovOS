@@ -72,7 +72,12 @@ hi! TabLineFill guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.d
 
 hi! SpecialKey guifg={{colors.primary.default.hex}}
 hi! Directory guifg={{colors.primary.default.hex}}
-hi! Search guifg={{colors.on_tertiary.default.hex}} guibg={{colors.tertiary.default.hex}}
+
+hi! Search guifg={{colors.on_primary.default.hex}} guibg={{colors.primary.default.hex}}
+hi! link IncSearch Search
+hi! link CurSearch Search
+hi! link LeapMatch Search
+hi! link LeapLabel Search
 
 hi! CmpItemKindCopilot guifg={{colors.cyan.default.hex}}
 hi! CmpItemKindNpm guifg={{colors.red.default.hex}}

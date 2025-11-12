@@ -28,15 +28,18 @@ in
 
     environment.systemPackages = with pkgs; [
       steam
+      cubyz-bin
       oversteer
       obs-studio
-      /*(lutris.override {
-        extraLibraries =
-          pkgs: with pkgs; [
-            libgudev
-            libvdpau
-          ];
-      })*/
+      /*
+        (lutris.override {
+          extraLibraries =
+            pkgs: with pkgs; [
+              libgudev
+              libvdpau
+            ];
+        })
+      */
       rpcs3
       bottles
       wineWow64Packages.stagingFull

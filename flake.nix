@@ -47,6 +47,7 @@
             overlays = [
               niri.overlays.niri
               (final: prev: {
+                cubyz-bin = prev.callPackage ./overlays/cubyz-bin { };
                 matugen = matugen.packages.${prev.system}.default;
                 gccdiag = prev.callPackage ./overlays/gccdiag { };
                 gbmonctl = prev.callPackage ./overlays/gbmonctl { };
