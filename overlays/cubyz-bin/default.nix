@@ -1,56 +1,121 @@
 {
   lib,
   stdenv,
-  fetchurl,
-  autoPatchelfHook,
+  fetchFromGitHub,
+  callPackage,
   makeWrapper,
   libx11,
+  libxcursor,
+  libGL,
+  alsa-lib,
+  vulkan-loader,
+  vulkan-validation-layers,
+  vulkan-tools,
+  zig,
 }:
-stdenv.mkDerivation rec {
-  pname = "cubyz-bin";
-  version = "0.0.1";
 
-  src = fetchurl {
-    url = "https://github.com/PixelGuys/Cubyz/releases/download/${version}/Linux-x86_64.tar.gz";
-    hash = "sha256-Rmh17XpO/CtLDobc8Jb4ojhtM7fUN+ungbVzQlIvE7U=";
+let
+  # This is kinda atrocious, but it works
+  # Override default zig flags
+  zig_hook =
+    (zig.overrideAttrs {
+      version = "0.15.0";
+      src = fetchFromGitHub {
+        owner = "ziglang";
+        repo = "zig";
+        rev = "bd97b66186dabb3533df1ea9eb650d7574496a59";
+        hash = "sha256-EVIg01kQ3JCZxnnrk6qMJn3Gm3+BZzPs75x9Q+sxqBw=";
+      };
+    }).hook.overrideAttrs
+      {
+        zig_default_flags = "";
+      };
+in
+
+stdenv.mkDerivation (finalAttrs: {
+  version = "0.0.1";
+  pname = "cubyz";
+  src = fetchFromGitHub {
+    owner = "pixelguys";
+    repo = "cubyz";
+    tag = finalAttrs.version;
+    hash = "sha256-SbMRr4kktwagYUyVBKFZLOwgSmkPngV8NbwkJRk2Zvg=";
   };
 
-  nativeBuildInputs = [
-    autoPatchelfHook
-    makeWrapper
-  ];
-
-  dontConfigure = true;
-  dontBuild = true;
-
-  buildInputs = [ libx11 ];
-
-  sourceRoot = ".";
-
-  installPhase = ''
-    runHook preInstall
-    mkdir -p $out/bin
-    mkdir -p $out/opt
-    cp -R Cubyz $out/opt/Cubyz
-    makeWrapper $out/opt/Cubyz/Cubyz $out/bin/cubyz --run "cd $out/opt/Cubyz"
-    runHook postInstall
+  postPatch = ''
+    ln -s ${callPackage ./deps.nix { }} $ZIG_GLOBAL_CACHE_DIR/p
   '';
 
-  preFixup =
-    let
-      libPath = lib.makeLibraryPath [
-        libx11
-      ];
-    in
-    ''
-      patchelf \
-      --set-rpath "${libPath}" \
-      $out/opt/Cubyz/Cubyz
-    '';
+  preBuild = "
+    mkdir -p ../Cubyz-libs/zig-out
+    ln -s ${callPackage ./libs.nix { }}/* ../Cubyz-libs/zig-out/
+  ";
 
-  meta = with lib; {
-    description = "Voxel sandbox game with a large render distance, procedurally generated content and some cool graphical effects.";
+  nativeBuildInputs = [
+    zig_hook # Needed for building zig stuff
+    makeWrapper # Needed for env variables
+  ];
+
+  buildInputs = [
+    libx11
+    libGL
+    vulkan-loader
+    vulkan-validation-layers
+    vulkan-tools
+    libxcursor
+    alsa-lib
+  ];
+
+  zigBuildFlags = [
+    #"-j6"				# Included in zig default flags
+    "-Dcpu=baseline" # Included in zig default flags
+    "-Drelease"
+    "-Dlocal" # Use local libraries
+    "-Doptimize=ReleaseSafe"
+  ];
+
+  # Symlink the assets to $out, add a desktop entry
+  postBuild = ''
+    mkdir -p $out/assets/cubyz
+    ln -s ${callPackage ./assets.nix { }}/* $out/assets/cubyz/
+    ln -s $src/assets/cubyz/* $out/assets/cubyz/
+
+    printf "
+      [Desktop Entry]
+      Name=Cubyz
+      Exec=$out/bin/Cubyz
+      Icon=$out/assets/cubyz/logo.png
+      Type=Application
+      Categories=Game;
+    " > $out/cubyz.desktop
+  '';
+
+  # Change some env variables, move a bunch of stuff under .config for modding purposes, symlink a desktop entry
+  postInstall = ''
+    wrapProgram $out/bin/Cubyz \
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath finalAttrs.buildInputs}" \
+      --prefix VK_LAYER_PATH : "${vulkan-validation-layers}/share/vulkan/explicit_layer.d" \
+      --run "
+        cd \$HOME/.config/cubyz
+        mkdir -p \$HOME/.config/cubyz/logs
+        mkdir -p \$HOME/.config/cubyz/assets
+        [ ! -d \$HOME/.config/cubyz/assets/cubyz ] && cp -pr $out/assets/cubyz \$HOME/.config/cubyz/assets/
+
+        [ ! -f \$HOME/.config/cubyz/launchConfig.zon ] && printf \".{
+          .cubyzDir = \\\"\$HOME/.config/cubyz\\\",
+        }\" > \$HOME/.config/cubyz/launchConfig.zon
+
+        [ ! -l \$HOME/.local/share/applications/cubyz.desktop ] && ln -sf $out/cubyz.desktop \$HOME/.local/share/applications/cubyz.desktop
+      "
+  '';
+
+  meta = {
     homepage = "https://github.com/PixelGuys/Cubyz";
-    maintainers = with maintainers; [ theaninova ];
+    description = "Voxel sandbox game with a large render distance, procedurally generated content and some cool graphical effects";
+    changelog = "https://github.com/PixelGuys/Cubyz/releases/tag/${finalAttrs.version}";
+    license = lib.licenses.gpl3Only;
+    platforms = lib.platforms.linux;
+    mainProgram = "cubyz";
+    maintainers = with lib.maintainers; [ leha44581 ];
   };
-}
+})
