@@ -54,7 +54,7 @@ in
             };
             variable-refresh-rate = "on-demand";
           };
-          layout.struts.top = 340;
+          layout.struts.top = 80;
         };
         wayland.windowManager.hyprland.settings = {
           general.layout = "master";
