@@ -50,7 +50,6 @@
     scribus
     # audacity
     pinta
-    kdePackages.kdenlive
     losslesscut-bin
     shotcut
     blender-hip
