@@ -105,7 +105,7 @@
     "127.0.0.1:57461" = [ "ai.local" ];
   };
   services.ollama = {
-    enable = true;
+    enable = false;
     package = pkgs.ollama.override {
       config.cudaSupport = true;
       config.rocmSupport = false;
@@ -113,7 +113,7 @@
     acceleration = "cuda";
   };
   services.open-webui = {
-    enable = true;
+    enable = false;
     port = 57461;
     environment = {
       ANONYMIZED_TELEMETRY = "False";

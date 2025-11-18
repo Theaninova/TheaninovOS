@@ -68,7 +68,7 @@ in
       };
       systemPackages = with pkgs; [
         mesa-demos
-        nvtopPackages.nvidia
+        # nvtopPackages.nvidia
         libva-utils
         vulkan-tools
       ];
