@@ -53,6 +53,7 @@
           enable = true;
           prettier = true;
         };
+        leap.enable = true;
         spellcheck.enable = true;
         status-line.enable = true;
         syntax.enable = true;
@@ -64,6 +65,7 @@
           enable = true;
           stylelint = true;
         };
+        cue.enable = true;
         dart.enable = true;
         js = {
           enable = true;
@@ -85,92 +87,6 @@
       };
     };
 
-    /*
-            keymaps = [
-              {
-                key = "s";
-                mode = [
-                  "n"
-                  "x"
-                  "o"
-                ];
-                action.__raw = "function() require('flash').jump() end";
-                options.desc = "Flash";
-              }
-              {
-                key = "S";
-                mode = [
-                  "n"
-                  "x"
-                  "o"
-                ];
-                action.__raw = "function() require('flash').treesitter() end";
-                options.desc = "Flash Treesitter";
-              }
-              {
-                key = "r";
-                mode = "o";
-                action.__raw = "function() require('flash').remote() end";
-                options.desc = "Remote Flash";
-              }
-              {
-                key = "R";
-                mode = [
-                  "o"
-                  "x"
-                ];
-                action.__raw = "function() require('flash').treesitter_search() end";
-                options.desc = "Treesitter Search";
-              }
-              {
-                key = "<c-s>";
-                mode = [
-                  "c"
-                ];
-                action.__raw = "function() require('flash').toggle() end";
-                options.desc = "Toggle Flash Search";
-              }
-            ];
-      vim.keymap.set({'n', 'x', 'o'}, 's', '<Plug>(leap)')
-      vim.keymap.set('n',             'S', '<Plug>(leap-from-window)')
-    */
-    keymaps = [
-      {
-        key = "s";
-        mode = [
-          "n"
-          "x"
-          "o"
-        ];
-        action.__raw = ''
-          function()
-            require('leap').leap({
-              windows = { vim.api.nvim_get_current_win() },
-              inclusive = true
-            })
-          end
-        '';
-        options.desc = "Leap";
-      }
-      {
-        key = "R";
-        mode = [
-          "x"
-          "o"
-        ];
-        action.__raw = ''
-          function ()
-            require('leap.treesitter').select {
-              -- To increase/decrease the selection in a clever-f-like manner,
-              -- with the trigger key itself (vRRRRrr...). The default keys
-              -- (<enter>/<backspace>) also work, so feel free to skip this.
-              opts = require('leap.user').with_traversal_keys('R', 'r')
-            }
-          end
-        '';
-      }
-    ];
-
     plugins = {
       which-key.enable = true;
       schemastore.enable = true;
@@ -178,24 +94,6 @@
       origami.enable = false;
       nvim-surround.enable = true;
       fidget.enable = true;
-      leap = {
-        enable = true;
-      };
-      /*
-        flash = {
-          enable = true;
-          settings = {
-            label = {
-              exclude = "jJxXqQ";
-              rainbow.enabled = true;
-            };
-            search = {
-              mode = "exact";
-              trigger = ";";
-            };
-          };
-        };
-      */
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;
@@ -207,7 +105,18 @@
 
         dockerls.enable = true;
 
-        yamlls.enable = true;
+        yamlls = {
+          enable = true;
+          settings.customTags = [
+            "!if mapping"
+            "!any sequence"
+            "!not scalar"
+            "!flat sequence"
+            "!repeat mapping"
+            "!param scalar"
+            "!macro mapping"
+          ];
+        };
         jsonls.enable = true;
         taplo.enable = true;
       };

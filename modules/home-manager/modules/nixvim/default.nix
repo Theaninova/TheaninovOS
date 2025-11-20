@@ -26,6 +26,7 @@
         ./base/diagnostics.nix
         ./base/find.nix
         ./base/formatting.nix
+        ./base/leap.nix
         ./base/spellcheck.nix
         ./base/status-line.nix
         ./base/syntax.nix
@@ -34,6 +35,7 @@
         ./languages/angular.nix
         ./languages/c.nix
         ./languages/css.nix
+        ./languages/cue.nix
         ./languages/dart.nix
         ./languages/js.nix
         ./languages/lua.nix

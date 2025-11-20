@@ -41,6 +41,15 @@ sudo nixos-rebuild switch --flake .#
 
 ## Cleaning your system
 
+### Cachix is down
+
+By default nix will just crash if cachix is down even if you don't have to fetch anything from it.
+Use `--option build-use-substitutes false` to temporarily disable it.
+
+```sh
+sudo nixos-rebuild switch --option build-use-substitutes false --flake .#
+```
+
 ### Find (accidental) folders holding your gc back
 
 ```sh
