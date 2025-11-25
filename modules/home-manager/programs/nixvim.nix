@@ -77,6 +77,7 @@
         python.enable = true;
         rust.enable = true;
         shell.enable = true;
+        strudel.enable = true;
         svelte.enable = true;
       };
       remaps = {
@@ -94,6 +95,7 @@
       origami.enable = false;
       nvim-surround.enable = true;
       fidget.enable = true;
+      vim-tidal.enable = true;
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;

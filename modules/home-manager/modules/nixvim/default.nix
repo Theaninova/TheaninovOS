@@ -12,6 +12,9 @@
         inherit pkgs hostname username;
       };
       modules = [
+        ./plugins/strudel.nix
+        ./plugins/tidal.nix
+
         ./aerial.nix
         ./auto-save.nix
         ./auto-format.nix
@@ -43,6 +46,7 @@
         ./languages/python.nix
         ./languages/rust.nix
         ./languages/shell.nix
+        ./languages/strudel.nix
         ./languages/svelte.nix
 
         ./remaps/half-page-scroll.nix

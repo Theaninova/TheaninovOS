@@ -18,6 +18,10 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    tidalcycles = {
+      url = "github:mitchmindtree/tidalcycles.nix/?ref=0db0918e7a3d3c30ed7a6e81dc9d4e3832870ac4";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +32,7 @@
       matugen,
       nix-flatpak,
       niri,
+      tidalcycles,
       ...
     }@inputs:
     let
@@ -56,6 +61,10 @@
                 rastertokpsl-re = prev.callPackage ./overlays/rastertokpsl-re { };
                 usb-sniffer = prev.callPackage ./overlays/usb-sniffer { };
                 gamma-launcher = prev.callPackage ./overlays/gamma-launcher { };
+                vimPlugins = prev.vimPlugins // {
+                  strudel-nvim = prev.callPackage ./overlays/strudel-nvim { };
+                  vim-tidal = tidalcycles.packages.${prev.system}.vim-tidal;
+                };
                 wireshark = prev.wireshark.overrideAttrs (
                   finalAttrs: prevAttrs: {
                     postInstall = prevAttrs.postInstall + ''
