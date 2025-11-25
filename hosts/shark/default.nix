@@ -11,8 +11,7 @@
     quiet.enable = true;
 
     kernelParams = [ "module_blacklist=i915" ];
-
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_stable;
 
     loader = {
       systemd-boot = {

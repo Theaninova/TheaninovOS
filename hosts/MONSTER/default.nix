@@ -5,7 +5,7 @@
   boot = {
     quiet.enable = true;
 
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_xanmod_stable;
     kernelModules = [ "sg" ];
 
     loader = {
