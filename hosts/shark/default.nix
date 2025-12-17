@@ -71,6 +71,7 @@
   hardware = {
     q3279vwf.enable = true;
     audio.preset.pipewire.enable = true;
+    cc1.enable = true;
 
     nvidia.preset.proprietary.enable = true;
 
@@ -109,7 +110,6 @@
       config.cudaSupport = true;
       config.rocmSupport = false;
     };
-    acceleration = "cuda";
   };
   services.open-webui = {
     enable = false;

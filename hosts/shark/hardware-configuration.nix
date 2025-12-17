@@ -24,10 +24,10 @@
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  fileSystems."/home" =
+  /*fileSystems."/home2" =
     { device = "/dev/disk/by-uuid/fa017457-fef3-4fac-9348-d37d2cd98656";
       fsType = "xfs";
-    };
+    };*/
 
   swapDevices = [ ];
 

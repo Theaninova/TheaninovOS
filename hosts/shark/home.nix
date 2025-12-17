@@ -17,6 +17,7 @@
       gamma-launcher
     ];
   };
+  services.nextcloud-client.enable = true;
   systemd.user.services = {
     blueman-applet = {
       Unit = {

@@ -32,6 +32,7 @@ in
             no_update_news = true;
             no_donation_nag = true;
           };
+          input.numlock_by_default = true;
         };
         plugins = with pkgs.hyprlandPlugins; [
         ];
@@ -82,6 +83,9 @@ in
         "org.freedesktop.impl.portal.Secret" = [ "gnome-keyring" ];
       };
     };
+
+    security.pam.services.gdm.enableGnomeKeyring = true;
+    security.pam.services.hyprland.enableGnomeKeyring = true;
 
     services = {
       kmscon = {

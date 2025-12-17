@@ -19,8 +19,6 @@ in
   config = mkIf cfg.enable {
     users.users.${username}.linger = true;
     boot = {
-      loader.timeout = 0;
-
       plymouth.enable = true;
 
       kernelParams = [

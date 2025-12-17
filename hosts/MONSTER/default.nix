@@ -3,6 +3,8 @@
   imports = [ ./hardware-configuration.nix ];
 
   boot = {
+    loader.timeout = 0;
+
     quiet.enable = true;
 
     kernelPackages = pkgs.linuxPackages_xanmod_stable;
