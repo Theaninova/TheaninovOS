@@ -8,6 +8,8 @@
   imports = [ ./hardware-configuration.nix ];
 
   boot = {
+    loader.timeout = 0;
+
     quiet.enable = true;
 
     kernelParams = [ "module_blacklist=i915" ];
