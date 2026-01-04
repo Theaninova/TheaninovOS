@@ -13,9 +13,18 @@ in
 {
   options.hardware.astro-a50 = {
     enable = mkEnableOption "Enable optimisations for the Logitech Astro A50 headset";
+    sinkWhenDocked = mkOption {
+      type = types.nullOr types.str;
+      description = "The PipeWire sink name to switch to when the Astro A50 is docked. If null, no switching will be done.";
+      default = "alsa_output.pci-0000_0a_00.4.analog-stereo";
+    };
   };
 
   config = mkIf cfg.enable {
+    services.udev.extraRules = ''
+      KERNEL=="hidraw*", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0b1c", MODE="0660", GROUP="input"
+    '';
+    users.extraGroups.input.members = [ username ];
     home-manager.users.${username} =
       let
         name = "Astro A50";
@@ -64,6 +73,29 @@ in
                 };
               }
             ];
+          };
+        };
+        systemd.user.services.astro-dock = mkIf (cfg.sinkWhenDocked != null) {
+          Unit = {
+            Description = "Astro A50 Dock Detection";
+            After = [ "pipewire.service" ];
+          };
+
+          Install.WantedBy = [ "default.target" ];
+
+          Service = {
+            Restart = "always";
+            ExecStart = lib.getExe (
+              pkgs.writeShellApplication {
+                name = "astro-dock-detect";
+                runtimeEnv = {
+                  HID_DEVICE = "/dev/input/by-id/usb-Logitech_A50-if08-hidraw";
+                  HEADSET_NAME = nodeNameIn;
+                  SPEAKERS_NAME = cfg.sinkWhenDocked;
+                };
+                text = builtins.readFile ./astro-a50-dock.sh;
+              }
+            );
           };
         };
       };
