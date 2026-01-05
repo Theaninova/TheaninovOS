@@ -34,6 +34,7 @@ in
           "alsa.components" = "USB046d:0b1c";
           "alsa.resolution_bits" = bitrate;
         };
+        hidrawPath = "/dev/input/by-id/usb-Logitech_A50-if08-hidraw";
         nodeNameIn = "astro-a50-eq-harman-in";
       in
       {
@@ -62,7 +63,7 @@ in
               {
                 name = "libpipewire-module-parametric-equalizer";
                 args = {
-                  "equalizer.filepath" = builtins.toString ./astro-a50-harman.txt;
+                  "equalizer.filepath" = toString ./astro-a50-harman.txt;
                   "equalizer.description" = "${name} (Harman EQ)";
                   "capture.props" = {
                     "node.name" = nodeNameIn;
@@ -82,14 +83,16 @@ in
           };
 
           Install.WantedBy = [ "default.target" ];
+          Path.PathExists = hidrawPath;
 
           Service = {
             Restart = "always";
+            RestartSec = 10;
             ExecStart = lib.getExe (
               pkgs.writeShellApplication {
                 name = "astro-dock-detect";
                 runtimeEnv = {
-                  HID_DEVICE = "/dev/input/by-id/usb-Logitech_A50-if08-hidraw";
+                  HID_DEVICE = hidrawPath;
                   HEADSET_NAME = nodeNameIn;
                   SPEAKERS_NAME = cfg.sinkWhenDocked;
                 };

@@ -33,9 +33,8 @@
     prismlauncher
 
     # chat apps
-    vesktop
+    # vesktop
     discord
-    element-desktop
     thunderbird
     signal-desktop
     # cinny-desktop
@@ -47,8 +46,8 @@
     # creative
     gimp3
     inkscape-with-extensions
-    scribus
-    # audacity
+    # scribus
+    audacity
     pinta
     losslesscut-bin
     shotcut
