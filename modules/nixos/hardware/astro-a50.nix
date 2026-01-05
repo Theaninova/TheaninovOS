@@ -20,37 +20,47 @@ in
     };
   };
 
-  config = mkIf cfg.enable {
-    services.udev.extraRules = ''
-      KERNEL=="hidraw*", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="0b1c", MODE="0660", GROUP="input"
-    '';
-    users.extraGroups.input.members = [ username ];
-    home-manager.users.${username} =
-      let
-        name = "Astro A50";
-        nick = "A50";
-        filter = bitrate: {
-          "media.class" = "Audio/Sink";
-          "alsa.components" = "USB046d:0b1c";
-          "alsa.resolution_bits" = bitrate;
-        };
-        hidrawPath = "/dev/input/by-id/usb-Logitech_A50-if08-hidraw";
-        nodeNameIn = "astro-a50-eq-harman-in";
-      in
-      {
+  config =
+    let
+      name = "Astro A50";
+      nick = "A50";
+      pipewireFilter = bitrate: {
+        "media.class" = "Audio/Sink";
+        "alsa.components" = "USB046d:0b1c";
+        "alsa.resolution_bits" = bitrate;
+      };
+      serviceName = "astro-a50-dock-detection";
+      nodeNameIn = "astro-a50-eq-harman-in";
+      hidrawName = "hidraw_astro_a50";
+      hidrawPath = "/dev/${hidrawName}";
+      deviceUnit = "dev-${hidrawName}.device";
+    in
+
+    mkIf cfg.enable {
+      services.udev.extraRules = lib.strings.join ", " [
+        "KERNEL==\"hidraw*\""
+        "ATTRS{idVendor}==\"046d\""
+        "ATTRS{idProduct}==\"0b1c\""
+        "MODE=\"0660\""
+        "GROUP=\"input\""
+        "TAG+=\"systemd\""
+        "SYMLINK+=\"${hidrawName}\""
+      ];
+      users.extraGroups.input.members = [ username ];
+      home-manager.users.${username} = {
         home.packages = with pkgs; [ zam-plugins ];
         xdg.configFile = {
           "wireplumber/wireplumber.conf.d/51-astro-a50.conf".text = builtins.toJSON {
             "monitor.alsa.rules" = [
               {
-                matches = [ (filter 16) ];
+                matches = [ (pipewireFilter 16) ];
                 actions.update-props = {
                   "node.description" = "${name} Chat";
                   "node.nick" = "${nick} Chat";
                 };
               }
               {
-                matches = [ (filter 24) ];
+                matches = [ (pipewireFilter 24) ];
                 actions.update-props = {
                   "node.description" = name;
                   "node.nick" = nick;
@@ -68,7 +78,7 @@ in
                   "capture.props" = {
                     "node.name" = nodeNameIn;
                     "filter.smart" = true;
-                    "filter.smart.target" = filter 24;
+                    "filter.smart.target" = pipewireFilter 24;
                   };
                   "playback.props"."node.name" = "EQ Output";
                 };
@@ -76,31 +86,33 @@ in
             ];
           };
         };
-        systemd.user.services.astro-dock = mkIf (cfg.sinkWhenDocked != null) {
+        systemd.user.services.${serviceName} = mkIf (cfg.sinkWhenDocked != null) {
           Unit = {
             Description = "Astro A50 Dock Detection";
-            After = [ "pipewire.service" ];
+            StopPropagatedFrom = [ deviceUnit ];
           };
-
-          Install.WantedBy = [ "default.target" ];
-          Path.PathExists = hidrawPath;
-
+          Install.WantedBy = [
+            "default.target"
+            deviceUnit
+          ];
           Service = {
             Restart = "always";
-            RestartSec = 10;
-            ExecStart = lib.getExe (
-              pkgs.writeShellApplication {
-                name = "astro-dock-detect";
-                runtimeEnv = {
-                  HID_DEVICE = hidrawPath;
-                  HEADSET_NAME = nodeNameIn;
-                  SPEAKERS_NAME = cfg.sinkWhenDocked;
-                };
-                text = builtins.readFile ./astro-a50-dock.sh;
-              }
-            );
+            RestartSec = "5";
+            ExecStart = "-${
+              lib.getExe (
+                pkgs.writeShellApplication {
+                  name = "astro-dock-detect";
+                  runtimeEnv = {
+                    HID_DEVICE = hidrawPath;
+                    HEADSET_NAME = nodeNameIn;
+                    SPEAKERS_NAME = cfg.sinkWhenDocked;
+                  };
+                  text = builtins.readFile ./astro-a50-dock.sh;
+                }
+              )
+            }";
           };
         };
       };
-  };
+    };
 }
