@@ -181,6 +181,15 @@
   ];
 
   networking = {
+    firewall = {
+      allowedUDPPortRanges = [
+        {
+          from = 1;
+          to = 65535;
+        }
+      ];
+    };
+
     networkmanager = {
       enable = true;
       plugins = with pkgs; [ networkmanager-openconnect ];

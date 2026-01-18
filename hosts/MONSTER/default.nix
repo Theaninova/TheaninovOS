@@ -45,7 +45,10 @@
     walker.enable = true;
     waybar.enable = true;
   };
-  desktops.niri.enable = true;
+  desktops.hyprland = {
+    enable = true;
+    scrolling = true;
+  };
   locale.preset.theaninova.enable = true;
 
   networking.hosts = {
@@ -195,6 +198,14 @@
         25565
         50765
       ];
+      /*
+        allowedUDPPortRanges = [
+          {
+            from = 1;
+            to = 65535;
+          }
+        ];
+      */
     };
 
     networkmanager = {

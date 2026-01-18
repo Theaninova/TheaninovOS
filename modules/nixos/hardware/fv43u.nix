@@ -57,7 +57,9 @@ in
           layout.struts.top = 80;
         };
         wayland.windowManager.hyprland.settings = {
-          general.layout = "master";
+          plugin.hyprscrolling = lib.mkIf config.desktops.hyprland.scrolling {
+            column_width = 0.4;
+          };
           master = {
             orientation = "center";
             slave_count_for_center_master = 0;
@@ -65,19 +67,13 @@ in
             allow_small_split = true;
           };
           render.direct_scanout = 0;
-          /*
-            monitor = [
-              "${monitorline},sdrbrightness,1.3"
-              "DP-3,addreserved,340,0,0,0"
-            ];
-          */
           monitorv2 = {
             output = "DP-3";
             mode = "3840x2160@144";
             position = "0x0";
             scale = 1;
             bitdepth = 10;
-            addreserved = "340,0,0,0";
+            addreserved = "80,0,0,0";
             cm = if cfg.hdr then "hdredid" else "srgb";
             sdr_min_luminance = 0.25;
             sdr_max_luminance = 250;
@@ -88,7 +84,7 @@ in
             min_refresh_rate = 48;
             no_break_fs_vrr = 1;
           };
-          experimental.xx_color_management_v4 = true;
+          # experimental.xx_color_management_v4 = true;
         };
 
         programs.waybar.settings.mainBar =

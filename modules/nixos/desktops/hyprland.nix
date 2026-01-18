@@ -12,6 +12,7 @@ in
 {
   options.desktops.hyprland = {
     enable = lib.mkEnableOption "Enable a DE based on Hyprland";
+    scrolling = lib.mkEnableOption "Hyprland scrolling wm";
   };
 
   config = lib.mkIf cfg.enable {
@@ -34,8 +35,12 @@ in
           };
           input.numlock_by_default = true;
         };
-        plugins = with pkgs.hyprlandPlugins; [
-        ];
+        plugins = lib.mkIf cfg.scrolling (
+          with pkgs.hyprlandPlugins;
+          [
+            hyprscrolling
+          ]
+        );
       };
       home = {
         packages = with pkgs; [ grim ];
