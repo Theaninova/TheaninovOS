@@ -36,9 +36,9 @@
 
   shell.components = {
     firefox-pip.enable = true;
-    # grimblast.enable = true;
+    grimblast.enable = true;
     gnome-keyring.enable = true;
-    # hyprpicker.enable = true;
+    hyprpicker.enable = true;
     kde-connect.enable = true;
     kitty.enable = true;
     swaync.enable = true;
