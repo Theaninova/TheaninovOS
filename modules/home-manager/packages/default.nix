@@ -51,7 +51,7 @@
     pinta
     losslesscut-bin
     shotcut
-    blender-hip
+    pkgsRocm.blender
 
     # development
     ghidra

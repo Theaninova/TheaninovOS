@@ -28,7 +28,6 @@ in
 
     environment.systemPackages = with pkgs; [
       steam
-      cubyz-bin
       oversteer
       obs-studio
       (lutris.override {
