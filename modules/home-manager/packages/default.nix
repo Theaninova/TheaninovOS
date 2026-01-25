@@ -33,7 +33,7 @@
     prismlauncher
 
     # chat apps
-    # vesktop
+    vesktop
     discord
     thunderbird
     signal-desktop
@@ -55,8 +55,10 @@
 
     # development
     ghidra
+    kdePackages.kate
 
     # utils
+    kdePackages.ark
     libqalculate
     ranger
     filezilla
