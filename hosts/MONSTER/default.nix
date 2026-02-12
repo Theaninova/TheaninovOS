@@ -193,7 +193,10 @@
 
   networking = {
     firewall = {
-      allowedTCPPorts = [ 25565 ];
+      allowedTCPPorts = [
+        25565
+        5173
+      ];
       allowedUDPPorts = [
         25565
         50765

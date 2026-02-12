@@ -16,7 +16,6 @@ in
 
   config = mkIf cfg.enable {
     fonts.fontconfig.subpixel.rgba = "bgr";
-    boot.kernelParams = [ "video=2560x1440@75" ];
 
     home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
       general.layout = "master";
@@ -25,7 +24,10 @@ in
         mfact = 0.65;
         always_keep_position = true;
       };
-      monitor = [ "DP-1,2560x1440@75,0x0,1" ];
+      monitor = [
+        "HDMI-A-1,2560x1440@75,0x0,1"
+        "DP-1,1920x1080@144,auto-center-right,1,transform,3"
+      ];
       xwayland.force_zero_scaling = true;
       misc.vrr = 0; # VA suffers from VRR flicker
     };

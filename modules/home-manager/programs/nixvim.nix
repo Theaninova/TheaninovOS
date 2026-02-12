@@ -104,6 +104,7 @@
       lsp.servers = {
         html.enable = true;
         svelte.enable = true;
+        buf_ls.enable = true;
 
         dockerls.enable = true;
 
