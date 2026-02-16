@@ -22,6 +22,17 @@
       url = "github:mitchmindtree/tidalcycles.nix/?ref=0db0918e7a3d3c30ed7a6e81dc9d4e3832870ac4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    elephant = {
+      url = "github:abenz1267/elephant";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    walker = {
+      url = "github:abenz1267/walker";
+      inputs = {
+        elephant.follows = "elephant";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
   };
 
   outputs =
@@ -33,6 +44,7 @@
       nix-flatpak,
       niri,
       tidalcycles,
+      walker,
       ...
     }@inputs:
     let
@@ -144,6 +156,7 @@
                   nix-flatpak.homeManagerModules.nix-flatpak
                   nixvim.homeModules.nixvim
                   ./modules/home-manager/modules/nixvim
+                  walker.homeManagerModules.default
                 ];
                 users.${username} = {
                   nix.gc = {

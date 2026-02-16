@@ -29,9 +29,12 @@
       ];
     };
   };
-  wayland.windowManager.hyprland.settings.windowrulev2 = [
-    # For some reason it really wants to be maximized
-    "suppressevent maximize,class:^(neovide)$"
+  wayland.windowManager.hyprland.settings.windowrule = [
+    {
+      name = "Suppress maximize for neovide";
+      "match:class" = "^(neovide)$";
+      suppress_event = "maximize";
+    }
   ];
   programs.nixvim = {
     globals = {

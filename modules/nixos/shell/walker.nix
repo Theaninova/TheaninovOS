@@ -8,7 +8,6 @@
 
 let
   cfg = config.shell.components.walker;
-  hmConfig = config.home-manager.users.${username};
 in
 {
   options.shell.components.walker = {
@@ -29,27 +28,14 @@ in
       };
       programs.niri.settings.binds."Mod+Space".action.spawn = [ (lib.getExe pkgs.walker) ];
       home.packages = with pkgs; [
-        walker
         wl-clipboard
       ];
-
-      xdg.configFile."walker/config.toml".source = (pkgs.formats.toml { }).generate "walker-config.toml" {
-        app_launch_prefix = "uwsm app -- ";
-        close_when_open = true;
-        force_keyboard_focus = true;
-      };
-      systemd.user.services.walker = {
-        Unit = {
-          Description = "Walker - Application Runner";
-          X-Restart-Triggers = [
-            "${hmConfig.xdg.configFile."walker/config.toml".source}"
-          ];
-          After = [ "graphical-session.target" ];
-        };
-        Install.WantedBy = [ "graphical-session.target" ];
-        Service = {
-          ExecStart = "${lib.getExe pkgs.walker} --gapplication-service";
-          Restart = "always";
+      programs.walker = {
+        enable = true;
+        runAsService = true;
+        config = {
+          close_when_open = true;
+          force_keyboard_focus = true;
         };
       };
     };

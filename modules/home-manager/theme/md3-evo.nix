@@ -341,7 +341,13 @@ in
 
       wayland.windowManager.hyprland = {
         settings = {
-          windowrulev2 = [ "float,class:^(zenity)$" ];
+          windowrule = [
+            {
+              name = "floating-zenity";
+              "match:class" = "^(zenity)$";
+              float = true;
+            }
+          ];
           decoration = {
             inactive_opacity = 0.8;
             shadow = {

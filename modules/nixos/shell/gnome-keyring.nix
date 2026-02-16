@@ -16,11 +16,15 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} = {
-      wayland.windowManager.hyprland.settings.windowrulev2 = [
-        "dimaround,class:^(gcr-prompter)$"
-        "noborder,class:^(gcr-prompter)$"
-        "rounding 10,class:^(gcr-prompter)$"
-        "animation slide,class:^(gcr-prompter)$"
+      wayland.windowManager.hyprland.settings.windowrule = [
+        {
+          name = "Gnome Keyring";
+          "match:class" = "^(gcr-prompter)$";
+          border_size = 0;
+          rounding = 10;
+          animation = "slide";
+          dim_around = true;
+        }
       ];
       home.packages = with pkgs; [
         polkit_gnome
