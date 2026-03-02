@@ -3,7 +3,7 @@
   stdenv,
   fetchFromGitHub,
   fetchFromGitLab,
-  boost,
+  boost177,
   libargs,
   cmake,
 }:
@@ -41,7 +41,7 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ cmake ];
 
   buildInputs = [
-    boost
+    boost177
     libargs
   ];
 

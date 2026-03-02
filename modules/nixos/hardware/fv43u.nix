@@ -57,8 +57,10 @@ in
           layout.struts.top = 80;
         };
         wayland.windowManager.hyprland.settings = {
-          plugin.hyprscrolling = lib.mkIf config.desktops.hyprland.scrolling {
+          scrolling = {
             column_width = 0.4;
+            focus_fit_method = 0;
+            fullscreen_on_one_column = false;
           };
           master = {
             orientation = "center";

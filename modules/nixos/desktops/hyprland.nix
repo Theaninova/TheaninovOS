@@ -35,12 +35,6 @@ in
           };
           input.numlock_by_default = true;
         };
-        plugins = lib.mkIf cfg.scrolling (
-          with pkgs.hyprlandPlugins;
-          [
-            hyprscrolling
-          ]
-        );
       };
       home = {
         packages = with pkgs; [ grim ];
