@@ -50,23 +50,7 @@
     scrolling = true;
   };
   locale.preset.theaninova.enable = true;
-
-  networking.hosts = {
-    "127.0.0.1:57461" = [ "ai.local" ];
-  };
   services = {
-    ollama.enable = false;
-    open-webui = {
-      enable = false;
-      port = 57461;
-      environment = {
-        ANONYMIZED_TELEMETRY = "False";
-        DO_NOT_TRACK = "True";
-        SCARF_NO_ANALYTICS = "True";
-        WEBUI_AUTH = "False";
-      };
-    };
-
     xserver.xkb.variant = "altgr-intl";
     xserver.xkb.layout = "us";
 

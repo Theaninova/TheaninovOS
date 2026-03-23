@@ -25,9 +25,10 @@
 
     ./locales/theaninova.nix
 
-    ./usecases/gaming.nix
     ./usecases/3d-printing.nix
     ./usecases/development.nix
+    ./usecases/gaming.nix
+    ./usecases/localai.nix
     ./usecases/windows-vm.nix
 
     ./services/airprint.nix

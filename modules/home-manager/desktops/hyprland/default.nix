@@ -110,7 +110,7 @@ in
       ghex
       gnome-disk-utility
       # fixes
-      xorg.xrandr
+      xrandr
     ];
 
     gtk = {

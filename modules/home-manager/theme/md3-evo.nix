@@ -299,8 +299,11 @@ in
       gtk = {
         gtk3.extraCss = # css
           "@import './theme.css';";
-        gtk4.extraCss = # css
-          "@import './theme.css';";
+        gtk4 = {
+          theme.name = "Adwaita";
+          extraCss = # css
+            "@import './theme.css';";
+        };
         theme = {
           name = "Adwaita";
         };
