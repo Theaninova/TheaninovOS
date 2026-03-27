@@ -80,6 +80,7 @@
                 wireshark = prev.wireshark.overrideAttrs (
                   finalAttrs: prevAttrs: {
                     postInstall = prevAttrs.postInstall + ''
+                      mkdir -p $out/lib/wireshark/extcap
                       ln -s ${final.usb-sniffer}/bin/usb_sniffer $out/lib/wireshark/extcap/usb_sniffer
                     '';
                   }

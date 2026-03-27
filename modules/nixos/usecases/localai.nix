@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  username,
   ...
 }:
 
@@ -15,10 +16,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    networking.hosts = {
-      "127.0.0.1:57461" = [ "ai.local" ];
-    };
-
     services = {
       ollama.enable = true;
       open-webui = {
@@ -32,5 +29,18 @@ in
         };
       };
     };
+    /*
+      virtualisation.oci-containers.containers.open-terminal =
+      let
+        xdg = config.home-manager.users.${username}.xdg;
+      in
+      {
+        podman.user = "${username}";
+        image = "ghcr.io/open-webui/open-terminal";
+        volumes = [ "${xdg.dataHome}/open-terminal:/home/user" ];
+        ports = [ "54183:8000" ];
+        extraOptions = [ "--env-file=${xdg.configHome}/open-terminal.env" ];
+      };
+    */
   };
 }

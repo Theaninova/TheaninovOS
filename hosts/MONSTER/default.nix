@@ -23,6 +23,7 @@
 
   usecases = {
     gaming.enable = true;
+    localai.enable = true;
     "3d-printing".enable = true;
     development = {
       enable = true;
@@ -119,7 +120,7 @@
   programs = {
     zsh.enable = true;
     wireshark = {
-      enable = false;
+      enable = true;
       package = pkgs.wireshark;
       usbmon.enable = true;
     };
