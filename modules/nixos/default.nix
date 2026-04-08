@@ -29,6 +29,7 @@
     ./usecases/development.nix
     ./usecases/gaming.nix
     ./usecases/localai.nix
+    ./usecases/nix-ld.nix
     ./usecases/windows-vm.nix
 
     ./services/airprint.nix

@@ -124,6 +124,10 @@
       package = pkgs.wireshark;
       usbmon.enable = true;
     };
+    nix-ld = {
+      enable = true;
+      enableRecommendedLibraries = true;
+    };
   };
 
   security.sudo.configFile = ''

@@ -24,6 +24,6 @@ in
       };
       lsp.servers.cssls.enable = true;
     };
-    extraPackages = lib.mkIf cfg.stylelint [ pkgs.nodePackages.stylelint ];
+    extraPackages = lib.mkIf cfg.stylelint [ pkgs.stylelint ];
   };
 }

@@ -70,6 +70,6 @@ in
         eslint.enable = lib.mkIf cfg.eslint true;
       };
     };
-    extraPackages = [ pkgs.nodePackages.typescript-language-server ];
+    extraPackages = [ pkgs.typescript-language-server ];
   };
 }

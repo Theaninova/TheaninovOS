@@ -185,7 +185,7 @@ in
           name = "theme";
           runtimeInputs = [
             pkgs.matugen
-            pkgs.swww
+            pkgs.awww
             pkgs.zenity
             pkgs.sunwait
           ];
@@ -292,7 +292,7 @@ in
     lib.mkIf cfg.enable {
       home.packages = [
         pkgs.adw-gtk3
-        pkgs.swww
+        pkgs.awww
         theme-script
       ];
 
@@ -315,14 +315,14 @@ in
       qt.platformTheme.name = "qtct";
 
       systemd.user.services = {
-        swww-daemon = {
+        awww-daemon = {
           Unit = {
-            Description = "Swww Daemon";
+            Description = "Awww Daemon";
             After = [ "graphical-session.target" ];
           };
           Install.WantedBy = [ "graphical-session.target" ];
           Service = {
-            ExecStart = "${pkgs.swww}/bin/swww-daemon";
+            ExecStart = "${pkgs.awww}/bin/awww-daemon";
             Restart = "always";
           };
         };
@@ -331,7 +331,7 @@ in
             Description = "MD3 Evo Theme Init";
             After = [
               "graphical-session.target"
-              "swww-daemon.service"
+              "awww-daemon.service"
             ];
           };
           Install.WantedBy = [ "graphical-session.target" ];
@@ -427,7 +427,7 @@ in
                 dunst = config.services.dunst.enable;
               };
 
-              wallpaper.command = lib.getExe pkgs.swww;
+              wallpaper.command = lib.getExe pkgs.awww;
 
               custom_colors =
                 let
