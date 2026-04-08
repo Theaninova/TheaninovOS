@@ -85,6 +85,7 @@ in
 
     security.pam.services.gdm.enableGnomeKeyring = true;
     security.pam.services.hyprland.enableGnomeKeyring = true;
+    programs.seahorse.enable = true;
 
     services = {
       kmscon = {

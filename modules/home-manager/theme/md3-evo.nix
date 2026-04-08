@@ -281,6 +281,7 @@ in
             fi
 
             matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
+            awww img "$WALLPAPER"
 
             dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
             dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
@@ -426,8 +427,6 @@ in
                 waybar = config.programs.waybar.enable;
                 dunst = config.services.dunst.enable;
               };
-
-              wallpaper.command = lib.getExe pkgs.awww;
 
               custom_colors =
                 let
