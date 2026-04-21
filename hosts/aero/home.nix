@@ -51,4 +51,7 @@
       };
     };
   };
+
+  wayland.windowManager.hyprland.settings.input.kb_options = [ "lv3:caps_switch" ];
+  services.nextcloud-client.enable = true;
 }

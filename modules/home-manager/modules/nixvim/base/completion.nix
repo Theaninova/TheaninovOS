@@ -15,38 +15,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    extraConfigLua =
-      lib.mkIf cfg.ollama
-        #lua
-        ''
-          require('minuet').setup({
-            provider = 'openai_fim_compatible',
-            n_completions = 1,
-            context_window = 1024,
-            provider_options = {
-              openai_fim_compatible = {
-                api_key = 'TERM',
-                name = 'Ollama',
-                end_point = 'http://localhost:11434/v1/completions',
-                model = 'deepseek-coder-v2:16b',
-                optional = {
-                  max_tokens = 56,
-                  stop = { '\n' },
-                  top_p = 0.9,
-                },
-              },
-            },
-            virtualtext = {
-              show_on_completion_menu = true,
-              auto_trigger_ft = { "*" },
-              keymap = {
-                accept = '<A-l>',
-              },
-            },
-            throttle = 0,
-            debounce = 0,
-          })
-        '';
     plugins = {
       luasnip.enable = true;
       lspkind = {
@@ -61,6 +29,50 @@ in
       copilot-lua = lib.mkIf cfg.copilot {
         enable = true;
         settings.suggestion.auto_trigger = true;
+      };
+      minuet = lib.mkIf cfg.ollama {
+        enable = true;
+        settings = {
+          provider = "openai_fim_compatible";
+          n_completions = 1;
+          context_window = 2048;
+          throttle = 0;
+          debounce = 0;
+          provider_options.openai_fim_compatible = {
+            api_key = "TERM";
+            name = "Llama.cpp";
+            end_point = "http://localhost:8012/v1/completions";
+            model = "PLACEHOLDER";
+            optional = {
+              max_tokens = 56;
+              top_p = 0.9;
+            };
+            # Llama.cpp does not support the `suffix` option in FIM completion.
+            # Therefore, we must disable it and manually populate the special
+            # tokens required for FIM completion.
+            template = {
+              prompt.__raw = ''
+                function(context_before_cursor, context_after_cursor, _)
+                      return '<|fim_prefix|>'
+                          .. context_before_cursor
+                          .. '<|fim_suffix|>'
+                          .. context_after_cursor
+                          .. '<|fim_middle|>'
+                end
+              '';
+              suffix = false;
+            };
+          };
+          cmp.enable_auto_complete = false;
+          blink.enable_auto_complete = false;
+          lsp.completion.enable = false;
+          virtualtext = {
+            auto_trigger_ft = [ "*" ];
+            keymap = {
+              # TODO: keymap
+            };
+          };
+        };
       };
       cmp = {
         enable = true;
@@ -101,6 +113,5 @@ in
         };
       };
     };
-    extraPlugins = lib.mkIf cfg.ollama [ pkgs.vimPlugins.minuet-ai-nvim ];
   };
 }

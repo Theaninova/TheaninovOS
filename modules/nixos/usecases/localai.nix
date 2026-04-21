@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   username,
   ...
 }:
@@ -16,10 +17,10 @@ in
   };
 
   config = mkIf cfg.enable {
+    home-manager.users.${username}.home.packages = [ pkgs.llama-cpp-rocm ];
     services = {
-      ollama.enable = true;
       open-webui = {
-        enable = true;
+        enable = false;
         port = 57461;
         environment = {
           ANONYMIZED_TELEMETRY = "False";

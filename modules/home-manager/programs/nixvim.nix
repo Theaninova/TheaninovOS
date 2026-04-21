@@ -45,6 +45,7 @@
         completion = {
           enable = true;
           copilot = true;
+          ollama = false;
         };
         diagnostics.enable = true;
         coverage.enable = false;
