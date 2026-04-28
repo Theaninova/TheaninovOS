@@ -7,7 +7,14 @@
       sha256 = "0lghiiiphbkqgiprqirxifldvix0j4k04jh1z9f911shrzjgqq4s";
     }
   ];
-  programs.mpv.enable = true;
+  programs.mpv = {
+    enable = true;
+    defaultProfiles = [ "gpu-hq" ];
+    config = {
+      tone-mapping = "mobius";
+    };
+  };
+  services.jellyfin-mpv-shim.enable = true;
   home.packages = with pkgs; [
     # nix
     cachix
@@ -22,7 +29,6 @@
     # media
     yt-dlp
     f3d
-    jellyfin-mpv-shim
     makemkv
     libfaketime
     handbrake

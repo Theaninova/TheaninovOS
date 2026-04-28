@@ -20,6 +20,17 @@
   wayland.windowManager.hyprland.settings.input.kb_options = [ "lv3:caps_switch" ];
   services.nextcloud-client.enable = true;
   systemd.user.services = {
+    nm-applet = {
+      Unit = {
+        Description = "Network manager applet";
+        After = [ "graphical-session.target" ];
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+      Service = {
+        ExecStart = "${pkgs.networkmanagerapplet}/bin/nm-applet";
+        Restart = "always";
+      };
+    };
     blueman-applet = {
       Unit = {
         Description = "Bluetooth manager applet";
