@@ -1,0 +1,10 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "waybar-ha"
+version = "0.0.1"
+
+[project.scripts]
+waybar-ha = "waybar_ha.main:main"

@@ -1,6 +1,7 @@
 window#waybar {
   background: none;
   border-bottom: none;
+  font-size: 20px;
 }
 
 window#waybar > box.horizontal {
@@ -15,7 +16,6 @@ window#waybar > box.horizontal {
 
 #clock {
   font-weight: bold;
-  font-size: 16px;
 }
 
 #privacy-item {

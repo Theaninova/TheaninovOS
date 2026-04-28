@@ -60,8 +60,6 @@
     udev.packages = with pkgs; [
       usb-sniffer
     ];
-
-    hardware.openrgb.enable = true;
   };
 
   hardware = {
