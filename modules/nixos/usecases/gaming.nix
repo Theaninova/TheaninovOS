@@ -37,7 +37,7 @@ in
             libvdpau
           ];
       })
-      # rpcs3
+      rpcs3
       bottles
       wineWow64Packages.stagingFull
       winetricks

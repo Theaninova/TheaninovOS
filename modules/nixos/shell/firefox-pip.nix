@@ -27,7 +27,7 @@ in
             opaque = true;
             pin = true;
             fullscreen_state = "2 0";
-            move = "8 8";
+            move = "240 8";
             keep_aspect_ratio = true;
             border_size = "0";
             animation = "fade";

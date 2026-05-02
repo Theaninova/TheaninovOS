@@ -13,6 +13,7 @@ in
   options.shell.components.waybar = {
     enable = lib.mkEnableOption (lib.mdDoc "Enable a pre-configured waybar setup");
     mobile = lib.mkEnableOption (lib.mdDoc "Mobile PC");
+    home-assistant = lib.mkEnableOption (lib.mdDoc "Home Assistant");
   };
 
   config = lib.mkIf cfg.enable {
@@ -32,17 +33,23 @@ in
               reload_style_on_change = true;
               exclusive = true;
 
-              modules-left = [
-                "custom/ha"
-              ]
-              ++ (
-                if cfg.mobile then
-                  [
-                    "battery"
-                  ]
-                else
-                  [ ]
-              );
+              modules-left =
+                (
+                  if cfg.home-assistant then
+                    [
+                      "custom/ha"
+                    ]
+                  else
+                    [ ]
+                )
+                ++ (
+                  if cfg.mobile then
+                    [
+                      "battery"
+                    ]
+                  else
+                    [ ]
+                );
               modules-center = [
                 "clock"
               ];
@@ -140,7 +147,7 @@ in
                 "tooltip-format" = "{capacity}%";
               };
 
-              "custom/ha" = {
+              "custom/ha" = lib.mkIf cfg.home-assistant {
                 exec = pkgs.lib.getExe waybar-ha;
                 return-type = "json";
                 interval = 30;

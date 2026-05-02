@@ -44,7 +44,10 @@
     kitty.enable = true;
     swaync.enable = true;
     walker.enable = true;
-    waybar.enable = true;
+    waybar = {
+      enable = true;
+      home-assistant = true;
+    };
   };
   desktops.hyprland = {
     enable = true;
@@ -178,6 +181,7 @@
     fzf
     eza
     # docker
+    ausweisapp
   ];
 
   networking = {
@@ -189,6 +193,9 @@
       allowedUDPPorts = [
         25565
         50765
+
+        # AusweisApp
+        24727
       ];
       /*
         allowedUDPPortRanges = [
