@@ -74,7 +74,7 @@ in
             mode = "3840x2160@144";
             position = "0x0";
             scale = 1;
-            bitdepth = 8;
+            bitdepth = 10;
             addreserved = "80,0,0,0";
             cm = if cfg.hdr then "hdredid" else "srgb";
             sdr_min_luminance = 0.25;

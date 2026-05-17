@@ -24,11 +24,6 @@ in
       # orca-slicer
     ];
     home-manager.users.${username} = {
-      services.flatpak.packages = [
-        "com.bambulab.BambuStudio"
-        "org.freecad.FreeCAD"
-        "com.prusa3d.PrusaSlicer" # gcode viewer!
-      ];
       programs = {
         lazygit.enable = true;
       };

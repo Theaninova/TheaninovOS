@@ -40,6 +40,7 @@
         ./languages/css.nix
         ./languages/cue.nix
         ./languages/dart.nix
+        ./languages/godot.nix
         ./languages/js.nix
         ./languages/lua.nix
         ./languages/nix.nix

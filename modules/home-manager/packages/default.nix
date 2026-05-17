@@ -65,6 +65,7 @@
 
     # utils
     kdePackages.ark
+    bazaar
     libqalculate
     ranger
     filezilla

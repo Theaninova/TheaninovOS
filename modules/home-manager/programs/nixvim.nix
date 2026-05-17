@@ -68,6 +68,7 @@
         };
         cue.enable = true;
         dart.enable = true;
+        godot.enable = true;
         js = {
           enable = true;
           eslint = true;
@@ -106,6 +107,7 @@
         html.enable = true;
         svelte.enable = true;
         buf_ls.enable = true;
+        glsl_analyzer.enable = true;
 
         dockerls.enable = true;
 
