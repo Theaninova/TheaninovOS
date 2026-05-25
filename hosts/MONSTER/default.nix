@@ -123,7 +123,7 @@
   programs = {
     zsh.enable = true;
     wireshark = {
-      enable = true;
+      enable = false;
       package = pkgs.wireshark;
       usbmon.enable = true;
     };

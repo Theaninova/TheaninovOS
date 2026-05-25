@@ -20,7 +20,7 @@
     cachix
     # lorri
     vulnix
-    gccdiag
+    # gccdiag
 
     # browsers
     firefox

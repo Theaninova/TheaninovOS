@@ -30,15 +30,17 @@ in
       steam
       oversteer
       obs-studio
-      (lutris.override {
-        extraLibraries =
-          pkgs: with pkgs; [
-            libgudev
-            libvdpau
-          ];
-      })
-      rpcs3
-      bottles
+      /*
+        (lutris.override {
+          extraLibraries =
+            pkgs: with pkgs; [
+              libgudev
+              libvdpau
+            ];
+        })
+      */
+      # rpcs3
+      # bottles
       wineWow64Packages.stagingFull
       winetricks
       protontricks
