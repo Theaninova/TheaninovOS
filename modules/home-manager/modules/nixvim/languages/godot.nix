@@ -14,6 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     plugins = {
       godot.enable = true;
+      conform-nvim.settings.formatters_by_ft.gdscript = [ "gdscript-formatter" ];
       lsp.servers.gdscript = {
         enable = true;
         package = null;
