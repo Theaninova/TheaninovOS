@@ -19,7 +19,12 @@ in
       wayland.windowManager.hyprland = {
         settings = {
           bind = [
-            "SUPER_SHIFT,V,exec,uwsm app -- ${lib.getExe pkgs.grimblast} --freeze copy area"
+            {
+              _args = [
+                "SUPER + SHIFT + V"
+                (lib.generators.mkLuaInline "hl.dsp.exec_cmd('uwsm app -- ${lib.getExe pkgs.grimblast} --freeze copy area')")
+              ];
+            }
           ];
         };
       };

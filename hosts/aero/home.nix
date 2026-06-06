@@ -16,15 +16,28 @@
     ];
   };
   wayland.windowManager.hyprland.settings = {
-    general.layout = "master";
-    master = {
-      orientation = "right";
-      mfact = 0.65;
-      always_keep_position = true;
+    config = {
+      general.layout = "master";
+      master = {
+        orientation = "right";
+        mfact = 0.65;
+        always_keep_position = true;
+      };
+      input.kb_options = [ "lv3:caps_switch" ];
     };
     monitor = [
-      "eDP-1,3840x2160@60,0x0,2"
-      "HDMI-A-4,2560x1440@75,1920x-768,1"
+      {
+        output = "eDP-1";
+        mode = "3840x2160@60";
+        position = "0x0";
+        scale = 2;
+      }
+      {
+        output = "HDMI-A-4";
+        mode = "2560x1440@75";
+        position = "1920x-768";
+        scale = 1;
+      }
     ];
   };
   systemd.user.services = {
@@ -52,6 +65,5 @@
     };
   };
 
-  wayland.windowManager.hyprland.settings.input.kb_options = [ "lv3:caps_switch" ];
   services.nextcloud-client.enable = true;
 }

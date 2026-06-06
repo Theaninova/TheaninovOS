@@ -28,7 +28,7 @@ in
         systemd.enable = false;
         package = null;
         portalPackage = null;
-        settings = {
+        settings.config = {
           ecosystem = {
             no_update_news = true;
             no_donation_nag = true;

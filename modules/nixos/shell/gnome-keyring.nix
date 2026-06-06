@@ -16,10 +16,10 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} = {
-      wayland.windowManager.hyprland.settings.windowrule = [
+      wayland.windowManager.hyprland.settings.window_rule = [
         {
           name = "Gnome Keyring";
-          "match:class" = "^(gcr-prompter)$";
+          match.class = "^(gcr-prompter)$";
           border_size = 0;
           rounding = 10;
           animation = "slide";

@@ -29,10 +29,10 @@
       ];
     };
   };
-  wayland.windowManager.hyprland.settings.windowrule = [
+  wayland.windowManager.hyprland.settings.window_rule = [
     {
       name = "Suppress maximize for neovide";
-      "match:class" = "^(neovide)$";
+      match.class = "^(neovide)$";
       suppress_event = "maximize";
     }
   ];

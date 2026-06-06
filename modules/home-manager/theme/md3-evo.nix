@@ -189,104 +189,106 @@ in
             pkgs.zenity
             pkgs.sunwait
           ];
-          text = ''
-            WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
-            STATE=${config.xdg.stateHome}/md3-evo
+          text =
+            # sh
+            ''
+              WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
+              STATE=${config.xdg.stateHome}/md3-evo
 
-            SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
-            if [ "$SCHEME" = "'prefer-light'" ]; then
-              MODE="light"
-            else
-              MODE="dark"
-            fi
-
-            if [ ! -d "$STATE" ]; then
-              mkdir -p "$STATE"
-            fi
-            if [ -f "$STATE/mode" ]; then
-              MODE=$(cat "$STATE/mode")
-            fi
-
-            if [ $# -eq 0 ]; then
-              echo -e "\033[1mUsage:\033[0m mode|light|dark|auto|toggle|wallpaper"
-              exit 1
-            elif [ "$1" = "mode" ]; then
-              echo -e "$MODE"
-              exit 0
-            elif [ "$1" = "wallpaper" ]; then
-              if [ $# -eq 1 ]; then
-                PICKED=$(zenity --file-selection --file-filter='Images | *.png *.jpg *.jpeg *.svg *.bmp *.gif')
-                cp "$PICKED" "$WALLPAPER"
+              SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
+              if [ "$SCHEME" = "'prefer-light'" ]; then
+                MODE="light"
               else
-                cp "$2" "$WALLPAPER"
+                MODE="dark"
               fi
-            elif [ "$1" = "toggle" ]; then
+
+              if [ ! -d "$STATE" ]; then
+                mkdir -p "$STATE"
+              fi
+              if [ -f "$STATE/mode" ]; then
+                MODE=$(cat "$STATE/mode")
+              fi
+
+              if [ $# -eq 0 ]; then
+                echo -e "\033[1mUsage:\033[0m mode|light|dark|auto|toggle|wallpaper"
+                exit 1
+              elif [ "$1" = "mode" ]; then
+                echo -e "$MODE"
+                exit 0
+              elif [ "$1" = "wallpaper" ]; then
+                if [ $# -eq 1 ]; then
+                  PICKED=$(zenity --file-selection --file-filter='Images | *.png *.jpg *.jpeg *.svg *.bmp *.gif')
+                  cp "$PICKED" "$WALLPAPER"
+                else
+                  cp "$2" "$WALLPAPER"
+                fi
+              elif [ "$1" = "toggle" ]; then
+                if [ "$MODE" = "light" ]; then
+                  MODE="dark"
+                else
+                  MODE="light"
+                fi
+                echo "$MODE" > "$STATE/mode"
+              elif [ "$1" = "light" ] || [ "$1" = "dark" ] || [ "$1" == "auto" ]; then
+                MODE="$1"
+                echo "$MODE" > "$STATE/mode"
+              elif [ "$1" = "init" ]; then
+                echo -e "\033[1mSetting up matugen\033[0m"
+              else
+                echo -e "\033[31mInvalid argument\033[0m"
+                exit 1
+              fi
+
+              if [ ! -f $WALLPAPER ]; then
+                echo -e "\033[31,1mNo wallpaper set\033[0m"
+                exit 1
+              fi
+
+              THEME_SERVICE_PATH="${config.xdg.configHome}/systemd/user/theme-init.timer"
+              if [ "$MODE" = "auto" ]; then
+                TIME=$(sunwait poll ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E || :)
+                if [ "$TIME" = "DAY" ]; then
+                  MODE="light"
+                  NEXT=6
+                else
+                  MODE="dark"
+                  NEXT=4
+                fi
+                NEXT=$(sunwait report ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E | awk "/Daylight:/ {print \$$NEXT}")
+                cat <<EOF | tee "$THEME_SERVICE_PATH" > /dev/null
+              [Unit]
+              Description=Next theme change timer
+
+              [Timer]
+              OnCalendar=*-*-* $(date -d "$NEXT today + 5 minutes" +'%H:%M'):00
+              AccuracySec=1min
+
+              [Install]
+              WantedBy=timers.target
+              EOF
+              else
+                rm -f "$THEME_SERVICE_PATH"
+              fi
+              systemctl --user daemon-reload &> /dev/null || :
+              systemctl --user restart theme-init.timer &> /dev/null || :
+
+              if command -v niri &> /dev/null; then
+                niri msg action do-screen-transition --delay-ms 500
+              fi
+
               if [ "$MODE" = "light" ]; then
-                MODE="dark"
+               GTK_THEME="adw-gtk3"
               else
-                MODE="light"
+               GTK_THEME="adw-gtk3-dark"
               fi
-              echo "$MODE" > "$STATE/mode"
-            elif [ "$1" = "light" ] || [ "$1" = "dark" ] || [ "$1" == "auto" ]; then
-              MODE="$1"
-              echo "$MODE" > "$STATE/mode"
-            elif [ "$1" = "init" ]; then
-              echo -e "\033[1mSetting up matugen\033[0m"
-            else
-              echo -e "\033[31mInvalid argument\033[0m"
-              exit 1
-            fi
 
-            if [ ! -f $WALLPAPER ]; then
-              echo -e "\033[31,1mNo wallpaper set\033[0m"
-              exit 1
-            fi
+              matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
+              awww img "$WALLPAPER"
 
-            THEME_SERVICE_PATH="${config.xdg.configHome}/systemd/user/theme-init.timer"
-            if [ "$MODE" = "auto" ]; then
-              TIME=$(sunwait poll ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E || :)
-              if [ "$TIME" = "DAY" ]; then
-                MODE="light"
-                NEXT=6
-              else
-                MODE="dark"
-                NEXT=4
-              fi
-              NEXT=$(sunwait report ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E | awk "/Daylight:/ {print \$$NEXT}")
-              cat <<EOF | tee "$THEME_SERVICE_PATH" > /dev/null
-            [Unit]
-            Description=Next theme change timer
-
-            [Timer]
-            OnCalendar=*-*-* $(date -d "$NEXT today + 5 minutes" +'%H:%M'):00
-            AccuracySec=1min
-
-            [Install]
-            WantedBy=timers.target
-            EOF
-            else
-              rm -f "$THEME_SERVICE_PATH"
-            fi
-            systemctl --user daemon-reload &> /dev/null || :
-            systemctl --user restart theme-init.timer &> /dev/null || :
-
-            if command -v niri &> /dev/null; then
-              niri msg action do-screen-transition --delay-ms 500
-            fi
-
-            if [ "$MODE" = "light" ]; then
-             GTK_THEME="adw-gtk3"
-            else
-             GTK_THEME="adw-gtk3-dark"
-            fi
-
-            matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
-            awww img "$WALLPAPER"
-
-            dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
-            dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
-            dconf write /org/gnome/desktop/interface/icon-theme "'Adwaita'"
-          '';
+              dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
+              dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
+              dconf write /org/gnome/desktop/interface/icon-theme "'Tela'"
+            '';
         }
       );
     in
@@ -294,6 +296,7 @@ in
       home.packages = [
         pkgs.adw-gtk3
         pkgs.awww
+        pkgs.tela-icon-theme
         theme-script
       ];
 
@@ -344,44 +347,18 @@ in
       };
 
       wayland.windowManager.hyprland = {
-        settings = {
-          windowrule = [
-            {
-              name = "floating-zenity";
-              "match:class" = "^(zenity)$";
-              float = true;
-            }
-          ];
-          decoration = {
-            inactive_opacity = 0.8;
-            shadow = {
-              enabled = true;
-              range = 32;
-              render_power = 8;
-              color = "rgba(000000aa)";
-              color_inactive = "rgba(00000011)";
-            };
-          };
-          animations = {
-            enabled = "yes";
-            bezier = [
-              "expoOut, 0.16, 1, 0.3, 1"
-            ];
-            animation = [
-              "windowsIn, 1, 5, expoOut, slide bottom"
-              "windows, 1, 5, expoOut, slide"
-              "windowsOut, 1, 5, expoOut, slide bottom"
-              "border, 1, 10, default"
-              "fade, 1, 7, default"
-              "fadeShadow, 1, 10, default"
-              "fadeDim, 1, 10, default"
-              "workspaces, 1, 6, default"
-            ];
-          };
-        };
-        extraConfig = ''
-          source=./theme.conf
-        '';
+        settings.window_rule = [
+          {
+            name = "floating-zenity";
+            match.class = "^(zenity)$";
+            float = true;
+          }
+        ];
+        extraConfig =
+          # lua
+          ''
+            require("theme")
+          '';
       };
 
       # TODO: include is coming in the next release
@@ -518,8 +495,8 @@ in
               })
               // (lib.optionalAttrs osConfig.programs.hyprland.enable {
                 hyprland = {
-                  input_path = ./hyprland.conf;
-                  output_path = "${config.xdg.configHome}/hypr/theme.conf";
+                  input_path = ./hyprland.lua;
+                  output_path = "${config.xdg.configHome}/hypr/theme.lua";
                   post_hook = pkgs.writeShellScript "reload-hyprland-theme" ''
                     if command -v hyprctl &> /dev/null; then
                       hyprctl reload

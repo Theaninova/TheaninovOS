@@ -21,10 +21,10 @@ in
           bind = [
             "SUPER_SHIFT,V,exec,XDG_CURRENT_DESKTOP=sway uwsm app -- flameshot gui --clipboard"
           ];
-          windowrule = [
+          window_rule = [
             {
               name = "Flameshot";
-              "match:class" = "^(flameshot)$";
+              match.class = "^(flameshot)$";
               animation = "fade";
               float = true;
             }

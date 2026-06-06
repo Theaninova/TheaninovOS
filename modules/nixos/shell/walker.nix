@@ -17,7 +17,15 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} = {
       wayland.windowManager.hyprland.settings = {
-        bindr = [ "SUPER,SUPER_L,exec,uwsm app -- ${lib.getExe pkgs.walker}" ];
+        bind = [
+          {
+            _args = [
+              "SUPER + SUPER_L"
+              (lib.generators.mkLuaInline "hl.dsp.exec_cmd('uwsm app -- ${lib.getExe pkgs.walker}')")
+              { release = true; }
+            ];
+          }
+        ];
         /*
           layerrule = [
             # TODO: Add layer rules for walker

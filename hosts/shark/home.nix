@@ -17,7 +17,7 @@
       gamma-launcher
     ];
   };
-  wayland.windowManager.hyprland.settings.input.kb_options = [ "lv3:caps_switch" ];
+  wayland.windowManager.hyprland.settings.config.input.kb_options = [ "lv3:caps_switch" ];
   services.nextcloud-client.enable = true;
   systemd.user.services = {
     nm-applet = {

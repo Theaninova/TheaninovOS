@@ -22,7 +22,12 @@ in
         '';
       in
       [
-        "SUPER_SHIFT,C,exec,uwsm app -- ${color-picker}"
+        {
+          _args = [
+            "SUPER + SHIFT + C"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('uwsm app -- ${color-picker}')")
+          ];
+        }
       ];
   };
 }

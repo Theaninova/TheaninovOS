@@ -16,7 +16,12 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} = {
       wayland.windowManager.hyprland.settings.bind = [
-        "SUPER,T,exec,uwsm app -- kitty"
+        {
+          _args = [
+            "SUPER + T"
+            (lib.generators.mkLuaInline "hl.dsp.exec_cmd('uwsm app -- kitty')")
+          ];
+        }
       ];
       programs.kitty = {
         enable = true;

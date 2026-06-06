@@ -17,11 +17,13 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} = {
       wayland.windowManager.hyprland.settings = {
-        windowrule = [
+        window_rule = [
           {
             name = "firefox-pip";
-            "match:class" = "^(firefox)$";
-            "match:title" = "^(Picture-in-Picture)$";
+            match = {
+              class = "^(firefox)$";
+              title = "^(Picture-in-Picture)$";
+            };
             float = true;
             no_follow_mouse = true;
             opaque = true;
@@ -29,7 +31,7 @@ in
             fullscreen_state = "2 0";
             move = "240 8";
             keep_aspect_ratio = true;
-            border_size = "0";
+            border_size = 0;
             animation = "fade";
           }
         ];

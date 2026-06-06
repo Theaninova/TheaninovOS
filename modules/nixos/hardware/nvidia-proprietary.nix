@@ -52,7 +52,7 @@ in
       nvidiaPersistenced = false;
     };
 
-    home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
+    home-manager.users.${username}.wayland.windowManager.hyprland.settings.config = {
       cursor.no_hardware_cursors = true;
       opengl.nvidia_anti_flicker = true;
       # render.direct_scanout = 1;
