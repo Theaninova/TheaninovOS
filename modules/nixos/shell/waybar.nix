@@ -76,7 +76,7 @@ in
               "pulseaudio" = {
                 format = "{icon} {volume}%";
                 format-icons = {
-                  "alsa_output.usb-Turtle_Beach_Turtle_Beach_Stealth_700_G2_MAX-01.iec958-stereo" = "󰋋";
+                  "astro-a50-eq-harman-in" = "󰋋";
                   "alsa_output.pci-0000_0a_00.4.analog-stereo" = "󰓃";
                   "alsa_output.pci-0000_08_00.1.hdmi-stereo-extra4" = "󰽟";
                   "alsa_output.usb-Blue_Microphones_Yeti_Stereo_Microphone_797_2018_11_12_79383-00.analog-stereo" =

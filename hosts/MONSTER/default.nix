@@ -67,7 +67,17 @@
 
   hardware = {
     amdgpu.preset.default.enable = true;
-    audio.preset.pipewire.enable = true;
+    audio = {
+      preset.pipewire.enable = true;
+      audio-share = {
+        enable = true;
+        partner = {
+          ip = "192.168.0.51";
+          name = "Luci";
+          combine = "astro-a50-eq-harman-in";
+        };
+      };
+    };
     cc1.enable = true;
     fv43u.enable = true;
     astro-a50.enable = true;

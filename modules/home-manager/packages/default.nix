@@ -14,7 +14,6 @@
       tone-mapping = "mobius";
     };
   };
-  services.jellyfin-mpv-shim.enable = true;
   home.packages = with pkgs; [
     # nix
     cachix

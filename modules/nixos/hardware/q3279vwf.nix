@@ -18,18 +18,31 @@ in
     fonts.fontconfig.subpixel.rgba = "bgr";
 
     home-manager.users.${username}.wayland.windowManager.hyprland.settings = {
-      general.layout = "master";
-      master = {
-        orientation = "right";
-        mfact = 0.65;
-        always_keep_position = true;
+      config = {
+        general.layout = "master";
+        master = {
+          orientation = "right";
+          mfact = 0.65;
+          always_keep_position = true;
+        };
+        xwayland.force_zero_scaling = true;
+        misc.vrr = 0; # VA suffers from VRR flicker
       };
       monitor = [
-        "HDMI-A-1,2560x1440@75,0x0,1"
-        "DP-1,1920x1080@144,auto-center-right,1,transform,3"
+        {
+          output = "HDMI-A-1";
+          mode = "2560x1440@75";
+          position = "0x0";
+          scale = 1;
+        }
+        {
+          output = "DP-1";
+          mode = "1920x1080@144";
+          position = "auto-center-right";
+          scale = 1;
+          transform = 3;
+        }
       ];
-      xwayland.force_zero_scaling = true;
-      misc.vrr = 0; # VA suffers from VRR flicker
     };
   };
 }

@@ -72,7 +72,17 @@
 
   hardware = {
     q3279vwf.enable = true;
-    audio.preset.pipewire.enable = true;
+    audio = {
+      preset.pipewire.enable = true;
+      audio-share = {
+        enable = true;
+        partner = {
+          ip = "192.168.0.84";
+          name = "Thea";
+          combine = "alsa_output.usb-SteelSeries_Arctis_Pro_Wireless-00.pro-output-0";
+        };
+      };
+    };
     cc1.enable = true;
 
     nvidia.preset.proprietary.enable = true;

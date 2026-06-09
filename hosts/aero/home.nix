@@ -13,6 +13,12 @@
     packages = with pkgs; [
       blueman
       kdePackages.okular
+      (pkgs.writeShellApplication {
+        name = "shut";
+        text = ''
+          shutdown now
+        '';
+      })
     ];
   };
   wayland.windowManager.hyprland.settings = {
@@ -23,7 +29,7 @@
         mfact = 0.65;
         always_keep_position = true;
       };
-      input.kb_options = [ "lv3:caps_switch" ];
+      input.kb_options = "lv3:caps_switch";
     };
     monitor = [
       {

@@ -11,6 +11,7 @@
     ./fonts/nerd-fonts.nix
     ./fonts/open-dyslexic.nix
 
+    ./hardware/audio-share.nix
     ./hardware/astro-a50.nix
     ./hardware/audio.nix
     ./hardware/gbmonctl.nix

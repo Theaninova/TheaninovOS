@@ -66,7 +66,7 @@ in
           sdr_min_luminance = 0.25;
           sdr_max_luminance = 250;
           icc = toString ./fv43u.icc;
-          cm = "dcip3";
+          # cm = "dcip3";
         };
       };
 

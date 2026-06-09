@@ -14,6 +14,7 @@
     extraConfig.PROJECTS = "${config.home.homeDirectory}/Projects";
   };
   programs.zoxide.enable = true;
+  services.jellyfin-mpv-shim.enable = true;
   wayland.windowManager.hyprland.settings.device =
     let
       targetDPI = 1200;
