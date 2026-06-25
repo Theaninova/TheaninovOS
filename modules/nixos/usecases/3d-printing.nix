@@ -20,9 +20,9 @@ in
     environment.systemPackages = with pkgs; [
       lpc21isp
       dfu-util
-      openscad
-      # orca-slicer
     ];
+    # Bambu Network Plugin
+    networking.firewall.allowedUDPPorts = [ 2021 ];
     home-manager.users.${username} = {
       programs = {
         lazygit.enable = true;

@@ -27,7 +27,6 @@ in
     ];
 
     environment.systemPackages = with pkgs; [
-      steam
       oversteer
       obs-studio
       /*

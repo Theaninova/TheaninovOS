@@ -14,6 +14,9 @@ hl.config({
 	decoration = {
     -- stylua: ignore
     rounding = {{custom.radius}},
+		--[[ motion_blur = {
+			enabled = true,
+		},]]
 		blur = {
       -- stylua: ignore
       size = {{custom.blur}},
@@ -47,4 +50,4 @@ hl.animation({ leaf = "fade", enabled = true, speed = 3, bezier = "linear" })
 hl.animation({ leaf = "fadeShadow", enabled = true, speed = 4, bezier = "linear" })
 hl.animation({ leaf = "fadeDim", enabled = true, speed = 4, bezier = "linear" })
 
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1, spring = "default" })
+hl.animation({ leaf = "workspaces", enabled = true, speed = 1, spring = "default", style = "slidevert" })
