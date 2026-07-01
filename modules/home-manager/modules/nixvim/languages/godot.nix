@@ -15,7 +15,9 @@ in
     plugins = {
       godot.enable = true;
       conform-nvim.settings.formatters_by_ft.gdscript = [ "gdscript-formatter" ];
-      lsp.servers.gdscript = {
+    };
+    lsp.servers = {
+      gdscript = {
         enable = true;
         package = null;
         config = {
@@ -24,6 +26,7 @@ in
           root_markers = [ "project.godot" ];
         };
       };
+      gdshader_lsp.enable = true;
     };
   };
 }

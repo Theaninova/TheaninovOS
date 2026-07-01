@@ -4,6 +4,7 @@
     enable = true;
     defaultEditor = true;
     vimAlias = true;
+    nixpkgs.useGlobalPackages = true;
 
     opts = {
       number = true;
@@ -54,7 +55,7 @@
           enable = true;
           prettier = true;
         };
-        leap.enable = true;
+        leap.enable = false;
         spellcheck.enable = true;
         status-line.enable = true;
         syntax.enable = true;
@@ -101,6 +102,13 @@
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;
+      };
+      auto-session = {
+        enable = true;
+        settings = {
+          cwd_change_handling = true;
+          use_git_branch = true;
+        };
       };
 
       lsp.servers = {

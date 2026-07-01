@@ -90,7 +90,7 @@ in
     services = {
       kmscon = {
         enable = true;
-        hwRender = true;
+        hwaccel = true;
       };
       greetd = {
         enable = true;

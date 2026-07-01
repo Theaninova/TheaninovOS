@@ -60,6 +60,7 @@
               allowUnfree = true;
               allowUnsupportedSystem = true;
               experimental-features = "nix-command flakes";
+              permittedInsecurePackages = [ "pnpm-10.29.2" ];
             };
             overlays = [
               niri.overlays.niri

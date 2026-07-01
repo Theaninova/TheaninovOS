@@ -15,18 +15,14 @@
     };
   };
   home.packages = with pkgs; [
-    # nix
     cachix
-    # lorri
     vulnix
-    # gccdiag
 
     # browsers
     firefox
     chromium
 
     # media
-    yt-dlp
     f3d
     makemkv
     libfaketime
@@ -39,13 +35,10 @@
 
     # chat apps
     vesktop
-    discord
     thunderbird
     signal-desktop
-    # cinny-desktop
 
     # office
-    libreoffice
     apostrophe
 
     # creative
@@ -55,7 +48,6 @@
     audacity
     pinta
     losslesscut-bin
-    shotcut
     pkgsRocm.blender
 
     # development

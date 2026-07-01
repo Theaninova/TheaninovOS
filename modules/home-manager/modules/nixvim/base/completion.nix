@@ -107,7 +107,7 @@ in
             };
             documentation = {
               border = "solid";
-              zindex = 10;
+              zindex = 9;
             };
           };
         };
