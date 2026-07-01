@@ -14,7 +14,13 @@ in
 
   config = lib.mkIf cfg.enable {
     plugins = {
-      strudel.enable = true;
+      strudel = {
+        enable = true;
+        lazyLoad = {
+          enable = true;
+          settings.ft = [ "strudel" ];
+        };
+      };
       web-devicons.customIcons = {
         str = {
           icon = " ";

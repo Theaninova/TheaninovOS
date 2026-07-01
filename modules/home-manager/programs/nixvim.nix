@@ -6,6 +6,15 @@
     vimAlias = true;
     nixpkgs.useGlobalPackages = true;
 
+    performance.byteCompileLua = {
+      enable = true;
+      configs = true;
+      initLua = true;
+      luaLib = true;
+      nvimRuntime = true;
+      plugins = true;
+    };
+
     extraConfigLuaPre = ''
       require('vim._core.ui2').enable()
     '';
@@ -51,13 +60,11 @@
       lazygit.enable = true;
       mergetool.enable = true;
       undotree.enable = true;
-      aerial.enable = true;
       harpoon.enable = true;
       base = {
         completion = {
           enable = true;
           copilot = true;
-          ollama = false;
         };
         diagnostics.enable = true;
         coverage.enable = false;
@@ -109,7 +116,6 @@
       origami.enable = false;
       nvim-surround.enable = true;
       fidget.enable = true;
-      vim-tidal.enable = true;
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;

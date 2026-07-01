@@ -29,6 +29,10 @@ in
       copilot-lua = lib.mkIf cfg.copilot {
         enable = true;
         settings.suggestion.auto_trigger = true;
+        lazyLoad = {
+          enable = true;
+          settings.event = [ "InsertEnter" ];
+        };
       };
       minuet = lib.mkIf cfg.ollama {
         enable = true;
