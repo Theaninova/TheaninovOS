@@ -64,6 +64,7 @@ in
         settings = {
           direction = lib.mkDefault "vertical";
           size = lib.mkDefault 60;
+          float_opts.border = config.opts.winborder;
         };
       };
 

@@ -21,22 +21,13 @@ in
       neo-tree = {
         enable = true;
         settings = {
-          event_handlers = [
-            {
-              event = "neo_tree_buffer_leave";
-              handler.__raw = ''
-                function()
-                  require('neo-tree').close_all()
-                end
-              '';
-            }
-          ];
+          window.position = "float";
           filesystem = {
             use_libuv_file_watcher = true;
             follow_current_file.enabled = true;
             filtered_items.visible = true;
           };
-          popupBorderStyle = "rounded";
+          popup_border_style = "";
         };
       };
       which-key.settings.spec = [

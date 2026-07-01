@@ -17,6 +17,7 @@
 
         ./aerial.nix
         ./auto-save.nix
+        ./auto-session.nix
         ./auto-format.nix
         ./harpoon.nix
         ./mergetool.nix

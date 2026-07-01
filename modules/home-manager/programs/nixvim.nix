@@ -6,9 +6,15 @@
     vimAlias = true;
     nixpkgs.useGlobalPackages = true;
 
+    extraConfigLuaPre = ''
+      require('vim._core.ui2').enable()
+    '';
+
     opts = {
       number = true;
       relativenumber = true;
+
+      cmdheight = 0;
 
       tabstop = 2;
       softtabstop = 2;
@@ -28,6 +34,9 @@
       updatetime = 50;
 
       fillchars.eob = " ";
+
+      winborder = "solid";
+      pumborder = "solid";
     };
     clipboard = {
       register = "unnamedplus";
@@ -37,11 +46,13 @@
 
     presets = {
       auto-save.enable = true;
+      auto-session.enable = true;
       auto-format.enable = true;
       lazygit.enable = true;
       mergetool.enable = true;
       undotree.enable = true;
       aerial.enable = true;
+      harpoon.enable = true;
       base = {
         completion = {
           enable = true;
@@ -55,7 +66,7 @@
           enable = true;
           prettier = true;
         };
-        leap.enable = false;
+        leap.enable = true;
         spellcheck.enable = true;
         status-line.enable = true;
         syntax.enable = true;
@@ -102,13 +113,6 @@
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;
-      };
-      auto-session = {
-        enable = true;
-        settings = {
-          cwd_change_handling = true;
-          use_git_branch = true;
-        };
       };
 
       lsp.servers = {

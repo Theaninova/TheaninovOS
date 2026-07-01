@@ -137,7 +137,7 @@ in
     services = {
       kmscon = {
         enable = true;
-        hwaccel = true;
+        config.hwaccel = true;
       };
       greetd = {
         enable = true;
