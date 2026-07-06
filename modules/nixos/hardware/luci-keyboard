@@ -1,0 +1,18 @@
+xkb_symbols "luci-keyboard"
+{
+  include "de(basic)"
+
+  key <CAPS> {[backslash, bar]};
+  key <INS> {
+    type="ONE_LEVEL",
+    symbols[Group1] = [ bar ]
+  };
+  key <PGUP> {[braceleft]};
+  key <PGDN> {[braceright]};
+  key <HOME> {
+    type="ONE_LEVEL",
+    symbols[Group1] = [ at ]
+  };
+  key <END> {[asciitilde]};
+};
+  

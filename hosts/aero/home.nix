@@ -29,7 +29,6 @@
         mfact = 0.65;
         always_keep_position = true;
       };
-      input.kb_options = "lv3:caps_switch";
     };
     monitor = [
       {

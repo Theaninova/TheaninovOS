@@ -15,6 +15,7 @@
     ./hardware/astro-a50.nix
     ./hardware/audio.nix
     ./hardware/gbmonctl.nix
+    ./hardware/luci-keyboard.nix
     ./hardware/nvidia-proprietary.nix
     ./hardware/nvidia-nouveau.nix
     ./hardware/amdgpu.nix

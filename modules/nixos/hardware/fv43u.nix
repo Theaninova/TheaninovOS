@@ -56,6 +56,13 @@ in
             no_break_fs_vrr = 1;
           };
         };
+        animation = {
+          leaf = "workspaces";
+          enabled = true;
+          speed = 1;
+          spring = "default";
+          style = "slidevert";
+        };
         monitor = {
           output = "DP-3";
           mode = "3840x2160@144";

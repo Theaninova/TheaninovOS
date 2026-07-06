@@ -53,6 +53,8 @@
     # development
     ghidra
     kdePackages.kate
+    tinymist
+    typewriter
 
     # utils
     kdePackages.ark

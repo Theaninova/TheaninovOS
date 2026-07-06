@@ -49,5 +49,3 @@ hl.animation({ leaf = "border", enabled = true, speed = 1, spring = "default" })
 hl.animation({ leaf = "fade", enabled = true, speed = 3, bezier = "linear" })
 hl.animation({ leaf = "fadeShadow", enabled = true, speed = 4, bezier = "linear" })
 hl.animation({ leaf = "fadeDim", enabled = true, speed = 4, bezier = "linear" })
-
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1, spring = "default", style = "slidevert" })

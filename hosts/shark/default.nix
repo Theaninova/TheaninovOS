@@ -60,15 +60,11 @@
   locale.preset.theaninova.enable = true;
 
   services.xserver = {
-    xkb = {
-      #variant = "altgr-intl";
-      #layout = "us";
-      layout = "de";
-    };
     videoDrivers = [ "nvidia" ];
   };
 
   services.airprint.enable = true;
+  services.languagetool.enable = true;
 
   hardware = {
     q3279vwf.enable = true;
@@ -83,7 +79,7 @@
         };
       };
     };
-    cc1.enable = true;
+    luci-keyboard.enable = true;
 
     nvidia.preset.proprietary.enable = true;
 
@@ -178,6 +174,7 @@
     nfs-utils
     opensc
     openssl
+    github-copilot-cli
     # secure boot / tmp2
     sbctl
     tpm2-tss
