@@ -34,7 +34,9 @@
         ./base/spellcheck.nix
         ./base/status-line.nix
         ./base/syntax.nix
+        ./base/tabs.nix
         ./base/tree.nix
+        ./base/yazi.nix
 
         ./languages/angular.nix
         ./languages/c.nix

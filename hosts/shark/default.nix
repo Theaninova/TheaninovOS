@@ -185,6 +185,7 @@
     p7zip
     fzf
     eza
+    yazi
   ];
 
   networking = {

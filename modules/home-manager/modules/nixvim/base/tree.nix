@@ -20,6 +20,10 @@ in
       web-devicons.enable = true;
       neo-tree = {
         enable = true;
+        lazyLoad = {
+          enable = true;
+          settings.cmd = "Neotree";
+        };
         settings = {
           window.position = "float";
           filesystem = {

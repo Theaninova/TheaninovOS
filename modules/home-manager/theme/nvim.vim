@@ -221,6 +221,24 @@ hi! MatchParen gui=none guibg={{colors.surface_container_highest.default.hex}}
 
 hi! LspInlayHint gui=italic guifg={{colors.outline.default.hex}} guibg={{colors.surface_container_highest.default.hex}}
 
+hi BufferCurrent guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
+hi BufferCurrentMod guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
+hi BufferCurrentIcon guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
+hi BufferCurrentSign guibg={{colors.surface.default.hex}} guifg={{colors.primary.default.hex}}
+hi BufferCurrentTarget guibg={{colors.primary.default.hex}} guifg={{colors.on_primary.default.hex}}
+
+hi BufferVisible guibg={{colors.primary_container.default.hex}} guifg={{colors.on_primary_container.default.hex}}
+hi BufferVisibleIcon guibg={{colors.primary_container.default.hex}}
+hi BufferVisibleSign guibg={{colors.surface.default.hex}} guifg={{colors.primary_container.default.hex}}
+hi BufferVisibleTarget guibg={{colors.primary_container.default.hex}} guifg={{colors.primary.default.hex}}
+
+hi BufferInactive guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}} 
+hi BufferInactiveIcon guibg={{colors.surface.default.hex}}
+hi BufferInactiveSign guibg={{colors.surface.default.hex}} guifg={{colors.outline.default.hex}}
+hi BufferInactiveTarget guibg={{colors.surface.default.hex}} guifg={{colors.primary.default.hex}}
+
+hi BufferTabpageFill guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}} 
+
 let g:lualine_theme = {
   \  "insert": {
   \    "a": {"fg": "{{colors.on_green.default.hex}}", "bg": "{{colors.green.default.hex}}", "gui": "bold"},

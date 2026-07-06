@@ -60,7 +60,6 @@
       lazygit.enable = true;
       mergetool.enable = true;
       undotree.enable = true;
-      harpoon.enable = true;
       base = {
         completion = {
           enable = true;
@@ -77,7 +76,8 @@
         spellcheck.enable = true;
         status-line.enable = true;
         syntax.enable = true;
-        tree.enable = true;
+        tabs.enable = true;
+        yazi.enable = true;
       };
       languages = {
         c.enable = true;
@@ -116,6 +116,7 @@
       origami.enable = false;
       nvim-surround.enable = true;
       fidget.enable = true;
+      gitsigns.enable = true;
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;

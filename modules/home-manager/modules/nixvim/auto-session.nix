@@ -14,6 +14,7 @@ in
         "buffers"
         "curdir"
         "folds"
+        "globals"
         "help"
         "tabpages"
         "winsize"
@@ -34,10 +35,6 @@ in
         };
       };
       lz-n.enable = true;
-      neo-tree.lazyLoad = {
-        enable = true;
-        settings.cmd = "Neotree";
-      };
       fidget.lazyLoad = {
         enable = true;
         settings = {

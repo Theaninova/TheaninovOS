@@ -190,6 +190,7 @@
     p7zip
     fzf
     eza
+    yazi
     # docker
     ausweisapp
   ];
