@@ -115,15 +115,49 @@ hi! SpellRare gui=undercurl guisp={{colors.success.default.hex}}
 hi! SpellLocal gui=undercurl guisp={{colors.success.default.hex}}
 
 hi! DiffAdd guibg={{colors.green_container.default.hex}} guifg={{colors.on_green_container.default.hex}}
-hi! DiffChange guibg={{colors.yellow_container.default.hex}} guifg={{colors.on_yellow_container.default.hex}}
+hi! DiffChange guibg={{colors.blue_container.default.hex}} guifg={{colors.on_blue_container.default.hex}}
 hi! DiffDelete guibg={{colors.red_container.default.hex}} guifg={{colors.on_red_container.default.hex}}
-hi! DiffText guibg={{colors.blue_container.default.hex}} guifg={{colors.on_blue_container.default.hex}}
+hi! DiffText guibg={{colors.yellow_container.default.hex}} guifg={{colors.on_yellow_container.default.hex}}
+
+hi Added guifg={{colors.green.default.hex}}
+hi Changed guifg={{colors.blue.default.hex}}
+hi Removed guifg={{colors.red.default.hex}}
+
+hi GitSignsAdd guibg={{colors.green_container.default.hex}} guifg={{colors.green.default.hex}}
+hi GitSignsChange guibg={{colors.blue_container.default.hex}} guifg={{colors.blue.default.hex}}
+hi GitSignsDelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
+hi GitSignsTopdelete guifg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
+hi GitSignsChangedelete guibg={{colors.yellow_container.default.hex}} guifg={{colors.yellow.default.hex}}
+hi GitSignsUntracked guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+
+hi GitSignsStagedAdd guibg={{colors.green_container.default.hex}} guifg={{colors.green.default.hex}}
+hi GitSignsStagedChange guibg={{colors.blue_container.default.hex}} guifg={{colors.blue.default.hex}}
+hi GitSignsStagedDelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
+hi GitSignsStagedTopdelete guifg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
+hi GitSignsStagedChangedelete guibg={{colors.yellow_container.default.hex}} guifg={{colors.yellow.default.hex}}
+hi GitSignsStagedUntracked guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+
+hi GitSignsAddNr guibg={{colors.green_container.default.hex}} guifg={{colors.on_green_container.default.hex}}
+hi GitSignsChangeNr guibg={{colors.blue_container.default.hex}} guifg={{colors.on_blue_container.default.hex}}
+hi GitSignsDeleteNr guibg={{colors.red_container.default.hex}} guifg={{colors.on_red_container.default.hex}}
+hi GitSignsTopdeleteNr guibg={{colors.red_container.default.hex}} guifg={{colors.on_red_container.default.hex}}
+hi GitSignsChangedeleteNr guibg={{colors.yellow_container.default.hex}} guifg={{colors.on_yellow_container.default.hex}}
+hi GitSignsUntrackedNr guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+
+hi GitSignsStagedAddNr guibg={{colors.green_container.default.hex}} guifg={{colors.on_green_container.default.hex}}
+hi GitSignsStagedChangeNr guibg={{colors.blue_container.default.hex}} guifg={{colors.on_blue_container.default.hex}}
+hi GitSignsStagedDeleteNr guibg={{colors.red_container.default.hex}} guifg={{colors.on_red_container.default.hex}}
+hi GitSignsStagedTopdeleteNr guibg={{colors.red_container.default.hex}} guifg={{colors.on_red_container.default.hex}}
+hi GitSignsStagedChangedeleteNr guibg={{colors.yellow_container.default.hex}} guifg={{colors.on_yellow_container.default.hex}}
+hi GitSignsStagedUntrackedNr guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+
+hi GitSignsCurrentLineBlame guifg={{colors.outline.default.hex}}
 
 hi! NeoTreeGitAdded guifg={{colors.green.default.hex}}
 hi! NeoTreeGitDeleted guifg={{colors.red.default.hex}}
-hi! NeoTreeGitModified guifg={{colors.yellow.default.hex}}
+hi! NeoTreeGitModified guifg={{colors.blue.default.hex}}
 hi! NeoTreeGitConflict guifg={{colors.danger.default.hex}}
-hi! NeoTreeGitUntracked guifg={{colors.blue.default.hex}}
+hi! NeoTreeGitUntracked guifg={{colors.yellow.default.hex}}
 
 hi! NonText guifg={{colors.outline_variant.default.hex}}
 hi! CursorLineNr guifg={{colors.on_surface.default.hex}}
@@ -238,6 +272,9 @@ hi BufferInactiveSign guibg={{colors.surface.default.hex}} guifg={{colors.outlin
 hi BufferInactiveTarget guibg={{colors.surface.default.hex}} guifg={{colors.primary.default.hex}}
 
 hi BufferTabpageFill guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}} 
+hi BufferScrollArrow guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+hi BufferTabpages guibg={{colors.surface.default.hex}} guifg={{colors.secondary.default.hex}}
+hi BufferTabpagesSep guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
 
 let g:lualine_theme = {
   \  "insert": {

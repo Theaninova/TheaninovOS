@@ -77,7 +77,7 @@
         status-line.enable = true;
         syntax.enable = true;
         tabs.enable = true;
-        yazi.enable = true;
+        tree.enable = true;
       };
       languages = {
         c.enable = true;
@@ -113,10 +113,38 @@
       which-key.enable = true;
       schemastore.enable = true;
       todo-comments.enable = true;
-      origami.enable = false;
       nvim-surround.enable = true;
       fidget.enable = true;
-      gitsigns.enable = true;
+      gitsigns = {
+        enable = true;
+        settings = {
+          current_line_blame = true;
+          signcolumn = true;
+          numhl = true;
+          diff_opts = {
+            ignore_blank_lines = true;
+            ignore_whitespace_change = true;
+            ignore_whitespace_change_at_eol = true;
+          };
+
+          signs_staged = {
+            add.text = "██";
+            change.text = "🮙🮙";
+            delete.text = "▂▂";
+            topdelete.text = "🮂🮂";
+            changedelete.text = "╲╲";
+            untracked.text = "╳╳";
+          };
+          signs = {
+            add.text = " █";
+            change.text = " 🮙";
+            delete.text = " ▂";
+            topdelete.text = " 🮂";
+            changedelete.text = " ╲";
+            untracked.text = " ╳";
+          };
+        };
+      };
       treesitter-context = {
         enable = false; # TODO: looks weird with Neovide
         settings.line_numbers = false;

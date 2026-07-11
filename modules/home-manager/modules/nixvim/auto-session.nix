@@ -14,13 +14,13 @@ in
         "buffers"
         "curdir"
         "folds"
-        "globals"
         "help"
         "tabpages"
         "winsize"
         "winpos"
         "terminal"
         "localoptions"
+        "globals"
       ]
     );
 
@@ -35,6 +35,10 @@ in
         };
       };
       lz-n.enable = true;
+      neo-tree.lazyLoad = {
+        enable = true;
+        settings.cmd = "Neotree";
+      };
       fidget.lazyLoad = {
         enable = true;
         settings = {

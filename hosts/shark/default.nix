@@ -151,6 +151,7 @@
       "audio"
       "video"
       "plugdev"
+      "dialout"
       "cdrom"
       "kvm"
     ];

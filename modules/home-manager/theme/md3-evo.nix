@@ -311,10 +311,12 @@ in
         theme = {
           name = "Adwaita";
         };
-        iconTheme = {
-          name = "Tela";
-          package = pkgs.tela-icon-theme;
-        };
+        /*
+          iconTheme = {
+            name = "Adwaita";
+            package = pkgs.adwaita-icon-theme;
+          };
+        */
       };
       qt.platformTheme.name = "qtct";
 

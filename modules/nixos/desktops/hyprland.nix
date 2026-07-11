@@ -16,7 +16,10 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [ glib ];
+    environment.systemPackages = with pkgs; [
+      glib
+      adwaita-icon-theme
+    ];
 
     programs.hyprland = {
       enable = true;

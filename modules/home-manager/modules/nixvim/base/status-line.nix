@@ -31,12 +31,6 @@ in
         settings = {
           options = {
             globalstatus = true;
-            /*
-              section_separators = {
-                left = "";
-                right = "";
-              };
-            */
             component_separators = {
               left = "┊";
               right = "┊";
@@ -46,25 +40,14 @@ in
             lualine_a = [
               {
                 __unkeyed-1 = "mode";
-                /*
-                  separator = {
-                    right = "";
-                    left = "";
-                  };
-                */
                 icon = "";
               }
             ];
+            lualine_c = [ ];
             lualine_x = lib.mkAfter [ { __unkeyed-1 = "filetype"; } ];
             lualine_z = [
               {
                 __unkeyed-1 = "location";
-                /*
-                  separator = {
-                    right = "";
-                    left = "";
-                  };
-                */
               }
             ];
           };

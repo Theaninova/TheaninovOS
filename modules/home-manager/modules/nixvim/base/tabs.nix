@@ -94,23 +94,42 @@ in
           letters = "etarfkcdmhsunobwgiyzqxvplj.,-ETARFKCDMHSUNOBWGIYZQXVPLJ";
         };
       };
-      /*
-        scope = {
-          enable = true;
-          settings.hooks = {
-            pre_tab_leave.__raw = ''
+      auto-session.settings = {
+        pre_save_cmds = [
+          {
+            __raw = ''
               function()
-                vim.api.nvim_exec_autocmds('User', {pattern = 'ScopeTabLeavePre'})
+                -- require("scope.session").save_state()
+                vim.api.nvim_exec_autocmds('User', {pattern = 'SessionSavePre'})
               end
             '';
-            post_tab_enter.__raw = ''
+          }
+        ];
+        post_restore_cmds = [
+          {
+            __raw = ''
               function()
-                vim.api.nvim_exec_autocmds('User', {pattern = 'ScopeTabEnterPost'})
+                -- require("scope.session").load_state()
               end
             '';
-          };
+          }
+        ];
+      };
+      scope = {
+        enable = false;
+        settings.hooks = {
+          pre_tab_leave.__raw = ''
+            function()
+              vim.api.nvim_exec_autocmds('User', {pattern = 'ScopeTabLeavePre'})
+            end
+          '';
+          post_tab_enter.__raw = ''
+            function()
+              vim.api.nvim_exec_autocmds('User', {pattern = 'ScopeTabEnterPost'})
+            end
+          '';
         };
-      */
+      };
     };
   };
 }
