@@ -114,6 +114,9 @@
       schemastore.enable = true;
       todo-comments.enable = true;
       nvim-surround.enable = true;
+      lensline.enable = false; # Maybe?
+      ccc.enable = false; # Maybe?
+      spider.enable = false; # Maybe?
       fidget.enable = true;
       gitsigns = {
         enable = true;

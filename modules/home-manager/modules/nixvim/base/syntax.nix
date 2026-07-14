@@ -26,6 +26,7 @@ in
         grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
         nixvimInjections = true;
       };
+      treesitter-textobjects.enable = lib.mkDefault true;
       indent-blankline = {
         enable = lib.mkDefault true;
         settings = {

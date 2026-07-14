@@ -12,7 +12,6 @@
   imports = [
     ./programs/neovide.nix
     ./programs/nixvim.nix
-    ./programs/git.nix
     ./packages
     ./programs
     ./services
