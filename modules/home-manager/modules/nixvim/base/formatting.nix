@@ -18,8 +18,10 @@ in
       enable = true;
       settings.formatters_by_ft = lib.mkIf cfg.prettier {
         javascript = [ "prettierd" ];
+        javascriptreact = [ "prettierd" ];
         markdown = [ "prettierd" ];
         typescript = [ "prettierd" ];
+        typescriptreact = [ "prettierd" ];
         json = [ "prettierd" ];
         yaml = [ "prettierd" ];
         html = [ "prettierd" ];

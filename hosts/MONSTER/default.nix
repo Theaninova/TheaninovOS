@@ -32,6 +32,7 @@
       svelte.enable = true;
       docker.enable = true;
     };
+    flatpak.enable = true;
     windows-vm.enable = true;
   };
 

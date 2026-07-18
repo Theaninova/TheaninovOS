@@ -37,7 +37,7 @@ let g:terminal_color_14 = "{{colors.cyan.default.hex}}"
 let g:terminal_color_15 = "{{colors.on_surface_variant.default.hex}}"
 set termguicolors
 
-set background={{mode | to_lower}}
+set background={{mode | lower_case}}
 
 if exists("g:neovide")
   hi! Normal guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
@@ -123,17 +123,17 @@ hi Added guifg={{colors.green.default.hex}}
 hi Changed guifg={{colors.blue.default.hex}}
 hi Removed guifg={{colors.red.default.hex}}
 
-hi GitSignsAdd guibg={{colors.green_container.default.hex}} guifg={{colors.green.default.hex}}
-hi GitSignsChange guibg={{colors.blue_container.default.hex}} guifg={{colors.blue.default.hex}}
-hi GitSignsDelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
-hi GitSignsTopdelete guifg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
-hi GitSignsChangedelete guibg={{colors.yellow_container.default.hex}} guifg={{colors.yellow.default.hex}}
-hi GitSignsUntracked guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
+hi GitSignsAdd guibg={{colors.green_container.default.hex}} guifg={{colors.green.default.hex | auto_lightness: 40.0}}
+hi GitSignsChange guibg={{colors.blue_container.default.hex}} guifg={{colors.blue.default.hex | auto_lightness: 30.0}}
+hi GitSignsDelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex | auto_lightness: 40.0}}
+hi GitSignsTopdelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex | auto_lightness: 40.0}}
+hi GitSignsChangedelete guibg={{colors.yellow_container.default.hex}} guifg={{colors.yellow.default.hex | auto_lightness: 30.0}}
+hi GitSignsUntracked guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex | auto_lightness: 30.0}}
 
 hi GitSignsStagedAdd guibg={{colors.green_container.default.hex}} guifg={{colors.green.default.hex}}
 hi GitSignsStagedChange guibg={{colors.blue_container.default.hex}} guifg={{colors.blue.default.hex}}
 hi GitSignsStagedDelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
-hi GitSignsStagedTopdelete guifg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
+hi GitSignsStagedTopdelete guibg={{colors.red_container.default.hex}} guifg={{colors.red.default.hex}}
 hi GitSignsStagedChangedelete guibg={{colors.yellow_container.default.hex}} guifg={{colors.yellow.default.hex}}
 hi GitSignsStagedUntracked guibg={{colors.surface.default.hex}} guifg={{colors.on_surface.default.hex}}
 

@@ -86,16 +86,16 @@
         "systems": "systems_2"
       },
       "locked": {
-        "lastModified": 1731508795,
-        "narHash": "sha256-+UibbVz5CTisKMms/5VXGe39FYr56qzaEtX4TWQPkjk=",
+        "lastModified": 1783421544,
+        "narHash": "sha256-msVlanBvdLsMeLdXnBQ6f9nRHKmDf7vhKoQMtyYbS8c=",
         "owner": "InioX",
         "repo": "matugen",
-        "rev": "cb9f81eb0150f6253895ea0adb1daa8534c15fc7",
+        "rev": "cf3c74c231e526121bd8e2ce0f1d04702301c342",
         "type": "github"
       },
       "original": {
         "owner": "InioX",
-        "ref": "v2.4.1",
+        "ref": "cf3c74c231e526121bd8e2ce0f1d04702301c342",
         "repo": "matugen",
         "type": "github"
       }

@@ -100,6 +100,7 @@
         shell.enable = true;
         strudel.enable = true;
         svelte.enable = true;
+        typst.enable = true;
       };
       remaps = {
         half-page-scroll.enable = true;
@@ -131,20 +132,20 @@
           };
 
           signs_staged = {
-            add.text = "██";
-            change.text = "🮙🮙";
-            delete.text = "▂▂";
-            topdelete.text = "🮂🮂";
-            changedelete.text = "╲╲";
-            untracked.text = "╳╳";
+            add.text = "█ ";
+            change.text = "🮙 ";
+            delete.text = "▂ ";
+            topdelete.text = "🮂 ";
+            changedelete.text = "╲ ";
+            untracked.text = "╳ ";
           };
           signs = {
-            add.text = " █";
-            change.text = " 🮙";
-            delete.text = " ▂";
-            topdelete.text = " 🮂";
-            changedelete.text = " ╲";
-            untracked.text = " ╳";
+            add.text = "█ ";
+            change.text = "🮙 ";
+            delete.text = "▂ ";
+            topdelete.text = "🮂 ";
+            changedelete.text = "╲  ";
+            untracked.text = "╳ ";
           };
         };
       };

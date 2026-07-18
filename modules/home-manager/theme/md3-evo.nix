@@ -23,16 +23,18 @@ in
     };
     flavour = lib.mkOption {
       type = lib.types.enum [
-        "content"
-        "expressive"
-        "fidelity"
-        "fruit-salad"
-        "monochrome"
-        "neutral"
-        "rainbow"
-        "tonal-spot"
+        "SchemeContent"
+        "SchemeExpressive"
+        "SchemeFidelity"
+        "SchemeFruitSalad"
+        "SchemeMonochrome"
+        "SchemeNeutral"
+        "SchemeRainbow"
+        "SchemeTonalSpot"
+        "SchemeVibrant"
+        "SchemeSmart"
       ];
-      default = "tonal-spot";
+      default = "SchemeSmart";
       description = "The flavour of the theme";
     };
     contrast = lib.mkOption {
@@ -189,106 +191,14 @@ in
             pkgs.zenity
             pkgs.sunwait
           ];
-          text =
-            # sh
-            ''
-              WALLPAPER=${config.xdg.configHome}/matugen/wallpaper
-              STATE=${config.xdg.stateHome}/md3-evo
-
-              SCHEME=$(dconf read /org/gnome/desktop/interface/color-scheme)
-              if [ "$SCHEME" = "'prefer-light'" ]; then
-                MODE="light"
-              else
-                MODE="dark"
-              fi
-
-              if [ ! -d "$STATE" ]; then
-                mkdir -p "$STATE"
-              fi
-              if [ -f "$STATE/mode" ]; then
-                MODE=$(cat "$STATE/mode")
-              fi
-
-              if [ $# -eq 0 ]; then
-                echo -e "\033[1mUsage:\033[0m mode|light|dark|auto|toggle|wallpaper"
-                exit 1
-              elif [ "$1" = "mode" ]; then
-                echo -e "$MODE"
-                exit 0
-              elif [ "$1" = "wallpaper" ]; then
-                if [ $# -eq 1 ]; then
-                  PICKED=$(zenity --file-selection --file-filter='Images | *.png *.jpg *.jpeg *.svg *.bmp *.gif')
-                  cp "$PICKED" "$WALLPAPER"
-                else
-                  cp "$2" "$WALLPAPER"
-                fi
-              elif [ "$1" = "toggle" ]; then
-                if [ "$MODE" = "light" ]; then
-                  MODE="dark"
-                else
-                  MODE="light"
-                fi
-                echo "$MODE" > "$STATE/mode"
-              elif [ "$1" = "light" ] || [ "$1" = "dark" ] || [ "$1" == "auto" ]; then
-                MODE="$1"
-                echo "$MODE" > "$STATE/mode"
-              elif [ "$1" = "init" ]; then
-                echo -e "\033[1mSetting up matugen\033[0m"
-              else
-                echo -e "\033[31mInvalid argument\033[0m"
-                exit 1
-              fi
-
-              if [ ! -f $WALLPAPER ]; then
-                echo -e "\033[31,1mNo wallpaper set\033[0m"
-                exit 1
-              fi
-
-              THEME_SERVICE_PATH="${config.xdg.configHome}/systemd/user/theme-init.timer"
-              if [ "$MODE" = "auto" ]; then
-                TIME=$(sunwait poll ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E || :)
-                if [ "$TIME" = "DAY" ]; then
-                  MODE="light"
-                  NEXT=6
-                else
-                  MODE="dark"
-                  NEXT=4
-                fi
-                NEXT=$(sunwait report ${builtins.toString cfg.auto-dark.lat}N ${builtins.toString cfg.auto-dark.lon}E | awk "/Daylight:/ {print \$$NEXT}")
-                cat <<EOF | tee "$THEME_SERVICE_PATH" > /dev/null
-              [Unit]
-              Description=Next theme change timer
-
-              [Timer]
-              OnCalendar=*-*-* $(date -d "$NEXT today + 5 minutes" +'%H:%M'):00
-              AccuracySec=1min
-
-              [Install]
-              WantedBy=timers.target
-              EOF
-              else
-                rm -f "$THEME_SERVICE_PATH"
-              fi
-              systemctl --user daemon-reload &> /dev/null || :
-              systemctl --user restart theme-init.timer &> /dev/null || :
-
-              if command -v niri &> /dev/null; then
-                niri msg action do-screen-transition --delay-ms 500
-              fi
-
-              if [ "$MODE" = "light" ]; then
-               GTK_THEME="adw-gtk3"
-              else
-               GTK_THEME="adw-gtk3-dark"
-              fi
-
-              matugen image "$WALLPAPER" --type scheme-${cfg.flavour} --contrast ${builtins.toString cfg.contrast} --mode "$MODE"
-              awww img "$WALLPAPER"
-
-              dconf write /org/gnome/desktop/interface/gtk-theme "'$GTK_THEME'"
-              dconf write /org/gnome/desktop/interface/color-scheme "'prefer-$MODE'"
-              dconf write /org/gnome/desktop/interface/icon-theme "'Tela'"
-            '';
+          runtimeEnv = {
+            STATE = "/home/theaninova/.local/state/md3-evo";
+            THEME_SERVICE_PATH = "${config.xdg.configHome}/systemd/user/theme-init.timer";
+            FLAVOUR = toString cfg.flavour;
+            LAT = "${toString cfg.auto-dark.lat}N";
+            LON = "${toString cfg.auto-dark.lon}E";
+          };
+          text = builtins.readFile ./theme.sh;
         }
       );
     in
@@ -297,9 +207,12 @@ in
         pkgs.adw-gtk3
         pkgs.awww
         pkgs.tela-icon-theme
+        pkgs.adwaita-icon-theme
+        pkgs.adwaita-icon-theme-legacy
+        pkgs.bibata-cursors
+        pkgs.gnome-themes-extra
         theme-script
       ];
-
       gtk = {
         gtk3.extraCss = # css
           "@import './theme.css';";
@@ -311,12 +224,10 @@ in
         theme = {
           name = "Adwaita";
         };
-        /*
-          iconTheme = {
-            name = "Adwaita";
-            package = pkgs.adwaita-icon-theme;
-          };
-        */
+        iconTheme = {
+          name = "Tela";
+          package = pkgs.tela-icon-theme;
+        };
       };
       qt.platformTheme.name = "qtct";
 
@@ -401,6 +312,10 @@ in
           settings = {
             config = {
               version_check = false;
+              source_color_index = 0;
+
+              contrast = cfg.contrast;
+              type = cfg.flavour;
 
               reload_apps_list = {
                 waybar = config.programs.waybar.enable;
@@ -438,20 +353,26 @@ in
                   info = mkColor "semantic" "info";
                 };
 
-              custom_keywords = {
-                inherit (cfg) flavour;
-                padding = builtins.toString cfg.padding;
-                double_padding = builtins.toString (cfg.padding * 2);
-                radius = builtins.toString cfg.radius;
-                transparency = builtins.toString cfg.transparency;
-                blur = builtins.toString cfg.blur;
-                contrast = builtins.toString cfg.contrast;
-                transparency_hex =
-                  let
-                    zeroPad = hex: if builtins.stringLength hex == 1 then "0${hex}" else hex;
-                  in
-                  zeroPad (lib.trivial.toHexString (builtins.floor (cfg.transparency * 255)));
-              };
+              import_json_files = [
+                (pkgs.writeText "keywords.json" (
+                  builtins.toJSON {
+                    custom = {
+                      inherit (cfg) flavour;
+                      padding = toString cfg.padding;
+                      double_padding = toString (cfg.padding * 2);
+                      radius = toString cfg.radius;
+                      transparency = toString cfg.transparency;
+                      blur = toString cfg.blur;
+                      contrast = toString cfg.contrast;
+                      transparency_hex =
+                        let
+                          zeroPad = hex: if builtins.stringLength hex == 1 then "0${hex}" else hex;
+                        in
+                        zeroPad (lib.trivial.toHexString (builtins.floor (cfg.transparency * 255)));
+                    };
+                  }
+                ))
+              ];
             };
 
             templates =

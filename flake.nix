@@ -6,7 +6,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     matugen = {
-      url = "github:InioX/matugen?ref=v2.4.1";
+      url = "github:InioX/matugen?ref=cf3c74c231e526121bd8e2ce0f1d04702301c342";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim = {

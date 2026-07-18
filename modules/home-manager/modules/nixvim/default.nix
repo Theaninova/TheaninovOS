@@ -52,6 +52,7 @@
         ./languages/shell.nix
         ./languages/strudel.nix
         ./languages/svelte.nix
+        ./languages/typst.nix
 
         ./remaps/half-page-scroll.nix
         ./remaps/no-accidental-macro.nix

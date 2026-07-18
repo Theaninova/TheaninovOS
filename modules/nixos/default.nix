@@ -29,6 +29,7 @@
 
     ./usecases/3d-printing.nix
     ./usecases/development.nix
+    ./usecases/flatpak.nix
     ./usecases/gaming.nix
     ./usecases/localai.nix
     ./usecases/nix-ld.nix
