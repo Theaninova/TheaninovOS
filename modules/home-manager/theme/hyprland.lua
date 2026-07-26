@@ -37,7 +37,7 @@ hl.config({
 	},
 })
 
-hl.curve("default", { type = "spring", mass = 1, stiffness = 90, dampening = 30 })
+hl.curve("default", { type = "spring", mass = 1, stiffness = 270, dampening = 30 })
 hl.curve("linear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.5, 0.5 } } })
 
 hl.animation({ leaf = "windows", enabled = true, speed = 1, spring = "default", style = "slide" })

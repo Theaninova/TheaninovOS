@@ -24,6 +24,9 @@ in
     # Bambu Network Plugin
     networking.firewall.allowedUDPPorts = [ 2021 ];
     home-manager.users.${username} = {
+      home.packages = with pkgs; [
+        orca-slicer
+      ];
       programs = {
         lazygit.enable = true;
       };
