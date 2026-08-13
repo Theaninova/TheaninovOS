@@ -3,6 +3,7 @@
   lib,
   osConfig,
   config,
+  username,
   ...
 }:
 
@@ -192,7 +193,7 @@ in
             pkgs.sunwait
           ];
           runtimeEnv = {
-            STATE = "/home/theaninova/.local/state/md3-evo";
+            STATE = "/home/${username}/.local/state/md3-evo";
             THEME_SERVICE_PATH = "${config.xdg.configHome}/systemd/user/theme-init.timer";
             FLAVOUR = toString cfg.flavour;
             LAT = "${toString cfg.auto-dark.lat}N";

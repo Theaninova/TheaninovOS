@@ -22,9 +22,18 @@ in
       dfu-util
     ];
     # Bambu Network Plugin
-    networking.firewall.allowedUDPPorts = [ 2021 ];
+    networking.firewall = {
+      allowedUDPPorts = [
+        2021 # Discovery
+      ];
+      allowedTCPPorts = [
+        8883 # MQTT
+        6000 # MPEG over TLS
+      ];
+    };
     home-manager.users.${username} = {
       home.packages = with pkgs; [
+        freecad
         orca-slicer
       ];
       programs = {

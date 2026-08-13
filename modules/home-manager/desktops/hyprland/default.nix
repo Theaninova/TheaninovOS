@@ -50,7 +50,7 @@ in
             disable_hyprland_logo = true;
             disable_splash_rendering = true;
             vrr = lib.mkDefault 2;
-            enable_swallow = true;
+            enable_swallow = false;
             swallow_regex = "^kitty$";
           };
           binds.scroll_event_delay = 0;
@@ -86,8 +86,8 @@ in
               (bind "SUPER + LEFT" "hl.dsp.layout('focus l')")
               (bind "SUPER + RIGHT" "hl.dsp.layout('focus r')")
 
-              (bind "SUPER + mouse_up" "hl.dsp.layout('focus r')")
-              (bind "SUPER + mouse_down" "hl.dsp.layout('focus l')")
+              (bind "SUPER + mouse_up" "hl.dsp.layout('focus l')")
+              (bind "SUPER + mouse_down" "hl.dsp.layout('focus r')")
             ]
           else
             [
