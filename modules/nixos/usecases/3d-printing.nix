@@ -34,6 +34,7 @@ in
     home-manager.users.${username} = {
       home.packages = with pkgs; [
         freecad
+        plasticity
         orca-slicer
       ];
       programs = {

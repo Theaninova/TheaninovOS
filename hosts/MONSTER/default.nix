@@ -196,6 +196,12 @@
     ausweisapp
   ];
 
+  /*services.nfsclient = {
+    enable = true;
+    ip = "192.168.0.51";
+    exportedDirs = [ "shared" ];
+  };*/
+
   networking = {
     firewall = {
       allowedTCPPorts = [

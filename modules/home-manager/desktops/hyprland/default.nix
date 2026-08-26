@@ -2,6 +2,7 @@
   pkgs,
   lib,
   osConfig,
+  username,
   ...
 }:
 let
@@ -57,7 +58,7 @@ in
           decoration.border_part_of_window = false;
         };
         bind = [
-          (bind "SUPER + C" "hl.dsp.window.close()")
+          (bind (if username == "luci" then "SUPER + Q" else "SUPER + C") "hl.dsp.window.close()")
           (bind "SUPER + P" ''
             function()
               hl.dsp.window.float()

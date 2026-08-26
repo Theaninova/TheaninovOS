@@ -157,6 +157,15 @@
     ];
   };
 
+  /*
+    services.nfshare = {
+      enable = true;
+      allowedIps = [ "192.168.0.84" ];
+      baseDir = "/export";
+      exportedDirs = [ "shared" ];
+    };
+  */
+
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     # Essential utils

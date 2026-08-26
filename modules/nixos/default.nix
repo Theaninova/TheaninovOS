@@ -36,6 +36,8 @@
     ./usecases/windows-vm.nix
 
     ./services/airprint.nix
+    ./services/nfs.nix
+    ./services/nfsclient.nix
 
     ./shell/dunst.nix
     ./shell/firefox-pip.nix
