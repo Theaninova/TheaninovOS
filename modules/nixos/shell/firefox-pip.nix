@@ -36,23 +36,6 @@ in
           }
         ];
       };
-      programs.niri.settings.window-rules = [
-        {
-          matches = [
-            {
-              app-id = "firefox";
-              title = "Picture-in-Picture";
-            }
-          ];
-          open-focused = false;
-          open-floating = true;
-          default-floating-position = {
-            x = homeConfig.theme.md3-evo.padding;
-            y = homeConfig.theme.md3-evo.padding;
-            relative-to = "top-left";
-          };
-        }
-      ];
     };
   };
 }

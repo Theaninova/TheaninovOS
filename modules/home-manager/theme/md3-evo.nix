@@ -275,19 +275,6 @@ in
           '';
       };
 
-      # TODO: include is coming in the next release
-      /*
-        xdg.configFile.niri-config = {
-          enable = osConfig.programs.niri.enable;
-          target = "niri/override.kdl";
-          text = ''
-            include "${config.xdg.configHome}/niri/config.kdl"
-            include "${config.programs.matugen.settings.templates.niri.output_path}"
-          '';
-        };
-        home.sessionVariables.NIRI_CONFIG = "${config.xdg.configHome}/niri/override.kdl";
-      */
-
       programs = {
         kitty.extraConfig = ''
           include ${config.programs.matugen.settings.templates.kitty.output_path}
@@ -404,12 +391,6 @@ in
                   output_path = "${config.xdg.configHome}/vesktop/themes/matugen.theme.css";
                 };
               }
-              // (lib.optionalAttrs osConfig.programs.niri.enable {
-                niri = {
-                  input_path = ./niri.kdl;
-                  output_path = "${config.xdg.configHome}/niri/md3-evo.kdl";
-                };
-              })
               // (lib.optionalAttrs config.programs.kitty.enable {
                 kitty = {
                   input_path = ./kitty.conf;

@@ -76,10 +76,6 @@ fi
 systemctl --user daemon-reload &>/dev/null || :
 systemctl --user restart theme-init.timer &>/dev/null || :
 
-if command -v niri &>/dev/null; then
-  niri msg action do-screen-transition --delay-ms 500
-fi
-
 if [ "$MODE" = "light" ]; then
   GTK_THEME="adw-gtk3"
   WALLPAPER=$(dconf read /org/gnome/desktop/background/picture-uri | sed "s/'file:\/\///;s/'//g")

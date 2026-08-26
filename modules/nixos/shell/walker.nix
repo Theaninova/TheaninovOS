@@ -26,15 +26,7 @@ in
             ];
           }
         ];
-        /*
-          layerrule = [
-            # TODO: Add layer rules for walker
-            "blur, anyrun"
-            "ignorealpha 0.3, anyrun"
-          ];
-        */
       };
-      programs.niri.settings.binds."Mod+Space".action.spawn = [ (lib.getExe pkgs.walker) ];
       home.packages = with pkgs; [
         wl-clipboard
       ];

@@ -14,10 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     tidalcycles = {
       url = "github:mitchmindtree/tidalcycles.nix/?ref=0db0918e7a3d3c30ed7a6e81dc9d4e3832870ac4";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -42,7 +38,6 @@
       nixvim,
       matugen,
       nix-flatpak,
-      niri,
       tidalcycles,
       walker,
       ...
@@ -63,7 +58,6 @@
               permittedInsecurePackages = [ "pnpm-10.29.2" ];
             };
             overlays = [
-              niri.overlays.niri
               (final: prev: {
                 cubyz-bin = prev.callPackage ./overlays/cubyz-bin { };
                 matugen = matugen.packages.${prev.system}.default;
@@ -108,7 +102,6 @@
             ./modules/nixos
             ./hosts/${hostname}
             home-manager.nixosModules.home-manager
-            niri.nixosModules.niri
             nix-flatpak.nixosModules.nix-flatpak
             {
               _module.args =

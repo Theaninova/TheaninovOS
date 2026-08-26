@@ -4,7 +4,6 @@
     ./boot/quiet.nix
 
     ./desktops/hyprland.nix
-    ./desktops/niri.nix
 
     ./fonts/fira-code.nix
     ./fonts/noto-sans.nix
