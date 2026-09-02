@@ -28,6 +28,12 @@ in
         xwayland.force_zero_scaling = true;
         misc.vrr = 0; # VA suffers from VRR flicker
       };
+      workspace_rule = [
+        {
+          workspace = "m[DP-1]";
+          layout_opts.orientation = "top";
+        }
+      ];
       monitor = [
         {
           output = "HDMI-A-1";
