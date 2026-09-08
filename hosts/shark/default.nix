@@ -102,7 +102,13 @@
     nerd-fonts.enable = true;
   };
 
-  programs.zsh.enable = true;
+  programs = {
+    zsh.enable = true;
+    nix-ld = {
+      enable = true;
+      enableRecommendedLibraries = true;
+    };
+  };
   security.sudo.configFile = ''
     Defaults env_reset,pwfeedback,passprompt="󰟵  "
   '';
