@@ -78,6 +78,22 @@
         "type": "github"
       }
     },
+    "llama-cpp-3-nixpkgs": {
+      "locked": {
+        "lastModified": 1788881743,
+        "narHash": "sha256-2V9GZGvPfrNzxFozhI9dcqV+c3QdA8YZrvAAzqEB+dI=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d6524aaca2ff07876657ae2b323f24be4874944b",
+        "type": "github"
+      }
+    },
     "matugen": {
       "inputs": {
         "nixpkgs": [
@@ -158,6 +174,7 @@
       "inputs": {
         "elephant": "elephant",
         "home-manager": "home-manager",
+        "llama-cpp-3-nixpkgs": "llama-cpp-3-nixpkgs",
         "matugen": "matugen",
         "nix-flatpak": "nix-flatpak",
         "nixpkgs": "nixpkgs",

@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    llama-cpp-3-nixpkgs.url = "github:nixos/nixpkgs/d6524aaca2ff07876657ae2b323f24be4874944b";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,6 +41,7 @@
       nix-flatpak,
       tidalcycles,
       walker,
+      llama-cpp-3-nixpkgs,
       ...
     }@inputs:
     let
@@ -49,6 +51,9 @@
         config:
         (eachSystem (
           system:
+          let
+            llama-cpp-3-pkgs = import llama-cpp-3-nixpkgs { inherit system; };
+          in
           import nixpkgs {
             inherit system;
             config = config // {
@@ -59,6 +64,7 @@
             };
             overlays = [
               (final: prev: {
+                llama-cpp-3-rocm = llama-cpp-3-pkgs.llama-cpp-rocm;
                 cubyz-bin = prev.callPackage ./overlays/cubyz-bin { };
                 matugen = matugen.packages.${prev.system}.default;
                 gccdiag = prev.callPackage ./overlays/gccdiag { };
