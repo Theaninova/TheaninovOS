@@ -138,6 +138,7 @@
       package = pkgs.wireshark;
       usbmon.enable = true;
     };
+    coolercontrol.enable = true;
     nix-ld = {
       enable = true;
       enableRecommendedLibraries = true;
@@ -196,11 +197,13 @@
     ausweisapp
   ];
 
-  /*services.nfsclient = {
-    enable = true;
-    ip = "192.168.0.51";
-    exportedDirs = [ "shared" ];
-  };*/
+  /*
+    services.nfsclient = {
+      enable = true;
+      ip = "192.168.0.51";
+      exportedDirs = [ "shared" ];
+    };
+  */
 
   networking = {
     firewall = {

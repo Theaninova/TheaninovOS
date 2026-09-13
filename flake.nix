@@ -64,7 +64,30 @@
             };
             overlays = [
               (final: prev: {
-                llama-cpp-3-rocm = llama-cpp-3-pkgs.llama-cpp-rocm;
+                llama-cpp-codacus =
+                  (llama-cpp-3-pkgs.llama-cpp.override {
+                    rocmSupport = true;
+                  }).overrideAttrs
+                    (oldAttrs: {
+                      version = "moe-cache";
+                      src = llama-cpp-3-pkgs.fetchFromGitHub {
+                        owner = "thecodacus";
+                        repo = "llama.cpp";
+                        rev = "perf";
+                        hash = "sha256-2PjGTayN9FiTbBx7BMnQHD9ihj0hvWFaD1TdgxGs0t8=";
+                      };
+                      nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ llama-cpp-3-pkgs.patchelf ];
+                      cmakeFlags = (oldAttrs.cmakeFlags or [ ]) ++ [
+                        "-DGGML_HIP=ON"
+                        "-DAMDGPU_TARGETS=gfx1030"
+                      ];
+                      postInstall = (oldAttrs.postInstall or "") + ''
+                        if [ -f bin/llama-moe-trace ]; then
+                          cp bin/llama-moe-trace $out/bin/
+                          ${llama-cpp-3-pkgs.patchelf}/bin/patchelf --shrink-rpath --allowed-rpath-prefixes "$out" "$out/bin/llama-moe-trace"
+                        fi
+                      '';
+                    });
                 cubyz-bin = prev.callPackage ./overlays/cubyz-bin { };
                 matugen = matugen.packages.${prev.system}.default;
                 gccdiag = prev.callPackage ./overlays/gccdiag { };
