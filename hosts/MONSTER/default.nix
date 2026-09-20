@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 {
   imports = [ ./hardware-configuration.nix ];
 
@@ -8,7 +13,26 @@
     quiet.enable = true;
 
     kernelPackages = pkgs.linuxPackages_xanmod_stable;
-    kernelModules = [ "sg" ];
+    kernelModules = [
+      "sg"
+      "it87"
+    ];
+    extraModulePackages = with config.boot.kernelPackages; [
+      (it87.overrideAttrs (
+        final: prev: {
+          version = "2.0.0";
+          src = pkgs.fetchFromGitHub {
+            owner = "frankcrawford";
+            repo = "it87";
+            rev = "v2.0";
+            hash = "sha256-ppehUInlPRKqiTBxEVGYwB/aHGyVGTYkoRJK4F67phg=";
+          };
+        }
+      ))
+    ];
+    extraModprobeConfig = ''
+      options it87 ignore_resource_conflict=1 force_id=0x8689
+    '';
 
     loader = {
       systemd-boot = {
