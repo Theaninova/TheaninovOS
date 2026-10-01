@@ -21,6 +21,7 @@
     # browsers
     firefox
     chromium
+    bitwarden-desktop
 
     # media
     f3d

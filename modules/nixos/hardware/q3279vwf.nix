@@ -31,7 +31,10 @@ in
       workspace_rule = [
         {
           workspace = "m[DP-1]";
-          layout_opts.orientation = "top";
+          layout_opts = {
+            orientation = "top";
+            always_keep_position = false;
+          };
         }
       ];
       monitor = [

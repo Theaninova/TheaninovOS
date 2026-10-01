@@ -44,7 +44,7 @@ let
 
         cache-type-k = "q8_0";
         cache-type-v = "q8_0";
-        ctx-size = 131072;
+        ctx-size = 150000; # 131072;
         batch-size = 2048;
         ubatch-size = 512;
         jinja = true;
