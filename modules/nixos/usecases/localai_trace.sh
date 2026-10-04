@@ -10,7 +10,7 @@ fi
 echo "[INFO] Using binary: $(command -v "$BIN")"
 echo "[INFO] Starting Coding Trace 1/2"
 MOE_TRACE_OUT="$TRACE_DIR/trace-code.csv" "$BIN" \
-  --model "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf" \
+  --model "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf" \
   --threads 6 \
   --n-gpu-layers 99 \
   --n-cpu-moe 99 \
@@ -27,7 +27,7 @@ MOE_TRACE_OUT="$TRACE_DIR/trace-code.csv" "$BIN" \
 
 echo "[INFO] Starting Conversation Trace 2/2"
 MOE_TRACE_OUT="$TRACE_DIR/trace-chat.csv" "$BIN" \
-  --model "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf" \
+  --model "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf" \
   --threads 6 \
   --n-gpu-layers 99 \
   --n-cpu-moe 99 \

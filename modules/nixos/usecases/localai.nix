@@ -14,37 +14,48 @@ let
   models-preset = pkgs.writeText "presets.ini" (
     pkgs.lib.generators.toINI { } {
       "Qwen3.8-Flash" = {
-        model = "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-UD-IQ3_XXS-00001-of-00003.gguf";
-        # model = "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-UD-IQ4_XS-00001-of-00003.gguf";
+        # model = "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_XXS-00001-of-00002.gguf";
+        model = "/mnt/llms/Qwen3.8-Flash/Qwen3.8-Flash-Next-GSQ-RCO-IQ3_S-00001-of-00002.gguf";
         cpu-range = "0-5";
         cpu-strict = 1;
         threads = 6;
+        threads-batch = 12;
+        cpu-range-batch = "0-11";
         parallel = 1;
-        n-gpu-layers = 99;
-        n-cpu-moe = 99;
+        cpu-moe = true;
         load-mode = "mmap";
+        lazy-mode = "on";
         flash-attn = "on";
 
-        mmproj = "/mnt/llms/Qwen3.8-Flash/mmproj-F16.gguf";
+        mmproj = "/mnt/llms/Qwen3.8-Flash/mmproj-Qwen3.8-Flash-Next-BF16.gguf";
         no-mmproj-offload = true;
 
-        #moe-cache-profile = "/mnt/llms/Qwen3.8-Flash/trace/qwen-merged.csv";
-        #moe-cache-slots = 48;
+        # moe-cache-profile = "/mnt/llms/Qwen3.8-Flash/trace/qwen-merged.csv";
+        # moe-cache-slots = 48;
 
-        spec-type = "draft-mtp";
-        spec-draft-model = "/mnt/llms/Qwen3.8-Flash/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf";
-        spec-draft-n-max = 2;
-        spec-draft-ngl = 99;
-        spec-draft-threads = 6;
-        spec-draft-cpu-range = "6-11";
-        spec-draft-cpu-strict = 1;
+        /*
+          spec-type = "draft-mtp";
+          spec-draft-model = "/mnt/llms/Qwen3.8-Flash/mtp-Qwen3.8-Flash-Next-shared-Q8_0.gguf";
+          spec-draft-n-max = 2;
+          spec-draft-ngl = 99;
+          spec-draft-threads = 6;
+          spec-draft-cpu-range = "6-11";
+          spec-draft-cpu-strict = 1;
+          spec-draft-type-k = "q8_0";
+          spec-draft-type-v = "q8_0";
+        */
         cache-reuse = 256;
-        fit = "off";
-        no-sched-async-cpu = true;
+        fit = "on";
+        #no-sched-async-cpu = true;
 
+        cache-ram = 16384;
+        cache-idle-slots = true;
+
+        kv-offload = true;
+        kv-unified = true;
         cache-type-k = "q8_0";
         cache-type-v = "q8_0";
-        ctx-size = 150000; # 131072;
+        ctx-size = 262144; # 150000; # 131072;
         batch-size = 2048;
         ubatch-size = 512;
         jinja = true;
@@ -101,6 +112,11 @@ in
       pkgs.llama-cpp-codacus
       pkgs.opencode
       pkgs.github-copilot-cli
+    ];
+    systemd.services.llama-cpp.serviceConfig.Environment = [
+      "HSA_OVERRIDE_GFX_VERSION=10.3.0"
+      "HIP_VISIBLE_DEVICES=0"
+      "ROC_ENABLE_PRE_VEGA=1"
     ];
     services = {
       llama-cpp = {

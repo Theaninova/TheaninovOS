@@ -107,7 +107,7 @@
     fv43u.enable = true;
     astro-a50.enable = true;
     # virtual-camera.enable = true;
-    # hid-fanatecff.enable = true;
+    hid-fanatecff.enable = true;
 
     enableAllFirmware = true;
     bluetooth = {
